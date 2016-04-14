@@ -29,6 +29,7 @@ import growthcraft.core.eventhandler.EventHandlerBucketFill.IBucketEntry;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.stats.CoreAchievement;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -48,16 +49,17 @@ public class SaltBucketEntry implements IBucketEntry
 	@Override
 	public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
 	{
-		if (Blocks.water.equals(world.getBlock(pos.blockX, pos.blockY, pos.blockZ)))
+		final IBlockState state = world.getBlockState(pos.getBlockPos());
+		if (state != null && Blocks.water.isAssociatedBlock(state.getBlock()))
 		{
-			if (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
-			{
-				final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
-				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
-				{
-					return true;
-				}
-			}
+			//if (world.getBlockMetadata(pos) == 0)
+			//{
+			//	final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
+			//	if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
+			//	{
+			//		return true;
+			//	}
+			//}
 		}
 		return false;
 	}
@@ -65,7 +67,7 @@ public class SaltBucketEntry implements IBucketEntry
 	@Override
 	public void commit(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull MovingObjectPosition pos)
 	{
-		world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
+		world.setBlockToAir(pos.getBlockPos());
 		CoreAchievement.SALTY_SITUATION.unlock(player);
 	}
 }

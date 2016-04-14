@@ -5,8 +5,10 @@ import java.util.Random;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,18 +25,18 @@ public class BlockBambooDoor extends BlockDoor
 		setHardness(3.0F);
 		disableStats();
 		setCreativeTab(null);
-		setBlockName("grc.bambooDoor");
+		setUnlocalizedName("grc.bamboo_door");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, int par2, int par3, int par4)
+	public Item getItem(World world, BlockPos pos)
 	{
 		return GrowthCraftBamboo.items.bambooDoorItem.getItem();
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random par2Random, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return (meta & 8) != 0 ? null : GrowthCraftBamboo.items.bambooDoorItem.getItem();
 	}

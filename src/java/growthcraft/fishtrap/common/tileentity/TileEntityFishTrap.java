@@ -1,5 +1,7 @@
 package growthcraft.fishtrap.common.tileentity;
 
+import growthcraft.core.common.tileentity.GrcTileEntityBase;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -7,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityFishTrap extends TileEntity implements IInventory
+public class TileEntityFishTrap extends GrcTileEntityBase implements IInventory
 {
 	// Constants
 	private ItemStack[] invSlots   = new ItemStack[5];
@@ -92,7 +94,7 @@ public class TileEntityFishTrap extends TileEntity implements IInventory
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int index)
+	public ItemStack removeStackFromSlot(int index)
 	{
 		if (this.invSlots[index] != null)
 		{
@@ -193,27 +195,25 @@ public class TileEntityFishTrap extends TileEntity implements IInventory
 
 		nbt.setTag("items", nbttaglist);
 
-		if (this.hasCustomInventoryName())
+		if (this.hasCustomName())
 		{
 			nbt.setString("name", this.name);
 		}
 	}
 
-	/************
-	 * NAMES
-	 ************/
 	@Override
-	public String getInventoryName()
+	public String getDisplayName()
 	{
-		return this.hasCustomInventoryName() ? this.name : "container.grc.fishTrap";
+		return this.hasCustomName() ? this.name : "container.grc.fishTrap";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName()
+	public boolean hasCustomName()
 	{
 		return this.name != null && this.name.length() > 0;
 	}
 
+	@Override
 	public void setGuiDisplayName(String string)
 	{
 		this.name = string;

@@ -66,18 +66,18 @@ public class EventHandlerBucketFill
 
 		public boolean matches(@Nonnull World world, @Nonnull MovingObjectPosition pos)
 		{
-			final Block srcBlock = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
+			final Block srcBlock = world.getBlockState(pos.getBlockPos()).getBlock();
 
-			if (block.equals(srcBlock))
+			if (block.isAssociatedBlock(srcBlock))
 			{
-				return world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0;
+				return true;
 			}
 			return false;
 		}
 
 		public void commit(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull MovingObjectPosition pos)
 		{
-			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
+			world.setBlockToAir(pos.getBlockPos());
 		}
 
 		public String toString()

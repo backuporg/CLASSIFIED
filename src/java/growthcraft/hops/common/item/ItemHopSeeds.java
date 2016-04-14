@@ -5,42 +5,40 @@ import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemHopSeeds extends GrcItemBase implements IPlantable
 {
 	public ItemHopSeeds()
 	{
 		super();
-		this.setUnlocalizedName("grc.hopSeeds");
+		this.setUnlocalizedName("grc.hop_seeds");
 		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
-	/************
-	 * MAIN
-	 ************/
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
 		if (dir != 1)
 		{
 			return false;
 		}
-		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
+		else if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 		{
-			if (BlockCheck.canSustainPlant(world, x, y, z, ForgeDirection.UP, GrowthCraftHops.hopVine.getBlock()) && BlockCheck.isRope(world, x, y + 1, z))
+			if (BlockCheck.canSustainPlant(world, pos, EnumFacing.UP, GrowthCraftHops.hopVine.getBlock()) && BlockCheck.isRope(world, pos.up()))
 			{
-				world.setBlock(x, y + 1, z, GrowthCraftHops.hopVine.getBlock());
+				world.setBlock(pos.up(), GrowthCraftHops.hopVine.getBlock());
 				--stack.stackSize;
 				return true;
 			}
@@ -55,31 +53,15 @@ public class ItemHopSeeds extends GrcItemBase implements IPlantable
 		}
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.itemIcon = reg.registerIcon("grchops:hop_seeds");
-	}
-
-	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
 	{
 		return EnumPlantType.Crop;
 	}
 
 	@Override
-	public Block getPlant(IBlockAccess world, int x, int y, int z)
+	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
-		return GrowthCraftHops.hopVine.getBlock();
-	}
-
-	@Override
-	public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
-	{
-		return 0;
+		return GrowthCraftHops.hopVine.getBlock().getDefaultState();
 	}
 }

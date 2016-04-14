@@ -23,12 +23,13 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITileProgressiveDevice, INBTItemSerializable
+public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITickable, ITileProgressiveDevice, INBTItemSerializable
 {
 	public static enum FermentBarrelDataID
 	{
@@ -207,37 +208,40 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	protected void updateDevice()
+	public void update()
 	{
-		if (recheckRecipe)
+		if (!worldObj.isRemote)
 		{
-			this.recheckRecipe = false;
-			refreshRecipe();
-		}
-
-		if (canFerment())
-		{
-			this.time++;
-
-			if (time >= getTimeMax())
+			if (recheckRecipe)
 			{
-				resetTime();
-				fermentItem();
-				markForInventoryUpdate();
+				this.recheckRecipe = false;
+				refreshRecipe();
 			}
-		}
-		else
-		{
-			if (time != 0)
+
+			if (canFerment())
 			{
-				resetTime();
-				markForInventoryUpdate();
+				this.time++;
+
+				if (time >= getTimeMax())
+				{
+					resetTime();
+					fermentItem();
+					markForInventoryUpdate();
+				}
+			}
+			else
+			{
+				if (time != 0)
+				{
+					resetTime();
+					markForInventoryUpdate();
+				}
 			}
 		}
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side)
+	public int[] getSlotsForFace(EnumFacing side)
 	{
 		return accessableSlotIds;
 	}
@@ -249,13 +253,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack stack, int side)
+	public boolean canInsertItem(int index, ItemStack stack, EnumFacing side)
 	{
 		return InventoryProcessor.instance().canInsertItem(this, stack, index);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, int side)
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing side)
 	{
 		return InventoryProcessor.instance().canExtractItem(this, stack, index);
 	}
@@ -359,7 +363,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid)
+	public boolean canFill(EnumFacing from, Fluid fluid)
 	{
 		final FluidStack fluidStack = getFluidStack(0);
 		if (fluidStack == null || fluidStack.getFluid() == null) return true;
@@ -367,25 +371,25 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	protected int doFill(ForgeDirection from, FluidStack resource, boolean shouldFill)
+	protected int doFill(EnumFacing from, FluidStack resource, boolean shouldFill)
 	{
 		return fillFluidTank(0, resource, shouldFill);
 	}
 
 	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid)
+	public boolean canDrain(EnumFacing from, Fluid fluid)
 	{
 		return FluidTest.fluidMatches(getFluidStack(0), fluid);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, int maxDrain, boolean shouldDrain)
+	protected FluidStack doDrain(EnumFacing from, int maxDrain, boolean shouldDrain)
 	{
 		return drainFluidTank(0, maxDrain, shouldDrain);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection from, FluidStack resource, boolean shouldDrain)
+	protected FluidStack doDrain(EnumFacing from, FluidStack resource, boolean shouldDrain)
 	{
 		if (resource == null || !resource.isFluidEqual(getFluidStack(0)))
 		{

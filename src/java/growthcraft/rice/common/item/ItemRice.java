@@ -5,13 +5,15 @@ import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.GrowthCraftRice;
 import growthcraft.rice.util.RiceBlockCheck;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemRice extends GrcItemBase
 {
@@ -22,45 +24,22 @@ public class ItemRice extends GrcItemBase
 		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
-	/************
-	 * MAIN
-	 ************/
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
-		if (dir != 1)
+		if (dir == EnumFacing.UP)
 		{
-			return false;
-		}
-		else if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
-		{
-			final Block soil = world.getBlock(x, y, z);
-
-			if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(x, y + 1, z) && world.getBlockMetadata(x, y, z) > 0)
+			if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 			{
-				world.setBlock(x, y + 1, z, GrowthCraftRice.riceBlock.getBlock());
-				--stack.stackSize;
-				return true;
-			}
-			else
-			{
-				return false;
+				final IBlockState soil = world.getBlockState(pos);
+				if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(pos.up()) && world.getBlockMetadata(pos) > 0)
+				{
+					world.setBlockState(pos.up(), GrowthCraftRice.riceBlock.getBlock().getDefaultState());
+					--stack.stackSize;
+					return true;
+				}
 			}
 		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.itemIcon = reg.registerIcon("grcrice:rice");
-	}
-
 }

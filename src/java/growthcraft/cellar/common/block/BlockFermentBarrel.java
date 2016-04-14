@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.client.render.RenderFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.event.EventBarrelDrained;
 import growthcraft.cellar.GrowthCraftCellar;
@@ -8,78 +7,74 @@ import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.Utils;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFermentBarrel extends BlockCellarContainer
 {
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
 	public BlockFermentBarrel()
 	{
 		super(Material.wood);
 		setTileEntityType(TileEntityFermentBarrel.class);
 		setHardness(2.5F);
 		setStepSound(soundTypeWood);
-		setBlockName("grc.fermentBarrel");
-		setBlockTextureName("grccellar:ferment_barrel");
+		setUnlocalizedName("grc.ferment_barrel");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setGuiType(CellarGuiType.FERMENT_BARREL);
 	}
 
 	@Override
-	protected boolean shouldRestoreBlockState(World world, int x, int y, int z, ItemStack stack)
+	protected boolean shouldRestoreBlockState(World world, BlockPos pos, ItemStack stack)
 	{
 		return true;
 	}
 
 	@Override
-	protected boolean shouldDropTileStack(World world, int x, int y, int z, int metadata, int fortune)
+	protected boolean shouldDropTileStack(World world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isRotatable(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 		return true;
 	}
 
 	@Override
-	protected boolean playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	protected boolean playerDrainTank(World world, BlockPos pos, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		final FluidStack available = Utils.playerDrainTank(world, x, y, z, tank, held, player);
+		final FluidStack available = Utils.playerDrainTank(world, pos, tank, held, player);
 		if (available != null && available.amount > 0)
 		{
-			GrowthCraftCellar.CELLAR_BUS.post(new EventBarrelDrained(player, world, x, y, z, available));
+			GrowthCraftCellar.CELLAR_BUS.post(new EventBarrelDrained(player, world, pos, available));
 			return true;
 		}
 		return false;
 	}
 
-	private void setDefaultDirection(World world, int x, int y, int z)
+	private void setDefaultDirection(World world, BlockPos pos)
 	{
 		if (!world.isRemote)
 		{
-			final Block southBlock = world.getBlock(x, y, z - 1);
-			final Block northBlock = world.getBlock(x, y, z + 1);
-			final Block westBlock = world.getBlock(x - 1, y, z);
-			final Block eastBlock = world.getBlock(x + 1, y, z);
-			byte meta = 3;
+			final IBlockState northBlock = world.getBlock(pos.north());
+			final IBlockState southBlock = world.getBlock(pos.south());
+			final IBlockState westBlock = world.getBlock(pos.west());
+			final IBlockState eastBlock = world.getBlock(pos.east());
+			int meta = 3;
 
 			if (southBlock.func_149730_j() && !northBlock.func_149730_j())
 			{
@@ -106,61 +101,18 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	}
 
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z)
+	public void onBlockAdded(World world, BlockPos pos)
 	{
-		super.onBlockAdded(world, x, y, z);
-		setDefaultDirection(world, x, y, z);
+		super.onBlockAdded(world, pos);
+		setDefaultDirection(world, pos);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack)
 	{
-		super.onBlockPlacedBy(world, x, y, z, entity, stack);
-		final int meta = BlockPistonBase.determineOrientation(world, x, y, z, entity);
-		world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[4];
-		final String basename = getTextureName();
-		icons[0] = reg.registerIcon(String.format("%s/minecraft/oak/side", basename));
-		icons[1] = reg.registerIcon(String.format("%s/minecraft/oak/side_alt", basename));
-		icons[2] = reg.registerIcon(String.format("%s/minecraft/oak/top", basename));
-		icons[3] = reg.registerIcon(String.format("%s/minecraft/oak/bottom", basename));
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconByIndex(int index)
-	{
-		return icons[index];
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta == 0 || meta == 1)
-		{
-			return side == 0 || side == 1 ? icons[1] : icons[0];
-		}
-		else if (meta == 2 || meta == 3)
-		{
-			return side == 2 || side == 3 ? icons[1] : icons[0];
-		}
-		else if (meta == 4 || meta == 5)
-		{
-			return side == 4 || side == 5 ? icons[1] : icons[0];
-		}
-		return icons[0];
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return RenderFermentBarrel.RENDER_ID;
+		super.onBlockPlacedBy(world, pos, entity, stack);
+		final int meta = BlockPistonBase.determineOrientation(world, pos, entity);
+		world.setBlockMetadataWithNotify(pos, meta, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	@Override
@@ -170,21 +122,12 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
 
-	/************
-	 * COMPARATOR
-	 ************/
 	@Override
 	public boolean hasComparatorInputOverride()
 	{
@@ -192,9 +135,9 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	}
 
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
+	public int getComparatorInputOverride(World world, BlockPos pos)
 	{
-		final TileEntityFermentBarrel te = getTileEntity(world, x, y, z);
+		final TileEntityFermentBarrel te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.getDeviceProgressScaled(15);

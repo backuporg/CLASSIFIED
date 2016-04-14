@@ -27,18 +27,16 @@ import java.util.List;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
 public class BlockBeeBoxBamboo extends BlockBeeBox
 {
 	public BlockBeeBoxBamboo()
 	{
 		super();
-		this.setBlockName("grc.BeeBox.Bamboo");
+		this.setUnlocalizedName("grc.bee_box.bamboo");
 	}
 
 	@Override
@@ -50,16 +48,8 @@ public class BlockBeeBoxBamboo extends BlockBeeBox
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubBlocks(Item block, CreativeTabs tab, List list)
+	public void getSubBlocks(Item block, CreativeTabs tab, List<ItemStack> list)
 	{
 		list.add(new ItemStack(block, 1, 0));
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		icons = new IIcon[4];
-		registerBeeBoxIcons(reg, "/grcbamboo/", 0);
 	}
 }

@@ -32,28 +32,25 @@ import buildcraft.api.tools.IToolWrench;
 import growthcraft.api.core.item.EnumDye;
 import growthcraft.core.GrowthCraftCore;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLever;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCrowbar extends GrcItemBase implements IToolWrench
 {
 	private final Set<Class<? extends Block>> shiftRotations = new HashSet<Class<? extends Block>>();
-
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
 
 	public ItemCrowbar()
 	{
@@ -65,8 +62,7 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 		shiftRotations.add(BlockButton.class);
 		shiftRotations.add(BlockChest.class);
 		setHarvestLevel("wrench", 0);
-		setUnlocalizedName("grccore.crowbar");
-		setTextureName("grccore:crowbar");
+		setUnlocalizedName("grc.crowbar");
 		setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
@@ -80,12 +76,13 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 	}
 
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
-		final Block block = world.getBlock(x, y, z);
-		if (block == null) return false;
+		final IBlockState state = world.getBlockState(pos);
+		if (state == null) return false;
+		final Block block = state.getBlock();
 		if (player.isSneaking() != isShiftRotation(block.getClass())) return false;
-		if (block.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side)))
+		if (block.rotateBlock(world, pos, EnumFacing.getFront(dir)))
 		{
 			player.swingItem();
 			return !world.isRemote;
@@ -94,19 +91,19 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 	}
 
 	@Override
-	public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player)
+	public boolean doesSneakBypassUse(World world, BlockPos pos, EntityPlayer player)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canWrench(EntityPlayer player, int x, int y, int z)
+	public boolean canWrench(EntityPlayer player, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public void wrenchUsed(EntityPlayer player, int x, int y, int z)
+	public void wrenchUsed(EntityPlayer player, BlockPos pos)
 	{
 		player.swingItem();
 	}
@@ -124,17 +121,6 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[EnumDye.VALUES.length];
-		for (EnumDye dye : EnumDye.VALUES)
-		{
-			this.icons[dye.meta] = reg.registerIcon(String.format("%s/%s", getIconString(), dye.name));
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public void getSubItems(Item item, CreativeTabs tab, List list)
 	{
@@ -142,12 +128,5 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 		{
 			list.add(new ItemStack(item, 1, dye.meta));
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta)
-	{
-		return icons[MathHelper.clamp_int(meta, 0, icons.length - 1)];
 	}
 }

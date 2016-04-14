@@ -26,6 +26,7 @@ package growthcraft.grapes.util;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 
 public class GrapeBlockCheck
 {
@@ -37,10 +38,12 @@ public class GrapeBlockCheck
 	 * @param block - block to check
 	 * @return true if block is a grape vine, false otherwise
 	 */
-	public static boolean isGrapeVine(Block block)
+	public static boolean isGrapeVine(IBlockState state)
 	{
-		return GrowthCraftGrapes.blocks.grapeVine0.getBlock() == block ||
-			GrowthCraftGrapes.blocks.grapeVine1.getBlock() == block;
+		if (state == null) return false;
+		final Block block = state.getBlock();
+		return GrowthCraftGrapes.blocks.grapeVine0.equals(block) ||
+			GrowthCraftGrapes.blocks.grapeVine1.equals(block);
 	}
 
 	/**
@@ -49,8 +52,10 @@ public class GrapeBlockCheck
 	 * @param block - block to check
 	 * @return true if block is a grape vine trunk, false otherwise
 	 */
-	public static boolean isGrapeVineTrunk(Block block)
+	public static boolean isGrapeVineTrunk(IBlockState state)
 	{
-		return GrowthCraftGrapes.blocks.grapeVine1.getBlock() == block;
+		if (state == null) return false;
+		final Block block = state.getBlock();
+		return GrowthCraftGrapes.blocks.grapeVine1.equals(block);
 	}
 }

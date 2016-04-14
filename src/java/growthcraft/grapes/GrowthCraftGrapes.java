@@ -6,13 +6,11 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.core.integration.NEI;
 import growthcraft.core.util.MapGenHelper;
 import growthcraft.grapes.common.CommonProxy;
 import growthcraft.grapes.common.village.ComponentVillageGrapeVineyard;
 import growthcraft.grapes.common.village.VillageHandlerGrapes;
 import growthcraft.grapes.creativetab.CreativeTabsGrowthcraftGrapes;
-import growthcraft.grapes.event.BonemealEventGrapes;
 import growthcraft.grapes.init.GrcGrapesBlocks;
 import growthcraft.grapes.init.GrcGrapesFluids;
 import growthcraft.grapes.init.GrcGrapesItems;
@@ -63,6 +61,14 @@ public class GrowthCraftGrapes
 	public static GrcGrapesConfig getConfig()
 	{
 		return instance.config;
+	}
+
+	/**
+	 * Only use this logger for logging GrowthCraftBees related items
+	 */
+	public static ILogger getLogger()
+	{
+		return instance.logger;
 	}
 
 	@EventHandler
@@ -117,10 +123,6 @@ public class GrowthCraftGrapes
 		// CRAFTING
 		//====================
 		GameRegistry.addShapelessRecipe(items.grapeSeeds.asStack(), items.grapes.getItem());
-		NEI.hideItem(blocks.grapeVine0.asStack());
-		NEI.hideItem(blocks.grapeVine1.asStack());
-		NEI.hideItem(blocks.grapeBlock.asStack());
-		NEI.hideItem(blocks.grapeLeaves.asStack());
 	}
 
 	@EventHandler
@@ -136,24 +138,9 @@ public class GrowthCraftGrapes
 		modules.init();
 	}
 
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event)
-	{
-		if (event.map.getTextureType() == 0)
-		{
-			for (int i = 0; i < fluids.grapeWineBooze.length; ++i)
-			{
-				fluids.grapeWineBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
-			}
-		}
-	}
-
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new BonemealEventGrapes());
-
 		modules.postInit();
 	}
 }

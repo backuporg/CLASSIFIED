@@ -3,26 +3,28 @@ package growthcraft.bees.common.item;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.item.GrcItemFoodBase;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.init.Items;
 
 public class ItemHoneyJar extends GrcItemFoodBase
 {
 	public ItemHoneyJar()
 	{
 		super(6, false);
-		this.setUnlocalizedName("grc.honeyJar");
-		this.setCreativeTab(GrowthCraftBees.tab);
-		this.setContainerItem(Items.flower_pot);
-		this.setMaxStackSize(1);
+		setUnlocalizedName("grc.honey_jar");
+		setCreativeTab(GrowthCraftBees.tab);
+		setContainerItem(Items.flower_pot);
+		setMaxStackSize(1);
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player)
 	{
-		this.itemIcon = reg.registerIcon("grcbees:honeyjar");
+		super.onItemUseFinish(stack, world, player);
+		return new ItemStack(Items.flower_pot);
 	}
 }

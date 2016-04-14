@@ -33,18 +33,20 @@ import growthcraft.core.logic.FlowerSpread;
 import growthcraft.core.logic.ISpreadablePlant;
 import growthcraft.milk.GrowthCraftMilk;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowable
 {
@@ -58,16 +60,15 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 		private ThistleStage() {}
 	}
 
-	private FlowerSpread spreadLogic;
+	public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 0, 3);
 
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+	private FlowerSpread spreadLogic;
 
 	public BlockThistle()
 	{
 		super(Material.plants);
 		setTickRandomly(true);
-		setBlockName("grcmilk.Thistle");
+		setUnlocalizedName("grcmilk.Thistle");
 		setStepSound(soundTypeGrass);
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		final BBox bb = BBox.newCube(2f, 0f, 2f, 12f, 16f, 12f).scale(1f / 16f);
@@ -76,33 +77,35 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	}
 
 	@Override
-	public boolean canSpreadTo(World world, int x, int y, int z)
+	public boolean canSpreadTo(World world, BlockPos pos)
 	{
-		if (world.isAirBlock(x, y, z) && canBlockStay(world, x, y, z))
+		//if (world.isAirBlock(pos) && canBlockStay(world, pos))
+		if (world.isAirBlock(pos))
 		{
 			return true;
 		}
 		return false;
 	}
 
-	private void runSpread(World world, int x, int y, int z, Random random)
+	private void runSpread(World world, BlockPos pos, Random random)
 	{
-		spreadLogic.run(this, 0, world, x, y, z, random);
+		spreadLogic.run(this, 0, world, pos, random);
 	}
 
-	private void incrementGrowth(World world, int x, int y, int z, int meta)
+	private void incrementGrowth(World world, BlockPos pos, IBlockState state)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, meta + 1, BlockFlags.SYNC);
-		AppleCore.announceGrowthTick(this, world, x, y, z, meta);
+		final int meta = (int)state.getValue(GROWTH);
+		world.setBlockState(pos, state.withProperty(GROWTH, meta + 1), BlockFlags.SYNC);
+		AppleCore.announceGrowthTick(this, world, pos, meta);
 	}
 
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		super.updateTick(world, x, y, z, random);
+		super.updateTick(world, pos, state, random);
 		if (!world.isRemote)
 		{
-			final int meta = world.getBlockMetadata(x, y, z);
+			final int meta = state.getValue(GROWTH);
 			if (meta >= ThistleStage.FLOWER)
 			{
 				final int spreadChance = GrowthCraftMilk.getConfig().thistleSpreadChance;
@@ -110,14 +113,14 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 				{
 					if (random.nextInt(spreadChance) == 0)
 					{
-						runSpread(world, x, y, z, random);
+						runSpread(world, pos, random);
 					}
 				}
 			}
 			else
 			{
 				final int growthChance = GrowthCraftMilk.getConfig().thistleGrowthChance;
-				final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, x, y, z, random);
+				final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, random);
 				if (allowGrowthResult == Event.Result.DENY)
 				{
 					return;
@@ -127,7 +130,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 				{
 					if (meta < ThistleStage.FLOWER)
 					{
-						incrementGrowth(world, x, y, z, meta);
+						incrementGrowth(world, pos, state);
 					}
 				}
 			}
@@ -135,7 +138,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	}
 
 	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
 	{
 		return EnumPlantType.Plains;
 	}
@@ -147,14 +150,14 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 
 	/* Can this accept bonemeal? */
 	@Override
-	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
 		return true;
 	}
 
 	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
 	@Override
-	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	public boolean canUseBonemeal(World world, Random random, BlockPos pos, IBlockState state)
 	{
 		return true;
 	}
@@ -175,7 +178,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 
 	/* Apply bonemeal effect */
 	@Override
-	public void func_149853_b(World world, Random random, int x, int y, int z)
+	public void grow(World world, Random random, BlockPos pos, IBlockState state)
 	{
 		final int meta = world.getBlockMetadata(x, y, z);
 		if (meta < ThistleStage.FLOWER)
@@ -191,28 +194,5 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 		{
 			runSpread(world, x, y, z, random);
 		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[4];
-
-		icons[0] = reg.registerIcon("grcmilk:thistle/stage1");
-		icons[1] = reg.registerIcon("grcmilk:thistle/stage2");
-		icons[2] = reg.registerIcon("grcmilk:thistle/stage3");
-		icons[3] = reg.registerIcon("grcmilk:thistle/stage4");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= icons.length)
-		{
-			return icons[3];
-		}
-		return this.icons[meta];
 	}
 }

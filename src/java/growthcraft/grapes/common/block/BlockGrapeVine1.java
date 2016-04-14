@@ -1,32 +1,27 @@
 package growthcraft.grapes.common.block;
 
 import java.util.List;
+import java.util.Random;
 
 import growthcraft.core.util.BlockCheck;
 import growthcraft.api.core.util.BlockFlags;
-import growthcraft.grapes.client.renderer.RenderGrapeVine1;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGrapeVine1 extends BlockGrapeVineBase
 {
-	public boolean graphicFlag;
-
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
 	public BlockGrapeVine1()
 	{
 		super();
@@ -35,147 +30,131 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase
 		setHardness(2.0F);
 		setResistance(5.0F);
 		setStepSound(soundTypeWood);
-		setBlockName("grc.grapeVine1");
+		setUnlocalizedName("grc.grape_vine1");
 		setCreativeTab(null);
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
-	protected boolean canUpdateGrowth(World world, int x, int y, int z)
+	protected boolean canUpdateGrowth(World world, BlockPos pos, IBlockState state)
 	{
-		return world.getBlockMetadata(x, y, z) == 0 || world.isAirBlock(x, y + 1, z);
+		GrowthCraftGrapes.getLogger().warn("BlockGrapeVine1#canUpdateGrowth TODO");
+		return false;
+		//return world.getBlockMetadata(pos) == 0 || world.isAirBlock(pos.up());
 	}
 
 	@Override
-	protected void doGrowth(World world, int x, int y, int z, int meta)
+	protected void doGrowth(World world, BlockPos pos, IBlockState state)
 	{
-		final Block above = world.getBlock(x, y + 1, z);
+		final BlockPos upPos = pos.up();
+		final IBlockState upState = world.getBlockState(upPos);
 		/* Is there a rope block above this? */
-		if (BlockCheck.isRope(above))
+		if (BlockCheck.isRope(upState))
 		{
-			incrementGrowth(world, x, y, z, meta);
-			world.setBlock(x, y + 1, z, GrowthCraftGrapes.blocks.grapeLeaves.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
+			incrementGrowth(world, pos, state);
+			world.setBlockState(upPos, GrowthCraftGrapes.blocks.grapeLeaves.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 		}
-		else if (world.isAirBlock(x, y + 1, z))
+		else if (world.isAirBlock(upPos))
 		{
-			incrementGrowth(world, x, y, z, meta);
-			world.setBlock(x, y + 1, z, this, 0, BlockFlags.UPDATE_AND_SYNC);
+			incrementGrowth(world, pos, state);
+			world.setBlockState(upPos, getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 		}
-		else if (GrowthCraftGrapes.blocks.grapeLeaves.getBlock() == above)
+		else if (GrowthCraftGrapes.blocks.grapeLeaves.equals(upState.getBlock()))
 		{
-			incrementGrowth(world, x, y, z, meta);
+			incrementGrowth(world, pos, state);
 		}
 	}
 
 	@Override
-	protected float getGrowthRate(World world, int x, int y, int z)
+	protected float getGrowthRate(World world, BlockPos pos)
 	{
-		int j = y;
-		if (world.getBlock(x, j - 1, z) == this && world.getBlock(x, j - 2, z) == Blocks.farmland)
+		final IBlockState belowState = world.getBlockState(pos.down());
+		// for lack of a better name
+		final IBlockState belowBelowState = world.getBlockState(pos.down(2));
+		if (this == belowState.getBlock() && Blocks.farmland == belowBelowState.getBlock())
 		{
-			j = y - 1;
+			pos = pos.down();
 		}
-		return super.getGrowthRate(world, x, j, z);
+		return super.getGrowthRate(world, pos);
 	}
 
-	/************
-	 * CONDITIONS
-	 ************/
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
+	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this) ||
-			this == world.getBlock(x, y - 1, z);
+		return BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, this) ||
+			isAssociatedBlock(world.getBlockState(pos.down()).getBlock());
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
+	public Item getItem(World world, BlockPos pos)
 	{
 		return GrowthCraftGrapes.items.grapeSeeds.getItem();
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[3];
-
-		icons[0] = reg.registerIcon("grcgrapes:trunk");
-		icons[1] = reg.registerIcon("grcgrapes:leaves");
-		icons[2] = reg.registerIcon("grcgrapes:leaves_opaque");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return icons[0];
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getLeafTexture()
-	{
-		graphicFlag = Blocks.leaves.isOpaqueCube();
-		return !this.graphicFlag ? icons[1] : icons[2];
-	}
-
-	/************
-	 * RENDER
-	 ************/
-	@Override
-	public int getRenderType()
-	{
-		return RenderGrapeVine1.id;
-	}
-
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB aabb, List<AxisAlignedBB> list, Entity entity)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(pos);
 		final float f = 0.0625F;
 
 		if (meta == 0)
 		{
-			this.setBlockBounds(6*f, 0.0F, 6*f, 10*f, 0.5F, 10*f);
-			super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
-			this.setBlockBounds(4*f, 0.5F, 4*f, 12*f, 1.0F, 12*f);
-			super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
+			setBlockBounds(6*f, 0.0F, 6*f, 10*f, 0.5F, 10*f);
+			super.addCollisionBoxesToList(world, pos, state, aabb, list, entity);
+			setBlockBounds(4*f, 0.5F, 4*f, 12*f, 1.0F, 12*f);
+			super.addCollisionBoxesToList(world, pos, state, aabb, list, entity);
 		}
 		else if (meta == 1)
 		{
-			this.setBlockBounds(6*f, 0.0F, 6*f, 10*f, 1.0F, 10*f);
-			super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
+			setBlockBounds(6*f, 0.0F, 6*f, 10*f, 1.0F, 10*f);
+			super.addCollisionBoxesToList(world, pos, state, aabb, list, entity);
 		}
 
-		this.setBlockBoundsBasedOnState(world, x, y, z);
+		setBlockBoundsBasedOnState(world, pos);
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
+	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(pos);
 		final float f = 0.0625F;
 
 		if (meta == 0)
 		{
-			this.setBlockBounds(4*f, 0.0F, 4*f, 12*f, 1.0F, 12*f);
+			setBlockBounds(4*f, 0.0F, 4*f, 12*f, 1.0F, 12*f);
 		}
 		else
 		{
-			this.setBlockBounds(6*f, 0.0F, 6*f, 10*f, 1.0F, 10*f);
+			setBlockBounds(6*f, 0.0F, 6*f, 10*f, 1.0F, 10*f);
+		}
+	}
+
+	@Override
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
+	{
+		final int meta = world.getBlockMetadata(pos);
+		if (meta == 0 && BlockCheck.isRope(world.getBlock(pos.up())))
+		{
+			if (!world.isRemote)
+			{
+				incrementGrowth(world, pos, meta);
+				world.setBlockState(pos.up(), GrowthCraftGrapes.blocks.grapeLeaves.getBlock().getDefaultState(), 0, BlockFlags.ALL);
+			}
+		}
+		if (meta == 0 && world.isAirBlock(pos.up()))
+		{
+			if (!world.isRemote)
+			{
+				incrementGrowth(world, pos, meta);
+				world.setBlockState(pos.up(), GrowthCraftGrapes.blocks.grapeVine1.getBlock().getDefaultState(), 0, BlockFlags.ALL);
+			}
+		}
+		else if (meta == 0 && world.getBlock(pos.up()) ==  GrowthCraftGrapes.blocks.grapeLeaves.getBlock())
+		{
+			if (!world.isRemote)
+			{
+				incrementGrowth(world, pos, meta);
+			}
 		}
 	}
 }

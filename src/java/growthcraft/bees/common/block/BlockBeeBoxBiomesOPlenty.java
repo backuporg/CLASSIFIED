@@ -29,11 +29,9 @@ import growthcraft.core.integration.bop.EnumBopWoodType;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
 public class BlockBeeBoxBiomesOPlenty extends BlockBeeBox
 {
@@ -41,7 +39,7 @@ public class BlockBeeBoxBiomesOPlenty extends BlockBeeBox
 	{
 		super();
 		setHardness(2f);
-		setBlockName("grc.BeeBox.BiomesOPlenty");
+		setUnlocalizedName("grc.bee_box.biomes_o_plenty");
 	}
 
 	@Override
@@ -57,22 +55,11 @@ public class BlockBeeBoxBiomesOPlenty extends BlockBeeBox
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubBlocks(Item block, CreativeTabs tab, List list)
+	public void getSubBlocks(Item block, CreativeTabs tab, List<ItemStack> list)
 	{
 		for (int i = 0; i < EnumBopWoodType.VALUES.length; ++i)
 		{
 			list.add(new ItemStack(block, 1, i));
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[4 * EnumBopWoodType.VALUES.length];
-		for (EnumBopWoodType type : EnumBopWoodType.VALUES)
-		{
-			registerBeeBoxIcons(reg, String.format("/biomesoplenty/%s/", type.name), type.meta);
 		}
 	}
 }

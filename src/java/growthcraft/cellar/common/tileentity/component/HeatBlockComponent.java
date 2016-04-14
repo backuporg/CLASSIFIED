@@ -28,9 +28,12 @@ import growthcraft.api.cellar.heatsource.IHeatSourceBlock;
 import growthcraft.core.util.BlockCheck;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Component for handling heat source blocks for a tile entity
@@ -38,7 +41,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class HeatBlockComponent
 {
 	private TileEntity tileEntity;
-	private ForgeDirection sourceDir = ForgeDirection.DOWN;
+	private EnumFacing sourceDir = EnumFacing.DOWN;
 	// Adjacent heating allows the block to accept heat from blocks on the same y axis and directly
 	// adjacent to it
 	private float adjacentHeating;
@@ -55,21 +58,16 @@ public class HeatBlockComponent
 
 	private World getWorld()
 	{
-		return tileEntity.getWorldObj();
+		return tileEntity.getWorld();
 	}
 
-	public float getHeatMultiplierFromDir(ForgeDirection dir)
+	public float getHeatMultiplierFromDir(EnumFacing dir)
 	{
-		final int x = tileEntity.xCoord + dir.offsetX;
-		final int y = tileEntity.yCoord + dir.offsetY;
-		final int z = tileEntity.zCoord + dir.offsetZ;
+		final BlockPos pos = tileEntity.getPos().offset(dir);
+		final IBlockState state = getWorld().getBlockState(pos);
+		final IHeatSourceBlock heatSource = CellarRegistry.instance().heatSource().getHeatSource(state.getBlock(), 0);
 
-		final Block block = getWorld().getBlock(x, y, z);
-		final int meta = getWorld().getBlockMetadata(x, y, z);
-
-		final IHeatSourceBlock heatSource = CellarRegistry.instance().heatSource().getHeatSource(block, meta);
-
-		if (heatSource != null) return heatSource.getHeat(getWorld(), x, y, z);
+		if (heatSource != null) return heatSource.getHeat(getWorld(), pos);
 		return 0.0f;
 	}
 
@@ -78,7 +76,7 @@ public class HeatBlockComponent
 		if (adjacentHeating > 0)
 		{
 			float heat = 0.0f;
-			for (ForgeDirection dir : BlockCheck.DIR4)
+			for (EnumFacing dir : BlockCheck.DIR4)
 			{
 				heat += getHeatMultiplierFromDir(dir);
 			}

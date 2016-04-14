@@ -30,6 +30,7 @@ import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.FluidFactory;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcCoreFluids extends GrcModuleBase
@@ -39,15 +40,15 @@ public class GrcCoreFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.saltWater = FluidFactory.instance().create(new GrcFluid("grccore.SaltWater"));
+		this.saltWater = FluidFactory.instance().create(new GrcFluid("grc.salt_water", new ResourceLocation("minecraft:water_still"), new ResourceLocation("minecraft:water_flow")));
 		saltWater.setCreativeTab(GrowthCraftCore.creativeTab).setItemColor(0x2C41F6);
-		saltWater.block.getBlock().setBlockTextureName("minecraft:water");
+		//saltWater.block.getBlock().setBlockTextureName("minecraft:water");
 	}
 
 	@Override
 	public void register()
 	{
-		saltWater.registerObjects("grccore", "SaltWater");
+		saltWater.registerObjects("grc", "salt_water");
 	}
 
 	@Override

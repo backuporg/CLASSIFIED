@@ -2,53 +2,45 @@ package growthcraft.bamboo.common.block;
 
 import java.util.Random;
 
-import growthcraft.bamboo.client.renderer.RenderBambooScaffold;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.common.block.GrcBlockBase;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooScaffold extends GrcBlockBase
 {
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
 	public BlockBambooScaffold()
 	{
 		super(Material.wood);
 		setStepSound(soundTypeWood);
 		setResistance(0.2F);
 		setHardness(0.5F);
-		setBlockName("grc.bambooScaffold");
+		setUnlocalizedName("grc.bamboo_scaffold");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		this.onNeighborBlockChange(world, x, y, z, null);
+		super.updateTick(world, pos, state, random);
+		onNeighborBlockChange(world, pos, state, null);
 	}
 
-	/************
-	 * TRIGGERS
-	 ************/
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float float7, float float8, float float9)
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		final ItemStack itemstack = player.inventory.getCurrentItem();
 		if (itemstack != null)
@@ -81,17 +73,16 @@ public class BlockBambooScaffold extends GrcBlockBase
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
-		if (!this.canBlockStay(world, x, y, z))
+		if (!canBlockStay(world, pos))
 		{
-			this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y, z);
+			fellBlockAsItem(world, pos, state);
 		}
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity)
 	{
 		entity.fallDistance = 0.0F;
 		if (entity.isCollidedHorizontally)
@@ -111,93 +102,46 @@ public class BlockBambooScaffold extends GrcBlockBase
 		}
 	}
 
-	/************
-	 * CONDITIONS
-	 ************/
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		return canBlockStay(world, x, y, z);
+		return canBlockStay(world, pos);
 	}
 
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
+	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		if (world.getBlock(x, y -1 , z).isSideSolid(world, x, y - 1, z, ForgeDirection.UP)) return true;
-		if (checkSides(world, x, y, z)) return true;
+		if (world.getBlock(x, y -1 , z).isSideSolid(world, x, y - 1, z, EnumFacing.UP)) return true;
+		if (checkSides(world, pos)) return true;
 
 		return false;
 	}
 
-	private boolean checkSides(World world, int x, int y, int z)
+	private boolean checkSides(World world, BlockPos pos)
 	{
-		final boolean flag = world.getBlock(x + 1, y, z) == this;
-		final boolean flag1 = world.getBlock(x - 1, y, z) == this;
-		final boolean flag2 = world.getBlock(x, y, z + 1) == this;
-		final boolean flag3 = world.getBlock(x, y, z - 1) == this;
+		final boolean flag = world.getBlockState(pos.east()).getBlock().isAssociatedBlock(this);
+		final boolean flag1 = world.getBlockState(pos.west()).getBlock().isAssociatedBlock(this);
+		final boolean flag2 = world.getBlockState(pos.north()).getBlock().isAssociatedBlock(this);
+		final boolean flag3 = world.getBlockState(pos.south()).getBlock().isAssociatedBlock(this);
 
 		if (!flag && !flag1 && !flag2 && !flag3) return false;
 
-		if (flag && world.getBlock(x + 1, y - 1, z).isSideSolid(world, x + 1, y - 1, z, ForgeDirection.UP)) return true;
-		if (flag1 && world.getBlock(x - 1, y - 1, z).isSideSolid(world, x - 1, y - 1, z, ForgeDirection.UP)) return true;
-		if (flag2 && world.getBlock(x, y - 1, z + 1).isSideSolid(world, x, y - 1, z + 1, ForgeDirection.UP)) return true;
-		if (flag3 && world.getBlock(x, y - 1, z - 1).isSideSolid(world, x, y - 1, z - 1, ForgeDirection.UP)) return true;
+		if (flag && world.getBlock(x + 1, y - 1, z).isSideSolid(world, x + 1, y - 1, z, EnumFacing.UP)) return true;
+		if (flag1 && world.getBlock(x - 1, y - 1, z).isSideSolid(world, x - 1, y - 1, z, EnumFacing.UP)) return true;
+		if (flag2 && world.getBlock(x, y - 1, z + 1).isSideSolid(world, x, y - 1, z + 1, EnumFacing.UP)) return true;
+		if (flag3 && world.getBlock(x, y - 1, z - 1).isSideSolid(world, x, y - 1, z - 1, EnumFacing.UP)) return true;
 
-		if (flag && world.getBlock(x + 2, y - 1, z).isSideSolid(world, x + 2, y - 1, z, ForgeDirection.UP)) return true;
-		if (flag1 && world.getBlock(x - 2, y - 1, z).isSideSolid(world, x - 2, y - 1, z, ForgeDirection.UP)) return true;
-		if (flag2 && world.getBlock(x, y - 1, z + 2).isSideSolid(world, x, y - 1, z + 2, ForgeDirection.UP)) return true;
-		if (flag3 && world.getBlock(x, y - 1, z - 2).isSideSolid(world, x, y - 1, z - 2, ForgeDirection.UP)) return true;
+		if (flag && world.getBlock(x + 2, y - 1, z).isSideSolid(world, x + 2, y - 1, z, EnumFacing.UP)) return true;
+		if (flag1 && world.getBlock(x - 2, y - 1, z).isSideSolid(world, x - 2, y - 1, z, EnumFacing.UP)) return true;
+		if (flag2 && world.getBlock(x, y - 1, z + 2).isSideSolid(world, x, y - 1, z + 2, EnumFacing.UP)) return true;
+		if (flag3 && world.getBlock(x, y - 1, z - 2).isSideSolid(world, x, y - 1, z - 2, EnumFacing.UP)) return true;
 
 		return false;
 	}
 
-	/************
-	 * STUFF
-	 ************/
-
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		return ForgeDirection.UP == side;
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[2];
-
-		icons[0] = reg.registerIcon("grcbamboo:block");
-		icons[1] = reg.registerIcon("grcbamboo:scaffold");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		if (side == 1)
-		{
-			return icons[0];
-		}
-		return icons[1];
-	}
-
-	/************
-	 * RENDER
-	 ************/
-	@Override
-	public int getRenderType()
-	{
-		return RenderBambooScaffold.id;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
+		return EnumFacing.UP == side;
 	}
 
 	@Override
@@ -208,12 +152,12 @@ public class BlockBambooScaffold extends GrcBlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos)
 	{
 		final float f = 0.125F;
 		return AxisAlignedBB.getBoundingBox(x + this.minX + f, y + this.minY, z + this.minZ + f, x + this.maxX - f, y + this.maxY, z + this.maxZ - f);

@@ -19,7 +19,7 @@ public class ItemBucketBooze extends ItemBucketFluid
 	public ItemBucketBooze(Block block, Fluid buze, CreativeTabs creativeTab)
 	{
 		super(block, buze, creativeTab);
-		setUnlocalizedName("grc.boozeBucket");
+		setUnlocalizedName("grc.booze_bucket");
 	}
 
 	public ItemBucketBooze(Block block, Fluid buze)

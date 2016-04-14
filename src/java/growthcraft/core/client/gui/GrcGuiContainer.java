@@ -41,7 +41,6 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -140,25 +139,21 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
 	public void drawFluidStack(int x, int y, int wp, int hp, int width, int height, int amount, FluidStack fluidstack)
 	{
 		if (fluidstack == null) return;
-
 		final Fluid fluid = fluidstack.getFluid();
 		final int color = fluid.getColor();
-
 		if (fluid != null)
 		{
-			final IIcon icon = fluid.getStillIcon();
-
-			if (icon != null)
-			{
-				bindTexture(TextureMap.locationBlocksTexture);
-
-				final float r = (float)(color >> 16 & 255) / 255.0F;
-				final float g = (float)(color >> 8 & 255) / 255.0F;
-				final float b = (float)(color & 255) / 255.0F;
-				GL11.glColor4f(r, g, b, 1.0f);
-				drawTexturedModelRectFromIcon(x + wp, y + hp + height - amount, icon, width, amount);
-				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-			}
+			//final IIcon icon = fluid.getStillIcon();
+			//if (icon != null)
+			//{
+			//	bindTexture(TextureMap.locationBlocksTexture);
+			//	final float r = (float)(color >> 16 & 255) / 255.0F;
+			//	final float g = (float)(color >> 8 & 255) / 255.0F;
+			//	final float b = (float)(color & 255) / 255.0F;
+			//	GL11.glColor4f(r, g, b, 1.0f);
+			//	//drawTexturedModelRectFromIcon(x + wp, y + hp + height - amount, icon, width, amount);
+			//	GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+			//}
 		}
 	}
 
@@ -193,8 +188,8 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
 		if (tileEntity instanceof IInventory)
 		{
 			final IInventory inv = (IInventory)tileEntity;
-			final String invName = inv.getInventoryName();
-			final String s = inv.hasCustomInventoryName() ? invName : GrcI18n.translate(invName);
+			final String invName = inv.getDisplayName();
+			final String s = inv.hasCustomName() ? invName : GrcI18n.translate(invName);
 			fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
 			fontRendererObj.drawString(GrcI18n.translate("container.inventory"), 8, ySize - 96 + 2, 4210752);
 		}

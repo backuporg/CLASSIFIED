@@ -11,6 +11,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class ItemRope extends GrcItemBase
@@ -20,28 +22,25 @@ public class ItemRope extends GrcItemBase
 		super();
 		setUnlocalizedName("grc.rope");
 		setCreativeTab(GrowthCraftCore.creativeTab);
-		setTextureName("grccore:rope");
 	}
 
-	/************
-	 * MAIN
-	 ************/
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float par8, float par9, float par10)
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
-		final Block block = world.getBlock(x, y, z);
-		final int blockMeta = world.getBlockMetadata(x, y, z);
+		final Block block = world.getBlockState(pos).getBlock();
+		GrowthCraftCore.getLogger("(fixme) ItemRope#onItemUse metadata");
+		final int blockMeta = 0;
 
 		if (Blocks.snow_layer == block && (blockMeta & 7) < 1)
 		{
-			dir = 1;
+			dir = EnumFacing.UP;
 		}
 		else
 		{
 			final FenceRopeEntry entry = FenceRopeRegistry.instance().getEntry(block, blockMeta);
 			if (entry != null)
 			{
-				if (!player.canPlayerEdit(x, y, z, dir, stack))
+				if (!player.canPlayerEdit(pos, dir, stack))
 				{
 					return false;
 				}
@@ -53,45 +52,17 @@ public class ItemRope extends GrcItemBase
 				int targetMeta = entry.getFenceRopeBlockMetadata();
 				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = blockMeta;
 
-				world.setBlock(x, y, z, entry.getFenceRopeBlock(), targetMeta, BlockFlags.UPDATE_AND_SYNC);
+				world.setBlockState(pos, entry.getFenceRopeBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 				--stack.stackSize;
 				return true;
 			}
 			else if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush)
 			{
-				if (dir == 0)
-				{
-					--y;
-				}
-
-				if (dir == 1)
-				{
-					++y;
-				}
-
-				if (dir == 2)
-				{
-					--z;
-				}
-
-				if (dir == 3)
-				{
-					++z;
-				}
-
-				if (dir == 4)
-				{
-					--x;
-				}
-
-				if (dir == 5)
-				{
-					++x;
-				}
+				pos.offset(dir, 1);
 			}
 		}
 
-		if (!player.canPlayerEdit(x, y, z, dir, stack))
+		if (!player.canPlayerEdit(pos, dir, stack))
 		{
 			return false;
 		}
@@ -102,19 +73,23 @@ public class ItemRope extends GrcItemBase
 		else
 		{
 			final Block block2 = GrowthCraftCore.blocks.ropeBlock.getBlock();
-			if (world.canPlaceEntityOnSide(block2, x, y, z, false, dir, (Entity)null, stack))
+			if (world.canPlaceEntityOnSide(block2, pos, false, dir, (Entity)null, stack))
 			{
-				final int meta = block2.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
-
-				if (world.setBlock(x, y, z, block2, meta, 3))
+				final int meta = block2.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
+				if (world.setBlockState(pos, block2.getDefaultState(), meta, 3))
 				{
-					if (world.getBlock(x, y, z) == block2)
+					if (world.getBlockState(pos).getBlock() == block2)
 					{
-						block2.onBlockPlacedBy(world, x, y, z, player, stack);
-						block2.onPostBlockPlaced(world, x, y, z, meta);
+						block2.onBlockPlacedBy(world, pos, player, stack);
+						block2.onPostBlockPlaced(world, pos, meta);
 					}
-
-					world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), block2.stepSound.func_150496_b(), (block2.stepSound.getVolume() + 1.0F) / 2.0F, block2.stepSound.getPitch() * 0.8F);
+					world.playSoundEffect(
+						(double)pos.getX() + 0.5D,
+						(double)pos.getY() + 0.5D,
+						(double)pos.getZ() + 0.5D,
+						block2.stepSound.getPlaceSound(),
+						(block2.stepSound.getVolume() + 1.0F) / 2.0F,
+						block2.stepSound.getPitch() * 0.8F);
 					--stack.stackSize;
 				}
 			}

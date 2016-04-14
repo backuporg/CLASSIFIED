@@ -1,15 +1,16 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.api.core.util.BBox;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.block.material.Material;
-import net.minecraft.world.IBlockAccess;
 
 public class BlockCultureJar extends BlockCellarContainer
 {
@@ -18,8 +19,7 @@ public class BlockCultureJar extends BlockCellarContainer
 		super(Material.glass);
 		setHardness(0.3F);
 		setStepSound(soundTypeGlass);
-		setBlockName("grc.fermentJar");
-		setBlockTextureName("grccellar:ferment_jar_glass");
+		setUnlocalizedName("grc.culture_jar");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setTileEntityType(TileEntityCultureJar.class);
 		setGuiType(CellarGuiType.FERMENT_JAR);
@@ -29,26 +29,14 @@ public class BlockCultureJar extends BlockCellarContainer
 	}
 
 	@Override
-	public int getRenderType()
-	{
-		return RenderCultureJar.RENDER_ID;
-	}
-
-	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}

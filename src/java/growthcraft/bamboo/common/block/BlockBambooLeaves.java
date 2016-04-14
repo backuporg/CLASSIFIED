@@ -6,9 +6,8 @@ import java.util.Random;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -17,7 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 {
@@ -30,25 +34,22 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		setStepSound(soundTypeGrass);
 		setHardness(0.2F);
 		setTickRandomly(true);
-		setBlockName("grc.bambooLeaves");
+		setUnlocalizedName("grc.bamboo_leaves");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
-	private void removeLeaves(World world, int x, int y, int z)
+	private void removeLeaves(World world, BlockPos pos)
 	{
-		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockToAir(x, y, z);
+		this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+		world.setBlockToAir(pos);
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
 		if (!world.isRemote)
 		{
-			final int meta = world.getBlockMetadata(x, y, z);
+			final int meta = world.getBlockState(pos);
 
 			if ((meta & 8) != 0 && (meta & 4) == 0)
 			{
@@ -145,11 +146,11 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 
 				if (l1 >= 0)
 				{
-					world.setBlockMetadataWithNotify(x, y, z, meta & -9, BlockFlags.SUPRESS_RENDER);
+					world.setBlockMetadataWithNotify(pos, meta & -9, BlockFlags.SUPRESS_RENDER);
 				}
 				else
 				{
-					this.removeLeaves(world, x, y, z);
+					this.removeLeaves(world, pos);
 				}
 			}
 		}
@@ -157,15 +158,15 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random random)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.randomDisplayTick(world, x, y, z, random);
+		super.randomDisplayTick(world, pos, state, random);
 		if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && random.nextInt(15) == 1)
 		{
 			final double d0 = (double)((float)x + random.nextFloat());
 			final double d1 = (double)y - 0.05D;
 			final double d2 = (double)((float)z + random.nextFloat());
-			world.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -173,7 +174,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	 * TRIGGERS
 	 ************/
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block par5, int par6)
+	public void breakBlock(World world, BlockPos pos, Block par5, int par6)
 	{
 		final byte b0 = 1;
 		final int j1 = b0 + 1;
@@ -202,13 +203,13 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	 * STUFF
 	 ************/
 	@Override
-	public void beginLeavesDecay(World world, int x, int y, int z)
+	public void beginLeavesDecay(World world, BlockPos pos)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, BlockFlags.SUPRESS_RENDER);
+		world.setBlockMetadataWithNotify(pos, world.getBlockState(pos) | 8, BlockFlags.SUPRESS_RENDER);
 	}
 
 	@Override
-	public boolean isLeaves(IBlockAccess world, int x, int y, int z)
+	public boolean isLeaves(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
@@ -224,7 +225,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	 * DROPS
 	 ************/
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return null;
 	}
@@ -246,7 +247,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
@@ -262,16 +263,15 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getRenderColor(int meta)
+	public int getRenderColor(IBlockState state)
 	{
 		return ColorizerFoliage.getFoliageColorBasic();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
+	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
 		int r = 0;
 		int g = 0;
 		int b = 0;
@@ -294,16 +294,16 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 	 * SHEARS
 	 ************/
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockMetadata(x, y, z) & 3));
+		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockState(pos) & 3));
 		return ret;
 	}
 }

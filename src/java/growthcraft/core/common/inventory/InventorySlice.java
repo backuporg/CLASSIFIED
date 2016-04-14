@@ -28,6 +28,7 @@ import javax.annotation.Nonnull;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IChatComponent;
 
 public class InventorySlice implements IInventory
 {
@@ -42,66 +43,94 @@ public class InventorySlice implements IInventory
 		this.maxSize = accesible.length;
 	}
 
+	@Override
 	public int getSizeInventory()
 	{
 		return maxSize;
 	}
 
+	@Override
 	public ItemStack getStackInSlot(int index)
 	{
 		return parent.getStackInSlot(accesible[index]);
 	}
 
+	@Override
 	public ItemStack decrStackSize(int index, int amount)
 	{
 		return parent.decrStackSize(accesible[index], amount);
 	}
 
-	public ItemStack getStackInSlotOnClosing(int index)
+	@Override
+	public ItemStack removeStackFromSlot(int index)
 	{
-		return parent.getStackInSlotOnClosing(accesible[index]);
+		return parent.removeStackFromSlot(accesible[index]);
 	}
 
+	@Override
 	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		parent.setInventorySlotContents(accesible[index], stack);
 	}
 
-	public String getInventoryName()
+	@Override
+	public void clear()
 	{
-		return parent.getInventoryName();
+		for (int index : accesible)
+		{
+			parent.setInventorySlotContents(index, null);
+		}
 	}
 
-	public boolean hasCustomInventoryName()
+	@Override
+	public String getName()
 	{
-		return parent.hasCustomInventoryName();
+		return parent.getName();
 	}
 
+	@Override
+	public IChatComponent getDisplayName()
+	{
+		return parent.getDisplayName();
+	}
+
+	@Override
+	public boolean hasCustomName()
+	{
+		return parent.hasCustomName();
+	}
+
+	@Override
 	public int getInventoryStackLimit()
 	{
 		return parent.getInventoryStackLimit();
 	}
 
+	@Override
 	public void markDirty()
 	{
 		parent.markDirty();
 	}
 
+	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
 		return parent.isUseableByPlayer(player);
 	}
 
-	public void openInventory()
+	@Override
+	public void openInventory(EntityPlayer player)
 	{
-		parent.openInventory();
+		parent.openInventory(player);
 	}
 
-	public void closeInventory()
+	@Override
+	public void closeInventory(EntityPlayer player)
 	{
-		parent.closeInventory();
+		parent.closeInventory(player);
 	}
 
+	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		return parent.isItemValidForSlot(accesible[index], stack);
@@ -123,5 +152,23 @@ public class InventorySlice implements IInventory
 			return result.stackSize <= 0 ? null : result;
 		}
 		return null;
+	}
+
+	@Override
+	public int getField(int id)
+	{
+		return parent.getField(id);
+	}
+
+	@Override
+	public void setField(int id, int value)
+	{
+		parent.setField(id, value);
+	}
+
+	@Override
+	public int getFieldCount()
+	{
+		return parent.getFieldCount();
 	}
 }

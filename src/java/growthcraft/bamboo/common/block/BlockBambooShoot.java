@@ -9,20 +9,22 @@ import growthcraft.core.util.BlockCheck;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.api.core.util.RenderType;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IGrowable
 {
@@ -35,69 +37,58 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		setStepSound(soundTypeGrass);
 		setHardness(0.0F);
 		setTickRandomly(true);
-		setBlockTextureName("grcbamboo:shoot");
 		final float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		setBlockName("grc.bambooShoot");
+		setUnlocalizedName("grc.bamboo_shoot");
 		setCreativeTab(null);
 	}
 
-	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta)
+	public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
 		return (float)(meta / 1.0);
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random rand)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
 		if (!world.isRemote)
 		{
-			super.updateTick(world, x, y, z, rand);
+			super.updateTick(world, pos, rand);
 
-			if (world.getBlockLightValue(x, y + 1, z) >= 9 && rand.nextInt(this.growth) == 0)
+			if (getLightValue(world, pos.up()) >= 9 && rand.nextInt(this.growth) == 0)
 			{
-				this.markOrGrowMarked(world, x, y, z, rand);
+				markOrGrowMarked(world, pos, rand);
 			}
 		}
 	}
 
-	/************
-	 * EVENTS
-	 ************/
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
-		super.onNeighborBlockChange(world, x, y, z, par5);
-		checkShootChange(world, x, y, z);
+		super.onNeighborBlockChange(world, pos, state, block);
+		checkShootChange(world, pos);
 	}
 
-	protected final void checkShootChange(World world, int x, int y, int z)
+	protected final void checkShootChange(World world, BlockPos pos)
 	{
-		if (!canBlockStay(world, x, y, z))
+		if (!canBlockStay(world, pos))
 		{
-			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y, z);
+			dropBlockAsItem(world, pos, world.getBlockMetadata(pos), 0);
+			world.setBlockToAir(pos);
 		}
 	}
 
-	/************
-	 * CONDITIONS
-	 ************/
-
 	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
+		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos);
 	}
 
 	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
+	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return (world.getFullBlockLightValue(x, y, z) >= 8 || world.canBlockSeeTheSky(x, y, z)) &&
-			BlockCheck.canSustainPlant(world, x, y - 1, z, ForgeDirection.UP, this);
+		return (world.getFullBlockLightValue(pos) >= 8 || world.canBlockSeeSky(pos)) &&
+			BlockCheck.canSustainPlant(world, x, y - 1, z, EnumFacing.UP, this);
 	}
 
 	/************
@@ -105,80 +96,68 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
+	public Item getItem(World world, BlockPos pos)
 	{
 		return GrowthCraftBamboo.items.bambooShootFood.getItem();
 	}
 
-	public void growBamboo(World world, int x, int y, int z, Random rand)
+	public void growBamboo(World world, BlockPos pos, Random rand)
 	{
-		if (!TerrainGen.saplingGrowTree(world, rand, x, y, z)) return;
-
-		final int meta = world.getBlockMetadata(x, y, z) & 3;
+		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
+		final int meta = world.getBlockMetadata(pos) & 3;
 		final WorldGenerator generator = new WorldGenBamboo(true);
-
-		world.setBlockToAir(x, y, z);
-
-		if (!generator.generate(world, rand, x, y, z))
+		world.setBlockToAir(pos);
+		if (!generator.generate(world, rand, pos))
 		{
-			world.setBlock(x, y, z, this, meta, BlockFlags.ALL);
+			world.setBlock(pos, this, meta, BlockFlags.ALL);
 		}
 	}
 
-	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
+	public void markOrGrowMarked(World world, BlockPos pos, Random random)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
+		final int meta = world.getBlockMetadata(pos);
 
 		if ((meta & 8) == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta | 8, BlockFlags.SUPRESS_RENDER);
+			world.setBlockMetadataWithNotify(pos, meta | 8, BlockFlags.SUPRESS_RENDER);
 		}
 		else
 		{
-			this.growBamboo(world, x, y, z, random);
+			this.growBamboo(world, pos, random);
 		}
 	}
 
-	/* Both side */
 	@Override
-	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
 		return true;
 	}
 
-	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
 	@Override
-	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
 	{
 		return true;
 	}
 
-	/* Apply bonemeal effect */
 	@Override
-	public void func_149853_b(World world, Random random, int x, int y, int z)
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
 		if (random.nextFloat() < 0.45D)
 		{
-			markOrGrowMarked(world, x, y, z, random);
+			markOrGrowMarked(world, pos, random);
 		}
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return false;
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random par2Random, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return GrowthCraftBamboo.items.bambooShootFood.getItem();
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return RenderType.BUSH;
 	}
 
 	@Override
@@ -188,13 +167,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos)
 	{
 		return null;
 	}

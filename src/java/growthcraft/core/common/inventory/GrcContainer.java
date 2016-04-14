@@ -217,9 +217,9 @@ public class GrcContainer extends Container
 
 	// crafters
 	@Override
-	public void addCraftingToCrafters(ICrafting iCrafting)
+	public void onCraftGuiOpened(ICrafting iCrafting)
 	{
-		super.addCraftingToCrafters(iCrafting);
+		super.onCraftGuiOpened(iCrafting);
 		if (tileEntity instanceof IGuiNetworkSync)
 		{
 			((IGuiNetworkSync)tileEntity).sendGUINetworkData(this, iCrafting);

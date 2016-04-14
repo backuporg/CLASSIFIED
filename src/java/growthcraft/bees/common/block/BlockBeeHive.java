@@ -4,47 +4,42 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.core.util.BlockFlags;
-import growthcraft.bees.client.renderer.RenderBeeHive;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.block.GrcBlockBase;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBeeHive extends GrcBlockBase
 {
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-
 	public BlockBeeHive()
 	{
 		super(Material.plants);
 		this.setHardness(0.6F);
 		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.beeHive");
+		this.setUnlocalizedName("grc.bee_hive");
 		this.setCreativeTab(GrowthCraftBees.tab);
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random random)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
+		super.randomDisplayTick(world, pos, state, random);
 		if (random.nextInt(24) == 0)
 		{
 			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
@@ -52,17 +47,14 @@ public class BlockBeeHive extends GrcBlockBase
 		}
 	}
 
-	/************
-	 * TRIGGERS
-	 ************/
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z)
+	public void onBlockAdded(World world, BlockPos pos)
 	{
 		super.onBlockAdded(world, x, y, z);
 		this.setDefaultDirection(world, x, y, z);
 	}
 
-	private void setDefaultDirection(World world, int x, int y, int z)
+	private void setDefaultDirection(World world, BlockPos pos)
 	{
 		if (!world.isRemote)
 		{
@@ -97,73 +89,63 @@ public class BlockBeeHive extends GrcBlockBase
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack)
 	{
-		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+		super.onBlockPlacedBy(world, pos, entity, stack);
 		final int face = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (face == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 2, BlockFlags.SYNC);
+			world.setBlockMetadataWithNotify(pos, 2, BlockFlags.SYNC);
 		}
 
 		if (face == 1)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 5, BlockFlags.SYNC);
+			world.setBlockMetadataWithNotify(pos, 5, BlockFlags.SYNC);
 		}
 
 		if (face == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 3, BlockFlags.SYNC);
+			world.setBlockMetadataWithNotify(pos, 3, BlockFlags.SYNC);
 		}
 
 		if (face == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 4, BlockFlags.SYNC);
+			world.setBlockMetadataWithNotify(pos, 4, BlockFlags.SYNC);
 		}
 	}
 
-	/************
-	 * CONDITIONS
-	 ************/
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
 
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
+	public void onNeighborBlockChange(World world, BlockPos pos, Block par5)
 	{
 		super.onNeighborBlockChange(world, x, y, z, par5);
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-			world.setBlockToAir(x, y, z);
+			fellBlockAsItem(world, pos, state);
 		}
 	}
 
-	public boolean canBlockStay(World world, int x, int y, int z)
+	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		if (world.isAirBlock(x, y + 1, z))
+		if (world.isAirBlock(pos.up()))
 		{
 			return false;
 		}
-		return world.getBlock(x, y + 1, z).isLeaves(world, x, y + 1, z);
+		return world.getBlockState(pos.up()).getBlock().isLeaves(world, pos.up());
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return true;
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
-	public Item getItemDropped(int par1, Random rand, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return GrowthCraftBees.items.bee.getItem();
 	}
@@ -175,9 +157,9 @@ public class BlockBeeHive extends GrcBlockBase
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int par5, float par6, int par7)
+	public void dropBlockAsItemWithChance(World world, BlockPos pos, int par5, float par6, int par7)
 	{
-		super.dropBlockAsItemWithChance(world, x, y, z, par5, par6, 0);
+		super.dropBlockAsItemWithChance(world, pos, par5, par6, par7);
 		if (!world.isRemote)
 		{
 			final int max = world.rand.nextInt(8);
@@ -187,44 +169,15 @@ public class BlockBeeHive extends GrcBlockBase
 				{
 					if (world.rand.nextInt(2) == 0)
 					{
-						dropBlockAsItem(world, x, y, z, GrowthCraftBees.items.honeyCombEmpty.asStack());
+						spawnEntity(world, pos, GrowthCraftBees.items.honeyCombEmpty.asStack());
 					}
 					else
 					{
-						dropBlockAsItem(world, x, y, z, GrowthCraftBees.items.honeyCombFilled.asStack());
+						spawnEntity(world, pos, GrowthCraftBees.items.honeyCombFilled.asStack());
 					}
 				}
 			}
 		}
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[2];
-
-		icons[0] = reg.registerIcon("grcbees:beehive_front");
-		icons[1] = reg.registerIcon("grcbees:beehive_sides");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return side != meta ? this.icons[1] : this.icons[0];
-	}
-
-	/************
-	 * RENDERS
-	 ************/
-	@Override
-	public int getRenderType()
-	{
-		return RenderBeeHive.id;
 	}
 
 	@Override
@@ -234,21 +187,12 @@ public class BlockBeeHive extends GrcBlockBase
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsForItemRender()
 	{
@@ -258,17 +202,17 @@ public class BlockBeeHive extends GrcBlockBase
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB axis, List<AxisAlignedBB> list, Entity entity)
 	{
 		final float f = 0.0625F;
 		this.setBlockBounds(4*f, 0.0F, 4*f, 12*f, 14*f, 12*f);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 		this.setBlockBounds(3*f, 1*f, 3*f, 13*f, 13*f, 13*f);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 		this.setBlockBounds(2*f, 4*f, 2*f, 14*f, 10*f, 14*f);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 		this.setBlockBounds(7*f, 14*f, 7*f, 9*f, 1.0F, 9*f);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 		this.setBlockBoundsForItemRender();
 	}
 }

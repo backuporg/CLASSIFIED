@@ -25,16 +25,18 @@ package growthcraft.milk.common.block;
 
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.api.core.util.BBox;
-import growthcraft.milk.client.render.RenderButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.GrowthCraftMilk;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockButterChurn extends GrcBlockContainer
 {
@@ -43,18 +45,17 @@ public class BlockButterChurn extends GrcBlockContainer
 		super(Material.wood);
 		setResistance(5.0F);
 		setHardness(2.0F);
-		setBlockName("grcmilk.ButterChurn");
+		setUnlocalizedName("grcmilk.ButterChurn");
 		setStepSound(soundTypeWood);
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityButterChurn.class);
 		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 16f, 8f).scale(1f / 16f);
 		setBlockBounds(bb.x0(), bb.y0(), bb.z0(), bb.x1(), bb.y1(), bb.z1());
-		setBlockTextureName("grcmilk:butter_churn");
 	}
 
-	private boolean tryChurning(World world, int x, int y, int z, EntityPlayer player)
+	private boolean tryChurning(World world, BlockPos pos, EntityPlayer player)
 	{
-		final TileEntityButterChurn butterChurn = getTileEntity(world, x, y, z);
+		final TileEntityButterChurn butterChurn = getTileEntity(world, pos);
 		if (butterChurn != null)
 		{
 			switch (butterChurn.doWork())
@@ -71,20 +72,14 @@ public class BlockButterChurn extends GrcBlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (super.onBlockActivated(world, x, y, z, player, meta, par7, par8, par9)) return true;
+		if (super.onBlockActivated(world, pos, player, facing, hitX, hitY, hitZ)) return true;
 		if (!player.isSneaking())
 		{
-			if (tryChurning(world, x, y, z, player)) return true;
+			if (tryChurning(world, pos, player)) return true;
 		}
 		return false;
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return RenderButterChurn.RENDER_ID;
 	}
 
 	@Override
@@ -94,14 +89,8 @@ public class BlockButterChurn extends GrcBlockContainer
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}

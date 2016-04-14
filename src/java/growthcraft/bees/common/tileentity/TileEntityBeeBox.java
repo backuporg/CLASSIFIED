@@ -17,6 +17,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IItemHandler
 {
@@ -53,9 +54,8 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
-		super.updateEntity();
 		if (!worldObj.isRemote) beeBox.update();
 	}
 
@@ -306,19 +306,19 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side)
+	public int[] getSlotsForFace(EnumFacing side)
 	{
-		return side == 1 ? beeSlotIds : honeyCombSlotIds;
+		return EnumFacing.UP == side ? beeSlotIds : honeyCombSlotIds;
 	}
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack stack, int side)
+	public boolean canInsertItem(int index, ItemStack stack, EnumFacing side)
 	{
 		return this.isItemValidForSlot(index, stack);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, int side)
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing side)
 	{
 		return true;
 	}

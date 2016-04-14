@@ -5,16 +5,17 @@ import java.util.Random;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooSlab extends BlockSlab
 {
@@ -25,17 +26,14 @@ public class BlockBambooSlab extends BlockSlab
 		setStepSound(soundTypeWood);
 		setResistance(5.0F);
 		setHardness(2.0F);
-		setBlockName("grc.bambooSlab");
+		setUnlocalizedName("grc.bamboo_slab");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubBlocks(Item item, CreativeTabs tab, List list)
+	public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list)
 	{
 		if (item != Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooDoubleSlab.getBlock()))
 		{
@@ -62,11 +60,8 @@ public class BlockBambooSlab extends BlockSlab
 		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
 	}
@@ -74,15 +69,5 @@ public class BlockBambooSlab extends BlockSlab
 	protected ItemStack createStackedBlock(int par1)
 	{
 		return new ItemStack(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock(), 2, 0);
-	}
-
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return GrowthCraftBamboo.blocks.bambooBlock.getBlock().getIcon(side, meta);
 	}
 }

@@ -6,22 +6,25 @@ import java.util.Random;
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.api.core.util.BlockFlags;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGrowable
 {
@@ -31,9 +34,6 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
 		private LeavesStage() {}
 	}
-
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
 
 	private final int growth = GrowthCraftApples.getConfig().appleLeavesGrowthRate;
 	private int[] adjacentTreeBlocks;
@@ -45,32 +45,30 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setStepSound(soundTypeGrass);
-		this.setBlockName("grc.appleLeaves");
+		this.setUnlocalizedName("grc.apple_leaves");
 		this.setCreativeTab(GrowthCraftApples.creativeTab);
 	}
 
-	/* Bonemeal? Client side */
 	@Override
-	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient)
+	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
 		return world.isAirBlock(x, y - 1, z) && (world.getBlockMetadata(x, y, z) & 3) == 0;
 	}
 
-	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
 	@Override
-	public boolean func_149852_a(World world, Random random, int x, int y, int z)
+	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state)
 	{
 		return true;
 	}
 
 	/* Apply bonemeal effect */
 	@Override
-	public void func_149853_b(World world, Random random, int x, int y, int z)
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
 		growApple(world, random, x, y, z);
 	}
 
-	private void growApple(World world, Random random, int x, int y, int z)
+	private void growApple(World world, Random random, BlockPos pos)
 	{
 		if (world.isAirBlock(x, y - 1, z))
 		{
@@ -78,17 +76,14 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		}
 	}
 
-	private void removeLeaves(World world, int x, int y, int z)
+	private void removeLeaves(World world, BlockPos pos)
 	{
 		this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 		world.setBlockToAir(x, y, z);
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
 		if (!world.isRemote)
 		{
@@ -212,15 +207,15 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random random)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.randomDisplayTick(world, x, y, z, random);
+		super.randomDisplayTick(world, pos, state, random);
 		if (world.canLightningStrikeAt(x, y + 1, z) && !World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) && random.nextInt(15) == 1)
 		{
 			final double d0 = (double)((float)x + random.nextFloat());
 			final double d1 = (double)y - 0.05D;
 			final double d2 = (double)((float)z + random.nextFloat());
-			world.spawnParticle("dripWater", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -228,7 +223,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	 * TRIGGERS
 	 ************/
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6)
+	public void breakBlock(World world, BlockPos pos, Block block, int par6)
 	{
 		final byte b0 = 1;
 		final int i1 = b0 + 1;
@@ -253,7 +248,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	}
 
 	@Override
-	public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int par6)
+	public void harvestBlock(World world, EntityPlayer player, BlockPos pos, int par6)
 	{
 		super.harvestBlock(world, player, x, y, z, par6);
 	}
@@ -263,25 +258,25 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
+	public Item getItem(World world, BlockPos pos)
 	{
 		return Item.getItemFromBlock(Blocks.leaves);
 	}
 
 	@Override
-	public void beginLeavesDecay(World world, int x, int y, int z)
+	public void beginLeavesDecay(World world, BlockPos pos)
 	{
 		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | LeavesStage.DECAY_MASK, BlockFlags.SUPRESS_RENDER);
 	}
 
 	@Override
-	public boolean isLeaves(IBlockAccess world, int x, int y, int z)
+	public boolean isLeaves(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return false;
 	}
@@ -290,7 +285,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	 * DROPS
 	 ************/
 	@Override
-	public Item getItemDropped(int meta, Random random, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return GrowthCraftApples.appleSapling.getItem();
 	}
@@ -302,7 +297,7 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float par6, int fortune)
+	public void dropBlockAsItemWithChance(World world, BlockPos pos, int meta, float par6, int fortune)
 	{
 		if (!world.isRemote)
 		{
@@ -325,29 +320,6 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		}
 	}
 
-	/************
-	 * TEXTURES
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		this.icons = new IIcon[2];
-
-		icons[0] = reg.registerIcon("leaves_oak");
-		icons[1] = reg.registerIcon("leaves_oak_opaque");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return icons[isOpaqueCube() ? 1 : 0];
-	}
-
-	/************
-	 * RENDERS
-	 ************/
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -356,14 +328,11 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
 
-	/************
-	 * COLORS
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor()
@@ -375,17 +344,15 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getRenderColor(int meta)
+	public int getRenderColor(IBlockState state)
 	{
 		return ColorizerFoliage.getFoliageColorBasic();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
+	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
-
 		int r = 0;
 		int g = 0;
 		int b = 0;
@@ -404,17 +371,14 @@ public class BlockAppleLeaves extends BlockLeavesBase implements IShearable, IGr
 		return (r / 9 & 255) << 16 | (g / 9 & 255) << 8 | b / 9 & 255;
 	}
 
-	/************
-	 * SHEARS
-	 ************/
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, int x, int y, int z)
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune)
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockMetadata(x, y, z) & 3));

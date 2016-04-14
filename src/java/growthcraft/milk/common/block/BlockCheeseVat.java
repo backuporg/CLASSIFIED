@@ -27,17 +27,20 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.common.block.GrcBlockContainer;
-import growthcraft.milk.client.render.RenderCheeseVat;
 import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
 import growthcraft.milk.GrowthCraftMilk;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCheeseVat extends GrcBlockContainer
 {
@@ -47,30 +50,30 @@ public class BlockCheeseVat extends GrcBlockContainer
 		setResistance(10.0F);
 		setHardness(5.0F);
 		setStepSound(soundTypeMetal);
-		setBlockName("grcmilk.CheeseVat");
+		setUnlocalizedName("grcmilk.CheeseVat");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseVat.class);
-		setBlockTextureName("grcmilk:cheese_vat");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z, Random random)
+	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
+		super.randomDisplayTick(world, pos, state, rand);
 		if (random.nextInt(12) == 0)
 		{
-			final TileEntityCheeseVat te = getTileEntity(world, x, y, z);
+			final TileEntityCheeseVat te = getTileEntity(world, pos);
 			if (te != null)
 			{
 				if (te.isWorking())
 				{
 					for (int i = 0; i < 3; ++i)
 					{
-						final double px = x + 0.5d + (random.nextFloat() - 0.5d);
-						final double py = y + (1d / 16d);
-						final double pz = z + 0.5d + (random.nextFloat() - 0.5d);
-						world.spawnParticle("smoke", px, py, pz, 0.0D, 1d / 32d, 0.0D);
-						world.playSoundEffect((double)x, (double)y, (double)z, "liquid.lavapop", 0.3f, 0.5f);
+						final double px = pos.getX() + 0.5d + (random.nextFloat() - 0.5d);
+						final double py = pos.getY() + (1d / 16d);
+						final double pz = pos.getZ() + 0.5d + (random.nextFloat() - 0.5d);
+						world.spawnParticle(EnumParticleTypes.SMOKE, px, py, pz, 0.0D, 1d / 32d, 0.0D);
+						world.playSoundEffect((double)px, (double)py, (double)pz, "liquid.lavapop", 0.3f, 0.5f);
 					}
 				}
 			}
@@ -85,31 +88,25 @@ public class BlockCheeseVat extends GrcBlockContainer
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB axis, List list, Entity entity)
 	{
 		final float unit = 1f / 16f;
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, unit, 1.0F);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, unit, 1.0F, 1.0F);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, unit);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		this.setBlockBounds(1.0F - unit, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		this.setBlockBounds(0.0F, 0.0F, 1.0F - unit, 1.0F, 1.0F, 1.0F);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		this.setBlockBoundsForItemRender();
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return RenderCheeseVat.RENDER_ID;
 	}
 
 	@Override
@@ -119,14 +116,8 @@ public class BlockCheeseVat extends GrcBlockContainer
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
@@ -138,9 +129,9 @@ public class BlockCheeseVat extends GrcBlockContainer
 	}
 
 	@Override
-	public int getComparatorInputOverride(World world, int x, int y, int z, int par5)
+	public int getComparatorInputOverride(World world, BlockPos pos)
 	{
-		final TileEntityCheeseVat te = getTileEntity(world, x, y, z);
+		final TileEntityCheeseVat te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.calcRedstone();

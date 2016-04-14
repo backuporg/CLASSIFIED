@@ -28,11 +28,12 @@ import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
 
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITileProgressiveDevice, IPancheonTile
+public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITickable, ITileProgressiveDevice, IPancheonTile
 {
 	private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
 
@@ -97,19 +98,22 @@ public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITile
 	}
 
 	@Override
-	protected void updateDevice()
+	public void update()
 	{
-		pancheon.update();
+		if (!worldObj.isRemote)
+		{
+			pancheon.update();
+		}
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
+	protected FluidStack doDrain(EnumFacing dir, int amount, boolean doDrain)
 	{
 		return getPresentTank().drain(amount, doDrain);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain)
+	protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain)
 	{
 		/**
 		 * @todo Drain from bottom fluid tank when dir == DOWN
@@ -126,7 +130,7 @@ public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITile
 	}
 
 	@Override
-	protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill)
+	protected int doFill(EnumFacing dir, FluidStack stack, boolean doFill)
 	{
 		if (outputTanksHaveFluid()) return 0;
 		return fillFluidTank(0, stack, doFill);

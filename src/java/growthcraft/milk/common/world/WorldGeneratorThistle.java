@@ -3,10 +3,13 @@ package growthcraft.milk.common.world;
 import java.util.Random;
 
 import growthcraft.api.core.util.BiomeUtils;
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -20,16 +23,18 @@ public class WorldGeneratorThistle implements IWorldGenerator
 {
 	private WorldGenerator thistle;
 
-	private boolean canPlaceOnBlock(World world, int x, int y, int z, Block block)
+	private boolean canPlaceOnBlock(World world, BlockPos pos, IBlockState state)
 	{
+		final Block block = state.getBlock();
 		return Blocks.dirt.equals(block) ||
 			Blocks.grass.equals(block);
 	}
 
-	private boolean canReplaceBlock(World world, int x, int y, int z, Block block)
+	private boolean canReplaceBlock(World world, BlockPos pos, IBlockState state)
 	{
-		return block.isAir(world, x, y, z) ||
-			block.isLeaves(world, x, y, z) ||
+		final Block block = state.getBlock();
+		return block.isAir(world, pos) ||
+			block.isLeaves(world, pos) ||
 			Blocks.vine == block;
 	}
 
@@ -43,30 +48,28 @@ public class WorldGeneratorThistle implements IWorldGenerator
 				if (rand.nextInt(genChance) != 0) continue;
 			}
 
-			final int x = chunk_x * 16 + rand.nextInt(16);
-			final int z = chunk_z * 16 + rand.nextInt(16);
-			int y = maxHeight;
-			for (; y > minHeight; --y)
+			BlockPos pos = new BlockPos(chunk_x * 16 + rand.nextInt(16), maxHeight, chunk_z * 16 + rand.nextInt(16));
+			for (; pos.getY() > minHeight; pos = pos.down())
 			{
 				// If you can't replace the block now, it means you probably
 				// hit the floor
-				if (!canReplaceBlock(world, x, y, z, world.getBlock(x, y, z)))
+				if (!canReplaceBlock(world, pos, world.getBlockState(pos)))
 				{
 					// move back up and break loop
-					y += 1;
+					pos = pos.up();
 					break;
 				}
 			}
 			// If we've exceeded the minHeight, bail this operation immediately
-			if (y <= minHeight)
+			if (pos.getY() <= minHeight)
 			{
 				continue;
 			}
 
-			final Block block = world.getBlock(x, y - 1, z);
-			if (canPlaceOnBlock(world, x, y - 1, z, block))
+			final IBlockState state = world.getBlockState(pos.down());
+			if (canPlaceOnBlock(world, pos.down(), state))
 			{
-				world.setBlock(x, y, z, GrowthCraftMilk.blocks.thistle.getBlock());
+				world.setBlockState(pos, GrowthCraftMilk.blocks.thistle.getBlock().getDefaultState());
 			}
 		}
 	}
@@ -74,7 +77,7 @@ public class WorldGeneratorThistle implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (world.provider.dimensionId == 0)
+		if (world.provider.getDimensionId() == 0)
 		{
 			final BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
 			if (GrowthCraftMilk.getConfig().thistleUseBiomeDict)

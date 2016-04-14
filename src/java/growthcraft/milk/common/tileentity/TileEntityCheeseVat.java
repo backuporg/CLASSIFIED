@@ -65,13 +65,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
+public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements ITickable, IItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
 {
 	public static enum FluidTankType
 	{
@@ -238,13 +239,13 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side)
+	public int[] getSlotsForFace(EnumFacing side)
 	{
 		return accessibleSlots.slotsAt(side);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, int side)
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing side)
 	{
 		return accessibleSlots.sideContains(side, index);
 	}
@@ -418,41 +419,44 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	protected void updateDevice()
+	public void update()
 	{
-		heatComponent.update();
-		if (!isIdle())
+		if (!worldObj.isRemote)
 		{
-			if (isHeated())
+			heatComponent.update();
+			if (!isIdle())
 			{
-				if (progress < progressMax)
+				if (isHeated())
 				{
-					progress += 1 * getHeatMultiplier();
+					if (progress < progressMax)
+					{
+						progress += 1 * getHeatMultiplier();
+					}
+					else
+					{
+						onFinishedProgress();
+						goIdle();
+					}
 				}
 				else
 				{
-					onFinishedProgress();
-					goIdle();
+					if (progress > 0)
+					{
+						progress -= 1;
+					}
+					else
+					{
+						goIdle();
+					}
 				}
 			}
 			else
 			{
-				if (progress > 0)
+				if (recheckRecipe)
 				{
-					progress -= 1;
+					this.recheckRecipe = false;
+					if (isHeated()) commitRecipe();
 				}
-				else
-				{
-					goIdle();
-				}
-			}
-		}
-		else
-		{
-			if (recheckRecipe)
-			{
-				this.recheckRecipe = false;
-				if (isHeated()) commitRecipe();
 			}
 		}
 	}
@@ -468,7 +472,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid)
+	public boolean canFill(EnumFacing from, Fluid fluid)
 	{
 		return FluidTest.hasTags(fluid, MilkFluidTags.MILK) ||
 			FluidTest.hasTags(fluid, MilkFluidTags.WHEY) ||
@@ -477,21 +481,21 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection dir, int amount, boolean doDrain)
+	protected FluidStack doDrain(EnumFacing dir, int amount, boolean doDrain)
 	{
 		if (!isIdle()) return null;
 		return wasteFluidSlot.consume(amount, doDrain);
 	}
 
 	@Override
-	protected FluidStack doDrain(ForgeDirection dir, FluidStack stack, boolean doDrain)
+	protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain)
 	{
 		if (!FluidTest.areStacksEqual(wasteFluidSlot.get(), stack)) return null;
 		return doDrain(dir, stack.amount, doDrain);
 	}
 
 	@Override
-	protected int doFill(ForgeDirection dir, FluidStack stack, boolean doFill)
+	protected int doFill(EnumFacing dir, FluidStack stack, boolean doFill)
 	{
 		if (!isIdle()) return 0;
 		int result = 0;
@@ -519,7 +523,7 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements IIte
 
 	private void playSuccessfulSwordActivationFX()
 	{
-		worldObj.playSoundEffect((double)xCoord, (double)yCoord, (double)zCoord, "random.successful_hit", 0.3f, 0.5f);
+		worldObj.playSoundEffect((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), "random.successful_hit", 0.3f, 0.5f);
 	}
 
 	private boolean doSwordActivation(EntityPlayer _player, ItemStack _stack)

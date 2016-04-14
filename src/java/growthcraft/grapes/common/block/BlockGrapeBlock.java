@@ -1,104 +1,95 @@
 package growthcraft.grapes.common.block;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.block.GrcBlockBase;
-import growthcraft.grapes.client.renderer.RenderGrape;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGrapeBlock extends GrcBlockBase
 {
 	protected int bayanusDropRarity = GrowthCraftGrapes.getConfig().bayanusDropRarity;
 	protected int grapesDropMin = GrowthCraftGrapes.getConfig().grapesDropMin;
 	protected int grapesDropMax = GrowthCraftGrapes.getConfig().grapesDropMax;
+	private Random rand = new Random();
 
 	public BlockGrapeBlock()
 	{
 		super(Material.plants);
-		setBlockTextureName("grcgrapes:grape");
 		setHardness(0.0F);
 		setStepSound(soundTypeGrass);
-		setBlockName("grc.grapeBlock");
+		setUnlocalizedName("grc.grape_block");
 		setBlockBounds(0.1875F, 0.5F, 0.1875F, 0.8125F, 1.0F, 0.8125F);
 		setCreativeTab(null);
 	}
 
-	/************
-	 * TICK
-	 ************/
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
+	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		if (!this.canBlockStay(world, x, y, z))
+		final IBlockState state = world.getBlockState(pos.up());
+		return GrowthCraftGrapes.blocks.grapeLeaves.equals(state.getBlock());
+	}
+
+	@Override
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	{
+		super.updateTick(world, pos, state, random);
+		if (!canBlockStay(world, pos))
 		{
-			fellBlockAsItem(world, x, y, z);
+			fellBlockAsItem(world, pos, state);
 		}
 	}
 
-	/************
-	 * TRIGGERS
-	 ************/
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int dir, float par7, float par8, float par9)
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!world.isRemote)
 		{
-			fellBlockAsItem(world, x, y, z);
+			fellBlockAsItem(world, pos);
 		}
 		return true;
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
-		if (!this.canBlockStay(world, x, y, z))
+		if (!this.canBlockStay(world, pos))
 		{
-			fellBlockAsItem(world, x, y, z);
+			fellBlockAsItem(world, pos);
 		}
 	}
 
-	/************
-	 * CONDITIONS
-	 ************/
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
-		return GrowthCraftGrapes.blocks.grapeLeaves.getBlock() == world.getBlock(x, y + 1, z);
-	}
-
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World world, int x, int y, int z)
+	public Item getItem(World world, BlockPos pos)
 	{
 		return GrowthCraftGrapes.items.grapes.getItem();
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return false;
 	}
 
-	/************
-	 * DROPS
-	 ************/
 	@Override
-	public Item getItemDropped(int meta, Random random, int par3)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
 		return GrowthCraftGrapes.items.grapes.getItem();
 	}
@@ -110,18 +101,18 @@ public class BlockGrapeBlock extends GrcBlockBase
 	}
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		final int count = quantityDropped(metadata, fortune, world.rand);
+		final List<ItemStack> ret = new ArrayList<ItemStack>();
+		final int count = quantityDropped(state, fortune, rand);
 		for(int i = 0; i < count; ++i)
 		{
-			final Item item = getItemDropped(metadata, world.rand, fortune);
+			final Item item = getItemDropped(state, rand, fortune);
 			if (item != null)
 			{
-				ret.add(new ItemStack(item, 1, damageDropped(metadata)));
+				ret.add(new ItemStack(item, 1, damageDropped(state)));
 			}
-			if (world.rand.nextInt(bayanusDropRarity) == 0)
+			if (rand.nextInt(bayanusDropRarity) == 0)
 			{
 				ret.add(EnumYeast.BAYANUS.asStack(1));
 			}
@@ -129,33 +120,9 @@ public class BlockGrapeBlock extends GrcBlockBase
 		return ret;
 	}
 
-	/************
-	 * RENDER
-	 ************/
-	@Override
-	public int getRenderType()
-	{
-		return RenderGrape.id;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
-	}
-
-	/************
-	 * BOXES
-	 ************/
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		return null;
 	}
 }

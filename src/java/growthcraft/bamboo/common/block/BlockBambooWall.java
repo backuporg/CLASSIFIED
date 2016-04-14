@@ -3,30 +3,26 @@ package growthcraft.bamboo.common.block;
 import java.util.List;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
-import growthcraft.bamboo.client.renderer.RenderBambooWall;
 import growthcraft.core.common.block.GrcBlockBase;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooWall extends GrcBlockBase
 {
-	@SideOnly(Side.CLIENT)
-	public static IIcon[] tex;
-
 	public BlockBambooWall()
 	{
 		super(Material.wood);
@@ -34,13 +30,10 @@ public class BlockBambooWall extends GrcBlockBase
 		setStepSound(soundTypeWood);
 		setResistance(5.0F / 3.0F);
 		setHardness(2.0F);
-		setBlockName("grc.bambooWall");
+		setUnlocalizedName("grc.bamboo_wall");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	public boolean getBlocksMovement(IBlockAccess world, int x, int y, int z)
 	{
@@ -57,39 +50,9 @@ public class BlockBambooWall extends GrcBlockBase
 			GrowthCraftBamboo.blocks.bambooStalk.getBlock() == block ||
 			Blocks.glass_pane == block ||
 			block instanceof BlockFenceGate ||
-			block instanceof BlockFence ||
-			block.renderAsNormalBlock()) return true;
+			block instanceof BlockFence) return true;
 
 		return false;
-	}
-
-	/************
-	 * ICONS
-	 ************/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		tex = new IIcon[2];
-
-		tex[0] = reg.registerIcon("grcbamboo:fence_top");
-		tex[1] = reg.registerIcon("grcbamboo:fence");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return side == 1 ? tex[0] : ( side == 0 ? tex[0] : tex[1]);
-	}
-
-	/************
-	 * RENDERS
-	 ************/
-	@Override
-	public int getRenderType()
-	{
-		return RenderBambooWall.id;
 	}
 
 	@Override
@@ -99,21 +62,12 @@ public class BlockBambooWall extends GrcBlockBase
 	}
 
 	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
+	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
 	{
 		return true;
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
@@ -264,7 +218,7 @@ public class BlockBambooWall extends GrcBlockBase
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List<AxisAlignedBB> list, Entity entity)
 	{
 		int tm;
 
@@ -289,7 +243,7 @@ public class BlockBambooWall extends GrcBlockBase
 		float z2 = 0.625F;
 
 		this.setBlockBounds(x1, 0.0F, z1, x2, 1.0F, z2);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		//XNEG
 		if (flagXneg)

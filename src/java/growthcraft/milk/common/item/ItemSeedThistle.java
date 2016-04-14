@@ -27,13 +27,15 @@ import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemSeedThistle extends GrcItemBase implements IPlantable
 {
@@ -46,38 +48,38 @@ public class ItemSeedThistle extends GrcItemBase implements IPlantable
 	}
 
 	@Override
-	public EnumPlantType getPlantType(IBlockAccess world, int x, int y, int z)
+	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
 	{
 		return EnumPlantType.Plains;
 	}
 
 	@Override
-	public Block getPlant(IBlockAccess world, int x, int y, int z)
+	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
-		return GrowthCraftMilk.blocks.thistle.getBlock();
+		return GrowthCraftMilk.blocks.thistle.getBlock().getDefaultState();
 	}
 
 	@Override
-	public int getPlantMetadata(IBlockAccess world, int x, int y, int z)
+	public int getPlantMetadata(IBlockAccess world, BlockPos pos)
 	{
 		return 0;
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int dir, float tx, float ty, float tz)
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int dir, float tx, float ty, float tz)
 	{
 		if (dir == 1)
 		{
-			if (player.canPlayerEdit(x, y, z, dir, stack) && player.canPlayerEdit(x, y + 1, z, dir, stack))
+			if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 			{
-				final Block soil = world.getBlock(x, y, z);
-				final Block plant = getPlant(world, x, y + 1, z);
+				final Block soil = world.getBlockState(pos).getBlock();
+				final Block plant = getPlant(world, pos.up());
 
 				if (plant instanceof IPlantable)
 				{
-					if (soil != null && !world.isAirBlock(x, y, z) && soil.canSustainPlant(world, x, y + 1, z, ForgeDirection.UP, (IPlantable)plant))
+					if (soil != null && !world.isAirBlock(pos) && soil.canSustainPlant(world, pos.up(), EnumFacing.UP, (IPlantable)plant))
 					{
-						world.setBlock(x, y + 1, z, plant);
+						world.setBlockState(pos.up(), plant.getDefaultState());
 						--stack.stackSize;
 						return true;
 					}

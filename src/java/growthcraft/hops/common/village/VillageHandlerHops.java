@@ -5,20 +5,21 @@ import java.util.Random;
 
 import growthcraft.hops.GrowthCraftHops;
 
-import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
-import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraft.village.MerchantRecipeList;
+import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
+import net.minecraft.world.gen.structure.StructureVillagePieces.Village;
+import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 
-public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreationHandler
+public class VillageHandlerHops implements IVillageCreationHandler
 {
-	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
@@ -45,8 +46,8 @@ public class VillageHandlerHops implements IVillageTradeHandler, IVillageCreatio
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Object buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5)
+	public Village buildComponent(PieceWeight villagePiece, Start startPiece, List pieces, Random random, int p1, int p2, int p3, EnumFacing facing, int p5)
 	{
-		return ComponentVillageHopVineyard.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
+		return ComponentVillageHopVineyard.buildComponent(startPiece, pieces, random, p1, p2, p3, facing, p5);
 	}
 }

@@ -5,69 +5,76 @@ import java.util.Random;
 
 import growthcraft.core.util.ItemUtils;
 import growthcraft.api.core.util.BlockFlags;
-import growthcraft.core.client.ClientProxy;
-import growthcraft.core.client.renderer.RenderPaddy;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 {
+	public static final PropertyInteger FLUID_LEVEL = PropertyInteger.create("fluid_level", 0, 15);
+
 	public BlockPaddyBase(Material material)
 	{
 		super(material);
-		this.setTickRandomly(true);
+		setTickRandomly(true);
+		setDefaultState(blockState.getBaseState().withProperty(FLUID_LEVEL, 0));
 	}
 
 	@Override
-	public boolean isFilledWithFluid(IBlockAccess world, int x, int y, int z, int meta)
+	public int getPaddyMaxFluidLevel(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
-		return meta >= getMaxPaddyMeta(world, x, y, z);
+		return 15;
 	}
 
-	public void drainPaddy(World world, int x, int y, int z)
+	@Override
+	public boolean isFilledWithFluid(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
-		if (meta > 0)
+		return state.getValue(FLUID_LEVEL) >= getPaddyMaxFluidLevel(world, pos, state);
+	}
+
+	public void drainPaddy(World world, BlockPos pos, IBlockState state)
+	{
+		final int level = state.getValue(FLUID_LEVEL);
+		if (level > 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, meta - 1, BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockState(pos, state.withProperty(FLUID_LEVEL, level - 1), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
-	public void fillPaddy(World world, int x, int y, int z)
+	public void fillPaddy(World world, BlockPos pos, IBlockState state)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, getMaxPaddyMeta(world, x, y, z), BlockFlags.UPDATE_AND_SYNC);
-	}
-
-	/************
-	 * TICK
-	 ************/
-
-	@Override
-	public void updateTick(World world, int x, int y, int z, Random random)
-	{
-		if (isBelowFillingFluid(world, x, y, z) && world.canLightningStrikeAt(x, y + 1, z))
+		final int level = state.getValue(FLUID_LEVEL);
+		if (level < getPaddyMaxFluidLevel(world. pos, state) - 1)
 		{
-			fillPaddy(world, x, y, z);
+			world.setBlockState(pos, state.withProperty(FLUID_LEVEL,level + 1), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
-	/************
-	 * TRIGGERS
-	 ************/
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float par7, float par8, float par9)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	{
+		if (isBelowFillingFluid(world, pos, state) && world.canLightningStrikeAt(x, y + 1, z))
+		{
+			fillPaddy(world, pos, state);
+		}
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (world.isRemote)
 		{
@@ -80,29 +87,31 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 			{
 				if (FluidContainerRegistry.isFilledContainer(itemstack))
 				{
-					final FluidStack addF = FluidContainerRegistry.getFluidForFilledItem(itemstack);
-					if (addF != null)
+					final FluidStack fillerFluidStack = FluidContainerRegistry.getFluidForFilledItem(itemstack);
+					if (fillerFluidStack != null)
 					{
-						int radius = addF.amount * 2 / FluidContainerRegistry.BUCKET_VOLUME;
+						int radius = fillerFluidStack.amount * 2 / FluidContainerRegistry.BUCKET_VOLUME;
 						if (radius % 2 == 0)
 						{
 							radius -= 1;
 						}
 
-						if (addF.getFluid() == getFillingFluid() && radius > 0)
+						if (fillerFluidStack.getFluid() == getFillingFluid() && radius > 0)
 						{
-							for (int lx = x - radius; lx <= x + radius; ++lx)
+							for (int lx = pos.getX() - radius; lx <= pos.getX() + radius; ++lx)
 							{
-								for (int lz = z - radius; lz <= z + radius; ++lz)
+								for (int lz = pos.getZ() - radius; lz <= pos.getZ() + radius; ++lz)
 								{
-									if (world.getBlock(lx, y, lz) == this)
+									final BlockPos fillPos = new BlockPos(lx, pos.getY(), lz);
+									final IBlockState fillState = world.getBlockState(fillPos);
+									if (fillState.getBlock() == this)
 									{
-										fillPaddy(world, lx, y, lz);
+										fillPaddy(world, fillPos, state);
 									}
 								}
 							}
 
-							if(!player.capabilities.isCreativeMode)
+							if (!player.capabilities.isCreativeMode)
 							{
 								player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemUtils.consumeStack(itemstack));
 							}
@@ -118,73 +127,50 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	}
 
 	@Override
-	public void onFallenUpon(World world, int x, int y, int z, Entity entity, float par6)
+	public void onFallenUpon(World world, BlockPos pos, Entity entity, float fallDistance)
 	{
-		if (!world.isRemote && world.rand.nextFloat() < par6 - 0.5F)
+		if (!world.isRemote && world.rand.nextFloat() < fallDistance - 0.5F)
 		{
 			if (!(entity instanceof EntityPlayer) && !world.getGameRules().getGameRuleBooleanValue("mobGriefing"))
 			{
 				return;
 			}
 
-			final Block plant = world.getBlock(x, y + 1, z);
+			final Block plant = world.getBlock(pos.up());
 			if (plant instanceof IPaddyCrop)
 			{
-				plant.dropBlockAsItem(world, x, y + 1, z, world.getBlockMetadata(x, y + 1, z), 0);
-				world.setBlockToAir(x, y + 1, z);
+				plant.dropBlockAsItem(world, pos.up(), world.getBlockMetadata(pos.up()), 0);
+				world.setBlockToAir(pos.up());
 			}
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
-		super.onNeighborBlockChange(world, x, y, z, par5);
-		if (isBelowFillingFluid(world, x, y, z))
+		super.onNeighborBlockChange(world, pos, state, block);
+		if (isBelowFillingFluid(world, pos, state))
 		{
-			fillPaddy(world, x, y, z);
+			fillPaddy(world, pos, state);
 		}
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockAccess world, int i, int j, int k, ForgeDirection side)
+	public boolean isSideSolid(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
-		return ForgeDirection.UP != side;
+		return EnumFacing.UP != side;
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, EntityPlayer player, int x, int y, int z, int metadata)
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		return false;
-	}
-
-	/************
-	 * RENDERS
-	 ************/
-	@Override
-	public int getRenderType()
-	{
-		return RenderPaddy.id;
 	}
 
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean canRenderInPass(int pass)
-	{
-		ClientProxy.paddyRenderPass = pass;
-		return true;
 	}
 
 	@Override
@@ -204,13 +190,27 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, int i, int j, int k, AxisAlignedBB axis, List list, Entity entity)
+	public boolean canConnectPaddyTo(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
-		final int meta = world.getBlockMetadata(i, j, k);
+		final IBlockState newState = world.getBlockState(pos);
+		if (this.equals(newState.getBlock()))
+		{
+			final int meta = newState.getValue(FLUID_LEVEL);
+			final int m = state.getValue(FLUID_LEVEL);
+			if ((m == 0 && meta == 0) || (m > 0 && meta > 0))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
+	@Override
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity entity)
+	{
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.875F, 1.0F);
-		super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 
 		final float thick = 0.125F;
 		final float j1 = 0.875F;
@@ -220,10 +220,10 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 		float k1 = 0.0F;
 		float k2 = 1.0F;
 
-		final boolean boolXPos = canConnectPaddyTo(world, i + 1, j, k, meta);
-		final boolean boolXNeg = canConnectPaddyTo(world, i - 1, j, k, meta);
-		final boolean boolYPos = canConnectPaddyTo(world, i, j, k + 1, meta);
-		final boolean boolYNeg = canConnectPaddyTo(world, i, j, k - 1, meta);
+		final boolean boolXPos = canConnectPaddyTo(world, pos.east(), state);
+		final boolean boolXNeg = canConnectPaddyTo(world, pos.west(), state);
+		final boolean boolYPos = canConnectPaddyTo(world, pos.south(), state);
+		final boolean boolYNeg = canConnectPaddyTo(world, pos.north(), state);
 
 		if (!boolXPos)
 		{
@@ -233,7 +233,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 			k2 = 1.0F - thick;
 
 			this.setBlockBounds(i1, j1, k1, i2, j2, k2);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
 		if (!boolXNeg)
@@ -244,7 +244,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 			k2 = 1.0F - thick;
 
 			this.setBlockBounds(i1, j1, k1, i2, j2, k2);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
 		if (!boolYPos)
@@ -255,7 +255,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 			k2 = 1.0F;
 
 			this.setBlockBounds(i1, j1, k1, i2, j2, k2);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
 		if (!boolYNeg)
@@ -266,51 +266,34 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 			k2 = 0.0F + thick;
 
 			this.setBlockBounds(i1, j1, k1, i2, j2, k2);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
 		//corners
-		if ((!canConnectPaddyTo(world, i - 1, j, k - 1, meta)) || (!boolXNeg) || (!boolYNeg))
+		if ((!canConnectPaddyTo(world, pos.north().west(), state)) || (!boolXNeg) || (!boolYNeg))
 		{
 			this.setBlockBounds(0.0F, j1, 0.0F, 0.0F + thick, j2, 0.0F + thick);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
-		if ((!canConnectPaddyTo(world, i + 1, j, k - 1, meta)) || (!boolXPos) || (!boolYNeg))
+		if ((!canConnectPaddyTo(world, pos.north().east(), state)) || (!boolXPos) || (!boolYNeg))
 		{
 			this.setBlockBounds(1.0F - thick, j1, 0.0F, 1.0F, j2, 0.0F + thick);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
-		if ((!canConnectPaddyTo(world, i - 1, j, k + 1, meta)) || (!boolXNeg) || (!boolYPos))
+		if ((!canConnectPaddyTo(world, pos.south().west(), state)) || (!boolXNeg) || (!boolYPos))
 		{
 			this.setBlockBounds(0.0F, j1, 1.0F - thick, 0.0F + thick, j2, 1.0F);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
-		if ((!canConnectPaddyTo(world, i + 1, j, k + 1, meta)) || (!boolXPos) || (!boolYPos))
+		if ((!canConnectPaddyTo(world, pos.south().east(), state)) || (!boolXPos) || (!boolYPos))
 		{
 			this.setBlockBounds(1.0F - thick, j1, 1.0F - thick, 1.0F, j2, 1.0F);
-			super.addCollisionBoxesToList(world, i, j, k, axis, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, mask, list, entity);
 		}
 
 		this.setBlockBoundsForItemRender();
-	}
-
-	public boolean canConnectPaddyTo(IBlockAccess world, int i, int j, int k, int m)
-	{
-		if (m > 0)
-		{
-			m = 1;
-		}
-
-		int meta = world.getBlockMetadata(i, j, k);
-
-		if (meta > 0)
-		{
-			meta = 1;
-		}
-
-		return this == world.getBlock(i, j, k) && meta == m;
 	}
 }

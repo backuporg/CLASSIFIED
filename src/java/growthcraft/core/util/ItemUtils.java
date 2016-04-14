@@ -5,8 +5,6 @@ import javax.annotation.Nonnull;
 
 import buildcraft.api.tools.IToolWrench;
 
-import cpw.mods.fml.common.Loader;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -17,6 +15,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -207,6 +206,11 @@ public class ItemUtils
 		}
 	}
 
+	public static void spawnItemStack(World world, BlockPos pos, ItemStack stack, Random random)
+	{
+		spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack, random);
+	}
+
 	public static void spawnBrokenItemStack(World world, int x, int y, int z, ItemStack stack, Random random)
 	{
 		if (stack != null)
@@ -302,21 +306,21 @@ public class ItemUtils
 		return isIToolWrench(item);
 	}
 
-	public static boolean canWrench(ItemStack item, EntityPlayer player, int x, int y, int z)
+	public static boolean canWrench(ItemStack item, EntityPlayer player, BlockPos pos)
 	{
 		if (isIToolWrench(item))
 		{
-			return ((IToolWrench)item.getItem()).canWrench(player, x, y, z);
+			return ((IToolWrench)item.getItem()).canWrench(player, pos);
 		}
 		return false;
 	}
 
-	public static void wrenchUsed(ItemStack item, EntityPlayer player, int x, int y, int z)
+	public static void wrenchUsed(ItemStack item, EntityPlayer player, BlockPos pos)
 	{
 		if (item == null) return;
 		if (isIToolWrench(item))
 		{
-			((IToolWrench)item.getItem()).wrenchUsed(player, x, y, z);
+			((IToolWrench)item.getItem()).wrenchUsed(player, pos);
 		}
 	}
 }
