@@ -158,7 +158,6 @@ public class GrowthCraftCore
 	public void init(FMLInitializationEvent event)
 	{
 		userFluidDictionary.loadUserConfig();
-		CommonProxy.instance.initRenders();
 		AchievementPageGrowthcraft.init();
 
 		userVinesConfig.addDefault(Blocks.vine);
