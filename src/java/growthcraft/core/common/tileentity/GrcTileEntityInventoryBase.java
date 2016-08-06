@@ -50,7 +50,7 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 
 	protected String inventoryName;
 	protected GrcInternalInventory inventory;
-    private LockCode code = LockCode.EMPTY_CODE;
+	private LockCode code = LockCode.EMPTY_CODE;
 
 	public GrcTileEntityInventoryBase()
 	{
@@ -82,34 +82,40 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 		ItemUtils.spawnItemStack(worldObj, pos.getX(), pos.getY(), pos.getZ(), discarded, worldObj.rand);
 	}
 
-    @Override
-    public boolean isLocked()
-    {
-        return this.code != null && !this.code.isEmpty();
-    }
-
-    @Override
-    public LockCode getLockCode()
-    {
-        return this.code;
-    }
-
-    @Override
-    public void setLockCode(LockCode code)
-    {
-        this.code = code;
-    }
+	@Override
+	public boolean isLocked()
+	{
+		return this.code != null && !this.code.isEmpty();
+	}
 
 	@Override
-    public IChatComponent getDisplayName()
-    {
-        return (IChatComponent)(this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName(), new Object[0]));
-    }
+	public LockCode getLockCode()
+	{
+		return this.code;
+	}
+
+	@Override
+	public void setLockCode(LockCode code)
+	{
+		this.code = code;
+	}
 
 	@Override
 	public boolean hasCustomName()
 	{
 		return inventoryName != null && inventoryName.length() > 0;
+	}
+
+	@Override
+	public String getName()
+	{
+		return hasCustomName() ? inventoryName : getDefaultInventoryName();
+	}
+
+	@Override
+	public IChatComponent getDisplayName()
+	{
+		return (IChatComponent)(this.hasCustomName() ? new ChatComponentText(this.getName()) : new ChatComponentTranslation(this.getName(), new Object[0]));
 	}
 
 	@Override
@@ -263,7 +269,7 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 
 	private void readLockCodeFromNBT(NBTTagCompound compound)
 	{
-        this.code = LockCode.fromNBT(compound);
+		this.code = LockCode.fromNBT(compound);
 	}
 
 	@Override
@@ -299,9 +305,9 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 	private void writeLockCodeToNBT(NBTTagCompound compound)
 	{
 		if (code != null)
-        {
-            code.toNBT(compound);
-        }
+		{
+			code.toNBT(compound);
+		}
 	}
 
 	@Override

@@ -48,6 +48,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.ResourceLocation;
 
 public class GrcGrapesFluids extends GrcModuleBase
 {
@@ -62,7 +63,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 		this.grapeWineBooze = new Booze[8];
 		this.grapeWineFluids = new BlockBoozeDefinition[grapeWineBooze.length];
 		this.grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.grapeWine", grapeWineBooze);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.grapeWine", grapeWineBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : grapeWineBooze)
 		{
 			booze.setColor(GrowthCraftGrapes.getConfig().grapeWineColor).setDensity(1120);

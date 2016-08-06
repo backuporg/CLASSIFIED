@@ -34,7 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -68,6 +67,14 @@ public class GrowthCraftApples
 	public static GrcApplesConfig getConfig()
 	{
 		return instance.config;
+	}
+
+	/**
+	 * Only use this logger for logging GrowthCraftBees related items
+	 */
+	public static ILogger getLogger()
+	{
+		return instance.logger;
 	}
 
 	@EventHandler
@@ -124,14 +131,10 @@ public class GrowthCraftApples
 		//====================
 		GameRegistry.addShapelessRecipe(appleSeeds.asStack(), Items.apple);
 
-		MinecraftForge.EVENT_BUS.register(this);
-
 		//====================
 		// SMELTING
 		//====================
 		GameRegistry.registerFuelHandler(new AppleFuelHandler());
-
-		NEI.hideItem(appleBlock.asStack());
 
 		modules.register();
 	}
@@ -144,19 +147,6 @@ public class GrowthCraftApples
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		modules.init();
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event)
-	{
-		if (event.map.getTextureType() == 0)
-		{
-			for (int i = 0; i < fluids.appleCiderBooze.length; ++i)
-			{
-				fluids.appleCiderBooze[i].setIcons(GrowthCraftCore.liquidSmoothTexture);
-			}
-		}
 	}
 
 	@EventHandler

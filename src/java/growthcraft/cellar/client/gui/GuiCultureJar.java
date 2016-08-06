@@ -78,7 +78,7 @@ public class GuiCultureJar extends GuiCellar<ContainerCultureJar, TileEntityCult
 	@Override
 	protected void actionPerformed(GuiButton butn)
 	{
-		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.getPos()));
 	}
 
 	@Override

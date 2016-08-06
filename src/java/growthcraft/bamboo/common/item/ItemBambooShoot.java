@@ -82,7 +82,7 @@ public class ItemBambooShoot extends GrcItemFoodBase implements IPlantable
 		}
 		else
 		{
-			if (world.canPlaceEntityOnSide(cropBlock, x, y, z, false, dir, (Entity)null, stack))
+			if (world.canBlockBePlaced(cropBlock, x, y, z, false, dir, (Entity)null, stack))
 			{
 				final int meta = cropBlock.onBlockPlaced(world, x, y, z, dir, par8, par9, par10, 0);
 

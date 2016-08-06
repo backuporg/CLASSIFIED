@@ -28,6 +28,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.World;
 
@@ -40,7 +41,7 @@ public class SchemaToVillage
 
 	public static interface IVillage
 	{
-		public void placeBlockAtCurrentPositionPub(World world, IBlockState block, int meta, int x, int y, int z, StructureBoundingBox box);
+		public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState block, StructureBoundingBox box);
 	}
 
 	public static interface IBlockEntries
@@ -115,7 +116,7 @@ public class SchemaToVillage
 					}
 					// null blocks are not placed
 					if (state != null) {
-						village.placeBlockAtCurrentPositionPub(world, state, offx + x, offy + y, offz + z, box);
+						village.placeBlockAtCurrentPositionPub(world, new BlockPos(offx + x, offy + y, offz + z), state, box);
 					}
 				}
 			}

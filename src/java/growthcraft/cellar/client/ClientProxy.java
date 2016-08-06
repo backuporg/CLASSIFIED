@@ -11,16 +11,15 @@ public class ClientProxy extends CommonProxy
 {
 	public void registerVillagerSkin()
 	{
-		VillagerRegistry.instance().registerVillagerSkin(GrowthCraftCellar.getConfig().villagerBrewerID,
-			new ResourceLocation("grccellar" , "textures/entity/brewer.png"));
+		GrowthCraftCellar.getLogger().warn("(fixme) cellar/ClientProxy registerVillagerSkin");
+		//VillagerRegistry.instance().registerVillagerSkin(GrowthCraftCellar.getConfig().villagerBrewerID,
+		//	new ResourceLocation("grccellar", "textures/entity/brewer.png"));
 	}
 
 	@Override
 	public void init()
 	{
 		new GrcCellarResources();
-
-		initRenders();
 		registerVillagerSkin();
 	}
 }

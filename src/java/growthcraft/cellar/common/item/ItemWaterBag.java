@@ -82,11 +82,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 	{
 		if (stack != null)
 		{
-			if (stack.stackTagCompound != null)
+			if (stack.hasTagCompound())
 			{
-				if (stack.stackTagCompound.hasKey("Fluid"))
+				final NBTTagCompound nbt = stack.getTagCompound();
+				if (nbt.hasKey("Fluid"))
 				{
-					return stack.stackTagCompound.getCompoundTag("Fluid");
+					return nbt.getCompoundTag("Fluid");
 				}
 			}
 		}
@@ -147,12 +148,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
 		if (!doFill)
 		{
-			if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Fluid"))
+			if (!container.hasTagCompound() || !container.getTagCompound().hasKey("Fluid"))
 			{
 				return Math.min(capacity, amount);
 			}
 
-			final FluidStack stack = FluidStack.loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
+			final FluidStack stack = FluidStack.loadFluidStackFromNBT(container.getTagCompound().getCompoundTag("Fluid"));
 
 			if (stack == null)
 			{
@@ -167,12 +168,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 			return Math.min(capacity - stack.amount, amount);
 		}
 
-		if (container.stackTagCompound == null)
+		if (!container.hasTagCompound())
 		{
-			container.stackTagCompound = new NBTTagCompound();
+			container.setTagCompound(new NBTTagCompound());
 		}
 
-		if (!container.stackTagCompound.hasKey("Fluid"))
+		if (!container.getTagCompound().hasKey("Fluid"))
 		{
 			final FluidStack res = resource.copy();
 			res.amount = amount;
@@ -181,15 +182,15 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 			if (capacity < amount)
 			{
 				fluidTag.setInteger("Amount", capacity);
-				container.stackTagCompound.setTag("Fluid", fluidTag);
+				container.getTagCompound().setTag("Fluid", fluidTag);
 				return capacity;
 			}
 
-			container.stackTagCompound.setTag("Fluid", fluidTag);
+			container.getTagCompound().setTag("Fluid", fluidTag);
 			return amount;
 		}
 
-		final NBTTagCompound fluidTag = container.stackTagCompound.getCompoundTag("Fluid");
+		final NBTTagCompound fluidTag = container.getTagCompound().getCompoundTag("Fluid");
 		final FluidStack stack = FluidStack.loadFluidStackFromNBT(fluidTag);
 
 		if (!stack.isFluidEqual(resource))
@@ -208,7 +209,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 			stack.amount = capacity;
 		}
 
-		container.stackTagCompound.setTag("Fluid", stack.writeToNBT(fluidTag));
+		container.getTagCompound().setTag("Fluid", stack.writeToNBT(fluidTag));
 		return filled;
 	}
 
@@ -223,12 +224,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 	{
 		final int expectedDrain = Math.min(maxDrain, dosage);
 
-		if (container.stackTagCompound == null || !container.stackTagCompound.hasKey("Fluid"))
+		if (!container.hasTagCompound() || !container.getTagCompound().hasKey("Fluid"))
 		{
 			return null;
 		}
 
-		final FluidStack stack = FluidStack.loadFluidStackFromNBT(container.stackTagCompound.getCompoundTag("Fluid"));
+		final FluidStack stack = FluidStack.loadFluidStackFromNBT(container.getTagCompound().getCompoundTag("Fluid"));
 		if (stack == null)
 		{
 			return null;
@@ -240,18 +241,17 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 		{
 			if (currentAmount == stack.amount)
 			{
-				container.stackTagCompound.removeTag("Fluid");
-
-				if (container.stackTagCompound.hasNoTags())
+				container.getTagCompound().removeTag("Fluid");
+				if (container.getTagCompound().hasNoTags())
 				{
-					container.stackTagCompound = null;
+					container.setTagCompound(null);
 				}
 				return stack;
 			}
 
-			final NBTTagCompound fluidTag = container.stackTagCompound.getCompoundTag("Fluid");
+			final NBTTagCompound fluidTag = container.getTagCompound().getCompoundTag("Fluid");
 			fluidTag.setInteger("Amount", currentAmount - stack.amount);
-			container.stackTagCompound.setTag("Fluid", fluidTag);
+			container.getTagCompound().setTag("Fluid", fluidTag);
 		}
 		return stack;
 	}
@@ -259,7 +259,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
 	{
-		return EnumAction.drink;
+		return EnumAction.DRINK;
 	}
 
 	@Override
@@ -364,33 +364,22 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 
 	private boolean tryFillByBlock(ItemStack stack, World world, EntityPlayer player)
 	{
-		final MovingObjectPosition pos = this.getMovingObjectPositionFromPlayer(world, player, true);
-
-		if (pos != null)
+		final MovingObjectPosition movingPos = this.getMovingObjectPositionFromPlayer(world, player, true);
+		if (movingPos.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
 		{
-			if (pos.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+			final BlockPos pos = movingPos.getBlockPos();
+			if (world.isBlockModifiable(player, pos))
 			{
-				final int i = pos.blockX;
-				final int j = pos.blockY;
-				final int k = pos.blockZ;
-
-				if (world.canMineBlock(player, i, j, k))
+				if (player.canPlayerEdit(pos, movingPos.sideHit, stack))
 				{
-					if (player.canPlayerEdit(i, j, k, pos.sideHit, stack))
+					final FluidStack fs = FluidUtils.drainFluidBlock(world, pos, false);
+					if (fs != null)
 					{
-						final Block block = world.getBlock(i, j, k);
-						if (block != null)
+						final int amount = cappedFill(stack, fs, true, capacity);
+						if (amount > 0)
 						{
-							final FluidStack fs = FluidUtils.drainFluidBlock(world, i, j, k, false);
-							if (fs != null)
-							{
-								final int amount = cappedFill(stack, fs, true, capacity);
-								if (amount > 0)
-								{
-									FluidUtils.drainFluidBlock(world, i, j, k, true);
-									return true;
-								}
-							}
+							FluidUtils.drainFluidBlock(world, pos, true);
+							return true;
 						}
 					}
 				}

@@ -4,8 +4,10 @@ import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class PacketClearTankButtonWByte extends AbstractPacketButton
@@ -14,9 +16,9 @@ public class PacketClearTankButtonWByte extends AbstractPacketButton
 
 	public PacketClearTankButtonWByte(){}
 
-	public PacketClearTankButtonWByte(int x, int y, int z, byte byt)
+	public PacketClearTankButtonWByte(BlockPos pos, byte byt)
 	{
-		super(x, y, z);
+		super(pos);
 		this.b = byt;
 	}
 
@@ -44,7 +46,7 @@ public class PacketClearTankButtonWByte extends AbstractPacketButton
 	public void handleServerSide(EntityPlayer player)
 	{
 		final World world = player.worldObj;
-		final TileEntity te = world.getTileEntity(xCoord, yCoord, zCoord);
+		final TileEntity te = world.getTileEntity(pos);
 
 		if (te instanceof TileEntityCellarDevice)
 		{

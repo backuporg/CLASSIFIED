@@ -41,6 +41,7 @@ import growthcraft.core.util.FluidFactory;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.ResourceLocation;
 
 public class GrcBeesFluids extends GrcModuleBase
 {
@@ -66,7 +67,7 @@ public class GrcBeesFluids extends GrcModuleBase
 		this.honeyMeadBooze = new Booze[7];
 		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		this.honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.honeyMead", honeyMeadBooze);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.honeyMead", honeyMeadBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : honeyMeadBooze)
 		{
 			booze.setColor(GrowthCraftBees.getConfig().honeyMeadColor).setDensity(1000).setViscosity(1200);

@@ -74,13 +74,13 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, ItemStack stack)
+	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, IBlockState state, ItemStack stack)
 	{
 		return true;
 	}
 
 	@Override
-	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, int metadata, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return true;
 	}
@@ -113,7 +113,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (super.onBlockActivated(world, pos, player, meta, hitX, hitY, hitZ)) return true;
+		if (super.onBlockActivated(world, pos, state, player, facing, hitX, hitY, hitZ)) return true;
 		if (!player.isSneaking())
 		{
 			final TileEntityHangingCurds hangingCurd = getTileEntity(world, pos);
@@ -160,7 +160,6 @@ public class BlockHangingCurds extends GrcBlockContainer
 		return super.getPickBlock(target, world, pos, player);
 	}
 
-	@Override
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
 		return !world.isAirBlock(pos.up()) &&
@@ -174,7 +173,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, Block block)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
 		if (!this.canBlockStay(world, pos))
 		{
@@ -183,9 +182,9 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.updateTick(world, pos, random);
+		super.updateTick(world, pos, state, rand);
 		if (!world.isRemote)
 		{
 			if (!canBlockStay(world, pos))

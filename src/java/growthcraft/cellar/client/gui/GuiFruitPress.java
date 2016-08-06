@@ -56,7 +56,7 @@ public class GuiFruitPress extends GuiCellar<ContainerFruitPress, TileEntityFrui
 
 	protected void actionPerformed(GuiButton butn)
 	{
-		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.getPos()));
 	}
 
 	@Override

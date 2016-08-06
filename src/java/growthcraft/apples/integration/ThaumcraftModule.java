@@ -47,28 +47,26 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	protected void integrate()
 	{
 		FMLInterModComms.sendMessage(modID, "harvestStandardCrop", GrowthCraftApples.appleBlock.asStack(1, 2));
-
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSapling.asStack(), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
-		ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
-
-		final AspectList[] common = new AspectList[]
-		{
-			new AspectList(),
-			new AspectList().add(Aspect.HEAL, 1),
-			new AspectList().add(Aspect.HEAL, 2),
-			new AspectList().add(Aspect.HEAL, 1),
-			new AspectList().add(Aspect.EXCHANGE, 1),
-			new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
-			new AspectList().add(Aspect.POISON, 1)
-		};
-
-		for (int i = 0; i < common.length; ++i)
-		{
-			final AspectList list = common[i];
-			ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftApples.fluids.appleCider.asStack(1, i), list.copy());
-			ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftApples.fluids.appleCiderBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL, Aspect.EXCHANGE));
-			ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftApples.fluids.appleCiderFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL, Aspect.EXCHANGE));
-		}
+		GrowthCraftApples.getLogger().warn("(fixme) Thaumcraft Aspects");
+		//ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSapling.asStack(), new AspectList().add(Aspect.PLANT, 1));
+		//ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleSeeds.asStack(), new AspectList().add(Aspect.PLANT, 1));
+		//ThaumcraftApi.registerObjectTag(GrowthCraftApples.appleLeaves.asStack(), new AspectList().add(Aspect.PLANT, 1));
+		//final AspectList[] common = new AspectList[]
+		//{
+		//	new AspectList(),
+		//	new AspectList().add(Aspect.HEAL, 1),
+		//	new AspectList().add(Aspect.HEAL, 2),
+		//	new AspectList().add(Aspect.HEAL, 1),
+		//	new AspectList().add(Aspect.EXCHANGE, 1),
+		//	new AspectList().add(Aspect.HEAL, 1).add(Aspect.POISON, 1),
+		//	new AspectList().add(Aspect.POISON, 1)
+		//};
+		//for (int i = 0; i < common.length; ++i)
+		//{
+		//	final AspectList list = common[i];
+		//	ThaumcraftBoozeHelper.instance().registerAspectsForBottleStack(GrowthCraftApples.fluids.appleCider.asStack(1, i), list.copy());
+		//	ThaumcraftBoozeHelper.instance().registerAspectsForBucket(GrowthCraftApples.fluids.appleCiderBuckets[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL, Aspect.EXCHANGE));
+		//	ThaumcraftBoozeHelper.instance().registerAspectsForFluidBlock(GrowthCraftApples.fluids.appleCiderFluids[i], AspectsHelper.scaleAspects(list.copy(), 3, Aspect.HEAL, Aspect.EXCHANGE));
+		//}
 	}
 }

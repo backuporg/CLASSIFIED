@@ -89,7 +89,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
 	public boolean canSpreadLeaves(World world, BlockPos pos)
 	{
-		return BlockCheck.isRope(world.getBlock(pos.up())) &&
+		return BlockCheck.isRope(world.getBlockState(pos.up())) &&
 			canBlockStay(world, pos.up());
 	}
 
@@ -98,7 +98,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	{
 		if (!this.canBlockStay(world, pos))
 		{
-			world.setBlock(pos, GrowthCraftCore.blocks.ropeBlock.getBlock());
+			world.setBlockState(pos, GrowthCraftCore.blocks.ropeBlock.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 		}
 		else
 		{
@@ -137,8 +137,8 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	@Override
 	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
-		return (meta < HopsStage.FRUIT) || canSpreadLeaves(world, x, y, z);
+		final int meta = state.getValue(GROWTH);
+		return (meta < HopsStage.FRUIT) || canSpreadLeaves(world, pos);
 	}
 
 	/* SideOnly(Side.SERVER) Can this apply bonemeal effect? */
@@ -152,79 +152,80 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
+		final int meta = state.getValue(GROWTH);
 		if (meta < HopsStage.BIG)
 		{
-			incrementGrowth(world, x, y, z, meta);
+			incrementGrowth(world, pos, state);
 		}
-		else if (meta >= HopsStage.BIG && canSpreadLeaves(world, x, y, z))
+		else if (meta >= HopsStage.BIG && canSpreadLeaves(world, pos))
 		{
-			spreadLeaves(world, x, y, z);
+			spreadLeaves(world, pos);
 		}
 		else
 		{
-			incrementGrowth(world, x, y, z, meta);
+			incrementGrowth(world, pos, meta);
 		}
 	}
 
 	private float getGrowthRateLoop(World world, BlockPos pos)
 	{
-		if (BlockCheck.canSustainPlant(world, x, y - 1, z, EnumFacing.UP, this))
+		if (BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, this))
 		{
-			return getGrowthRate(world, x, y, z);
+			return getGrowthRate(world, pos);
 		}
 		else
 		{
 			for (int loop = 1; loop < 5; ++loop)
 			{
-				if (world.getBlock(x, y - loop, z) != this)
+				final BlockPos p = pos.offset(EnumFacing.DOWN, loop);
+				if (world.getBlockState(p).getBlock() != this)
 				{
-					return getGrowthRate(world, x, y, z);
+					return getGrowthRate(world, pos);
 				}
 
-				if (isVineRoot(world, x, y - loop, z))
+				if (isVineRoot(world, p))
 				{
-					return getGrowthRate(world, x, y - loop, z);
+					return getGrowthRate(world, p);
 				}
 			}
-
-			return getGrowthRate(world, x, y, z);
+			return getGrowthRate(world, pos);
 		}
 	}
 
 	private float getGrowthRate(World world, BlockPos pos)
 	{
-		final Block l = world.getBlock(x, y, z - 1);
-		final Block i1 = world.getBlock(x, y, z + 1);
-		final Block j1 = world.getBlock(x - 1, y, z);
-		final Block k1 = world.getBlock(x + 1, y, z);
-		final Block l1 = world.getBlock(x - 1, y, z - 1);
-		final Block i2 = world.getBlock(x + 1, y, z - 1);
-		final Block j2 = world.getBlock(x + 1, y, z + 1);
-		final Block k2 = world.getBlock(x - 1, y, z + 1);
+		final Block l = world.getBlockState(pos.north()).getBlock();
+		final Block i1 = world.getBlockState(pos.south()).getBlock();
+		final Block j1 = world.getBlockState(pos.west()).getBlock();
+		final Block k1 = world.getBlockState(pos.east()).getBlock();
+		final Block l1 = world.getBlockState(pos.north().west()).getBlock();
+		final Block i2 = world.getBlockState(pos.north().east()).getBlock();
+		final Block j2 = world.getBlockState(pos.south().east()).getBlock();
+		final Block k2 = world.getBlockState(pos.south().west()).getBlock();
 		final boolean flag = j1 == this || k1 == this;
 		final boolean flag1 = l == this || i1 == this;
 		final boolean flag2 = l1 == this || i2 == this || j2 == this || k2 == this;
 		float f = 1.0F;
 
-		for (int l2 = x - 1; l2 <= x + 1; ++l2)
+		for (int l2 = pos.getX() - 1; l2 <= pos.getX() + 1; ++l2)
 		{
-			for (int i3 = z - 1; i3 <= z + 1; ++i3)
+			for (int i3 = pos.getZ() - 1; i3 <= pos.getZ() + 1; ++i3)
 			{
-				final IBlockState state = BlockCheck.getFarmableBlock(world, l2, y - 1, i3, EnumFacing.UP, this);
+				final BlockPos soilPos = new BlockPos(l2, pos.getY() - 1, i3);
+				final IBlockState state = BlockCheck.getFarmableBlock(world, soilPos, EnumFacing.UP, this);
 				float f1 = 0.0F;
 
 				if (state != null)
 				{
 					f1 = 1.0F;
 
-					if (state.getBlock().isFertile(world, l2, y - 1, i3))
+					if (state.getBlock().isFertile(world, soilPos))
 					{
 						f1 = 3.0F;
 					}
 				}
 
-				if (l2 != x || i3 != z)
+				if (l2 != pos.getX() || i3 != pos.getZ())
 				{
 					f1 /= 4.0F;
 				}
@@ -243,43 +244,49 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
 	public void removeFruit(World world, BlockPos pos)
 	{
-		world.setBlockMetadataWithNotify(x, y, z, HopsStage.BIG, BlockFlags.UPDATE_AND_SYNC);
+		world.setBlockState(pos, world.getBlockState(pos).withProperty(GROWTH, HopsStage.BIG), BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (world.getBlockMetadata(x, y, z) >= HopsStage.FRUIT)
+		if (state.getValue(GROWTH) >= HopsStage.FRUIT)
 		{
 			if (!world.isRemote)
 			{
-				removeFruit(world, x, y, z);
-				dropBlockAsItem(world, x, y, z, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+				removeFruit(world, pos);
+				spawnEntity(world, pos, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;
 		}
 		return false;
 	}
 
-	@Override
+	private boolean isVineRoot(World world, BlockPos pos)
+	{
+		final IBlockState state = world.getBlockState(pos);
+		return world.getBlockState(pos).getBlock() == this &&
+			BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, this) &&
+			state.getValue(GROWTH) >= HopsStage.BIG;
+	}
+
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		if (BlockCheck.canSustainPlant(world, x, y - 1, z, EnumFacing.UP, this))
+		if (BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, this))
 		{
 			return true;
 		}
 		else
 		{
 			int loop = 1;
-
 			while (loop < 5)
 			{
-				if (world.getBlock(x, y - loop, z) != this)
+				final BlockPos lPos = pos.offset(EnumFacing.DOWN, loop);
+				if (world.getBlockState(lPos).getBlock() != this)
 				{
 					return false;
 				}
-
-				if (isVineRoot(world, x, y - loop, z))
+				if (isVineRoot(world, lPos))
 				{
 					return true;
 				}
@@ -290,19 +297,14 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		}
 	}
 
-	private boolean isVineRoot(World world, BlockPos pos)
-	{
-		return world.getBlock(x, y, z) == this &&
-			BlockCheck.canSustainPlant(world, x, y - 1, z, EnumFacing.UP, this) &&
-			world.getBlockMetadata(x, y, z) >= HopsStage.BIG;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, BlockPos pos)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
-		return meta < HopsStage.FRUIT ? GrowthCraftHops.hopSeeds.getItem() : GrowthCraftHops.hops.getItem();
+		final int meta = world.getBlockState(pos).getValue(GROWTH);
+		return meta < HopsStage.FRUIT ?
+			GrowthCraftHops.hopSeeds.getItem() :
+			GrowthCraftHops.hops.getItem();
 	}
 
 	@Override
@@ -332,11 +334,12 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
+		final Random rand = world instanceof World ? ((World)world).rand : RANDOM;
 		final List<ItemStack> ret = new ArrayList<ItemStack>();
 		ret.add(GrowthCraftCore.items.rope.asStack());
-		if (world.getBlockMetadata(x, y, z) >= HopsStage.BIG)
+		if (state.getValue(GROWTH) >= HopsStage.BIG)
 		{
-			ret.add(GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+			ret.add(GrowthCraftHops.hops.asStack(1 + rand.nextInt(8)));
 		}
 		return ret;
 	}
@@ -367,36 +370,33 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
-
 		int r = 0;
 		int g = 0;
 		int b = 0;
-
 		for (int l1 = -1; l1 <= 1; ++l1)
 		{
 			for (int i2 = -1; i2 <= 1; ++i2)
 			{
-				final int j2 = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+				final BlockPos p = new BlockPos(pos.getX() + i2, pos.getY(), pos.getZ() + l1);
+				final int j2 = world.getBiomeGenForCoords(pos.getX() + i2, pos.getZ() + l1).getBiomeFoliageColor();
 				r += (j2 & 16711680) >> 16;
 				g += (j2 & 65280) >> 8;
 				b += j2 & 255;
 			}
 		}
-
 		return (r / 9 & 255) << 16 | (g / 9 & 255) << 8 | b / 9 & 255;
 	}
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, BlockPos pos, AxisAlignedBB aabb, List list, Entity entity)
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB aabb, List list, Entity entity)
 	{
-		final boolean flag = this.canConnectRopeTo(world, x, y, z - 1);
-		final boolean flag1 = this.canConnectRopeTo(world, x, y, z + 1);
-		final boolean flag2 = this.canConnectRopeTo(world, x - 1, y, z);
-		final boolean flag3 = this.canConnectRopeTo(world, x + 1, y, z);
-		final boolean flag4 = this.canConnectRopeTo(world, x, y - 1, z);
-		final boolean flag5 = this.canConnectRopeTo(world, x, y + 1, z);
+		final boolean flag = this.canConnectRopeTo(world, pos.north());
+		final boolean flag1 = this.canConnectRopeTo(world, pos.south());
+		final boolean flag2 = this.canConnectRopeTo(world, pos.west());
+		final boolean flag3 = this.canConnectRopeTo(world, pos.east());
+		final boolean flag4 = this.canConnectRopeTo(world, pos.down());
+		final boolean flag5 = this.canConnectRopeTo(world, pos.up());
 		float f = 0.4375F;
 		float f1 = 0.5625F;
 		float f2 = 0.4375F;
@@ -417,7 +417,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		if (flag || flag1)
 		{
 			this.setBlockBounds(f, f4, f2, f1, f5, f3);
-			super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, aabb, list, entity);
 		}
 
 		f2 = 0.4375F;
@@ -436,7 +436,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		if (flag2 || flag3)
 		{
 			this.setBlockBounds(f, f4, f2, f1, f5, f3);
-			super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, aabb, list, entity);
 		}
 
 		f = 0.4375F;
@@ -455,18 +455,17 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		if (flag4 || flag5)
 		{
 			this.setBlockBounds(f, f4, f2, f1, f5, f3);
-			super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
+			super.addCollisionBoxesToList(world, pos, state, aabb, list, entity);
 		}
-
-		this.setBlockBoundsBasedOnState(world, x, y, z);
+		this.setBlockBoundsBasedOnState(world, pos);
 	}
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
+		final IBlockState state = world.getBlockState(pos);
+		final int meta = state.getValue(GROWTH);
 		final float f = 0.0625F;
-
 		switch (meta)
 		{
 			case 0:

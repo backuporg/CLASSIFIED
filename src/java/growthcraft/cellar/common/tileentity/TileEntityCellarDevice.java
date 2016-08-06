@@ -46,7 +46,7 @@ public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase imp
 				// Fluid ID
 				case 0:
 				{
-					final FluidStack result = FluidUtils.replaceFluidStack(v, getFluidStack(tankIndex));
+					final FluidStack result = FluidUtils.replaceFluidStackById(v, getFluidStack(tankIndex));
 					if (result != null) getFluidTank(tankIndex).setFluid(result);
 				} break;
 				// Fluid amounts CAN exceed a 16bit integer, in order to handle the capacity, the value is split across 2 data points, by high and low bytes

@@ -34,6 +34,7 @@ import growthcraft.core.common.GrcModuleBase;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.ResourceLocation;
 
 public class GrcApplesFluids extends GrcModuleBase
 {
@@ -48,7 +49,7 @@ public class GrcApplesFluids extends GrcModuleBase
 		appleCiderBooze = new Booze[7];
 		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
 		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.appleCider", appleCiderBooze);
+		BoozeRegistryHelper.initializeBoozeFluids("grc.appleCider", appleCiderBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : appleCiderBooze)
 		{
 			booze.setColor(GrowthCraftApples.getConfig().appleCiderColor).setDensity(1010);

@@ -132,7 +132,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	{
 		if (!world.isRemote && world.rand.nextFloat() < fallDistance - 0.5F)
 		{
-			if (!(entity instanceof EntityPlayer) && !world.getGameRules().getGameRuleBooleanValue("mobGriefing"))
+			if (!(entity instanceof EntityPlayer) && !world.getGameRules().getBoolean("mobGriefing"))
 			{
 				return;
 			}
@@ -171,13 +171,6 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	public boolean isOpaqueCube()
 	{
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass()
-	{
-		return 1;
 	}
 
 	@Override

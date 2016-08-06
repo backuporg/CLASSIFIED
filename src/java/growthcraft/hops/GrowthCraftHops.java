@@ -30,7 +30,6 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -120,10 +119,6 @@ public class GrowthCraftHops
 		//====================
 		GameRegistry.addShapelessRecipe(hopSeeds.asStack(), hops.getItem());
 
-		NEI.hideItem(hopVine.asStack());
-
-		MinecraftForge.EVENT_BUS.register(this);
-
 		modules.register();
 	}
 
@@ -137,23 +132,6 @@ public class GrowthCraftHops
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		modules.init();
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void onTextureStitchPost(TextureStitchEvent.Post event)
-	{
-		if (event.map.getTextureType() == 0)
-		{
-			for (Booze bz : fluids.hopAleBooze)
-			{
-				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
-			}
-			for (Booze bz : fluids.lagerBooze)
-			{
-				bz.setIcons(GrowthCraftCore.liquidSmoothTexture);
-			}
-		}
 	}
 
 	@EventHandler

@@ -187,7 +187,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return false;
 	}
 
-	public boolean tryWrenchItem(EntityPlayer player, World world, BlockPos pos)
+	public boolean tryWrenchItem(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		if (player == null) return false;
 		final ItemStack is = player.inventory.getCurrentItem();
@@ -237,7 +237,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return null;
 	}
 
-	protected void setTileTagCompound(World world, BlockPos pos, ItemStack stack, NBTTagCompound tag)
+	protected void setTileTagCompound(IBlockAccess world, BlockPos pos, ItemStack stack, NBTTagCompound tag)
 	{
 		final Item item = stack.getItem();
 		if (item instanceof IItemTileBlock)
@@ -284,7 +284,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		setupCustomDisplayName(world, pos, stack);
 	}
 
-	protected void scatterInventory(World world, BlockPos pos, Block block)
+	protected void scatterInventory(World world, BlockPos pos, IBlockState state)
 	{
 		final TileEntity te = getTileEntity(world, pos);
 		if (te instanceof IInventory)
@@ -297,7 +297,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 					final ItemStack stack = inventory.getStackInSlot(index);
 					ItemUtils.spawnItemStack(world, pos, stack, rand);
 				}
-				world.updateComparatorOutputLevel(pos, block);
+				world.updateComparatorOutputLevel(pos, this);
 			}
 		}
 	}
@@ -308,10 +308,10 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, Block block, int meta)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
 		if (shouldScatterInventoryOnBreak(world, pos))
-			scatterInventory(world, pos, block);
+			scatterInventory(world, pos, state);
 		world.removeTileEntity(pos);
 	}
 
@@ -328,7 +328,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 
 		if (this.canSilkHarvest(world, pos, state, player) && EnchantmentHelper.getSilkTouchModifier(player))
 		{
-			final ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+			final List<ItemStack> items = new ArrayList<ItemStack>();
 			final ItemStack itemstack = createHarvestedBlockItemStack(world, player, pos, state);
 
 			if (itemstack != null)
@@ -336,7 +336,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 				items.add(itemstack);
 			}
 
-			ForgeEventFactory.fireBlockHarvesting(items, world, this, pos, world.getBlockState(pos), 0, 1.0f, true, player);
+			ForgeEventFactory.fireBlockHarvesting(items, world, pos, world.getBlockState(pos), 0, 1.0f, true, player);
 			for (ItemStack is : items)
 			{
 				GrowthCraftCore.getLogger().error("Unimplemented harvestBlock dropBlockAsItem(World, BlockPos, IBlockState, ItemStack)");
@@ -357,12 +357,13 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return false;
 	}
 
-	private void getDefaultDrops(List<ItemStack> ret, World world, BlockPos pos, IBlockState state, int fortune)
+	private void getDefaultDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		final int count = quantityDropped(state, fortune, world.rand);
+		final Random rand = world instanceof World ? ((World)world).rand : RANDOM;
+		final int count = quantityDropped(state, fortune, rand);
 		for (int i = 0; i < count; ++i)
 		{
-			final Item item = getItemDropped(state, world.rand, fortune);
+			final Item item = getItemDropped(state, rand, fortune);
 			if (item != null)
 			{
 				ret.add(new ItemStack(item, 1, damageDropped(state)));
@@ -412,7 +413,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return fs != null && fs.amount > 0;
 	}
 
-	private boolean handleIFluidHandler(World world, BlockPos pos, EntityPlayer player, int meta)
+	private boolean handleIFluidHandler(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		final TileEntity te = world.getTileEntity(pos);
 		if (te instanceof IFluidHandler)
@@ -450,7 +451,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		return false;
 	}
 
-	private boolean handleOnUseItem(World world, BlockPos pos, EntityPlayer player, int meta)
+	private boolean handleOnUseItem(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		final TileEntity te = world.getTileEntity(pos);
 		if (te instanceof IItemHandler)
@@ -488,9 +489,9 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (tryWrenchItem(player, world, pos)) return true;
-		if (handleIFluidHandler(world, pos, player, meta)) return true;
-		if (handleOnUseItem(world, pos, player, meta)) return true;
+		if (tryWrenchItem(world, pos, state, player)) return true;
+		if (handleIFluidHandler(world, pos, state, player)) return true;
+		if (handleOnUseItem(world, pos, state, player)) return true;
 		return false;
 	}
 }

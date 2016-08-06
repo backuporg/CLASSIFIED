@@ -28,6 +28,7 @@ import growthcraft.core.util.ItemUtils;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -44,8 +45,8 @@ public class EventHandlerCauldronUseItem
 
 		// if you need more items, be sure to change this event to pick items
 		// from a HashMap, however for now, I'll just hard code the WaterBag
-		final Block target = event.world.getBlock(event.x, event.y, event.z);
-
+		final IBlockState state = event.world.getBlockState(event.pos);
+		final Block target = state.getBlock();
 		if (target instanceof BlockCauldron)
 		{
 			final BlockCauldron cauldron = (BlockCauldron)target;
@@ -55,14 +56,14 @@ public class EventHandlerCauldronUseItem
 
 			if (GrowthCraftCellar.waterBag.equals(itemstack.getItem()))
 			{
-				final int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
+				final int meta = state.getValue(BlockCauldron.LEVEL);
 				if (meta > 0)
 				{
 					event.setCanceled(true);
 					// 16 - is the default water bag color
 					itemstack.setItemDamage(16);
 					ItemUtils.replacePlayerCurrentItem(event.entityPlayer, itemstack);
-					cauldron.func_150024_a(event.world, event.x, event.y, event.z, meta - 1);
+					cauldron.setWaterLevel(event.world, event.pos, state, meta - 1);
 				}
 			}
 		}

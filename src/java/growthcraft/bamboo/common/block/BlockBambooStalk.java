@@ -141,7 +141,7 @@ public class BlockBambooStalk extends GrcBlockBase
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, Block par5, int par6)
+	public void breakBlock(World world, BlockPos pos, IBlockState block)
 	{
 		if (world.getBlockMetadata(x, y, z) == 0)
 		{

@@ -11,8 +11,10 @@ import growthcraft.core.util.SchemaToVillage.IBlockEntries;
 import growthcraft.core.util.SchemaToVillage;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -108,9 +110,10 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		return null;
 	}
 
-	public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box)
+	@Override
+	public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState state, StructureBoundingBox box)
 	{
-		setBlockState(world, block, meta, x, y, z, box);
+		setBlockState(world, pos, state, box);
 	}
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)

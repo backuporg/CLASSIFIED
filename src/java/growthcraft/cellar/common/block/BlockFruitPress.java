@@ -75,25 +75,25 @@ public class BlockFruitPress extends BlockCellarContainer
 			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
 		}
 
-		world.setBlock(x, y + 1, z, getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SYNC);
+		world.setBlock(pos.up(), getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SYNC);
 	}
 
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, int m, EntityPlayer player)
 	{
-		if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, x, y, z))
+		if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, pos))
 		{
-			world.destroyBlock(x, y + 1, z, true);
-			world.getTileEntity(x, y + 1, z).invalidate();
+			world.destroyBlock(pos.up(), true);
+			world.getTileEntity(pos.up()).invalidate();
 		}
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, Block block)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
-		if (!this.canBlockStay(world, x, y, z))
+		if (!this.canBlockStay(world, pos))
 		{
-			world.destroyBlock(x, y, z, true);
+			world.destroyBlock(pos, true);
 		}
 	}
 
@@ -129,7 +129,7 @@ public class BlockFruitPress extends BlockCellarContainer
 	 */
 	public boolean presserIsAbove(World world, BlockPos pos)
 	{
-		return getPresserBlock() == world.getBlock(x, y + 1, z);
+		return getPresserBlock() == world.getBlock(pos.up());
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class BlockFruitPress extends BlockCellarContainer
 
 		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
 			super.canPlaceBlockAt(world, x, y, z) &&
-			super.canPlaceBlockAt(world, x, y + 1, z);
+			super.canPlaceBlockAt(world, pos.up());
 	}
 
 	@Override

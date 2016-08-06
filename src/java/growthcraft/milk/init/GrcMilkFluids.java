@@ -70,6 +70,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.ResourceLocation;
 
 public class GrcMilkFluids extends GrcModuleBase
 {
@@ -110,7 +111,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	private void preInitKumisFluids()
 	{
 		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
-		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids);
+		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : kumisFluids)
 		{
 			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);

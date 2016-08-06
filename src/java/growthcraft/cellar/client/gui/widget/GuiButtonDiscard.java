@@ -29,7 +29,7 @@ public class GuiButtonDiscard extends GuiButton
 		{
 			mc.getTextureManager().bindTexture(this.res);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.field_146123_n = w >= this.xPosition && h >= this.yPosition && w < this.xPosition + this.width && h < this.yPosition + this.height;
+			this.hovered = w >= this.xPosition && h >= this.yPosition && w < this.xPosition + this.width && h < this.yPosition + this.height;
 			final short y = 182;
 			int x = 0;
 
@@ -37,7 +37,7 @@ public class GuiButtonDiscard extends GuiButton
 			{
 				x += this.width * 1;
 			}
-			else if (this.field_146123_n)
+			else if (this.hovered)
 			{
 				x += this.width * 2;
 			}

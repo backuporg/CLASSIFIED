@@ -161,7 +161,7 @@ public class FluidUtils
 		return true;
 	}
 
-	public static FluidStack replaceFluidStack(int fluidId, FluidStack srcStack)
+	public static FluidStack replaceFluidStackById(int fluidId, FluidStack srcStack)
 	{
 		final Fluid fluid = FluidRegistry.getFluid(fluidId);
 		if (fluid == null)

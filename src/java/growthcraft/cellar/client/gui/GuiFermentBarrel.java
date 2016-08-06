@@ -65,7 +65,7 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
 	@Override
 	protected void actionPerformed(GuiButton butn)
 	{
-		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+		GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButton(tileEntity.getPos()));
 	}
 
 	@Override
@@ -99,24 +99,22 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
 			final FluidStack fluid = tileEntity.getFluidStack(0);
 			drawTank(x, y, 63, 17, 50, 52, i, fluid, tileEntity.getFluidTank(0));
 			bindGuiTexture();
-
 			itemRender.zLevel = 100.0F;
-
 			// render active modifiers
 			final Collection<FluidTag> tags = CoreRegistry.instance().fluidDictionary().getFluidTags(fluid);
 			if (tags != null)
 			{
 				if (tags.contains(BoozeTag.FERMENTED))
 				{
-					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.nether_wart), x + 114, y + 16);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.nether_wart), x + 114, y + 16);
 				}
 				if (tags.contains(BoozeTag.EXTENDED))
 				{
-					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.redstone), x + 114, y + 32);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.redstone), x + 114, y + 32);
 				}
 				if (tags.contains(BoozeTag.POTENT))
 				{
-					itemRender.renderItemAndEffectIntoGUI(fontRendererObj, mc.renderEngine, new ItemStack(Items.glowstone_dust), x + 130, y + 32);
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.glowstone_dust), x + 130, y + 32);
 				}
 			}
 			itemRender.zLevel = 0.0F;

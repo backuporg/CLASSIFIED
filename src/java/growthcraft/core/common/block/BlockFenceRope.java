@@ -7,6 +7,7 @@ import java.util.Random;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.api.core.util.BlockKey;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.BlockCheck;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

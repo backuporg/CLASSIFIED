@@ -143,7 +143,7 @@ public class BlockBeeBox extends GrcBlockContainer
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, Block par5, int par6)
+	public void breakBlock(World world, BlockPos pos, IBlockState block)
 	{
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(pos);
 

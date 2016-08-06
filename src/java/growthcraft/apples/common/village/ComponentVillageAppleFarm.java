@@ -90,9 +90,10 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		return null;
 	}
 
-	public void placeBlockAtCurrentPositionPub(World world, Block block, int meta, int x, int y, int z, StructureBoundingBox box)
+	@Override
+	public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState state, StructureBoundingBox box)
 	{
-		setBlockState(world, block, meta, x, y, z, box);
+		setBlockState(world, pos, state, box);
 	}
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)

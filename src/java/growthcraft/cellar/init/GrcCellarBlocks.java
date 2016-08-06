@@ -58,7 +58,5 @@ public class GrcCellarBlocks extends GrcModuleBase
 		brewKettle.register("grc.brewKettle");
 		fermentBarrel.register("grc.fermentBarrel", ItemBlockFermentBarrel.class);
 		cultureJar.register("grc.fermentJar");
-
-		NEI.hideItem(fruitPresser.asStack());
 	}
 }

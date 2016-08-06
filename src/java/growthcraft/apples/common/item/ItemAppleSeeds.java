@@ -44,8 +44,6 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 		{
 			pos = pos.offset(dir);
 		}
-
-
 		if (!player.canPlayerEdit(pos, dir, stack))
 		{
 			return false;
@@ -56,27 +54,26 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 		}
 		else
 		{
-			if (world.canPlaceEntityOnSide(cropBlock, pos, false, dir, (Entity)null, stack))
+			if (world.canBlockBePlaced(cropBlock, pos, false, dir, (Entity)null, stack))
 			{
 				final int meta = cropBlock.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
 				if (world.setBlock(pos, cropBlock, meta, 3))
 				{
 					if (world.getBlock(pos) == cropBlock)
 					{
-						cropBlock.onBlockPlacedBy(world, pos, player, stack);
+						cropBlock.onBlockPlacedBy(world, pos, state, player, stack);
 						cropBlock.onPostBlockPlaced(world, pos, meta);
 					}
 					world.playSoundEffect(
-						(double)x + 0.5D,
-						(double)y + 0.5D,
-						(double)z + 0.5D,
+						(double)pos.getX() + 0.5D,
+						(double)pos.getY() + 0.5D,
+						(double)pos.getZ() + 0.5D,
 						cropBlock.stepSound.getPlaceSound(),
 						(cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-						cropBlock.stepSound.getPitch() * 0.8F);
+						cropBlock.stepSound.getFrequency() * 0.8F);
 					--stack.stackSize;
 				}
 			}
-
 			return true;
 		}
 	}

@@ -89,15 +89,15 @@ public class GuiBrewKettle extends GuiCellar<ContainerBrewKettle, TileEntityBrew
 	{
 		if (button0 != null && button == button0)
 		{
-			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, (byte)0));
+			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(tileEntity.getPos(), (byte)0));
 		}
 		else if (button1 != null && button == button1)
 		{
-			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, (byte)1));
+			GrowthCraftCellar.packetPipeline.sendToServer(new PacketClearTankButtonWByte(tileEntity.getPos(), (byte)1));
 		}
 		else if (button == button2)
 		{
-			GrowthCraftCellar.packetPipeline.sendToServer(new PacketSwitchTankButton(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord));
+			GrowthCraftCellar.packetPipeline.sendToServer(new PacketSwitchTankButton(tileEntity.getPos()));
 		}
 	}
 

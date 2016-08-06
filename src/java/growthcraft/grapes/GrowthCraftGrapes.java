@@ -29,7 +29,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -74,8 +73,6 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(this);
-
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/grapes.conf");
 
@@ -132,7 +129,8 @@ public class GrowthCraftGrapes
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 
 		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
+		logger.warn("(fixme) GrowthCraftGrapes#init registerVillageTradeHandler");
+		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		modules.init();

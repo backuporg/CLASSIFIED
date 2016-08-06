@@ -37,8 +37,6 @@ import growthcraft.cellar.util.TagFormatterCultureJar;
 import growthcraft.cellar.util.TagFormatterFruitPress;
 import growthcraft.api.core.nbt.NBTHelper;
 
-import net.minecraftforge.fml.common.Optional;
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -48,8 +46,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 
 public class CellarDataProvider implements IWailaDataProvider
 {
@@ -144,7 +144,7 @@ public class CellarDataProvider implements IWailaDataProvider
 
 	@Override
 	@Optional.Method(modid="Waila")
-	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z)
+	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, BlockPos pos)
 	{
 		if (te instanceof TileEntityBrewKettle) getBrewKettleData((TileEntityBrewKettle)te, tag);
 		if (te instanceof TileEntityFruitPress) getFruitPressData((TileEntityFruitPress)te, tag);

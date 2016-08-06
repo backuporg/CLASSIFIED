@@ -242,8 +242,6 @@ public class GrowthCraftCellar
 		// ACHIEVEMENTS
 		//====================
 		achievements = new GrcCellarAchievements();
-
-		NEI.hideItem(chievItemDummy.asStack());
 	}
 
 	private void extendPotionsArray()
@@ -305,7 +303,8 @@ public class GrowthCraftCellar
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
 
-		VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
+		logger.warn("(fixme) cellar/registerVillagerId brewer");
+		//VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
 
 		CommonProxy.instance.init();

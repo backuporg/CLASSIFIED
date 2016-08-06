@@ -66,6 +66,11 @@ public class GrowthCraftBamboo
 		return instance.config;
 	}
 
+	public static ILogger getLogger()
+	{
+		return instance.logger;
+	}
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{

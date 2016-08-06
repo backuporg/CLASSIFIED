@@ -1,5 +1,7 @@
 package growthcraft.rice.common.item;
 
+import growthcraft.api.core.util.BlockFlags;
+import growthcraft.core.common.block.BlockPaddyBase;
 import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.rice.GrowthCraftRice;
@@ -32,11 +34,14 @@ public class ItemRice extends GrcItemBase
 			if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 			{
 				final IBlockState soil = world.getBlockState(pos);
-				if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(pos.up()) && world.getBlockMetadata(pos) > 0)
+				if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(pos.up()))
 				{
-					world.setBlockState(pos.up(), GrowthCraftRice.riceBlock.getBlock().getDefaultState());
-					--stack.stackSize;
-					return true;
+					if (((Integer)state.getValue(BlockPaddyBase.FLUID_LEVEL)) > 0)
+					{
+						world.setBlockState(pos.up(), GrowthCraftRice.riceBlock.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+						--stack.stackSize;
+						return true;
+					}
 				}
 			}
 		}

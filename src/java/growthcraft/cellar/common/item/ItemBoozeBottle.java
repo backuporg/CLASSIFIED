@@ -92,7 +92,7 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	}
 
 	@Override
-	public int func_150905_g(ItemStack stack)
+	public int getHealAmount(ItemStack stack)
 	{
 		final BoozeEntry entry = getBoozeEntry(stack);
 		if (entry != null)
@@ -103,7 +103,7 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	}
 
 	@Override
-	public float func_150906_h(ItemStack stack)
+	public float getSaturationModifier(ItemStack stack)
 	{
 		final BoozeEntry entry = getBoozeEntry(stack);
 		if (entry != null)
@@ -160,20 +160,6 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses()
-	{
-		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack, int pass)
-	{
-		return BoozeUtils.hasEffect(getFluid(stack));
-	}
-
-	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		return super.getUnlocalizedName();
@@ -188,7 +174,7 @@ public class ItemBoozeBottle extends GrcItemFoodBase implements IFluidItem
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
-		return EnumAction.drink;
+		return EnumAction.DRINK;
 	}
 
 	@Override

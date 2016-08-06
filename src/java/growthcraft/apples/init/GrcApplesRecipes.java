@@ -68,7 +68,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
+				.addPotionEntry(Potion.absorption, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[2])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POTENT)
@@ -76,7 +76,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 			.fermentsFrom(fs[3], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.080f), TickUtils.seconds(45))
-				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
+				.addPotionEntry(Potion.absorption, TickUtils.seconds(90), 0);
 
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[3])
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
@@ -84,7 +84,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 			.fermentsFrom(fs[2], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
+				.addPotionEntry(Potion.absorption, TickUtils.seconds(90), 0);
 
 		// Silken Nectar - ETHEREAL
 		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[4])
@@ -105,9 +105,9 @@ public class GrcApplesRecipes extends GrcModuleBase
 					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.waterBreathing.id, TickUtils.minutes(10), 0)))
 					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.invisibility.id, TickUtils.minutes(10), 0)))
 					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.nightVision.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76434_w.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76443_y.id, TickUtils.minutes(10), 0)))
+					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.healthBoost.id, TickUtils.minutes(10), 0)))
+					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.absorption.id, TickUtils.minutes(10), 0)))
+					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.saturation.id, TickUtils.minutes(10), 0)))
 				);
 
 		// Intoxicated - Origin Yeast
@@ -118,7 +118,7 @@ public class GrcApplesRecipes extends GrcModuleBase
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 2.5f), TickUtils.seconds(45))
 				.addEffect(new EffectWeightedRandomList()
-					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
+					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.absorption.id, TickUtils.seconds(90), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2)))
 				);
 

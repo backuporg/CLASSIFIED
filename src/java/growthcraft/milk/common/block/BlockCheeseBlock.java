@@ -71,7 +71,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	}
 
 	@Override
-	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, ItemStack stack)
+	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, IBlockState state, ItemStack stack)
 	{
 		return true;
 	}

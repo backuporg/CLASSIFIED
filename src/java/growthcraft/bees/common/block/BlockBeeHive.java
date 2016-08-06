@@ -120,10 +120,10 @@ public class BlockBeeHive extends GrcBlockBase
 		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
 	}
 
-	public void onNeighborBlockChange(World world, BlockPos pos, Block par5)
+	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)
 	{
-		super.onNeighborBlockChange(world, x, y, z, par5);
-		if (!this.canBlockStay(world, x, y, z))
+		super.onNeighborBlockChange(world, pos, state, block);
+		if (!this.canBlockStay(world, pos))
 		{
 			fellBlockAsItem(world, pos, state);
 		}

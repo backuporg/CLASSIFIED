@@ -128,6 +128,7 @@ public abstract class GrcTileEntityBase extends TileEntity implements IBlockUpda
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes"})
 	public Packet getDescriptionPacket()
 	{
 		final NBTTagCompound data = new NBTTagCompound();

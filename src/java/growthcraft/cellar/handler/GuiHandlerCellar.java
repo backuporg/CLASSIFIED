@@ -17,14 +17,14 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
 
 public class GuiHandlerCellar implements IGuiHandler
 {
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
-		final TileEntity te = world.getTileEntity(x, y, z);
-
+		final TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
 		if (te instanceof TileEntityFruitPress)
 		{
 			return new ContainerFruitPress(player.inventory, (TileEntityFruitPress)te);
@@ -51,8 +51,7 @@ public class GuiHandlerCellar implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z)
 	{
-		final TileEntity te = world.getTileEntity(x, y, z);
-
+		final TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
 		if (te instanceof TileEntityFruitPress)
 		{
 			return new GuiFruitPress(player.inventory, (TileEntityFruitPress)te);

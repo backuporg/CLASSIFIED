@@ -31,49 +31,43 @@ public class ItemRope extends GrcItemBase
 		GrowthCraftCore.getLogger().warn("(fixme) ItemRope#onItemUse metadata");
 		final int blockMeta = 0;
 
-		if (Blocks.snow_layer == block && (blockMeta & 7) < 1)
-		{
-			dir = EnumFacing.UP;
-		}
-		else
-		{
-			final FenceRopeEntry entry = FenceRopeRegistry.instance().getEntry(block, blockMeta);
-			if (entry != null)
-			{
-				if (!player.canPlayerEdit(pos, dir, stack))
-				{
-					return false;
-				}
-				else if (stack.stackSize == 0)
-				{
-					return false;
-				}
+		if (!block.isReplaceable(world, pos))
+        {
+            pos = pos.offset(dir);
+        }
 
-				int targetMeta = entry.getFenceRopeBlockMetadata();
-				if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = blockMeta;
-
-				world.setBlockState(pos, entry.getFenceRopeBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
-				--stack.stackSize;
-				return true;
-			}
-			else if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush)
+		final FenceRopeEntry entry = FenceRopeRegistry.instance().getEntry(block, blockMeta);
+		if (entry != null)
+		{
+			if (!player.canPlayerEdit(pos, dir, stack))
 			{
-				pos.offset(dir, 1);
+				return false;
 			}
+			else if (stack.stackSize == 0)
+			{
+				return false;
+			}
+
+			int targetMeta = entry.getFenceRopeBlockMetadata();
+			if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = blockMeta;
+
+			world.setBlockState(pos, entry.getFenceRopeBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+			--stack.stackSize;
+			return true;
 		}
 
-		if (!player.canPlayerEdit(pos, dir, stack))
+		if (stack.stackSize == 0)
 		{
 			return false;
 		}
-		else if (stack.stackSize == 0)
+		else if (!player.canPlayerEdit(pos, dir, stack))
 		{
 			return false;
 		}
 		else
 		{
 			final Block block2 = GrowthCraftCore.blocks.ropeBlock.getBlock();
-			if (world.canPlaceEntityOnSide(block2, pos, false, dir, (Entity)null, stack))
+			if (world.canBlockBePlaced(block2, pos, false, dir, (Entity)null, stack))
 			{
 				final int meta = block2.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
 				if (world.setBlockState(pos, block2.getDefaultState(), meta, 3))

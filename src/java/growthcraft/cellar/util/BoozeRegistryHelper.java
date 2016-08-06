@@ -44,22 +44,23 @@ import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BoozeRegistryHelper
 {
 	private BoozeRegistryHelper() {}
 
-	public static void initializeBoozeFluids(String basename, Booze[] boozes)
+	public static void initializeBoozeFluids(String basename, Booze[] boozes, ResourceLocation still, ResourceLocation flowing)
 	{
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			boozes[i] = new Booze(basename + i);
+			boozes[i] = new Booze(basename + i, still, flowing);
 			FluidRegistry.registerFluid(boozes[i]);
 			CellarRegistry.instance().booze().registerBooze(boozes[i]);
 		}
@@ -113,7 +114,6 @@ public class BoozeRegistryHelper
 			if (oldBucket != null)
 			{
 				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
-				NEI.hideItem(oldBucket.asStack(1, i));
 			}
 		}
 	}

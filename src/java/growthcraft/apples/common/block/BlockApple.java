@@ -86,8 +86,9 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
+		super.updateTick(world, pos, state, rand);
 		if (!this.canBlockStay(world, pos))
 		{
 			fellBlockAsItem(world, pos, state);

@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
@@ -105,9 +106,10 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 		return null;
 	}
 
-	public void placeBlockAtCurrentPositionPub(World world, IBlockState state, int x, int y, int z, StructureBoundingBox box)
+	@Override
+	public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState state, StructureBoundingBox box)
 	{
-		setBlockState(world, state, x, y, z, box);
+		setBlockState(world, pos, state, box);
 	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)

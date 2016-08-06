@@ -3,34 +3,34 @@ package growthcraft.cellar.network;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
+import net.minecraft.util.BlockPos;
+
 public abstract class AbstractPacketButton extends AbstractPacket
 {
-	int xCoord;
-	int yCoord;
-	int zCoord;
+	public BlockPos.MutableBlockPos pos;
 
 	public AbstractPacketButton() {}
 
-	public AbstractPacketButton(int x, int y, int z)
+	public AbstractPacketButton(BlockPos pos)
 	{
-		this.xCoord = x;
-		this.yCoord = y;
-		this.zCoord = z;
+		this.pos = new BlockPos.MutableBlockPos();
+		this.pos.set(pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
-		buffer.writeInt(xCoord);
-		buffer.writeInt(yCoord);
-		buffer.writeInt(zCoord);
+		buffer.writeInt(pos.getX());
+		buffer.writeInt(pos.getY());
+		buffer.writeInt(pos.getZ());
 	}
 
 	@Override
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
 	{
-		this.xCoord = buffer.readInt();
-		this.yCoord = buffer.readInt();
-		this.zCoord = buffer.readInt();
+		final int xCoord = buffer.readInt();
+		final int yCoord = buffer.readInt();
+		final int zCoord = buffer.readInt();
+		pos.set(xCoord, yCoord, zCoord);
 	}
 }

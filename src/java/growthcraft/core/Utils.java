@@ -1,13 +1,15 @@
 package growthcraft.core;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
@@ -92,7 +94,7 @@ public class Utils
 		}
 	}
 
-	public static boolean playerFillTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	public static boolean playerFillTank(World world, BlockPos pos, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
 		if (held == null) return false;
 
@@ -135,7 +137,10 @@ public class Utils
 					}
 					else
 					{
-						world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, containerItem));
+						world.spawnEntityInWorld(new EntityItem(world,
+							(double)pos.getX() + 0.5D,
+							(double)pos.getY() + 1.5D,
+							(double)pos.getZ() + 0.5D, containerItem));
 					}
 				}
 				else if (player instanceof EntityPlayerMP)
@@ -155,7 +160,7 @@ public class Utils
 		return true;
 	}
 
-	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
+	public static FluidStack playerDrainTank(World world, BlockPos pos, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
 	{
 		if (held == null) return null;
 
@@ -183,7 +188,10 @@ public class Utils
 
 			if (!player.inventory.addItemStackToInventory(filled))
 			{
-				world.spawnEntityInWorld(new EntityItem(world, (double)x + 0.5D, (double)y + 1.5D, (double)z + 0.5D, filled));
+				world.spawnEntityInWorld(new EntityItem(world,
+					(double)pos.getX() + 0.5D,
+					(double)pos.getY() + 1.5D,
+					(double)pos.getZ() + 0.5D, filled));
 			}
 			else if (player instanceof EntityPlayerMP)
 			{
@@ -207,8 +215,8 @@ public class Utils
 		return available;
 	}
 
-	public static FluidStack playerDrainTank(World world, int x, int y, int z, IFluidHandler tank, ItemStack held, EntityPlayer player)
+	public static FluidStack playerDrainTank(World world, BlockPos pos, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		return playerDrainTank(world, x, y, z, tank, held, player, false, 0, 0);
+		return playerDrainTank(world, pos, tank, held, player, false, 0, 0);
 	}
 }
