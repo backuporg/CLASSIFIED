@@ -50,7 +50,7 @@ public class ItemBamboo extends GrcItemBase
 				{
 					if (world.getBlock(pos) == block)
 					{
-						block.onBlockPlacedBy(world, pos, player, stack);
+						block.onBlockPlacedBy(world, pos, state, player, stack);
 						block.onPostBlockPlaced(world, pos, 1);
 					}
 

@@ -112,11 +112,11 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack)
 	{
+		super.onBlockPlacedBy(world, pos, state, entity, stack);
 		final int m = world.getBlockMetadata(pos.down());
 		world.setBlockMetadataWithNotify(pos, m, BlockFlags.UPDATE_AND_SYNC);
-
 		if (!world.isRemote)
 		{
 			updatePressState(world, pos);

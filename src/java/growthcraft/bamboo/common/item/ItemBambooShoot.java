@@ -35,48 +35,16 @@ public class ItemBambooShoot extends GrcItemFoodBase implements IPlantable
 	{
 		final Block block1 = world.getBlock(x, y, z);
 
-		if (block1 == Blocks.snow && (world.getBlockMetadata(x, y, z) & 7) < 1)
-		{
-			dir = 1;
-		}
-		else if (block1 != Blocks.vine && block1 != Blocks.tallgrass && block1 != Blocks.deadbush)
-		{
-			if (dir == 0)
-			{
-				--y;
-			}
+        if (!block.isReplaceable(world, pos))
+        {
+            pos = pos.offset(dir);
+        }
 
-			if (dir == 1)
-			{
-				++y;
-			}
-
-			if (dir == 2)
-			{
-				--z;
-			}
-
-			if (dir == 3)
-			{
-				++z;
-			}
-
-			if (dir == 4)
-			{
-				--x;
-			}
-
-			if (dir == 5)
-			{
-				++x;
-			}
-		}
-
-		if (!player.canPlayerEdit(x, y, z, dir, stack))
+		if (stack.stackSize == 0)
 		{
 			return false;
 		}
-		else if (stack.stackSize == 0)
+		else if (!player.canPlayerEdit(pos, dir, stack))
 		{
 			return false;
 		}
@@ -90,7 +58,7 @@ public class ItemBambooShoot extends GrcItemFoodBase implements IPlantable
 				{
 					if (world.getBlock(x, y, z) == cropBlock)
 					{
-						cropBlock.onBlockPlacedBy(world, x, y, z, player, stack);
+						cropBlock.onBlockPlacedBy(world, pos, state, player, stack);
 						cropBlock.onPostBlockPlaced(world, x, y, z, meta);
 					}
 

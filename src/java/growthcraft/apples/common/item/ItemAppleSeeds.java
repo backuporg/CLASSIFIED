@@ -36,19 +36,16 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 	{
 		final IBlockState state = world.getBlockState(pos);
 		final Block block = state.getBlock();
-		if (Blocks.snow_layer.isAssociatedBlock(block) && (world.getBlockMetadata(pos) & 7) < 1)
-		{
-			dir = EnumFacing.UP;
-		}
-		else if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush)
-		{
-			pos = pos.offset(dir);
-		}
-		if (!player.canPlayerEdit(pos, dir, stack))
+        if (!block.isReplaceable(world, pos))
+        {
+            pos = pos.offset(dir);
+        }
+
+		if (stack.stackSize == 0)
 		{
 			return false;
 		}
-		else if (stack.stackSize == 0)
+		else if (!player.canPlayerEdit(pos, dir, stack))
 		{
 			return false;
 		}

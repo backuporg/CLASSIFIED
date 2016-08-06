@@ -66,24 +66,24 @@ public class ItemRope extends GrcItemBase
 		}
 		else
 		{
-			final Block block2 = GrowthCraftCore.blocks.ropeBlock.getBlock();
-			if (world.canBlockBePlaced(block2, pos, false, dir, (Entity)null, stack))
+			final Block ropeBlock = GrowthCraftCore.blocks.ropeBlock.getBlock();
+			if (world.canBlockBePlaced(ropeBlock, pos, false, dir, (Entity)null, stack))
 			{
-				final int meta = block2.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
-				if (world.setBlockState(pos, block2.getDefaultState(), meta, 3))
+				final int meta = ropeBlock.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
+				if (world.setBlockState(pos, ropeBlock.getDefaultState(), meta, 3))
 				{
-					if (world.getBlockState(pos).getBlock() == block2)
+					if (world.getBlockState(pos).getBlock() == ropeBlock)
 					{
-						block2.onBlockPlacedBy(world, pos, player, stack);
-						block2.onPostBlockPlaced(world, pos, meta);
+						ropeBlock.onBlockPlacedBy(world, pos, state, player, stack);
+						ropeBlock.onPostBlockPlaced(world, pos, meta);
 					}
 					world.playSoundEffect(
 						(double)pos.getX() + 0.5D,
 						(double)pos.getY() + 0.5D,
 						(double)pos.getZ() + 0.5D,
-						block2.stepSound.getPlaceSound(),
-						(block2.stepSound.getVolume() + 1.0F) / 2.0F,
-						block2.stepSound.getPitch() * 0.8F);
+						ropeBlock.stepSound.getPlaceSound(),
+						(ropeBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+						ropeBlock.stepSound.getPitch() * 0.8F);
 					--stack.stackSize;
 				}
 			}

@@ -277,9 +277,9 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack)
 	{
-		super.onBlockPlacedBy(world, pos, state, placer, stack);
+		super.onBlockPlacedBy(world, pos, state, entity, stack);
 		restoreBlockStateFromStack(world, pos, state, stack);
 		setupCustomDisplayName(world, pos, stack);
 	}
