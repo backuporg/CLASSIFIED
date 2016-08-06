@@ -17,7 +17,7 @@ public class HarvestDropsEventCore
 	public void onHarvestDrops(HarvestDropsEvent event)
 	{
 		CoreRegistry.getLogger().warn("(fixme) HarvestDropsEventCore#onHarvestDrops metadata");
-		if (CoreRegistry.instance().vineDrops().isVine(event.block, 0) && !event.isSilkTouching && event.harvester != null)
+		if (CoreRegistry.instance().vineDrops().isVine(event.state.getBlock(), 0) && !event.isSilkTouching && event.harvester != null)
 		{
 			if (event.harvester.getHeldItem() == null)
 			{

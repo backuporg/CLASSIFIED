@@ -67,10 +67,11 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		if (isBelowFillingFluid(world, pos, state) && world.canLightningStrikeAt(x, y + 1, z))
-		{
-			fillPaddy(world, pos, state);
-		}
+		super.updateTick(world, pos, state, random);
+		//if (isBelowFillingFluid(world, pos, state) && world.canLightningStrikeAt(x, y + 1, z))
+		//{
+		//	fillPaddy(world, pos, state);
+		//}
 	}
 
 	@Override
@@ -180,9 +181,6 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 		return 1;
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsForItemRender()
 	{

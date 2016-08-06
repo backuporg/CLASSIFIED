@@ -180,7 +180,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	@Override
 	public void grow(World world, Random random, BlockPos pos, IBlockState state)
 	{
-		final int meta = world.getBlockMetadata(x, y, z);
+		final int meta = state.getValue(GROWTH);
 		if (meta < ThistleStage.FLOWER)
 		{
 			final int growthChance = GrowthCraftMilk.getConfig().thistleGrowthChance;
@@ -188,11 +188,11 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 			{
 				if (random.nextInt(growthChance) != 0) return;
 			}
-			incrementGrowth(world, x, y, z, meta);
+			incrementGrowth(world, pos, state);
 		}
 		else
 		{
-			runSpread(world, x, y, z, random);
+			runSpread(world, pos, random);
 		}
 	}
 }
