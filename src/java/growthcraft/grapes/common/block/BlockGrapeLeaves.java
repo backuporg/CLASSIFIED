@@ -1,5 +1,8 @@
 package growthcraft.grapes.common.block;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.core.util.BlockFlags;
@@ -9,13 +12,15 @@ import growthcraft.core.util.BlockCheck;
 import growthcraft.grapes.GrowthCraftGrapes;
 import growthcraft.grapes.util.GrapeBlockCheck;
 
-import net.minecraft.block.BlockLeavesBase;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -26,7 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope, IGrowable
+public class BlockGrapeLeaves extends BlockLeaves implements IBlockRope, IGrowable
 {
 	private final int grapeLeavesGrowthRate = GrowthCraftGrapes.getConfig().grapeLeavesGrowthRate;
 	private final int grapeSpawnRate = GrowthCraftGrapes.getConfig().grapeSpawnRate;
@@ -35,13 +40,26 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope, IGr
 
 	public BlockGrapeLeaves()
 	{
-		super(Material.leaves, false);
+		super();
 		setTickRandomly(true);
 		setHardness(0.2F);
 		setLightOpacity(1);
 		setStepSound(soundTypeGrass);
 		setUnlocalizedName("grc.grape_leaves");
 		setCreativeTab(null);
+		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
+	}
+
+    @Override
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+    {
+        return new ArrayList<ItemStack>(Arrays.asList(GrowthCraftGrapes.items.grapes.asStack()));
+    }
+
+	@Override
+	public BlockPlanks.EnumType getWoodType(int meta)
+	{
+		return null;
 	}
 
 	private boolean isTrunk(World world, BlockPos pos)
@@ -164,34 +182,6 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope, IGr
 		}
 	}
 
-	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
-	{
-		super.updateTick(world, pos, state, random);
-		if (!canBlockStay(world, pos))
-		{
-			world.setBlockState(pos, GrowthCraftCore.blocks.ropeBlock.getBlock().getDefaultState());
-		}
-		else
-		{
-			grow(world, random, pos, state);
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-	{
-		super.randomDisplayTick(worldIn, pos, state, rand);
-        if (worldIn.isRainingAt(pos.up()) && !World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && rand.nextInt(15) == 1)
-        {
-            double d0 = (double)((float)pos.getX() + rand.nextFloat());
-            double d1 = (double)pos.getY() - 0.05D;
-            double d2 = (double)((float)pos.getZ() + rand.nextFloat());
-            worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
-        }
-	}
-
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
 		if (this.isSupportedByTrunk(world, pos))
@@ -228,9 +218,20 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope, IGr
 	}
 
 	@Override
-	public boolean isLeaves(IBlockAccess world, BlockPos pos)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
 	{
-		return true;
+		super.updateTick(world, pos, state, random);
+		if (!world.isRemote)
+		{
+			if (!canBlockStay(world, pos))
+			{
+				world.setBlockState(pos, GrowthCraftCore.blocks.ropeBlock.getBlock().getDefaultState());
+			}
+			else
+			{
+				grow(world, random, pos, state);
+			}
+		}
 	}
 
 	@Override
@@ -255,41 +256,5 @@ public class BlockGrapeLeaves extends BlockLeavesBase implements IBlockRope, IGr
 	public int quantityDropped(Random random)
 	{
 		return 1;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return Blocks.leaves.isOpaqueCube();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing facing)
-	{
-		return true;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getBlockColor()
-	{
-		final double d0 = 0.5D;
-		final double d1 = 1.0D;
-		return ColorizerFoliage.getFoliageColor(d0, d1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderColor(IBlockState state)
-	{
-		return ColorizerFoliage.getFoliageColorBasic();
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
-	{
-		return BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
 	}
 }

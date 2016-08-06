@@ -37,7 +37,7 @@ public class ItemGrapeSeeds extends GrcItemBase implements IPlantable
 				final BlockGrapeVine0 block = GrowthCraftGrapes.blocks.grapeVine0.getBlock();
 				if (BlockCheck.canSustainPlant(world, pos, EnumFacing.UP, block) && world.isAirBlock(pos.up()))
 				{
-					world.setBlock(pos.up(), block);
+					world.setBlockState(pos.up(), block.getDefaultState());
 					--stack.stackSize;
 					return true;
 				}

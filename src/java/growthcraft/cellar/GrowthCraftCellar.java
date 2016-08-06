@@ -202,7 +202,7 @@ public class GrowthCraftCellar
 		GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, "grc.tileentity.fermentBarrel");
 		GameRegistry.registerTileEntity(TileEntityCultureJar.class, "grc.tileentity.fermentJar");
 
-		MapGenHelper.registerVillageStructure(ComponentVillageTavern.class, "grc.tavern");
+		MapGenHelper.registerStructureComponent(ComponentVillageTavern.class, "grc.tavern");
 
 		//====================
 		// CRAFTING

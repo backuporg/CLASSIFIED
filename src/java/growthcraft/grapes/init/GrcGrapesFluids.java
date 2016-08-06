@@ -130,7 +130,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 			.fermentsFrom(fs[3], new OreItemStacks("yeastEthereal"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.053f), TickUtils.seconds(90))
-				.addPotionEntry(Potion.field_76434_w, TickUtils.minutes(3), 0)
+				.addPotionEntry(Potion.healthBoost, TickUtils.minutes(3), 0)
 				.addPotionEntry(Potion.resistance, TickUtils.minutes(3), 0);
 
 		// Port Wine - Bayanus Yeast

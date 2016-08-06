@@ -34,42 +34,15 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
-		final Block block = world.getBlock(pos);
-		if (block == Blocks.snow_layer && (world.getBlockMetadata(pos) & 7) < 1)
+		final IBlockState state = world.getBlockState(pos);
+		final Block block = state.getBlock();
+		if (Blocks.snow_layer.isAssociatedBlock(block) && (world.getBlockMetadata(pos) & 7) < 1)
 		{
-			dir = 1;
+			dir = EnumFacing.UP;
 		}
 		else if (block != Blocks.vine && block != Blocks.tallgrass && block != Blocks.deadbush)
 		{
-			if (dir == 0)
-			{
-				--y;
-			}
-
-			if (dir == 1)
-			{
-				++y;
-			}
-
-			if (dir == 2)
-			{
-				--z;
-			}
-
-			if (dir == 3)
-			{
-				++z;
-			}
-
-			if (dir == 4)
-			{
-				--x;
-			}
-
-			if (dir == 5)
-			{
-				++x;
-			}
+			pos = pos.offset(dir);
 		}
 
 
@@ -85,8 +58,7 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 		{
 			if (world.canPlaceEntityOnSide(cropBlock, pos, false, dir, (Entity)null, stack))
 			{
-				final int meta = cropBlock.onBlockPlaced(world, pos, dir, par8, par9, par10, 0);
-
+				final int meta = cropBlock.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
 				if (world.setBlock(pos, cropBlock, meta, 3))
 				{
 					if (world.getBlock(pos) == cropBlock)
@@ -94,8 +66,13 @@ public class ItemAppleSeeds extends GrcItemBase implements IPlantable
 						cropBlock.onBlockPlacedBy(world, pos, player, stack);
 						cropBlock.onPostBlockPlaced(world, pos, meta);
 					}
-
-					world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), cropBlock.stepSound.getPlaceSound(), (cropBlock.stepSound.getVolume() + 1.0F) / 2.0F, cropBlock.stepSound.getPitch() * 0.8F);
+					world.playSoundEffect(
+						(double)x + 0.5D,
+						(double)y + 0.5D,
+						(double)z + 0.5D,
+						cropBlock.stepSound.getPlaceSound(),
+						(cropBlock.stepSound.getVolume() + 1.0F) / 2.0F,
+						cropBlock.stepSound.getPitch() * 0.8F);
 					--stack.stackSize;
 				}
 			}

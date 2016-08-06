@@ -104,7 +104,7 @@ public class GrowthCraftRice
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
-		MapGenHelper.registerVillageStructure(ComponentVillageRiceField.class, "grc.ricefield");
+		MapGenHelper.registerStructureComponent(ComponentVillageRiceField.class, "grc.ricefield");
 
 		//====================
 		// ORE DICTIONARY

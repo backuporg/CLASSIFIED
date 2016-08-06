@@ -37,13 +37,13 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	}
 
 	@Override
-	protected boolean shouldRestoreBlockState(World world, BlockPos pos, ItemStack stack)
+	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, ItemStack stack)
 	{
 		return true;
 	}
 
 	@Override
-	protected boolean shouldDropTileStack(World world, BlockPos pos, IBlockState state, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return true;
 	}

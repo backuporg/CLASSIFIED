@@ -96,7 +96,7 @@ public class Utils
 	{
 		if (held == null) return false;
 
-		final EnumFacing direction = EnumFacing.UNKNOWN;
+		final EnumFacing direction = null;
 
 		if (held.getItem() instanceof IFluidContainerItem)
 		{
@@ -159,7 +159,7 @@ public class Utils
 	{
 		if (held == null) return null;
 
-		final EnumFacing direction = EnumFacing.UNKNOWN;
+		final EnumFacing direction = null;
 		final FluidStack available = tank.drain(direction, DRAIN_CAP, false);
 		if (available == null) return null;
 

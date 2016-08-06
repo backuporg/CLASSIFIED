@@ -60,7 +60,7 @@ public class BlockCheeseVat extends GrcBlockContainer
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.randomDisplayTick(world, pos, state, rand);
-		if (random.nextInt(12) == 0)
+		if (rand.nextInt(12) == 0)
 		{
 			final TileEntityCheeseVat te = getTileEntity(world, pos);
 			if (te != null)
@@ -69,9 +69,9 @@ public class BlockCheeseVat extends GrcBlockContainer
 				{
 					for (int i = 0; i < 3; ++i)
 					{
-						final double px = pos.getX() + 0.5d + (random.nextFloat() - 0.5d);
+						final double px = pos.getX() + 0.5d + (rand.nextFloat() - 0.5d);
 						final double py = pos.getY() + (1d / 16d);
-						final double pz = pos.getZ() + 0.5d + (random.nextFloat() - 0.5d);
+						final double pz = pos.getZ() + 0.5d + (rand.nextFloat() - 0.5d);
 						world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, px, py, pz, 0.0D, 1d / 32d, 0.0D);
 						world.playSoundEffect((double)px, (double)py, (double)pz, "liquid.lavapop", 0.3f, 0.5f);
 					}

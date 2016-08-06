@@ -251,7 +251,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 	}
 
-	protected boolean shouldRestoreBlockState(World world, BlockPos pos, IBlockState state, ItemStack stack)
+	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, IBlockState state, ItemStack stack)
 	{
 		return false;
 	}
@@ -352,7 +352,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 	}
 
-	protected boolean shouldDropTileStack(World world, BlockPos pos, IBlockState state, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return false;
 	}
@@ -370,7 +370,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 		}
 	}
 
-	protected void getTileItemStackDrops(List<ItemStack> ret, World world, BlockPos pos, IBlockState state, int fortune)
+	protected void getTileItemStackDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		final TileEntity te = getTileEntity(world, pos);
 		if (te instanceof INBTItemSerializable)

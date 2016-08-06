@@ -58,7 +58,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	public void fillPaddy(World world, BlockPos pos, IBlockState state)
 	{
 		final int level = state.getValue(FLUID_LEVEL);
-		if (level < getPaddyMaxFluidLevel(world. pos, state) - 1)
+		if (level < getPaddyMaxFluidLevel(world, pos, state) - 1)
 		{
 			world.setBlockState(pos, state.withProperty(FLUID_LEVEL,level + 1), BlockFlags.UPDATE_AND_SYNC);
 		}
@@ -136,11 +136,10 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 			{
 				return;
 			}
-
-			final Block plant = world.getBlock(pos.up());
-			if (plant instanceof IPaddyCrop)
+			final IBlockState plantState = world.getBlockState(pos.up());
+			if (plantState.getBlock() instanceof IPaddyCrop)
 			{
-				plant.dropBlockAsItem(world, pos.up(), world.getBlockMetadata(pos.up()), 0);
+				plantState.getBlock().dropBlockAsItem(world, pos.up(), plantState, 0);
 				world.setBlockToAir(pos.up());
 			}
 		}

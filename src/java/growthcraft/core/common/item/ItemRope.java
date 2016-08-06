@@ -28,7 +28,7 @@ public class ItemRope extends GrcItemBase
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
 		final Block block = world.getBlockState(pos).getBlock();
-		GrowthCraftCore.getLogger("(fixme) ItemRope#onItemUse metadata");
+		GrowthCraftCore.getLogger().warn("(fixme) ItemRope#onItemUse metadata");
 		final int blockMeta = 0;
 
 		if (Blocks.snow_layer == block && (blockMeta & 7) < 1)

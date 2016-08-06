@@ -31,7 +31,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 	}
 
-	public void markOrGrowMarked(World world, BlockPos pos, Random random)
+	public void markOrGrowMarked(World world, BlockPos pos, Random rand)
 	{
 		final int meta = world.getBlockMetadata(pos);
 
@@ -41,31 +41,30 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		}
 		else
 		{
-			this.growTree(world, pos, random);
+			this.growTree(world, pos, rand);
 		}
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
+		super.updateTick(world, pos, state, rand);
 		if (!world.isRemote)
 		{
-			super.updateTick(world, pos, random);
-
-			if (getLightValue(world, pos.up()) >= 9 && random.nextInt(growthRate) == 0)
+			if (getLightValue(world, pos.up()) >= 9 && rand.nextInt(growthRate) == 0)
 			{
-				this.markOrGrowMarked(world, pos, random);
+				this.markOrGrowMarked(world, pos, rand);
 			}
 		}
 	}
 
-	public void growTree(World world, BlockPos pos, Random random)
+	public void growTree(World world, BlockPos pos, Random rand)
 	{
-		if (!TerrainGen.saplingGrowTree(world, random, pos)) return;
+		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
 		final int meta = world.getBlockMetadata(pos) & 3;
 		final WorldGenerator generator = new WorldGenAppleTree(true);
 		world.setBlockToAir(pos);
-		if (!generator.generate(world, random, pos))
+		if (!generator.generate(world, rand, pos))
 		{
 			world.setBlockState(pos, this, meta, BlockFlags.ALL);
 		}
@@ -86,9 +85,9 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		if (random.nextFloat() < 0.45D)
+		if (rand.nextFloat() < 0.45D)
 		{
-			growTree(world, pos, random);
+			growTree(world, pos, rand);
 		}
 	}
 }

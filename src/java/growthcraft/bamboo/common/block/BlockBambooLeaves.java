@@ -7,18 +7,19 @@ import growthcraft.api.core.util.BlockFlags;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.ColorizerFoliage;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,6 +37,7 @@ public class BlockBambooLeaves extends BlockLeavesBase implements IShearable
 		setTickRandomly(true);
 		setUnlocalizedName("grc.bamboo_leaves");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
+		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
 	}
 
 	private void removeLeaves(World world, BlockPos pos)

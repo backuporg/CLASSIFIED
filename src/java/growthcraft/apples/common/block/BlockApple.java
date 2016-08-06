@@ -10,6 +10,7 @@ import growthcraft.core.integration.AppleCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,8 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 		private AppleStage() {}
 	}
 
+	public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 0, 3);
+
 	private final int growth = GrowthCraftApples.getConfig().appleGrowthRate;
 	private final boolean dropRipeApples = GrowthCraftApples.getConfig().dropRipeApples;
 	private final int dropChance = GrowthCraftApples.getConfig().appleDropChance;
@@ -43,35 +46,30 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	public BlockApple()
 	{
 		super(Material.plants);
-		this.setTickRandomly(true);
-		this.setHardness(0.2F);
-		this.setResistance(5.0F);
-		this.setStepSound(soundTypeWood);
-		this.setUnlocalizedName("grc.apple_block");
-		this.setCreativeTab(null);
-	}
-
-	public boolean isMature(IBlockAccess world, BlockPos pos)
-	{
-		final int meta = world.getBlockMetadata(pos);
-		return meta >= AppleStage.MATURE;
+		setTickRandomly(true);
+		setHardness(0.2F);
+		setResistance(5.0F);
+		setStepSound(soundTypeWood);
+		setUnlocalizedName("grc.apple_block");
+		setCreativeTab(null);
 	}
 
 	public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
-		return (float)meta / (float)AppleStage.MATURE;
+		return (float)state.getValue(GROWTH) / (float)AppleStage.MATURE;
 	}
 
-	void incrementGrowth(World world, BlockPos pos, int meta)
+	public void incrementGrowth(World world, BlockPos pos, IBlockState state)
 	{
-		world.setBlockMetadataWithNotify(pos, meta + 1, BlockFlags.SYNC);
+		final int meta = (int)state.getValue(GROWTH);
+		world.setBlockState(pos, state.withProperty(GROWTH, meta + 1), BlockFlags.SYNC);
 		AppleCore.announceGrowthTick(this, world, pos, meta);
 	}
 
 	@Override
 	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return world.getBlockMetadata(pos) < AppleStage.MATURE;
+		return state.getValue(GROWTH) < AppleStage.MATURE;
 	}
 
 	@Override
@@ -103,10 +101,10 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 			final boolean continueGrowth = random.nextInt(this.growth) == 0;
 			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
-				final int meta = world.getBlockMetadata(pos);
+				final int meta = state.getValue(GROWTH);
 				if (meta < AppleStage.MATURE)
 				{
-					incrementGrowth(world, pos, meta);
+					incrementGrowth(world, pos, state);
 				}
 				else if (dropRipeApples && world.rand.nextInt(this.dropChance) == 0)
 				{
@@ -119,7 +117,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (world.getBlockMetadata(pos) >= AppleStage.MATURE)
+		if (state.getValue(GROWTH) >= AppleStage.MATURE)
 		{
 			if (!world.isRemote)
 			{
@@ -141,8 +139,8 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return GrowthCraftApples.appleLeaves.equals(world.getBlockState(pos.up()).getBlock()) &&
-			(world.getBlockMetadata(pos.up()) & 3) == 0;
+		final IBlockState state = world.getBlockState(pos.up());
+		return GrowthCraftApples.appleLeaves.equals(state.getBlock());
 	}
 
 	@Override
@@ -155,7 +153,9 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	@Override
 	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
-		return meta >= AppleStage.MATURE ? Items.apple : null;
+		if ((int)state.getValue(GROWTH) >= AppleStage.MATURE)
+			return Items.apple;
+		return null;
 	}
 
 	@Override
@@ -194,7 +194,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
-		final int meta = world.getBlockMetadata(pos);
+		final int meta = state.getValue(GROWTH);
 		final float f = 0.0625F;
 
 		if (meta == AppleStage.YOUNG)

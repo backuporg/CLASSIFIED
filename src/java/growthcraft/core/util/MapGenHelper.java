@@ -30,14 +30,15 @@ public final class MapGenHelper
 {
 	private MapGenHelper() {}
 
-	public static void registerVillageStructure(Class<? extends StructureVillagePieces.Village> structure, String name)
+	public static void registerStructureComponent(Class<? extends StructureVillagePieces.Village> structure, String name)
 	{
 		try
 		{
-			MapGenStructureIO.func_143031_a(structure, name);
+			MapGenStructureIO.registerStructureComponent(structure, name);
 		}
 		catch (Throwable e)
 		{
+			e.printStackTrace();
 			// TODO, possibly log error instead of ignoring it
 		}
 	}

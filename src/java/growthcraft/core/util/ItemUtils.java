@@ -238,7 +238,7 @@ public class ItemUtils
 
 	public static void spawnItemStackAtTile(ItemStack stack, TileEntity tile, Random random)
 	{
-		spawnItemStack(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord, stack, random);
+		spawnItemStack(tile.getWorld(), tile.getPos(), stack, random);
 	}
 
 	/**
@@ -251,7 +251,7 @@ public class ItemUtils
 	{
 		if (stack == null) return null;
 		final Item item = stack.getItem();
-		if (item instanceof ItemBlock) return ((ItemBlock)item).field_150939_a;
+		if (item instanceof ItemBlock) return ((ItemBlock)item).block;
 		return null;
 	}
 

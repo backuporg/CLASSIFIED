@@ -97,7 +97,7 @@ public class GrowthCraftGrapes
 
 		CoreRegistry.instance().vineDrops().addDropEntry(items.grapes.asStack(), config.vineGrapeDropRarity);
 
-		MapGenHelper.registerVillageStructure(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
+		MapGenHelper.registerStructureComponent(ComponentVillageGrapeVineyard.class, "grc.grapevineyard");
 
 		//====================
 		// ADDITIONAL PROPS.

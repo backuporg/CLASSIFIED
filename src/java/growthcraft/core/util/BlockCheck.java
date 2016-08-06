@@ -246,10 +246,10 @@ public class BlockCheck
 	 * @param plant  - the plant in question
 	 * @return block if it can be planted upon, else null
 	 */
-	public static Block getFarmableBlock(IBlockAccess world, BlockPos pos, EnumFacing dir, IPlantable plant)
+	public static IBlockState getFarmableBlock(IBlockAccess world, BlockPos pos, EnumFacing dir, IPlantable plant)
 	{
 		if (canSustainPlantOn(world, pos, dir, plant, world.getBlockState(pos)))
-			return soil;
+			return world.getBlockState(pos);
 		return null;
 	}
 
@@ -265,7 +265,7 @@ public class BlockCheck
 	public static boolean isBlockPlacableOnSide(World world, BlockPos pos, EnumFacing dir)
 	{
 		if (world.isAirBlock(pos)) return false;
-		final IBlockState state = world.getBlock(pos);
+		final IBlockState state = world.getBlockState(pos);
 		if (state != null)
 		{
 			return state.getBlock().isBlockSolid(world, pos, dir);

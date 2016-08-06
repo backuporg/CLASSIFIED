@@ -99,7 +99,7 @@ public class GrowthCraftApples
 		appleBlock.register("grc.appleBlock");
 		appleSeeds.register("grc.appleSeeds");
 
-		MapGenHelper.registerVillageStructure(ComponentVillageAppleFarm.class, "grc.applefarm");
+		MapGenHelper.registerStructureComponent(ComponentVillageAppleFarm.class, "grc.applefarm");
 
 		//====================
 		// ADDITIONAL PROPS.

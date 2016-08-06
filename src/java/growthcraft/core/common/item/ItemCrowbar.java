@@ -82,7 +82,7 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 		if (state == null) return false;
 		final Block block = state.getBlock();
 		if (player.isSneaking() != isShiftRotation(block.getClass())) return false;
-		if (block.rotateBlock(world, pos, EnumFacing.getFront(dir)))
+		if (block.rotateBlock(world, pos, dir))
 		{
 			player.swingItem();
 			return !world.isRemote;

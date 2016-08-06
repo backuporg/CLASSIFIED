@@ -74,13 +74,13 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	protected boolean shouldRestoreBlockState(World world, BlockPos pos, ItemStack stack)
+	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, ItemStack stack)
 	{
 		return true;
 	}
 
 	@Override
-	protected boolean shouldDropTileStack(World world, BlockPos pos, int metadata, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, int metadata, int fortune)
 	{
 		return true;
 	}
@@ -97,7 +97,7 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	protected void getTileItemStackDrops(List<ItemStack> ret, World world, BlockPos pos, IBlockState state, int fortune)
+	protected void getTileItemStackDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		final TileEntityHangingCurds te = getTileEntity(world, pos);
 		if (te != null)

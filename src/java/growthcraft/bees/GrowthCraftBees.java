@@ -153,7 +153,7 @@ public class GrowthCraftBees
 		// TileEntities
 		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
-		MapGenHelper.registerVillageStructure(ComponentVillageApiarist.class, "grc.apiarist");
+		MapGenHelper.registerStructureComponent(ComponentVillageApiarist.class, "grc.apiarist");
 		modules.register();
 		registerRecipes();
 		userBeesConfig.addDefault(items.bee.asStack()).setComment("Growthcraft's default bee");

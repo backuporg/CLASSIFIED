@@ -10,13 +10,16 @@ import growthcraft.core.util.SchemaToVillage.IBlockEntries;
 import growthcraft.core.util.SchemaToVillage;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
+import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraft.world.World;
 
 public class ComponentVillageAppleFarm extends StructureVillagePieces.Village implements SchemaToVillage.IVillage
 {
@@ -66,22 +69,22 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 	// DO NOT REMOVE
 	public ComponentVillageAppleFarm() {}
 
-	public ComponentVillageAppleFarm(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+	public ComponentVillageAppleFarm(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
 	{
-		super(startPiece, par2);
+		super(startPiece, facing);
 		this.coordBaseMode = coordBaseMode;
 		this.boundingBox = boundingBox;
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
+	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, EnumFacing facing)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
 		if (canVillageGoDeeper(structureboundingbox))
 		{
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
 			{
-				return new ComponentVillageAppleFarm(startPiece, par7, random, structureboundingbox, coordBaseMode);
+				return new ComponentVillageAppleFarm(startPiece, facing, random, structureboundingbox, coordBaseMode);
 			}
 		}
 		return null;
@@ -125,13 +128,13 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 
 		final boolean vert = coordBaseMode == 0 || coordBaseMode == 2;
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
-		map.put('x', new BlockEntry(Blocks.log, 0));
-		map.put('-', new BlockEntry(Blocks.log, vert ? 4 : 8));
-		map.put('|', new BlockEntry(Blocks.log, vert ? 8 : 4));
+		map.put('x', new BlockEntry(Blocks.log.getDefaultState()));
+		map.put('-', new BlockEntry(Blocks.log.getDefaultState()));
+		map.put('|', new BlockEntry(Blocks.log.getDefaultState()));
 
-		map.put('f', new BlockEntry(Blocks.fence, 0));
-		map.put('g', new BlockEntry(Blocks.fence_gate, this.getMetadataWithOffset(Blocks.fence_gate, 0)));
-		map.put('t', new BlockEntry(Blocks.torch, 0));
+		map.put('f', new BlockEntry(Blocks.oak_fence.getDefaultState()));
+		map.put('g', new BlockEntry(Blocks.oak_fence_gate.getDefaultState()));
+		map.put('t', new BlockEntry(Blocks.torch.getDefaultState()));
 
 		SchemaToVillage.drawSchema(this, world, random, box, appleFarmSchema, map, 0, 1, 0);
 
@@ -146,7 +149,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 			for (int col = 0; col < 11; ++col)
 			{
 				clearCurrentPositionBlocksUpwards(world, col, 7, row, box);
-				replaceAirAndLiquidDownwards(world, Blocks.dirt, 0, col, -1, row, box);
+				replaceAirAndLiquidDownwards(world, Blocks.dirt.getDefaultState(), 0, col, -1, row, box);
 			}
 		}
 		return true;

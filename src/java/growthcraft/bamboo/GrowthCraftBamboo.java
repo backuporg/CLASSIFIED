@@ -122,7 +122,7 @@ public class GrowthCraftBamboo
 		GameRegistry.addShapedRecipe(blocks.bambooScaffold.asStack(16), "BBB", " A ", "A A", 'A', items.bamboo.getItem(), 'B', blocks.bambooBlock.getBlock());
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', items.bambooCoal.getItem(), 'B', "stickWood"}));
 
-		MapGenHelper.registerVillageStructure(ComponentVillageBambooYard.class, "grc.bambooyard");
+		MapGenHelper.registerStructureComponent(ComponentVillageBambooYard.class, "grc.bambooyard");
 
 		registerOres();
 

@@ -102,7 +102,7 @@ public class GrowthCraftHops
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(hops.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(hops.asStack(), 1, 2, 10));
 
-		MapGenHelper.registerVillageStructure(ComponentVillageHopVineyard.class, "grc.hopvineyard");
+		MapGenHelper.registerStructureComponent(ComponentVillageHopVineyard.class, "grc.hopvineyard");
 
 		//====================
 		// ORE DICTIONARY

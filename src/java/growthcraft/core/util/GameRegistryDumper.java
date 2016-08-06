@@ -99,79 +99,75 @@ public class GameRegistryDumper
 	@SuppressWarnings("rawtypes")
 	public static void dumpBlocks()
 	{
-		GrowthCraftCore.getLogger().info("Dumping Blocks");
-		final Iterator it = GameRegistry.Type.BLOCK.getRegistry().iterator();
-
-		try (FileWriter writer = new FileWriter("dumps/GameRegistry_Blocks.txt"))
-		{
-			while (it.hasNext())
-			{
-				final Block obj = (Block)it.next();
-				try
-				{
-					if (obj != null)
-					{
-						writer.write("" + Block.getIdFromBlock(obj) + "," + obj.getUnlocalizedName() + "," + obj.getLocalizedName() + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
-
-						if (Platform.isClient())
-						{
-							writeItemSubtypes(obj, writer);
-						}
-						else
-						{
-							writeItemStackToFile(new ItemStack(obj), writer);
-						}
-					}
-				}
-				catch (NullPointerException ex)
-				{
-					writer.write("null,,,\n");
-				}
-			}
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
-		}
+		GrowthCraftCore.getLogger().warn("(fixme) Dumping Blocks");
+		//final Iterator it = GameRegistry.Type.BLOCK.getRegistry().iterator();
+		//try (FileWriter writer = new FileWriter("dumps/GameRegistry_Blocks.txt"))
+		//{
+		//	while (it.hasNext())
+		//	{
+		//		final Block obj = (Block)it.next();
+		//		try
+		//		{
+		//			if (obj != null)
+		//			{
+		//				writer.write("" + Block.getIdFromBlock(obj) + "," + obj.getUnlocalizedName() + "," + obj.getLocalizedName() + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
+		//				if (Platform.isClient())
+		//				{
+		//					writeItemSubtypes(obj, writer);
+		//				}
+		//				else
+		//				{
+		//					writeItemStackToFile(new ItemStack(obj), writer);
+		//				}
+		//			}
+		//		}
+		//		catch (NullPointerException ex)
+		//		{
+		//			writer.write("null,,,\n");
+		//		}
+		//	}
+		//}
+		//catch (IOException ex)
+		//{
+		//	ex.printStackTrace();
+		//}
 	}
 
 	@SuppressWarnings("rawtypes")
 	public static void dumpItems()
 	{
-		GrowthCraftCore.getLogger().info("Dumping Items");
-		final Iterator it = GameRegistry.Type.ITEM.getRegistry().iterator();
-
-		try (FileWriter writer = new FileWriter("dumps/GameRegistry_Items.txt"))
-		{
-			while (it.hasNext())
-			{
-				final Item obj = (Item)it.next();
-				try
-				{
-					if (obj != null)
-					{
-						writer.write("" + Item.getIdFromItem(obj) + "," + obj.getUnlocalizedName() + "," + "?" + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
-
-						if (Platform.isClient())
-						{
-							writeItemSubtypes(obj, writer);
-						}
-						else
-						{
-							writeItemStackToFile(new ItemStack(obj), writer);
-						}
-					}
-				}
-				catch (NullPointerException ex)
-				{
-					writer.write("null,,,\n");
-				}
-			}
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
-		}
+		GrowthCraftCore.getLogger().warn("Dumping Items");
+		//final Iterator it = GameRegistry.Type.ITEM.getRegistry().iterator();
+		//try (FileWriter writer = new FileWriter("dumps/GameRegistry_Items.txt"))
+		//{
+		//	while (it.hasNext())
+		//	{
+		//		final Item obj = (Item)it.next();
+		//		try
+		//		{
+		//			if (obj != null)
+		//			{
+		//				writer.write("" + Item.getIdFromItem(obj) + "," + obj.getUnlocalizedName() + "," + "?" + "," + GameRegistry.findUniqueIdentifierFor(obj) + "\n");
+		//				if (Platform.isClient())
+		//				{
+		//					writeItemSubtypes(obj, writer);
+		//				}
+		//				else
+		//				{
+		//					writeItemStackToFile(new ItemStack(obj), writer);
+		//				}
+		//			}
+		//		}
+		//		catch (NullPointerException ex)
+		//		{
+		//			writer.write("null,,,\n");
+		//		}
+		//	}
+		//}
+		//catch (IOException ex)
+		//{
+		//	ex.printStackTrace();
+		//}
 	}
 
 	@SuppressWarnings("rawtypes")

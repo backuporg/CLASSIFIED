@@ -33,6 +33,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ChatComponentTranslation;
 
 public class GrcInternalInventory implements IInventory, INBTSerializableContext
 {
@@ -165,7 +167,19 @@ public class GrcInternalInventory implements IInventory, INBTSerializableContext
 	}
 
 	@Override
-	public String getDisplayName()
+	public boolean hasCustomName()
+	{
+		return false;
+	}
+
+	@Override
+	public IChatComponent getDisplayName()
+	{
+		return new ChatComponentTranslation(inventoryName, new Object[0]);
+	}
+
+	@Override
+	public String getName()
 	{
 		return inventoryName;
 	}

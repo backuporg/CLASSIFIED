@@ -102,8 +102,7 @@ public class GrcBlockFluid extends BlockFluidClassic
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.randomDisplayTick(world, pos, state, random);
-
+		super.randomDisplayTick(world, pos, state, rand);
 		final IBlockState belowState = world.getBlockState(pos.down(2));
 		if (rand.nextInt(10) == 0 &&
 			World.doesBlockHaveSolidTopSurface(world, pos.down()) &&

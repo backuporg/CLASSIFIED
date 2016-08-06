@@ -211,14 +211,14 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		{
 			for (int i3 = z - 1; i3 <= z + 1; ++i3)
 			{
-				final Block block = BlockCheck.getFarmableBlock(world, l2, y - 1, i3, EnumFacing.UP, this);
+				final IBlockState state = BlockCheck.getFarmableBlock(world, l2, y - 1, i3, EnumFacing.UP, this);
 				float f1 = 0.0F;
 
-				if (block != null)
+				if (state != null)
 				{
 					f1 = 1.0F;
 
-					if (block.isFertile(world, l2, y - 1, i3))
+					if (state.getBlock().isFertile(world, l2, y - 1, i3))
 					{
 						f1 = 3.0F;
 					}
