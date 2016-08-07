@@ -1,11 +1,14 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -93,42 +96,22 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
 		if (index == 0)
 		{
 			// only allow extraction from the top
-			if (side == 1) return true;
+			if (side == EnumFacing.UP) return true;
 		}
 		// else this is the residue slot
 		else
 		{
 			// extract from sides, or bottom
-			if (side == 0 || side > 1) return true;
+			if (side != EnumFacing.UP) return true;
 		}
 		return false;
-	}
-
-	/************
-	 * NBT
-	 ************/
-
-	/**
-	 * @param nbt - nbt data to load
-	 */
-	@Override
-	protected void readTanksFromNBT(NBTTagCompound nbt)
-	{
-		if (nbt.hasKey("Tank"))
-		{
-			getFluidTank(0).readFromNBT(nbt.getCompoundTag("Tank"));
-		}
-		else
-		{
-			super.readTanksFromNBT(nbt);
-		}
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-		if (nbt.getInteger("FruitPress_version") > 0)
+		if (nbt.getInteger("fruit_press_version") > 0)
 		{
 			fruitPress.readFromNBT(nbt, "fruit_press");
 		}
@@ -143,12 +126,20 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
 	{
 		super.writeToNBT(nbt);
 		fruitPress.writeToNBT(nbt, "fruit_press");
-		nbt.setInteger("FruitPress_version", 2);
+		nbt.setInteger("fruit_press_version", 2);
 	}
 
-	/************
-	 * PACKETS
-	 ************/
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerFruitPress(playerInventory, this);
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:fruit_press";
+	}
 
 	/**
 	 * @param id - data id

@@ -76,7 +76,7 @@ public abstract class TileEntityCellarDevice extends GrcTileEntityDeviceBase imp
 		{
 			final int offset = 50 + i * 3;
 			final FluidStack fluid = getFluidStack(i);
-			iCrafting.sendProgressBarUpdate(container, offset, fluid != null ? fluid.getFluidID() : 0);
+			iCrafting.sendProgressBarUpdate(container, offset, fluid != null ? fluid.getFluid().getID() : 0);
 			iCrafting.sendProgressBarUpdate(container, offset + 1, fluid != null ? (fluid.amount & 0xFFFF) : 0);
 			iCrafting.sendProgressBarUpdate(container, offset + 2, fluid != null ? ((fluid.amount >> 16) & 0xFFFF) : 0);
 			i++;

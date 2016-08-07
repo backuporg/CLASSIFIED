@@ -62,7 +62,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	{
 		if (GrowthCraftBees.beeBoxThaumcraft != null)
 		{
-			GameRegistry.registerBlock(GrowthCraftBees.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.BeeBox.Thaumcraft");
+			GameRegistry.registerBlock(GrowthCraftBees.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.bee_box.thaumcraft");
 		}
 	}
 
@@ -88,6 +88,8 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
+		GrowthCraftBees.getLogger().warn("(fixme) GrowthCraftBees/ThaumcraftModule#integrate");
+		/*
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyCombEmpty.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.VOID, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyCombFilled.asStack(), new AspectList().add(Aspect.ORDER, 1).add(Aspect.SLIME, 1).add(Aspect.GREED, 1).add(Aspect.HUNGER, 1));
 		ThaumcraftApi.registerObjectTag(GrowthCraftBees.items.honeyJar.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.EARTH, 1).add(Aspect.FIRE, 1).add(Aspect.VOID, 1).add(Aspect.GREED, 3).add(Aspect.HUNGER, 1));
@@ -186,7 +188,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 					ThaumcraftApi.registerObjectTag(bdef.asStack(1, ItemKey.WILDCARD_VALUE), new AspectList().add(Aspect.TREE, 4).add(Aspect.VOID, 1));
 				}
 			}
-		}
+		}*/
 	}
 }
 

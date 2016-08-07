@@ -82,12 +82,12 @@ public class BlockFishTrap extends GrcBlockContainer
 		boolean flag;
 		if (GrowthCraftFishTrap.getConfig().useBiomeDict)
 		{
-			final BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+			final BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 			flag = BiomeDictionary.isBiomeOfType(biome, Type.WATER);
 		}
 		else
 		{
-			flag = Utils.isIDInList(world.getBiomeGenForCoords(x, z).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
+			flag = Utils.isIDInList(world.getBiomeGenForCoords(pos).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
 		}
 
 		if (flag)

@@ -93,7 +93,7 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 	@Override
 	public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState state, StructureBoundingBox box)
 	{
-		setBlockState(world, pos, state, box);
+		setBlockState(world, state, pos.getX(), pos.getY(), pos.getZ(), box);
 	}
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)

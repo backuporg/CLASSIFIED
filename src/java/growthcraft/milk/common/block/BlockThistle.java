@@ -163,8 +163,9 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	}
 
 	@Override
-	public Item getItemDropped(int meta, Random random, int fortune)
+	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
+		final int meta = state.getValue(GROWTH);
 		if (meta < ThistleStage.FLOWER)
 		{
 			if (GrowthCraftMilk.items.seedThistle != null)
@@ -173,7 +174,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 			}
 			return null;
 		}
-		return super.getItemDropped(meta, random, fortune);
+		return super.getItemDropped(state, random, fortune);
 	}
 
 	/* Apply bonemeal effect */

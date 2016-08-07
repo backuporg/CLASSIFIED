@@ -45,9 +45,6 @@ public class BlockBambooStalk extends GrcBlockBase
 		return true;
 	}
 
-	/************
-	 * TICK
-	 ************/
 	@Override
 	public int tickRate(World world)
 	{
@@ -207,19 +204,19 @@ public class BlockBambooStalk extends GrcBlockBase
 
 	private boolean canFence(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFence.getBlock() ||
-			world.getBlock(x, y, z) == Blocks.fence_gate ||
-			world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooFenceGate.getBlock();
+		return world.getBlockState(pos).getBlock() == GrowthCraftBamboo.blocks.bambooFence.getBlock() ||
+			world.getBlockState(pos).getBlock() == Blocks.fence_gate ||
+			world.getBlockState(pos).getBlock() == GrowthCraftBamboo.blocks.bambooFenceGate.getBlock();
 	}
 
 	private boolean canWall(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlock(x, y, z) == GrowthCraftBamboo.blocks.bambooWall.getBlock();
+		return world.getBlock(pos).getBlock() == GrowthCraftBamboo.blocks.bambooWall.getBlock();
 	}
 
 	private boolean canDoor(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlock(x, y, z) instanceof BlockDoor;
+		return world.getBlockState(x, y, z).getBlock() instanceof BlockDoor;
 	}
 
 	@Override
@@ -278,7 +275,8 @@ public class BlockBambooStalk extends GrcBlockBase
 			{
 				for (int i2 = -1; i2 <= 1; ++i2)
 				{
-					final int color = world.getBiomeGenForCoords(x + i2, z + l1).getBiomeFoliageColor(x + i2, y, z + l1);
+					final BlockPos p = new BlockPos(x + i2, y, z + l1);
+					final int color = world.getBiomeGenForCoords(p).getBiomeFoliageColor(p);
 					r += (color & 16711680) >> 16;
 					g += (color & 65280) >> 8;
 					b += color & 255;
@@ -303,22 +301,26 @@ public class BlockBambooStalk extends GrcBlockBase
 
 		if (world.getBlockMetadata(x, y, z) != 0)
 		{
-			if (this.canFence(world, x, y, z - 1) || this.canWall(world, x, y, z - 1) || this.canDoor(world, x, y, z - 1))
+			final BlockPos north = pos.north();
+			final BlockPos south = pos.south();
+			final BlockPos east = pos.east();
+			final BlockPos west = pos.west();
+			if (this.canFence(world, north) || this.canWall(world, north) || this.canDoor(world, north))
 			{
 				z1 = 0.0F;
 			}
 
-			if (this.canFence(world, x, y, z + 1) || this.canWall(world, x, y, z + 1) || this.canDoor(world, x, y, z + 1))
+			if (this.canFence(world, south) || this.canWall(world, south) || this.canDoor(world, south))
 			{
 				z2 = 1.0F;
 			}
 
-			if (this.canFence(world, x - 1, y, z) || this.canWall(world, x - 1, y, z) || this.canDoor(world, x - 1, y, z))
+			if (this.canFence(world, west) || this.canWall(world, west) || this.canDoor(world, west))
 			{
 				x1 = 0.0F;
 			}
 
-			if (this.canFence(world, x + 1, y, z) || this.canWall(world, x + 1, y, z) || this.canDoor(world, x + 1, y, z))
+			if (this.canFence(world, east) || this.canWall(world, east) || this.canDoor(world, east))
 			{
 				x2 = 1.0F;
 			}

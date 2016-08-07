@@ -43,7 +43,7 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Optional.Method(modid="Thaumcraft")
 	protected void integrate()
 	{
-		GrowthCraftBamboo.getLogger().warn("(fixme) bamboo/ThaumcraftModule#integrate");
+		GrowthCraftBamboo.getLogger().warn("(fixme) GrowthCraftBamboo/ThaumcraftModule#integrate");
 		//ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooBlock.asStack(), new AspectList().add(Aspect.TREE, 4));
 		//ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooFence.asStack(), new AspectList().add(Aspect.TREE, 2));
 		//ThaumcraftApi.registerObjectTag(GrowthCraftBamboo.blocks.bambooFenceGate.asStack(), new AspectList().add(Aspect.TREE, 2).add(Aspect.MECHANISM, 1).add(Aspect.MOTION, 1));

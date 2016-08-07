@@ -51,7 +51,7 @@ public class BoPModule extends ModIntegrationBase
 	@Override
 	public void doRegister()
 	{
-		GrowthCraftBees.beeBoxBiomesOPlenty.register("grc.BeeBox.BiomesOPlenty", ItemBlockBeeBox.class);
+		GrowthCraftBees.beeBoxBiomesOPlenty.register("grc.bee_box.biomes_o_plenty", ItemBlockBeeBox.class);
 	}
 
 	@Override

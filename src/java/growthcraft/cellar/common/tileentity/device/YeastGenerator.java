@@ -84,7 +84,7 @@ public class YeastGenerator extends DeviceProgressive
 	 */
 	public BiomeGenBase getCurrentBiome()
 	{
-		return getWorld().getBiomeGenForCoords(parent.xCoord, parent.zCoord);
+		return getWorld().getBiomeGenForCoords(parent.getPos());
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class YeastGenerator extends DeviceProgressive
 
 			if (tempItemList.size() > 0)
 			{
-				final WeightedItemStack weightedItemStack = (WeightedItemStack)WeightedRandom.getRandomItem(getWorld().rand, tempItemList);
+				final WeightedItemStack weightedItemStack = WeightedRandom.getRandomItem(getWorld().rand, tempItemList);
 				if (weightedItemStack != null && weightedItemStack.itemStack != null)
 				{
 					final ItemStack result = weightedItemStack.itemStack.copy();

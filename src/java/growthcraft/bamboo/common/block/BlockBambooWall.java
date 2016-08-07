@@ -35,16 +35,16 @@ public class BlockBambooWall extends GrcBlockBase
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess world, int x, int y, int z)
+	public boolean getBlocksMovement(IBlockAccess world, BlockPos pos)
 	{
 		return false;
 	}
 
-	public boolean canConnectWallTo(IBlockAccess world, int x, int y, int z)
+	public boolean canConnectWallTo(IBlockAccess world, BlockPos pos)
 	{
-		if (world.isAirBlock(x, y, z)) return false;
+		if (world.isAirBlock(pos)) return false;
 
-		final Block block = world.getBlock(x, y, z);
+		final Block block = world.getBlock(pos);
 
 		if (this == block ||
 			GrowthCraftBamboo.blocks.bambooStalk.getBlock() == block ||
@@ -69,19 +69,16 @@ public class BlockBambooWall extends GrcBlockBase
 	}
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
+	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooWall#setBlockBoundsBasedOnState");
+		/*
 		int tm;
 
-		final Block idXneg = world.getBlock(x - 1, y, z);
-		final Block idXpos = world.getBlock(x + 1, y, z);
-		final Block idZneg = world.getBlock(x, y, z - 1);
-		final Block idZpos = world.getBlock(x, y, z + 1);
-
-		int metaXneg = world.getBlockMetadata(x - 1, y, z);
-		int metaXpos = world.getBlockMetadata(x + 1, y, z);
-		int metaZneg = world.getBlockMetadata(x, y, z - 1);
-		int metaZpos = world.getBlockMetadata(x, y, z + 1);
+		final IBlockState idXneg = world.getBlockState(pos.west());
+		final IBlockState idXpos = world.getBlockState(pos.east());
+		final IBlockState idZneg = world.getBlockState(pos.north());
+		final IBlockState idZpos = world.getBlockState(pos.south());
 
 		final boolean flagXneg = this.canConnectWallTo(world, x - 1, y, z) || (idXneg instanceof BlockStairs && (metaXneg & 3) == 0);
 		final boolean flagXpos = this.canConnectWallTo(world, x + 1, y, z) || (idXpos instanceof BlockStairs && (metaXpos & 3) == 1);
@@ -214,13 +211,15 @@ public class BlockBambooWall extends GrcBlockBase
 		}
 
 		this.setBlockBounds(x1, 0.0F, z1, x2, 1.0F, z2);
+		*/
 	}
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB axis, List<AxisAlignedBB> list, Entity entity)
+	public void addCollisionBoxesToList(World world, BlockPos pos, AxisAlignedBB axis, List<AxisAlignedBB> list, Entity entity)
 	{
-		int tm;
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooWall#addCollisionBoxesToList");
+		/*int tm;
 
 		final Block idXneg = world.getBlock(x - 1, y, z);
 		final Block idXpos = world.getBlock(x + 1, y, z);
@@ -465,5 +464,6 @@ public class BlockBambooWall extends GrcBlockBase
 		}
 
 		this.setBlockBoundsBasedOnState(world, x, y, z);
+		*/
 	}
 }

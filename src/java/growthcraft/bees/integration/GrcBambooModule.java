@@ -50,7 +50,7 @@ public class GrcBambooModule extends ModIntegrationBase
 	@Override
 	protected void doRegister()
 	{
-		GameRegistry.registerBlock(GrowthCraftBees.beeBoxBamboo.getBlock(), ItemBlockBeeBox.class, "grc.BeeBox.Bamboo");
+		GameRegistry.registerBlock(GrowthCraftBees.beeBoxBamboo.getBlock(), ItemBlockBeeBox.class, "grc.bee_box.bamboo");
 	}
 
 	@Override

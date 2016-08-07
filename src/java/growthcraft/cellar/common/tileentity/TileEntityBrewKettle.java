@@ -5,6 +5,7 @@ import java.io.IOException;
 import io.netty.buffer.ByteBuf;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
@@ -12,6 +13,8 @@ import growthcraft.core.common.tileentity.event.EventHandler;
 import growthcraft.core.common.tileentity.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -137,31 +140,17 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		return EnumFacing.DOWN != side || index == 1;
 	}
 
-	/************
-	 * NBT
-	 ************/
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		super.readFromNBT(nbt);
-
-		if (nbt.hasKey("time"))
-		{
-			// Pre 2.5
-			brewKettle.setTime(nbt.getShort("time"));
-			brewKettle.setGrain(nbt.getFloat("grain"));
-		}
-		else
-		{
-			brewKettle.readFromNBT(nbt, "brew_kettle");
-		}
+		brewKettle.readFromNBT(nbt, "brew_kettle");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-
 		brewKettle.writeToNBT(nbt, "brew_kettle");
 	}
 
@@ -179,9 +168,17 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		return false;
 	}
 
-	/************
-	 * PACKETS
-	 ************/
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerBrewKettle(playerInventory, this);
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:brew_kettle";
+	}
 
 	/**
 	 * @param id - data id

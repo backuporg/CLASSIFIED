@@ -378,7 +378,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 			for (int i2 = -1; i2 <= 1; ++i2)
 			{
 				final BlockPos p = new BlockPos(pos.getX() + i2, pos.getY(), pos.getZ() + l1);
-				final int j2 = world.getBiomeGenForCoords(pos.getX() + i2, pos.getZ() + l1).getBiomeFoliageColor();
+				final int j2 = world.getBiomeGenForCoords(p).getBiomeFoliageColor();
 				r += (j2 & 16711680) >> 16;
 				g += (j2 & 65280) >> 8;
 				b += j2 & 255;

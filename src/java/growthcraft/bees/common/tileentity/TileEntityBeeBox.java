@@ -12,7 +12,9 @@ import growthcraft.core.common.tileentity.IItemHandler;
 import growthcraft.core.util.ItemUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -287,6 +289,18 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 		super.writeToNBT(nbt);
 		nbt.setInteger("BeeBox.version", beeBoxVersion);
 		beeBox.writeToNBT(nbt, "bee_box");
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerBeeBox(playerInventory, this);
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcbees:bee_box";
 	}
 
 	/************

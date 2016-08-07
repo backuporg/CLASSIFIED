@@ -124,7 +124,7 @@ public class BlockCheesePress extends GrcBlockContainer
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (super.onBlockActivated(world, pos, state, player, hitX, hitY, hitZ)) return true;
+		if (super.onBlockActivated(world, pos, state, player, facing, hitX, hitY, hitZ)) return true;
 		if (GrowthCraftMilk.getConfig().cheesePressHandOperated)
 		{
 			if (!player.isSneaking())

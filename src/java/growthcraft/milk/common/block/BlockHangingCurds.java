@@ -86,14 +86,15 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, int meta)
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, IBlockState state)
 	{
 		final TileEntityHangingCurds te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.asItemStack();
 		}
-		return new ItemStack(this, 1, meta);
+		GrowthCraftMilk.getLogger().warn("(fixme) BlockHangingCurds#createHarvestedBlockItemStack curd metadata");
+		return new ItemStack(this, 1, 0);
 	}
 
 	@Override
@@ -195,9 +196,10 @@ public class BlockHangingCurds extends GrcBlockContainer
 	}
 
 	@Override
-	public int damageDropped(int metadata)
+	public int damageDropped(IBlockState state)
 	{
-		return metadata;
+		GrowthCraftMilk.getLogger().warn("(fixme) BlockHangingCurds#damageDropped");
+		return 0;
 	}
 
 	@Override

@@ -28,6 +28,9 @@ import growthcraft.core.common.tileentity.GrcTileEntityDeviceBase;
 import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fluids.FluidStack;
@@ -140,5 +143,17 @@ public class TileEntityPancheon extends GrcTileEntityDeviceBase implements ITick
 	protected void markForFluidUpdate()
 	{
 		markForBlockUpdate();
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return null;
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcmilk:pancheon";
 	}
 }

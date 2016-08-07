@@ -33,8 +33,8 @@ public class ItemRice extends GrcItemBase
 		{
 			if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 			{
-				final IBlockState soil = world.getBlockState(pos);
-				if (soil != null && RiceBlockCheck.isPaddy(soil) && world.isAirBlock(pos.up()))
+				final IBlockState state = world.getBlockState(pos);
+				if (state != null && RiceBlockCheck.isPaddy(state) && world.isAirBlock(pos.up()))
 				{
 					if (((Integer)state.getValue(BlockPaddyBase.FLUID_LEVEL)) > 0)
 					{

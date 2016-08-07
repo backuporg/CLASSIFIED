@@ -114,7 +114,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	}
 
 	@Override
-	protected void scatterInventory(World world, BlockPos pos, Block block)
+	protected void scatterInventory(World world, BlockPos pos, IBlockState state)
 	{
 		final TileEntityCheeseBlock te = getTileEntity(world, pos);
 		if (te != null)
@@ -186,8 +186,9 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	}
 
 	@Override
-	public int damageDropped(int metadata)
+	public int damageDropped(IBlockState state)
 	{
-		return metadata;
+		GrowthCraftMilk.getLogger().warn("(fixme) BlockCheeseBlock#damageDropped");
+		return 0;
 	}
 }

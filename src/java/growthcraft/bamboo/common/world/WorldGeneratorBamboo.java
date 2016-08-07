@@ -5,10 +5,11 @@ import java.util.Random;
 import growthcraft.api.core.util.BiomeUtils;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
-import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGeneratorBamboo implements IWorldGenerator
 {
@@ -27,11 +28,11 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 	{
 		if (!world.getWorldInfo().getTerrainType().getWorldTypeName().startsWith("flat"))
 		{
-			final int i = chunkX * 16 + random.nextInt(16) + 8;
-			final int j = random.nextInt(128);
-			final int k = chunkZ * 16 + random.nextInt(16) + 8;
-
-			final BiomeGenBase biome = world.getBiomeGenForCoords(i, k);
+			final BlockPos pos = new BlockPos(
+				chunkX * 16 + random.nextInt(16) + 8,
+				random.nextInt(128),
+				chunkZ * 16 + random.nextInt(16) + 8);
+			final BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 			if (GrowthCraftBamboo.getConfig().useBiomeDict)
 			{
 				if (!BiomeUtils.testBiomeTypeTagsTable(biome, GrowthCraftBamboo.getConfig().bambooBiomesTypeList)) return;
@@ -44,7 +45,7 @@ public class WorldGeneratorBamboo implements IWorldGenerator
 
 			if (random.nextInt(this.rarity) == 0)
 			{
-				new WorldGenBamboo(true).generateClumps(world, random, i, j, k);
+				new WorldGenBamboo(true).generateClumps(world, random, pos);
 			}
 		}
 	}

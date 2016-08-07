@@ -10,6 +10,7 @@ import growthcraft.api.core.fluids.FluidUtils;
 import growthcraft.api.core.nbt.INBTItemSerializable;
 import growthcraft.api.core.nbt.NBTHelper;
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.inventory.GrcInternalInventory;
 import growthcraft.core.common.inventory.InventoryProcessor;
@@ -18,6 +19,8 @@ import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
@@ -264,19 +267,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		return InventoryProcessor.instance().canExtractItem(this, stack, index);
 	}
 
-	@Override
-	protected void readTanksFromNBT(NBTTagCompound nbt)
-	{
-		if (nbt.hasKey("Tank"))
-		{
-			getFluidTank(0).readFromNBT(nbt.getCompoundTag("Tank"));
-		}
-		else
-		{
-			super.readTanksFromNBT(nbt);
-		}
-	}
-
 	private void readFermentTimeFromNBT(NBTTagCompound nbt)
 	{
 		this.time = NBTHelper.getInteger(nbt, "time");
@@ -318,6 +308,18 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	{
 		super.writeToNBT(nbt);
 		writeFermentTimeToNBT(nbt);
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerFermentBarrel(playerInventory, this);
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:ferment_barrel";
 	}
 
 	@Override

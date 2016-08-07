@@ -222,7 +222,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	@Override
 	public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState state, StructureBoundingBox box)
 	{
-		setBlockState(world, pos, state, box);
+		setBlockState(world, state, pos.getX(), pos.getY(), pos.getZ(), box);
 	}
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)

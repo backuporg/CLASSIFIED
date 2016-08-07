@@ -60,6 +60,8 @@ import growthcraft.milk.event.EventCheeseVat.EventCheeseVatMadeCurds;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -713,5 +715,17 @@ public class TileEntityCheeseVat extends GrcTileEntityDeviceBase implements ITic
 	public int calcRedstone()
 	{
 		return getFluidAmountScaled(15, FluidTankType.PRIMARY.id);
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return null;
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcmilk:cheese_vat";
 	}
 }

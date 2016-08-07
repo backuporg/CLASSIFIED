@@ -24,7 +24,7 @@ public class BiomeGenBamboo extends BiomeGenBase
 	 * @return world abstract tree - The world generator used for the Bamboo Biome
 	 */
 	@Override
-	public WorldGenAbstractTree func_150567_a(Random p_150567_1_)
+	public WorldGenAbstractTree genBigTreeChance(Random p_150567_1_)
 	{
 		return worldGenBamboo;
 	}

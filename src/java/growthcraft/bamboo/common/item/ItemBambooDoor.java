@@ -23,7 +23,7 @@ public class ItemBambooDoor extends GrcItemBase
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
-	private static void placeDoorBlock(World world, int i, int j, int k, int side, Block block)
+	private static void placeDoorBlock(World world, BlockPos pos, int side, Block block)
 	{
 		byte b0 = 0;
 		byte b1 = 0;
@@ -48,10 +48,12 @@ public class ItemBambooDoor extends GrcItemBase
 			b0 = 1;
 		}
 
-		final int i1 = (world.getBlock(i - b0, j, k - b1).isNormalCube(world, i - b0, j, k - b1) ? 1 : 0) + (world.getBlock(i - b0, j + 1, k - b1).isNormalCube(world, i - b0, j + 1, k - b1) ? 1 : 0);
-		final int j1 = (world.getBlock(i + b0, j, k + b1).isNormalCube(world, i + b0, j, k + b1) ? 1 : 0) + (world.getBlock(i + b0, j + 1, k + b1).isNormalCube(world, i + b0, j + 1, k + b1) ? 1 : 0);
-		final boolean flag = world.getBlock(i - b0, j, k - b1) == block || world.getBlock(i - b0, j + 1, k - b1) == block;
-		final boolean flag1 = world.getBlock(i + b0, j, k + b1) == block || world.getBlock(i + b0, j + 1, k + b1) == block;
+		final BlockPos posNW = new BlockPos(pos.getX() - b0, pos.getY(), pos.getZ() - b1);
+		final BlockPos posNE = new BlockPos(pos.getX() + b0, pos.getY(), pos.getZ() + b1);
+		final int i1 = (world.getBlockState(posNW).getBlock().isNormalCube(world, posNW) ? 1 : 0) + (world.getBlockState(posNW.up()).getBlock().isNormalCube(world, posNW.up()) ? 1 : 0);
+		final int j1 = (world.getBlockState(posNE).getBlock().isNormalCube(world, posNE) ? 1 : 0) + (world.getBlockState(posNE.up()).getBlock().isNormalCube(world, posNE.up()) ? 1 : 0);
+		final boolean flag = world.getBlockState(posNW).getBlock() == block || world.getBlockState(posNW.up()).getBlock() == block;
+		final boolean flag1 = world.getBlockState(posNE).getBlock() == block || world.getBlockState(posNE.up()).getBlock() == block;
 		boolean flag2 = false;
 
 		if (flag && !flag1)
@@ -63,10 +65,11 @@ public class ItemBambooDoor extends GrcItemBase
 			flag2 = true;
 		}
 
-		world.setBlock(i, j, k, block, side, 2);
-		world.setBlock(i, j + 1, k, block, 8 | (flag2 ? 1 : 0), 2);
-		world.notifyBlocksOfNeighborChange(i, j, k, block);
-		world.notifyBlocksOfNeighborChange(i, j + 1, k, block);
+		GrowthCraftBamboo.getLogger().warn("(fixme) ItemBambooDoor#placeDoorBlock")
+		world.setBlockState(pos, block.getDefaultState()); //block, side, 2);
+		world.setBlockState(pos.up(), block.getDefaultState()); //block, 8 | (flag2 ? 1 : 0), 2);
+		//world.notifyBlocksOfNeighborChange(i, j, k, block);
+		//world.notifyBlocksOfNeighborChange(i, j + 1, k, block);
 	}
 
 	@Override
@@ -89,8 +92,8 @@ public class ItemBambooDoor extends GrcItemBase
 				}
 				else
 				{
-					final int i1 = MathHelper.floor_double((double)((player.rotationYaw + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
-					placeDoorBlock(world, pos, i1, block);
+					final int dir = MathHelper.floor_double((double)((player.rotationYaw + 180.0F) * 4.0F / 360.0F) - 0.5D) & 3;
+					placeDoorBlock(world, pos, dir, block);
 					--stack.stackSize;
 					return true;
 				}

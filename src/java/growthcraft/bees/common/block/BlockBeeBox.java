@@ -125,7 +125,7 @@ public class BlockBeeBox extends GrcBlockContainer
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (super.onBlockActivated(world, pos, player, dir, par7, par8, par9)) return true;
+		if (super.onBlockActivated(world, pos, state, player, facing, hitX, hitY, hitZ)) return true;
 		if (world.isRemote)
 		{
 			return true;
@@ -175,9 +175,10 @@ public class BlockBeeBox extends GrcBlockContainer
 	 * DROPS
 	 ************/
 	@Override
-	public int damageDropped(int damage)
+	public int damageDropped(IBlockState state)
 	{
-		return damage;
+		GrowthCraftBees.getLogger().warn("(fixme) BlockBeeBox#damageDropped");
+		return 0;
 	}
 
 	@Override

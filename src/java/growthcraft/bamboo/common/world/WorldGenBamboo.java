@@ -33,16 +33,16 @@ public class WorldGenBamboo extends WorldGenAbstractTree
 			final int x = pos.getX() + rand.nextInt(8) - rand.nextInt(8);
 			final int y = pos.getY() + rand.nextInt(4) - rand.nextInt(4);
 			final int z = pos.getZ() + rand.nextInt(8) - rand.nextInt(8);
-			this.generate(world, rand, x, y, z);
+			this.generate(world, rand, new BlockPos(x, y, z));
 		}
-
 		return true;
 	}
 
 	@Override
 	public boolean generate(World world, Random rand, BlockPos pos)
 	{
-		final int height = rand.nextInt(3) + this.minTreeHeight;
+		GrowthCraftBamboo.getLogger().warn("(fixme) WorldGenBamboo#generate");
+		/*final int height = rand.nextInt(3) + this.minTreeHeight;
 		boolean flag = true;
 
 		if (j >= 1 && j + height + 1 <= maxTreeHeight)
@@ -183,14 +183,12 @@ public class WorldGenBamboo extends WorldGenAbstractTree
 				}
 			}
 		}
-		else
-		{
-			return false;
-		}
+		*/
+		return false;
 	}
 
 	@Override
-	protected boolean func_150523_a(Block block)
+	public boolean func_150523_a(Block block)
 	{
 		return block.getMaterial() == Material.air ||
 			block.getMaterial() == Material.leaves ||
@@ -203,12 +201,12 @@ public class WorldGenBamboo extends WorldGenAbstractTree
 	}
 
 	@Override
-	protected boolean isReplaceable(World world, int x, int y, int z)
+	public boolean isReplaceable(World world, BlockPos pos)
 	{
-		final Block block = world.getBlock(x, y, z);
-		return block.isAir(world, x, y, z) ||
-			block.isLeaves(world, x, y, z) ||
-			block.isWood(world, x, y, z) ||
+		final Block block = world.getBlockState(pos).getBlock();
+		return block.isAir(world, pos) ||
+			block.isLeaves(world, pos) ||
+			block.isWood(world, pos) ||
 			func_150523_a(block);
 	}
 }

@@ -40,6 +40,8 @@ import growthcraft.core.util.ItemUtils;
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -320,5 +322,17 @@ public class TileEntityButterChurn extends GrcTileEntityDeviceBase implements IT
 		stream.writeInt(shaftState);
 		stream.writeInt(churns);
 		return false;
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return null;
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcmilk:butter_churn";
 	}
 }

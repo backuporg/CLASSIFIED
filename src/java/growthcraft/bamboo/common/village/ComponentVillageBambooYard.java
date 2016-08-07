@@ -114,7 +114,7 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 	@Override
 	public void placeBlockAtCurrentPositionPub(World world, BlockPos pos, IBlockState state, StructureBoundingBox box)
 	{
-		setBlockState(world, pos, state, box);
+		setBlockState(world, state, pos.getX(), pos.getY(), pos.getZ(), box);
 	}
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)
@@ -122,7 +122,6 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		final int x = this.getXWithOffset(tx, tz);
 		final int y = this.getYWithOffset(ty);
 		final int z = this.getZWithOffset(tx, tz);
-
 		if (bb.isVecInside(x, y, z))
 		{
 			generator.generate(world, random, x, y, z);
@@ -134,34 +133,27 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		if (this.field_143015_k < 0)
 		{
 			this.field_143015_k = this.getAverageGroundLevel(world, box);
-
 			if (this.field_143015_k < 0)
 			{
 				return true;
 			}
-
 			// the structure is 1 block lower due to the water layer
 			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 14, 0);
 		}
-
 		// clear entire bounding box
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
 		this.fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass, Blocks.grass, false);
-
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
-
 		// okay folks, no BIG D jokes here
-		map.put('D', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 2)));
+		map.put('D', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock().getDefaultState()));
 		// top of the door brought forward
-		map.put('d', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), this.getMetadataWithOffset(GrowthCraftBamboo.blocks.bambooDoor.getBlock(), 8 | 1)));
-		map.put('p', new BlockEntry(GrowthCraftBamboo.blocks.bambooBlock.getBlock(), 0));
-		map.put('s', new BlockEntry(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock(), 0));
-		map.put('t', new BlockEntry(Blocks.torch, 0));
-		map.put('~', new BlockEntry(Blocks.water, 0));
-		map.put('W', new BlockEntry(GrowthCraftBamboo.blocks.bambooWall.getBlock(), 0));
-
+		map.put('d', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock().getDefaultState()));
+		map.put('p', new BlockEntry(GrowthCraftBamboo.blocks.bambooBlock.getBlock().getDefaultState()));
+		map.put('s', new BlockEntry(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock().getDefaultState()));
+		map.put('t', new BlockEntry(Blocks.torch.getDefaultState()));
+		map.put('~', new BlockEntry(Blocks.water.getDefaultState()));
+		map.put('W', new BlockEntry(GrowthCraftBamboo.blocks.bambooWall.getBlock().getDefaultState()));
 		SchemaToVillage.drawSchema(this, world, random, box, bambooYardSchema, map);
-
 		// This places the bamboo trees to the best of its ability.
 		final WorldGenBamboo genBamboo = new WorldGenBamboo(true);
 		placeWorldGenAt(world, random, 4, 1, 4, box, genBamboo);
@@ -172,7 +164,6 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 		placeWorldGenAt(world, random, 7, 1, 7, box, genBamboo);
 		placeWorldGenAt(world, random, 4, 1, 8, box, genBamboo);
 		placeWorldGenAt(world, random, 6, 1, 8, box, genBamboo);
-
 		for (int row = 0; row < 12; ++row)
 		{
 			for (int col = 0; col < 11; ++col)
@@ -181,7 +172,6 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 				this.replaceAirAndLiquidDownwards(world, Blocks.dirt, 0, col, -1, row, box);
 			}
 		}
-
 		return true;
 	}
 }

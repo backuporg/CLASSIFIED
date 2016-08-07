@@ -41,12 +41,14 @@ import growthcraft.milk.GrowthCraftMilk;
 import io.netty.buffer.ByteBuf;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -353,5 +355,17 @@ public class TileEntityCheesePress extends GrcTileEntityInventoryBase implements
 		stream.writeInt(screwState);
 		stream.writeInt(time);
 		return false;
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return null;
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grcmilk:cheese_press";
 	}
 }

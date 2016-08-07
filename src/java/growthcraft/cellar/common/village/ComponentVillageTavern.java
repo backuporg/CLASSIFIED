@@ -100,8 +100,8 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 3, 1, 1, box);
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 2, 1, 3, box);
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 3, 1, 3, box);
-		setBlockState(world, Blocks.fence.getDefaultState(), 2, 1, 2, box);
-		setBlockState(world, Blocks.fence.getDefaultState(), 3, 1, 2, box);
+		setBlockState(world, Blocks.oak_fence.getDefaultState(), 2, 1, 2, box);
+		setBlockState(world, Blocks.oak_fence.getDefaultState(), 3, 1, 2, box);
 		setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 2, 2, 2, box);
 		setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 3, 2, 2, box);
 
@@ -109,17 +109,16 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		{
 			if (z < 4)
 			{
-				setBlockState(world, Blocks.oak_stairs.getDefaultState(), getMetadataWithOffset(Blocks.oak_stairs, 1), 8, 1, z, box);
+				setBlockState(world, Blocks.oak_stairs.getDefaultState(), 8, 1, z, box);
 			}
 
 			if (z != 5)
 			{
-				setBlockState(world, Blocks.fence.getDefaultState(), 0, 9, 1, z, box);
-				setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 0, 9, 2, z, box);
+				setBlockState(world, Blocks.oak_fence.getDefaultState(), 9, 1, z, box);
+				setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 9, 2, z, box);
 				setBlockState(world, GrowthCraftCellar.blocks.fermentBarrel.getBlock().getDefaultState(), 11, 2, z, box);
 			}
-
-			setBlockState(world, Blocks.planks, 0, 11, 1, z, box);
+			setBlockState(world, Blocks.planks.getDefaultState(), 11, 1, z, box);
 		}
 
 		for (z = -1; z <= 1; ++z)

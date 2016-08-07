@@ -26,6 +26,7 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.ContainerCultureJar;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
@@ -38,6 +39,8 @@ import growthcraft.core.common.tileentity.ITileProgressiveDevice;
 
 import io.netty.buffer.ByteBuf;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
@@ -217,6 +220,18 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
 				markForBlockUpdate();
 			}
 		}
+	}
+
+	@Override
+	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	{
+		return new ContainerCultureJar(playerInventory, this);
+	}
+
+	@Override
+	public String getGuiID()
+	{
+		return "grccellar:culture_jar";
 	}
 
 	@Override

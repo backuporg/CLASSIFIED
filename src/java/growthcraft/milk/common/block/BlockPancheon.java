@@ -49,12 +49,6 @@ public class BlockPancheon extends GrcBlockContainer
 	}
 
 	@Override
-	public int getRenderType()
-	{
-		return RenderPancheon.RENDER_ID;
-	}
-
-	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
