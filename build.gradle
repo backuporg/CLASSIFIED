@@ -134,6 +134,25 @@ runClient {
     }
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs += [
+        "-Xlint:all",
+        "-Xlint:deprecation",
+        "-Xlint:rawtypes",
+        "-Xlint:unchecked",
+        "-Xdiags:verbose",
+        "-Xmaxerrs", "2000"
+    ]
+    options.deprecation = true
+    options.encoding = "utf8"
+}
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
 /*
 debugClient {
     if( project.hasProperty("mcUsername") && project.hasProperty("mcPassword") ) {
