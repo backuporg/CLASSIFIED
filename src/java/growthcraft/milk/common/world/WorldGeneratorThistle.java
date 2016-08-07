@@ -47,7 +47,6 @@ public class WorldGeneratorThistle implements IWorldGenerator
 			{
 				if (rand.nextInt(genChance) != 0) continue;
 			}
-
 			BlockPos pos = new BlockPos(chunk_x * 16 + rand.nextInt(16), maxHeight, chunk_z * 16 + rand.nextInt(16));
 			for (; pos.getY() > minHeight; pos = pos.down())
 			{
@@ -65,7 +64,6 @@ public class WorldGeneratorThistle implements IWorldGenerator
 			{
 				continue;
 			}
-
 			final IBlockState state = world.getBlockState(pos.down());
 			if (canPlaceOnBlock(world, pos.down(), state))
 			{
@@ -79,7 +77,8 @@ public class WorldGeneratorThistle implements IWorldGenerator
 	{
 		if (world.provider.getDimensionId() == 0)
 		{
-			final BiomeGenBase biome = world.getBiomeGenForCoords(chunkX, chunkZ);
+			final BlockPos pos = new BlockPos(chunkX, 0, chunkZ);
+			final BiomeGenBase biome = world.getBiomeGenForCoords(pos);
 			if (GrowthCraftMilk.getConfig().thistleUseBiomeDict)
 			{
 				if (!BiomeUtils.testBiomeTypeTagsTable(biome, GrowthCraftMilk.getConfig().thistleBiomesTypeList)) return;

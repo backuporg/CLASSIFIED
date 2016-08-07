@@ -31,7 +31,7 @@ public class ItemCheeseCloth extends GrcItemBase
 	public ItemCheeseCloth()
 	{
 		super();
-		setUnlocalizedName("grcmilk.CheeseCloth");
+		setUnlocalizedName("grc.cheese_cloth");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 	}
 }

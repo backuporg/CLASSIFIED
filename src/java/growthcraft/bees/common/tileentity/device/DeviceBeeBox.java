@@ -197,7 +197,7 @@ public class DeviceBeeBox extends DeviceBase
 
 	public float getGrowthRate()
 	{
-		return calcGrowthRate(getWorld(), parent.xCoord, parent.yCoord, parent.zCoord);
+		return calcGrowthRate(getWorld(), parent.getPos());
 	}
 
 	public void update()

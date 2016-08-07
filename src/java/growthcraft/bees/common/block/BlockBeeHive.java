@@ -157,9 +157,9 @@ public class BlockBeeHive extends GrcBlockBase
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, BlockPos pos, int par5, float par6, int par7)
+	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune)
 	{
-		super.dropBlockAsItemWithChance(world, pos, par5, par6, par7);
+		super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
 		if (!world.isRemote)
 		{
 			final int max = world.rand.nextInt(8);
@@ -169,11 +169,11 @@ public class BlockBeeHive extends GrcBlockBase
 				{
 					if (world.rand.nextInt(2) == 0)
 					{
-						spawnEntity(world, pos, GrowthCraftBees.items.honeyCombEmpty.asStack());
+						spawnAsEntity(world, pos, GrowthCraftBees.items.honeyCombEmpty.asStack());
 					}
 					else
 					{
-						spawnEntity(world, pos, GrowthCraftBees.items.honeyCombFilled.asStack());
+						spawnAsEntity(world, pos, GrowthCraftBees.items.honeyCombFilled.asStack());
 					}
 				}
 			}

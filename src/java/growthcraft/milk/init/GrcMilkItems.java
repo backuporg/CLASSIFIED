@@ -76,16 +76,16 @@ public class GrcMilkItems extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		butter.register("grcmilk.Butter");
-		cheese.register("grcmilk.Cheese");
-		cheeseCloth.register("grcmilk.CheeseCloth");
-		iceCream.register("grcmilk.IceCream");
-		yogurt.register("grcmilk.Yogurt");
-		stomach.register("grcmilk.Stomach");
-		starterCulture.register("grcmilk.StarterCulture");
+		butter.register("grc.butter");
+		cheese.register("grc.cheese");
+		cheeseCloth.register("grc.cheese_cloth");
+		iceCream.register("grc.ice_cream");
+		yogurt.register("grc.yogurt");
+		stomach.register("grc.stomach");
+		starterCulture.register("grc.starter_culture");
 		if (seedThistle != null)
 		{
-			seedThistle.register("grcmilk.SeedThistle");
+			seedThistle.register("grc.thistle_seed");
 		}
 	}
 
@@ -229,7 +229,7 @@ public class GrcMilkItems extends GrcModuleBase
 		OreDictionary.registerOre("foodOffal", stomach.asStack());
 		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
 		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
-		
+
 		if (seedThistle != null)
 		{
 			OreDictionary.registerOre("listAllseed", seedThistle.asStack());

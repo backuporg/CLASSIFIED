@@ -6,6 +6,7 @@ import growthcraft.apples.GrowthCraftApples;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.api.core.util.BlockFlags;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,19 +30,32 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		setCreativeTab(GrowthCraftCore.creativeTab);
 		final float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
+		setDefaultState(blockState.getBaseState().withProperty(BlockSapling.STAGE, 0));
+	}
+
+	public void growTree(World world, BlockPos pos, Random rand)
+	{
+		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
+		final IBlockState oldState = world.getBlockState(pos);
+		final WorldGenerator generator = new WorldGenAppleTree(true);
+		world.setBlockToAir(pos);
+		if (!generator.generate(world, rand, pos))
+		{
+			world.setBlockState(pos, oldState, BlockFlags.ALL);
+		}
 	}
 
 	public void markOrGrowMarked(World world, BlockPos pos, Random rand)
 	{
-		final int meta = world.getBlockMetadata(pos);
-
-		if ((meta & 8) == 0)
+		final IBlockState state = world.getBlockState(pos);
+		final int meta = state.getValue(BlockSapling.STAGE);
+		if (meta == 0)
 		{
-			world.setBlockMetadataWithNotify(pos, meta | 8, BlockFlags.SUPRESS_RENDER);
+			world.setBlockState(pos, state.withProperty(BlockSapling.STAGE, 1), BlockFlags.SUPRESS_RENDER);
 		}
 		else
 		{
-			this.growTree(world, pos, rand);
+			growTree(world, pos, rand);
 		}
 	}
 
@@ -53,27 +67,15 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		{
 			if (getLightValue(world, pos.up()) >= 9 && rand.nextInt(growthRate) == 0)
 			{
-				this.markOrGrowMarked(world, pos, rand);
+				markOrGrowMarked(world, pos, rand);
 			}
-		}
-	}
-
-	public void growTree(World world, BlockPos pos, Random rand)
-	{
-		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-		final int meta = world.getBlockMetadata(pos) & 3;
-		final WorldGenerator generator = new WorldGenAppleTree(true);
-		world.setBlockToAir(pos);
-		if (!generator.generate(world, rand, pos))
-		{
-			world.setBlockState(pos, this, meta, BlockFlags.ALL);
 		}
 	}
 
 	@Override
 	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return (world.getBlockMetadata(pos) & 8) == 0;
+		return state.getValue(BlockSapling.STAGE) == 0;
 	}
 
 	@Override

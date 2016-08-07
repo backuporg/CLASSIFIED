@@ -42,7 +42,7 @@ public class ItemButter extends GrcItemFoodBase
 		super(2, 0.3F, false);
 		setHasSubtypes(true);
 		setMaxDamage(0);
-		setUnlocalizedName("grcmilk.Butter");
+		setUnlocalizedName("grc.butter");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 	}
 

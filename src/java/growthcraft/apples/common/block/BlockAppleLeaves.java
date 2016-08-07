@@ -97,4 +97,18 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable
 	{
 		return false;
 	}
+
+	@Override
+	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
+	{
+		return true;
+	}
+
+	@Override
+	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	{
+		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+		ret.add(new ItemStack(Blocks.leaves, 1));
+		return ret;
+	}
 }

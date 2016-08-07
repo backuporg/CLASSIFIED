@@ -163,7 +163,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		}
 		else
 		{
-			incrementGrowth(world, pos, meta);
+			incrementGrowth(world, pos, state);
 		}
 	}
 
@@ -255,7 +255,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 			if (!world.isRemote)
 			{
 				removeFruit(world, pos);
-				spawnEntity(world, pos, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
+				spawnAsEntity(world, pos, GrowthCraftHops.hops.asStack(1 + world.rand.nextInt(8)));
 			}
 			return true;
 		}
@@ -377,8 +377,8 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		{
 			for (int i2 = -1; i2 <= 1; ++i2)
 			{
-				final BlockPos p = new BlockPos(pos.getX() + i2, pos.getY(), pos.getZ() + l1);
-				final int j2 = world.getBiomeGenForCoords(p).getBiomeFoliageColor();
+				final BlockPos lPos = pos.add(i2, 0, l1);
+				final int j2 = world.getBiomeGenForCoords(lPos).getFoliageColorAtPos(lPos);
 				r += (j2 & 16711680) >> 16;
 				g += (j2 & 65280) >> 8;
 				b += j2 & 255;

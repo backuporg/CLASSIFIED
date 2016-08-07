@@ -95,11 +95,11 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 		}
 		else
 		{
-			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, rand);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
-			final boolean continueGrowth = random.nextInt(this.growth) == 0;
+			final boolean continueGrowth = rand.nextInt(this.growth) == 0;
 			if (allowGrowthResult == Event.Result.ALLOW || continueGrowth)
 			{
 				final int meta = state.getValue(GROWTH);
@@ -152,7 +152,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		if ((int)state.getValue(GROWTH) >= AppleStage.MATURE)
 			return Items.apple;
@@ -160,15 +160,15 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	}
 
 	@Override
-	public int quantityDropped(Random random)
+	public int quantityDropped(Random rand)
 	{
 		return 1;
 	}
 
 	@Override
-	public void dropBlockAsItemWithChance(World world, BlockPos pos, int par5, float par6, int par7)
+	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int _foturne)
 	{
-		super.dropBlockAsItemWithChance(world, pos, par5, par6, 0);
+		super.dropBlockAsItemWithChance(world, pos, state, chance, 0);
 	}
 
 	@Override
@@ -178,26 +178,11 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos)
-	{
-		this.setBlockBoundsBasedOnState(world, pos);
-		return super.getCollisionBoundingBoxFromPool(world, pos);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, BlockPos pos)
-	{
-		this.setBlockBoundsBasedOnState(world, pos);
-		return super.getSelectedBoundingBoxFromPool(world, pos);
-	}
-
-	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos)
 	{
+		final IBlockState state = world.getBlockState(pos);
 		final int meta = state.getValue(GROWTH);
 		final float f = 0.0625F;
-
 		if (meta == AppleStage.YOUNG)
 		{
 			this.setBlockBounds(6*f, 11*f, 6*f, 10*f, 15*f, 10*f);
@@ -210,5 +195,12 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 		{
 			this.setBlockBounds(5*f, 9*f, 5*f, 11*f, 15*f, 11*f);
 		}
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
+	{
+		this.setBlockBoundsBasedOnState(world, pos);
+		return super.getCollisionBoundingBox(world, pos, state);
 	}
 }

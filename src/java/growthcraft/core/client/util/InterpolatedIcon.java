@@ -37,8 +37,8 @@ public class InterpolatedIcon extends TextureAtlasSprite
 
 		if (i != k && k >= 0 && k < framesTextureData.size())
 		{
-			final int[][] aint = (int[][]) framesTextureData.get(i);
-			final int[][] aint1 = (int[][]) framesTextureData.get(k);
+			final int[][] aint = framesTextureData.get(i);
+			final int[][] aint1 = framesTextureData.get(k);
 
 			if(interpolatedFrameData == null || interpolatedFrameData.length != aint.length)
 			{

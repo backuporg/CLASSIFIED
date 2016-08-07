@@ -42,9 +42,8 @@ public class ItemSeedThistle extends GrcItemBase implements IPlantable
 	public ItemSeedThistle()
 	{
 		super();
-		setUnlocalizedName("grcmilk.seed_thistle");
+		setUnlocalizedName("grc.seed_thistle");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
-		setTextureName("grcmilk:seeds/seed_thistle");
 	}
 
 	@Override
@@ -60,21 +59,15 @@ public class ItemSeedThistle extends GrcItemBase implements IPlantable
 	}
 
 	@Override
-	public int getPlantMetadata(IBlockAccess world, BlockPos pos)
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		return 0;
-	}
-
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int dir, float tx, float ty, float tz)
-	{
-		if (dir == 1)
+		if (facing == EnumFacing.UP)
 		{
-			if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
+			if (player.canPlayerEdit(pos, facing, stack) && player.canPlayerEdit(pos.up(), facing, stack))
 			{
 				final Block soil = world.getBlockState(pos).getBlock();
-				final Block plant = getPlant(world, pos.up());
-
+				final IBlockState plantState = getPlant(world, pos.up());
+				final Block plant = plantState.getBlock();
 				if (plant instanceof IPlantable)
 				{
 					if (soil != null && !world.isAirBlock(pos) && soil.canSustainPlant(world, pos.up(), EnumFacing.UP, (IPlantable)plant))

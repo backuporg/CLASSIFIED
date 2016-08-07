@@ -79,7 +79,7 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 	{
 		final ItemStack discarded = stack.copy();
 		discarded.stackSize = discardedAmount;
-		ItemUtils.spawnItemStack(worldObj, pos.getX(), pos.getY(), pos.getZ(), discarded, worldObj.rand);
+		ItemUtils.spawnItemStack(worldObj, pos, discarded, worldObj.rand);
 	}
 
 	@Override

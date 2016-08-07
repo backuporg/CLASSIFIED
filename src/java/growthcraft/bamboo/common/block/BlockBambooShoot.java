@@ -163,7 +163,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
 	{
 		return null;
 	}

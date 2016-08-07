@@ -62,7 +62,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 		super(Material.cake);
 		setHardness(0.5F);
 		setStepSound(soundTypeCloth);
-		setUnlocalizedName("grcmilk.CheeseBlock");
+		setUnlocalizedName("grc.cheese_block");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityCheeseBlock.class);
 		final BBox bb = BBox.newCube(4f, 0f, 4f, 8f, 8f, 8f).scale(1f / 16f);
@@ -123,7 +123,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 			te.populateDrops(drops);
 			for (ItemStack stack : drops)
 			{
-				ItemUtils.spawnItemStack(world, pos, stack, rand);
+				spawnAsEntity(world, pos, stack);
 			}
 		}
 	}

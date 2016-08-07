@@ -1,5 +1,6 @@
 package growthcraft.hops.common.item;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
@@ -30,7 +31,11 @@ public class ItemHopSeeds extends GrcItemBase implements IPlantable
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
-		if (dir != 1)
+		if (stack.stackSize <= 0)
+		{
+			return false;
+		}
+		else if (dir != EnumFacing.UP)
 		{
 			return false;
 		}
@@ -38,19 +43,13 @@ public class ItemHopSeeds extends GrcItemBase implements IPlantable
 		{
 			if (BlockCheck.canSustainPlant(world, pos, EnumFacing.UP, GrowthCraftHops.hopVine.getBlock()) && BlockCheck.isRope(world, pos.up()))
 			{
-				world.setBlock(pos.up(), GrowthCraftHops.hopVine.getBlock());
+				world.setBlockState(pos.up(), GrowthCraftHops.hopVine.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 				--stack.stackSize;
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
 			return false;
 		}
+		return false;
 	}
 
 	@Override

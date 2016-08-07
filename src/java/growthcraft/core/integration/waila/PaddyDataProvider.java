@@ -44,7 +44,7 @@ public class PaddyDataProvider implements IWailaDataProvider
 		if (block instanceof IPaddy)
 		{
 			final IPaddy prov = (IPaddy)block;
-			final boolean filledWithFluid = prov.isFilledWithFluid(accessor.getWorld(), accessor.getPosition(), accessor.getMetadata());
+			final boolean filledWithFluid = prov.isFilledWithFluid(accessor.getWorld(), accessor.getPosition(), accessor.getBlockState());
 			final String content = EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.paddy.hasFluid") + " " +
 				EnumChatFormatting.WHITE + GrcI18n.translate("grc.format.value." + filledWithFluid);
 			tooltip.add(content);

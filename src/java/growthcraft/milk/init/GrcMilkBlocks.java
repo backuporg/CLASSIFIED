@@ -85,15 +85,15 @@ public class GrcMilkBlocks extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		butterChurn.register("grcmilk.ButterChurn");
-		cheeseBlock.register("grcmilk.CheeseBlock", ItemBlockCheeseBlock.class);
-		cheesePress.register("grcmilk.CheesePress");
-		cheeseVat.register("grcmilk.CheeseVat");
-		hangingCurds.register("grcmilk.HangingCurds", ItemBlockHangingCurds.class);
-		pancheon.register("grcmilk.Pancheon");
+		butterChurn.register("grc.butter_churn");
+		cheeseBlock.register("grc.cheese_block", ItemBlockCheeseBlock.class);
+		cheesePress.register("grc.cheese_press");
+		cheeseVat.register("grc.cheese_vat");
+		hangingCurds.register("grc.hanging_curds", ItemBlockHangingCurds.class);
+		pancheon.register("grc.pancheon");
 		if (thistle != null)
 		{
-			thistle.register("grcmilk.Thistle");
+			thistle.register("grc.thistle");
 		}
 		registerOres();
 	}

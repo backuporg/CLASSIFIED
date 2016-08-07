@@ -31,15 +31,12 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 		if (this.field_143015_k < 0)
 		{
 			this.field_143015_k = this.getAverageGroundLevel(world, box);
-
 			if (this.field_143015_k < 0)
 			{
 				return true;
 			}
-
 			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 9 - 1, 0);
 		}
-
 		this.fillWithBlocks(world, box, 0, 1, 0, 12, 5, 8, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 		this.fillWithBlocks(world, box, 0, 0, 0, 0, 0, 8, Blocks.log.getDefaultState(), Blocks.log.getDefaultState(), false);
 		this.fillWithBlocks(world, box, 12, 0, 0, 12, 0, 8, Blocks.log.getDefaultState(), Blocks.log.getDefaultState(), false);
@@ -48,38 +45,35 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 		this.fillWithBlocks(world, box, 1, 0, 1, 11, 0, 7, Blocks.grass.getDefaultState(), Blocks.grass.getDefaultState(), false);
 		int loop;
 		int loop2;
-
 		for (loop = 1; loop < 12; loop = loop + 2)
 		{
 			this.fillWithBlocks(world, box, loop, 0, 2, loop, 0, 6, Blocks.water.getDefaultState(), Blocks.water.getDefaultState(), false);
 			this.fillWithBlocks(world, box, loop, 0, 2, loop, 0, 2, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
 			this.fillWithBlocks(world, box, loop, 0, 4, loop, 0, 4, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
 			this.fillWithBlocks(world, box, loop, 0, 6, loop, 0, 6, Blocks.farmland.getDefaultState(), Blocks.farmland.getDefaultState(), false);
-			this.setBlockState(world, GrowthCraftCore.blocks.fenceRope.getBlock().getDefaultState(), 0, loop, 6, 1, box);
-			this.setBlockState(world, GrowthCraftCore.blocks.fenceRope.getBlock().getDefaultState(), 0, loop, 6, 7, box);
+			this.setBlockState(world, GrowthCraftCore.blocks.oakFenceRope.getBlock().getDefaultState(), loop, 6, 1, box);
+			this.setBlockState(world, GrowthCraftCore.blocks.oakFenceRope.getBlock().getDefaultState(), loop, 6, 7, box);
 			for (loop2 = 2; loop2 <= 6; ++loop2)
 			{
-				this.setBlockState(world, GrowthCraftCore.blocks.ropeBlock.getBlock(), 0, loop, 6, loop2, box);
+				this.setBlockState(world, GrowthCraftCore.blocks.ropeBlock.getBlock().getDefaultState(), loop, 6, loop2, box);
 			}
 			for (loop2 = 1; loop2 <= 5; ++loop2)
 			{
-				this.setBlockState(world, Blocks.fence.getDefaultState(), 0, loop, loop2, 1, box);
-				this.setBlockState(world, Blocks.fence.getDefaultState(), 0, loop, loop2, 7, box);
-				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), 3, loop, loop2, 2, box);
-				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), 3, loop, loop2, 4, box);
-				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), 3, loop, loop2, 6, box);
+				this.setBlockState(world, Blocks.oak_fence.getDefaultState(), loop, loop2, 1, box);
+				this.setBlockState(world, Blocks.oak_fence.getDefaultState(), loop, loop2, 7, box);
+				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), loop, loop2, 2, box);
+				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), loop, loop2, 4, box);
+				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), loop, loop2, 6, box);
 			}
 		}
-
 		for (loop = 0; loop < 9; ++loop)
 		{
 			for (loop2 = 0; loop2 < 13; ++loop2)
 			{
 				clearCurrentPositionBlocksUpwards(world, loop2, 9, loop, box);
-				replaceAirAndLiquidDownwards(world, Blocks.dirt.getDefaultState(), 0, loop2, -1, loop, box);
+				replaceAirAndLiquidDownwards(world, Blocks.dirt.getDefaultState(), loop2, -1, loop, box);
 			}
 		}
-
 		return true;
 	}
 

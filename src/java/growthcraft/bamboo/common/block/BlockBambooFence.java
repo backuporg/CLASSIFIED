@@ -5,6 +5,8 @@ import growthcraft.bamboo.GrowthCraftBamboo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -17,7 +19,7 @@ public class BlockBambooFence extends BlockFence
 {
 	public BlockBambooFence()
 	{
-		super(null, Material.wood);
+		super(Material.wood, MapColor.woodColor);
 		this.useNeighborBrightness = true;
 		setStepSound(soundTypeWood);
 		setResistance(5.0F);
@@ -26,9 +28,6 @@ public class BlockBambooFence extends BlockFence
 		setUnlocalizedName("grc.bamboo_fence");
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	public boolean getBlocksMovement(IBlockAccess world, BlockPos pos)
 	{
@@ -36,7 +35,7 @@ public class BlockBambooFence extends BlockFence
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(World world, BlockPos pos)
+	public boolean canPlaceTorchOnTop(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
@@ -48,9 +47,10 @@ public class BlockBambooFence extends BlockFence
 	}
 
 	@Override
-	public boolean canConnectFenceTo(IBlockAccess world, BlockPos pos)
+	public boolean canConnectTo(IBlockAccess world, BlockPos pos)
 	{
-		final Block block = world.getBlock(x, y, z);
+		final IBlockState state = world.getBlockState(pos);
+		final Block block = state.getBlock();
 
 		if (this == block ||
 			(block instanceof BlockFence) ||

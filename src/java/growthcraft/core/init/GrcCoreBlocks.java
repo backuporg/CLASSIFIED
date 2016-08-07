@@ -88,7 +88,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 		spruceFenceRope.register("grc.spruce_fence_rope", ItemBlockFenceRope.class);
 		birchFenceRope.register("grc.birch_fence_rope", ItemBlockFenceRope.class);
 		jungleFenceRope.register("grc.jungle_fence_rope", ItemBlockFenceRope.class);
-		darkOakFenceRope.register("grc.darkOak_fence_rope", ItemBlockFenceRope.class);
+		darkOakFenceRope.register("grc.dark_oak_fence_rope", ItemBlockFenceRope.class);
 		acaciaFenceRope.register("grc.acacia_fence_rope", ItemBlockFenceRope.class);
 		ropeBlock.register("grc.rope_block");
 		saltBlock.register("grc.salt_block");

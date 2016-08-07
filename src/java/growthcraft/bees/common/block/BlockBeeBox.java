@@ -153,7 +153,7 @@ public class BlockBeeBox extends GrcBlockContainer
 			{
 				final ItemStack stack = te.getStackInSlot(index);
 
-				ItemUtils.spawnItemStack(world, pos, stack, world.rand);
+				spawnAsEntity(world, pos, stack);
 			}
 
 			world.updateComparatorOutputLevel(pos, par5);

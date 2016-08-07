@@ -41,7 +41,7 @@ public class BlockPancheon extends GrcBlockContainer
 	{
 		super(Material.clay);
 		setHardness(0.6F);
-		setUnlocalizedName("grcmilk.Pancheon");
+		setUnlocalizedName("grc.pancheon");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 		setTileEntityType(TileEntityPancheon.class);
 		final BBox bb = BBox.newCube(0f, 0f, 0f, 16f, 5f, 16f).scale(1f / 16f);

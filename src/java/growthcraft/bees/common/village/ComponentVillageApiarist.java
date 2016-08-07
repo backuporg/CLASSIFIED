@@ -230,98 +230,102 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		if (this.field_143015_k < 0)
 		{
 			this.field_143015_k = this.getAverageGroundLevel(world, box);
-
 			if (this.field_143015_k < 0)
 			{
 				return true;
 			}
-
 			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 7, 0);
 		}
-
 		// clear entire bounding box
 		this.fillWithBlocks(world, box, 0, 0, 0, 9, 8, 14, Blocks.air, Blocks.air, false);
-
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
-
 		// Plop down the tree first
-		map.put('x', new BlockEntry(Blocks.log, 2));
-		map.put('l', new BlockEntry(Blocks.leaves, 2));
-
+		//map.put('x', new BlockEntry(Blocks.log, 2));
+		map.put('x', new BlockEntry(Blocks.log.getDefaultState()));
+		//map.put('l', new BlockEntry(Blocks.leaves, 2));
+		map.put('l', new BlockEntry(Blocks.leaves.getDefaultState()));
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristBackyardTreeSchema, map, 3, 1, 10);
-
 		map.clear();
-
-		map.put('c', new BlockEntry(Blocks.cobblestone));
-		map.put('d', new BlockEntry(Blocks.grass));
-		map.put('p', new BlockEntry(Blocks.planks));
-		map.put('x', new BlockEntry(Blocks.log));
-		map.put('l', new BlockEntry(Blocks.leaves));
-		map.put('g', new BlockEntry(Blocks.glass_pane));
-
-		map.put('f', new BlockEntry(Blocks.fence));
+		map.put('c', new BlockEntry(Blocks.cobblestone.getDefaultState()));
+		map.put('d', new BlockEntry(Blocks.grass.getDefaultState()));
+		map.put('p', new BlockEntry(Blocks.planks.getDefaultState()));
+		map.put('x', new BlockEntry(Blocks.log.getDefaultState()));
+		map.put('l', new BlockEntry(Blocks.leaves.getDefaultState()));
+		map.put('g', new BlockEntry(Blocks.glass_pane.getDefaultState()));
+		map.put('f', new BlockEntry(Blocks.fence.getDefaultState()));
 		// high slab
-		map.put('-', new BlockEntry(Blocks.wooden_slab, 8));
+		//map.put('-', new BlockEntry(Blocks.wooden_slab, 8));
+		map.put('-', new BlockEntry(Blocks.wooden_slab.getDefaultState()));
 		// low slab
-		map.put('_', new BlockEntry(Blocks.wooden_slab, 0));
+		//map.put('_', new BlockEntry(Blocks.wooden_slab, 0));
+		map.put('_', new BlockEntry(Blocks.wooden_slab.getDefaultState()));
 		map.put(',', new MultiBlockEntries(new BlockEntry[]{
-			new BlockEntry(Blocks.red_flower, 4),
-			new BlockEntry(Blocks.red_flower, 5),
-			new BlockEntry(Blocks.red_flower, 6),
-			new BlockEntry(Blocks.red_flower, 7)
+			//new BlockEntry(Blocks.red_flower, 4),
+			new BlockEntry(Blocks.red_flower.getDefaultState()),
+			//new BlockEntry(Blocks.red_flower, 5),
+			new BlockEntry(Blocks.red_flower.getDefaultState()),
+			//new BlockEntry(Blocks.red_flower, 6),
+			new BlockEntry(Blocks.red_flower.getDefaultState()),
+			//new BlockEntry(Blocks.red_flower, 7)
+			new BlockEntry(Blocks.red_flower.getDefaultState())
 		}));
-
-		map.put('1', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
-		map.put('2', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
-		map.put('3', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
-
-		map.put('4', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 0)));
-		map.put('6', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 1)));
-
-		map.put('7', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
-		map.put('8', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
-		map.put('9', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
-
+		//map.put('1', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
+		map.put('1', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('2', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
+		map.put('2', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('3', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2)));
+		map.put('3', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('4', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 0)));
+		map.put('4', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('6', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 1)));
+		map.put('6', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('7', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
+		map.put('7', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('8', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
+		map.put('8', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('9', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
+		map.put('9', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
 		map.put('t', new BlockEntry(Blocks.torch));
-
-		map.put('Y', new BlockEntry(Blocks.planks, 2));
-		map.put('B', new BlockEntry(Blocks.planks, 1));
-
-		map.put('H', new BlockEntry(GrowthCraftBees.beeHive.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeHive.getBlock(), 3)));
-		map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeBox.getBlock(), random.nextInt(6))));
-
+		//map.put('Y', new BlockEntry(Blocks.planks, 2));
+		map.put('Y', new BlockEntry(Blocks.planks.getDefaultState()));
+		//map.put('B', new BlockEntry(Blocks.planks, 1));
+		map.put('B', new BlockEntry(Blocks.planks.getDefaultState()));
+		//map.put('H', new BlockEntry(GrowthCraftBees.beeHive.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeHive.getBlock(), 3)));
+		map.put('H', new BlockEntry(GrowthCraftBees.beeHive.getBlock().getDefaultState()));
+		//map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeBox.getBlock(), random.nextInt(6))));
+		map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock().getDefaultState()));
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristExteriorSchema, map, 0, 0, 0);
-
 		// Get ready to recycle for interior design
 		map.clear();
-
 		map.put('p', new BlockEntry(Blocks.planks));
-
 		// inverted stairs for decorating interior
-		map.put('1', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
-		map.put('2', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
-		map.put('3', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
-
-		map.put('4', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 0) | 4));
-		map.put('6', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 1) | 4));
-
-		map.put('7', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
-		map.put('8', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
-		map.put('9', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
-
-		map.put('_', new BlockEntry(Blocks.wooden_slab, 0));
-
-		map.put('K', new BlockEntry(Blocks.bookshelf, 0));
-
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
+		map.put('1', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
+		map.put('2', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
+		map.put('3', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 0) | 4));
+		map.put('4', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 1) | 4));
+		map.put('6', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
+		map.put('7', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
+		map.put('8', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//, this.getMetadataWithOffset(Blocks.oak_stairs, 3) | 4));
+		map.put('9', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
+		//map.put('_', new BlockEntry(Blocks.wooden_slab, 0));
+		map.put('_', new BlockEntry(Blocks.wooden_slab.getDefaultState()));
+		//map.put('K', new BlockEntry(Blocks.bookshelf, 0));
+		map.put('K', new BlockEntry(Blocks.bookshelf.getDefaultState()));
 		// metadata here is (1(spruce leaves) | 4(no decay))
-		map.put('l', new BlockEntry(Blocks.leaves, 1 | 4));
-
+		//map.put('l', new BlockEntry(Blocks.leaves, 1 | 4));
+		map.put('l', new BlockEntry(Blocks.leaves.getDefaultState()));
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristInteriorSchema, map, 1, 1, 2);
-
 		// Place torches
-		this.setBlockState(world, Blocks.torch, 0, 5, 3, 2, box);
-		this.setBlockState(world, Blocks.torch, 0, 4, 3, 5, box);
-
+		this.setBlockState(world, Blocks.torch.getDefaultState(), 5, 3, 2, box);
+		this.setBlockState(world, Blocks.torch.getDefaultState(), 4, 3, 5, box);
 		/*
 			TODO:
 				place signs beside stairs to form a chair -
@@ -329,18 +333,15 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		 */
 		//this.setBlockState(world, Blocks.wall_sign, 2, 4, 1, 5, box);
 		//this.setBlockState(world, Blocks.wall_sign, 2, 6, 1, 5, box);
-
 		// Drop in the front door
-		this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		//this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 		// Drop in the back door
-		this.placeDoorAtCurrentPosition(world, box, random, 3, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
-
+		//this.placeDoorAtCurrentPosition(world, box, random, 3, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
 		// Slap that nicely placed flower pot on the counter
-		this.setBlockState(world, Blocks.flower_pot, 3, 2, 2, 2, box);
-
+		//this.setBlockState(world, Blocks.flower_pot, 3, 2, 2, 2, box);
+		this.setBlockState(world, Blocks.flower_pot.getDefaultState(), 2, 2, 2, box);
 		// Shove a chest behind the counter, filled with goodies
 		this.generateStructureChestContents(world, box, random, 1, 2, 5, apiaristChestContents, 3 + random.nextInt(6));
-
 		// Fix some structural madness, like buildings spawning in the air and
 		// floating on a thin layer of dirt/cobblestone
 		for (int row = 0; row < 14; ++row)
@@ -348,10 +349,9 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 			for (int col = 0; col < 9; ++col)
 			{
 				this.clearCurrentPositionBlocksUpwards(world, col, 8, row, box);
-				this.replaceAirAndLiquidDownwards(world, Blocks.cobblestone, 0, col, -1, row, box);
+				this.replaceAirAndLiquidDownwards(world, Blocks.cobblestone.getDefaultState(), col, -1, row, box);
 			}
 		}
-
 		// Trap the villager behind the counter, so he shall forever sells us
 		// apiary items... Poor guy.
 		this.spawnVillagers(world, box, 1, 2, 3, 1);

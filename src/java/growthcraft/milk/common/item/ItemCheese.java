@@ -42,7 +42,7 @@ public class ItemCheese extends GrcItemFoodBase
 		super(2, 0.3F, false);
 		setHasSubtypes(true);
 		setMaxDamage(0);
-		setUnlocalizedName("grcmilk.Cheese");
+		setUnlocalizedName("grc.cheese");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 	}
 

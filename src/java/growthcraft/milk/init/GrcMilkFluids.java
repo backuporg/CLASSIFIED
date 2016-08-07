@@ -95,7 +95,7 @@ public class GrcMilkFluids extends GrcModuleBase
 	{
 		for (EnumCheeseType cheese : EnumCheeseType.VALUES)
 		{
-			final String fluidName = "grcmilk.Cheese" + StringUtils.capitalize(cheese.name);
+			final String fluidName = "grc.cheese_" + cheese.name;
 			final Fluid fluid = new GrcFluid(fluidName,
 				new ResourceLocation("grcmilk:fluids/milk_still"),
 				new ResourceLocation("grcmilk:fluids/milk_flow")
@@ -133,7 +133,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		if (GrowthCraftMilk.getConfig().milkEnabled)
 		{
 			this.milk = FluidFactory.instance().create(
-				new GrcFluid("grcmilk.Milk", new ResourceLocation("grcmilk:fluids/milk_still"), new ResourceLocation("grcmilk:fluids/milk_flow")).setDensity(1030).setViscosity(3000),
+				new GrcFluid("grc.milk", new ResourceLocation("grcmilk:fluids/milk_still"), new ResourceLocation("grcmilk:fluids/milk_flow")).setDensity(1030).setViscosity(3000),
 				FluidFactory.FEATURE_FOOD_BOTTLE | FluidFactory.FEATURE_BLOCK);
 			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 4, 0.3f, false));
 			milk.foodBottle.getItem().setEffect(milkEffect).setAlwaysEdible();
@@ -141,7 +141,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			//milk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 		}
 
-		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.ButterMilk", new ResourceLocation("grcmilk:fluids/butter_milk_still"), new ResourceLocation("grcmilk:fluids/butter_milk_flow")), FluidFactory.FEATURE_ALL_EDIBLE);
+		this.butterMilk = FluidFactory.instance().create(new GrcFluid("grc.butter_milk", new ResourceLocation("grcmilk:fluids/butter_milk_still"), new ResourceLocation("grcmilk:fluids/butter_milk_flow")), FluidFactory.FEATURE_ALL_EDIBLE);
 		butterMilk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(butterMilk.getFluid(), 6, 0.4f, false));
 		{
 			final EffectList list = new EffectList();
@@ -157,19 +157,19 @@ public class GrcMilkFluids extends GrcModuleBase
 		butterMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFEE7);
 		//butterMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/buttermilk");
 
-		this.cream = FluidFactory.instance().create(new GrcFluid("grcmilk.Cream", new ResourceLocation("grcmilk:fluids/cream_still"), new ResourceLocation("grcmilk:fluids/cream_flow")));
+		this.cream = FluidFactory.instance().create(new GrcFluid("grc.cream", new ResourceLocation("grcmilk:fluids/cream_still"), new ResourceLocation("grcmilk:fluids/cream_flow")));
 		cream.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFDD0);
 		//cream.block.getBlock().setBlockTextureName("grcmilk:fluids/cream");
 
-		this.curds = FluidFactory.instance().create(new GrcFluid("grcmilk.Curds", new ResourceLocation("grcmilk:fluids/curds_still"), new ResourceLocation("grcmilk:fluids/curds_flow")));
+		this.curds = FluidFactory.instance().create(new GrcFluid("grc.milk_curds", new ResourceLocation("grcmilk:fluids/curds_still"), new ResourceLocation("grcmilk:fluids/curds_flow")));
 		curds.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFF6);
 		//curds.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 
-		this.rennet = FluidFactory.instance().create(new GrcFluid("grcmilk.Rennet", new ResourceLocation("grcmilk:fluids/rennet_still"), new ResourceLocation("grcmilk:fluids/rennet_flow")));
+		this.rennet = FluidFactory.instance().create(new GrcFluid("grc.rennet", new ResourceLocation("grcmilk:fluids/rennet_still"), new ResourceLocation("grcmilk:fluids/rennet_flow")));
 		rennet.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x877243);
 		//rennet.block.getBlock().setBlockTextureName("grcmilk:fluids/rennet");
 
-		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.SkimMilk", new ResourceLocation("grcmilk:fluids/skim_milk_still"), new ResourceLocation("grcmilk:fluids/skim_milk_flow")), FluidFactory.FEATURE_ALL_EDIBLE);
+		this.skimMilk = FluidFactory.instance().create(new GrcFluid("grc.skim_milk", new ResourceLocation("grcmilk:fluids/skim_milk_still"), new ResourceLocation("grcmilk:fluids/skim_milk_flow")), FluidFactory.FEATURE_ALL_EDIBLE);
 		skimMilk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(skimMilk.getFluid(), 2, 0.2f, false));
 		{
 			final EffectList list = new EffectList();
@@ -183,7 +183,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		skimMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		//skimMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/skimmilk");
 
-		this.whey = FluidFactory.instance().create(new GrcFluid("grcmilk.Whey", new ResourceLocation("grcmilk:fluids/whey_still"), new ResourceLocation("grcmilk:fluids/whey_flow")), FluidFactory.FEATURE_ALL_EDIBLE);
+		this.whey = FluidFactory.instance().create(new GrcFluid("grc.whey", new ResourceLocation("grcmilk:fluids/whey_still"), new ResourceLocation("grcmilk:fluids/whey_flow")), FluidFactory.FEATURE_ALL_EDIBLE);
 		whey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(whey.getFluid(), 1, 0.1f, false));
 		{
 			final EffectList list = new EffectList();
@@ -197,7 +197,7 @@ public class GrcMilkFluids extends GrcModuleBase
 		whey.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0x94a860);
 		//whey.block.getBlock().setBlockTextureName("grcmilk:fluids/whey");
 
-		this.pasteurizedMilk = FluidFactory.instance().create(new GrcFluid("grcmilk.PasteurizedMilk", new ResourceLocation("grcmilk:fluids/pasteurized_milk_still"), new ResourceLocation("grcmilk:fluids/pasteurized_milk_flow")));
+		this.pasteurizedMilk = FluidFactory.instance().create(new GrcFluid("grc.pasteurized_milk", new ResourceLocation("grcmilk:fluids/pasteurized_milk_still"), new ResourceLocation("grcmilk:fluids/pasteurized_milk_flow")));
 		pasteurizedMilk.setCreativeTab(GrowthCraftMilk.creativeTab).setItemColor(0xFFFFFA);
 		//pasteurizedMilk.block.getBlock().setBlockTextureName("grcmilk:fluids/milk");
 
@@ -306,29 +306,29 @@ public class GrcMilkFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		kumisBottle.register("grcmilk.KumisBottle");
+		kumisBottle.register("grc.kumis_bottle");
 
 		if (milk != null)
 		{
-			milk.registerObjects("grcmilk", "Milk");
+			milk.registerObjects("grc", "milk");
 			// ensure that we don't already have some variation of milk present
-			if (FluidRegistry.getFluid("milk") == null)
+			if (FluidRegistry.getFluid("grc") == null)
 			{
 				FluidContainerRegistry.registerFluidContainer(milk.getFluid(), new ItemStack(Items.milk_bucket, 1), new ItemStack(Items.bucket, 1));
 				EventHandlerBucketFill.instance().register(milk.getFluidBlock(), new ItemStack(Items.milk_bucket, 1));
 			}
 		}
-		butterMilk.registerObjects("grcmilk", "ButterMilk");
-		cream.registerObjects("grcmilk", "Cream");
-		curds.registerObjects("grcmilk", "Curds");
-		rennet.registerObjects("grcmilk", "Rennet");
-		skimMilk.registerObjects("grcmilk", "SkimMilk");
-		whey.registerObjects("grcmilk", "Whey");
-		pasteurizedMilk.registerObjects("grcmilk", "PasteurizedMilk");
+		butterMilk.registerObjects("grc", "butter_milk");
+		cream.registerObjects("grc", "cream");
+		curds.registerObjects("grc", "milk_curds");
+		rennet.registerObjects("grc", "rennet");
+		skimMilk.registerObjects("grc", "skim_milk");
+		whey.registerObjects("grc", "whey");
+		pasteurizedMilk.registerObjects("grc", "pasteurized_milk");
 
 		for (Map.Entry<EnumCheeseType, FluidFactory.FluidDetails> pair : cheeses.entrySet())
 		{
-			pair.getValue().registerObjects("grcmilk", "Cheese" + StringUtils.capitalize(pair.getKey().name));
+			pair.getValue().registerObjects("grc", "cheese_" + pair.getKey().name);
 		}
 
 		BoozeRegistryHelper.registerBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBottle, kumisBasename, null);

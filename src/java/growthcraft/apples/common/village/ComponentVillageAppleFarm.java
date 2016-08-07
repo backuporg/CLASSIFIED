@@ -98,13 +98,10 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)
 	{
-		final int x = this.getXWithOffset(tx, tz);
-		final int y = this.getYWithOffset(ty);
-		final int z = this.getZWithOffset(tx, tz);
-
-		if (bb.isVecInside(x, y, z))
+		final BlockPos pos = new BlockPos(this.getXWithOffset(tx, tz), this.getYWithOffset(ty), this.getZWithOffset(tx, tz));
+		if (bb.isVecInside(pos))
 		{
-			generator.generate(world, random, x, y, z);
+			generator.generate(world, random, pos);
 		}
 	}
 
@@ -113,44 +110,35 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 		if (field_143015_k < 0)
 		{
 			this.field_143015_k = this.getAverageGroundLevel(world, box);
-
 			if (field_143015_k < 0)
 			{
 				return true;
 			}
-
 			boundingBox.offset(0, field_143015_k - boundingBox.maxY + 9, 0);
 		}
-
 		// clear entire bounding box
-		fillWithBlocks(world, box, 0, 0, 0, 11, 4, 11, Blocks.air, Blocks.air, false);
+		fillWithBlocks(world, box, 0, 0, 0, 11, 4, 11, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 		// Fill floor with grass blocks
-		fillWithBlocks(world, box, 0, 0, 0, 11, 0, 11, Blocks.grass, Blocks.grass, false);
-
-		final boolean vert = coordBaseMode == 0 || coordBaseMode == 2;
+		fillWithBlocks(world, box, 0, 0, 0, 11, 0, 11, Blocks.grass.getDefaultState(), Blocks.grass.getDefaultState(), false);
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		map.put('x', new BlockEntry(Blocks.log.getDefaultState()));
 		map.put('-', new BlockEntry(Blocks.log.getDefaultState()));
 		map.put('|', new BlockEntry(Blocks.log.getDefaultState()));
-
 		map.put('f', new BlockEntry(Blocks.oak_fence.getDefaultState()));
 		map.put('g', new BlockEntry(Blocks.oak_fence_gate.getDefaultState()));
 		map.put('t', new BlockEntry(Blocks.torch.getDefaultState()));
-
 		SchemaToVillage.drawSchema(this, world, random, box, appleFarmSchema, map, 0, 1, 0);
-
 		final WorldGenAppleTree genAppleTree = new WorldGenAppleTree(true);
 		placeWorldGenAt(world, random, 3, 1, 3, box, genAppleTree);
 		placeWorldGenAt(world, random, 7, 1, 3, box, genAppleTree);
 		placeWorldGenAt(world, random, 3, 1, 7, box, genAppleTree);
 		placeWorldGenAt(world, random, 7, 1, 7, box, genAppleTree);
-
 		for (int row = 0; row < 11; ++row)
 		{
 			for (int col = 0; col < 11; ++col)
 			{
 				clearCurrentPositionBlocksUpwards(world, col, 7, row, box);
-				replaceAirAndLiquidDownwards(world, Blocks.dirt.getDefaultState(), 0, col, -1, row, box);
+				replaceAirAndLiquidDownwards(world, Blocks.dirt.getDefaultState(), col, -1, row, box);
 			}
 		}
 		return true;

@@ -42,20 +42,22 @@ public class BlockBambooScaffold extends GrcBlockBase
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooScaffold#onBlockActivated");
 		final ItemStack itemstack = player.inventory.getCurrentItem();
 		if (itemstack != null)
 		{
 			if (itemstack.getItem() == Item.getItemFromBlock(this))
 			{
 				final int loop = world.getActualHeight();
-				for (int j = y + 1; j < loop; j++)
+				for (int j = pos.getY() + 1; j < loop; j++)
 				{
-					final Block block = world.getBlock(x, j, z);
-					if ((block == null) || (world.isAirBlock(x, j, z)) || (block.isReplaceable(world, x, j, z)))
+					final BlockPos lPos = new BlockPos(pos.getX(), j, pos.getZ());
+					final Block block = world.getBlock(lPos);
+					if ((block == null) || (world.isAirBlock(lPos)) || (block.isReplaceable(world, lPos)))
 					{
 						if (!world.isRemote)
 						{
-							if (world.setBlock(x, j, z, this, 0, 3) && !player.capabilities.isCreativeMode)
+							if (world.setBlockState(lPos, getDefaultState(), BlockFlags.UPDATE_AND_SYNC) && !player.capabilities.isCreativeMode)
 							{
 								itemstack.stackSize -= 1;
 							}
@@ -110,7 +112,7 @@ public class BlockBambooScaffold extends GrcBlockBase
 
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		if (world.getBlock(x, y -1 , z).isSideSolid(world, x, y - 1, z, EnumFacing.UP)) return true;
+		if (world.getBlockState(pos.down()).getBlock().isSideSolid(world, pos.down(), EnumFacing.UP)) return true;
 		if (checkSides(world, pos)) return true;
 
 		return false;
@@ -125,15 +127,16 @@ public class BlockBambooScaffold extends GrcBlockBase
 
 		if (!flag && !flag1 && !flag2 && !flag3) return false;
 
-		if (flag && world.getBlock(x + 1, y - 1, z).isSideSolid(world, x + 1, y - 1, z, EnumFacing.UP)) return true;
-		if (flag1 && world.getBlock(x - 1, y - 1, z).isSideSolid(world, x - 1, y - 1, z, EnumFacing.UP)) return true;
-		if (flag2 && world.getBlock(x, y - 1, z + 1).isSideSolid(world, x, y - 1, z + 1, EnumFacing.UP)) return true;
-		if (flag3 && world.getBlock(x, y - 1, z - 1).isSideSolid(world, x, y - 1, z - 1, EnumFacing.UP)) return true;
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooScaffold#checkSides");
+		//if (flag && world.getBlock(x + 1, y - 1, z).isSideSolid(world, x + 1, y - 1, z, EnumFacing.UP)) return true;
+		//if (flag1 && world.getBlock(x - 1, y - 1, z).isSideSolid(world, x - 1, y - 1, z, EnumFacing.UP)) return true;
+		//if (flag2 && world.getBlock(x, y - 1, z + 1).isSideSolid(world, x, y - 1, z + 1, EnumFacing.UP)) return true;
+		//if (flag3 && world.getBlock(x, y - 1, z - 1).isSideSolid(world, x, y - 1, z - 1, EnumFacing.UP)) return true;
 
-		if (flag && world.getBlock(x + 2, y - 1, z).isSideSolid(world, x + 2, y - 1, z, EnumFacing.UP)) return true;
-		if (flag1 && world.getBlock(x - 2, y - 1, z).isSideSolid(world, x - 2, y - 1, z, EnumFacing.UP)) return true;
-		if (flag2 && world.getBlock(x, y - 1, z + 2).isSideSolid(world, x, y - 1, z + 2, EnumFacing.UP)) return true;
-		if (flag3 && world.getBlock(x, y - 1, z - 2).isSideSolid(world, x, y - 1, z - 2, EnumFacing.UP)) return true;
+		//if (flag && world.getBlock(x + 2, y - 1, z).isSideSolid(world, x + 2, y - 1, z, EnumFacing.UP)) return true;
+		//if (flag1 && world.getBlock(x - 2, y - 1, z).isSideSolid(world, x - 2, y - 1, z, EnumFacing.UP)) return true;
+		//if (flag2 && world.getBlock(x, y - 1, z + 2).isSideSolid(world, x, y - 1, z + 2, EnumFacing.UP)) return true;
+		//if (flag3 && world.getBlock(x, y - 1, z - 2).isSideSolid(world, x, y - 1, z - 2, EnumFacing.UP)) return true;
 
 		return false;
 	}
@@ -157,9 +160,15 @@ public class BlockBambooScaffold extends GrcBlockBase
 		return true;
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
 	{
 		final float f = 0.125F;
-		return AxisAlignedBB.getBoundingBox(x + this.minX + f, y + this.minY, z + this.minZ + f, x + this.maxX - f, y + this.maxY, z + this.maxZ - f);
+		return AxisAlignedBB.getBoundingBox(
+			pos.getX() + this.minX + f,
+			pos.getY() + this.minY,
+			pos.getZ() + this.minZ + f,
+			pos.getX() + this.maxX - f,
+			pos.getY() + this.maxY,
+			pos.getZ() + this.maxZ - f);
 	}
 }

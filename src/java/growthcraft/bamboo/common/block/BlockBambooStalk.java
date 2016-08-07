@@ -3,6 +3,7 @@ package growthcraft.bamboo.common.block;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.core.util.BlockCheck;
@@ -10,6 +11,7 @@ import growthcraft.core.util.BlockCheck;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,6 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooStalk extends GrcBlockBase
 {
+	public static final PropertyBool DRIED = PropertyBool.create("dried");
 	private final int growth = GrowthCraftBamboo.getConfig().bambooStalkGrowthRate;
 
 	public BlockBambooStalk()
@@ -37,10 +40,16 @@ public class BlockBambooStalk extends GrcBlockBase
 		setTickRandomly(true);
 		setUnlocalizedName("grc.bamboo_stalk");
 		setCreativeTab(null);
+		setDefaultState(blockState.getBaseState().withProperty(DRIED, false));
+	}
+
+	public boolean isDried(IBlockState state)
+	{
+		return state.getValue(DRIED);
 	}
 
 	@Override
-	public boolean canPlaceTorchOnTop(World world, BlockPos pos)
+	public boolean canPlaceTorchOnTop(IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
@@ -52,67 +61,63 @@ public class BlockBambooStalk extends GrcBlockBase
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		if (world.getBlockMetadata(x, y, z) == 0)
+		super.updateTick(world, pos, state, rand);
+		if ((Boolean)state.getValue(DRIED)) return;
+		if (!isBambooOnGround(world, pos)) return;
+		if (rand.nextInt(this.growth) != 0) return;
+
+		final BlockBambooShoot bambooShoot = GrowthCraftBamboo.blocks.bambooShoot.getBlock();
+
+		final byte b = 9;
+		int amount = 10;
+		final BlockPos.MutableBlockPos basePos = new BlockPos.MutableBlockPos(pos.getX(), pos.getY(), pos.getZ());
+		final BlockPos.MutableBlockPos lPos = new BlockPos.MutableBlockPos(0, 0, 0);
+
+		for (int x1 = pos.getX() - b; x1 <= pos.getX() + b; ++x1)
 		{
-			int x1 = x;
-			int y1 = y;
-			int z1 = z;
-
-			if (isBambooOnGround(world, x, y, z))
+			for (int z1 = pos.getZ() - b; z1 <= pos.getZ() + b; ++z1)
 			{
-				if (rand.nextInt(this.growth) == 0)
+				for (int y1 = pos.getY() - 1; y1 <= pos.getY() + 1; ++y1)
 				{
-					final byte b = 9;
-					int amount = 10;
-					final BlockBambooShoot bambooShoot = GrowthCraftBamboo.blocks.bambooShoot.getBlock();
-
-					for (x1 = x - b; x1 <= x + b; ++x1)
+					lPos.set(x1, y1, z1);
+					final boolean flag1 = world.getBlockState(lPos).getBlock() == this && isBambooOnGround(world, lPos);
+					final boolean flag2 = world.getBlockState(lPos).getBlock() == bambooShoot;
+					if (flag1 || flag2)
 					{
-						for (z1 = z - b; z1 <= z + b; ++z1)
+						--amount;
+						if (amount <= 0)
 						{
-							for (y1 = y - 1; y1 <= y + 1; ++y1)
-							{
-								final boolean flag1 = world.getBlock(x1, y1, z1) == this && isBambooOnGround(world, x1, y1, z1);
-								final boolean flag2 = world.getBlock(x1, y1, z1) == bambooShoot;
-								if (flag1 || flag2)
-								{
-									--amount;
-									if (amount <= 0)
-									{
-										return;
-									}
-								}
-							}
+							return;
 						}
-					}
-
-					x1 = x + rand.nextInt(3) - 1;
-					y1 = y + rand.nextInt(2) - rand.nextInt(2);
-					z1 = z + rand.nextInt(3) - 1;
-
-					for (int loop = 0; loop < 4; ++loop)
-					{
-						if (world.isAirBlock(x1, y1, z1) && bambooShoot.canBlockStay(world, x1, y1, z1))
-						{
-							x = x1;
-							y = y1;
-							z = z1;
-						}
-
-						x1 = x + rand.nextInt(3) - 1;
-						y1 = y + rand.nextInt(2) - rand.nextInt(2);
-						z1 = z + rand.nextInt(3) - 1;
-					}
-
-					if (world.isAirBlock(x1, y1, z1) && bambooShoot.canBlockStay(world, x1, y1, z1))
-					{
-						world.setBlock(x1, y1, z1, bambooShoot);
 					}
 				}
-
 			}
+		}
+
+		lPos.set(
+			pos.getX() + rand.nextInt(3) - 1,
+			pos.getY() + rand.nextInt(2) - rand.nextInt(2),
+			pos.getZ() + rand.nextInt(3) - 1
+		);
+
+		for (int loop = 0; loop < 4; ++loop)
+		{
+			if (world.isAirBlock(lPos) && bambooShoot.canBlockStay(world, lPos))
+			{
+				basePos.set(lPos.getX(), lPos.getY(), lPos.getZ());
+			}
+
+			lPos.set(
+				basePos.getX() + rand.nextInt(3) - 1,
+				basePos.getY() + rand.nextInt(2) - rand.nextInt(2),
+				basePos.getZ() + rand.nextInt(3) - 1);
+		}
+
+		if (world.isAirBlock(lPos) && bambooShoot.canBlockStay(world, lPos))
+		{
+			world.setBlockState(lPos, bambooShoot.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
@@ -121,7 +126,7 @@ public class BlockBambooStalk extends GrcBlockBase
 	{
 		boolean flag = false;
 
-		if (world.getBlock(pos.down()) != this)
+		if (world.getBlockState(pos.down()).getBlock() != this)
 		{
 			if (!isBambooOnGround(world, pos))
 			{
@@ -129,7 +134,7 @@ public class BlockBambooStalk extends GrcBlockBase
 			}
 		}
 
-		if (flag && world.getBlockMetadata(pos) == 0)
+		if (flag && !isDried(state))
 		{
 			fellBlockAsItem(world, pos, state);
 		}
@@ -138,26 +143,24 @@ public class BlockBambooStalk extends GrcBlockBase
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState block)
+	public void breakBlock(World world, BlockPos pos, IBlockState state)
 	{
-		if (world.getBlockMetadata(x, y, z) == 0)
+		if (isDried(state)) return;
+		final int offset = 4;
+		final int wideOffset = offset + 1;
+		if (world.isAreaLoaded(pos.subtract(wideOffset, wideOffset, wideOffset), pos.add(wideOffset, wideOffset, wideOffset)))
 		{
-			final byte b0 = 4;
-			final int j1 = b0 + 1;
-
-			if (world.checkChunksExist(x - j1, y - j1, z - j1, x + j1, y + j1, z + j1))
+			for (int x1 = -offset; x1 <= offset; ++x1)
 			{
-				for (int x1 = -b0; x1 <= b0; ++x1)
+				for (int y1 = -offset; y1 <= offset; ++y1)
 				{
-					for (int y1 = -b0; y1 <= b0; ++y1)
+					for (int z1 = -offset; z1 <= offset; ++z1)
 					{
-						for (int z1 = -b0; z1 <= b0; ++z1)
+						final BlockPos lPos = new BlockPos(x + x1, y + y1, z + z1);
+						final IBlockState leafState = world.getBlockState(lPos);
+						if (leafState != null && leafState.getBlock() != null)
 						{
-							final Block block = world.getBlock(x + x1, y + y1, z + z1);
-							if (block != null)
-							{
-								block.beginLeavesDecay(world, x + x1, y + y1, z + z1);
-							}
+							leafState.getBlock().beginLeavesDecay(world, lPos);
 						}
 					}
 				}
@@ -175,7 +178,7 @@ public class BlockBambooStalk extends GrcBlockBase
 	@Override
 	public boolean canSustainLeaves(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlockMetadata(x, y, z) == 0 ? true : false;
+		return !isDried(world.getBlockState(pos));
 	}
 
 	@Override
@@ -193,7 +196,7 @@ public class BlockBambooStalk extends GrcBlockBase
 	public boolean isBambooOnGround(World world, BlockPos pos)
 	{
 		if (!BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, GrowthCraftBamboo.blocks.bambooShoot.getBlock())) return false;
-		return this == world.getBlock(x, y, z);
+		return this == world.getBlockState(pos).getBlock();
 	}
 
 	@Override
@@ -216,7 +219,7 @@ public class BlockBambooStalk extends GrcBlockBase
 
 	private boolean canDoor(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlockState(x, y, z).getBlock() instanceof BlockDoor;
+		return world.getBlockState(pos).getBlock() instanceof BlockDoor;
 	}
 
 	@Override
@@ -265,24 +268,22 @@ public class BlockBambooStalk extends GrcBlockBase
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass)
 	{
-		if (world.getBlockMetadata(x, y, z) == 0)
+		if (!isDried(world.getBlockState(pos)))
 		{
 			int r = 0;
 			int g = 0;
 			int b = 0;
-
 			for (int l1 = -1; l1 <= 1; ++l1)
 			{
 				for (int i2 = -1; i2 <= 1; ++i2)
 				{
-					final BlockPos p = new BlockPos(x + i2, y, z + l1);
-					final int color = world.getBiomeGenForCoords(p).getBiomeFoliageColor(p);
+					final BlockPos p = pos.add(i2, 0, l1);
+					final int color = world.getBiomeGenForCoords(p).getFoliageColorAtPos(p);
 					r += (color & 16711680) >> 16;
 					g += (color & 65280) >> 8;
 					b += color & 255;
 				}
 			}
-
 			return (r / 9 & 255) << 16 | (g / 9 & 255) << 8 | b / 9 & 255;
 		}
 		else
@@ -298,8 +299,7 @@ public class BlockBambooStalk extends GrcBlockBase
 		float x2 = 0.75F;
 		float z1 = 0.25F;
 		float z2 = 0.75F;
-
-		if (world.getBlockMetadata(x, y, z) != 0)
+		if (!isDried(world.getBlockState(pos)))
 		{
 			final BlockPos north = pos.north();
 			final BlockPos south = pos.south();
@@ -325,7 +325,6 @@ public class BlockBambooStalk extends GrcBlockBase
 				x2 = 1.0F;
 			}
 		}
-
 		this.setBlockBounds(x1, 0.0F, z1, x2, 1.0F, z2);
 	}
 
@@ -337,76 +336,72 @@ public class BlockBambooStalk extends GrcBlockBase
 		final float x2 = 0.75F;
 		final float z1 = 0.25F;
 		final float z2 = 0.75F;
-
 		this.setBlockBounds(x1, 0.0F, z1, x2, 1.0F, z2);
 		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
-
-		if (world.getBlockMetadata(x, y, z) != 0)
+		if (isDried(state))
 		{
-			if (this.canFence(world, x, y, z - 1))
+			if (this.canFence(world, pos.north()))
 			{
-				renderFence(world, axis, list, entity, x, y, z, EnumFacing.NORTH);
+				renderFence(world, axis, list, entity, pos, state, EnumFacing.NORTH);
 			}
-			else if (this.canWall(world, x, y, z - 1))
+			else if (this.canWall(world, pos.north()))
 			{
-				renderWall(world, axis, list, entity, x, y, z, EnumFacing.NORTH);
+				renderWall(world, axis, list, entity, pos, state, EnumFacing.NORTH);
 			}
-			else if (this.canDoor(world, x, y, z - 1))
+			else if (this.canDoor(world, pos.north()))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, EnumFacing.NORTH);
-			}
-
-			if (this.canFence(world, x, y, z + 1))
-			{
-				renderFence(world, axis, list, entity, x, y, z, EnumFacing.SOUTH);
-			}
-			else if (this.canWall(world, x, y, z + 1))
-			{
-				renderWall(world, axis, list, entity, x, y, z, EnumFacing.SOUTH);
-			}
-			else if (this.canDoor(world, x, y, z + 1))
-			{
-				renderDoor(world, axis, list, entity, x, y, z, EnumFacing.SOUTH);
+				renderDoor(world, axis, list, entity, pos, state, EnumFacing.NORTH);
 			}
 
-			if (this.canFence(world, x - 1, y, z))
+			if (this.canFence(world, pos.south()))
 			{
-				renderFence(world, axis, list, entity, x, y, z, EnumFacing.WEST);
+				renderFence(world, axis, list, entity, pos, state, EnumFacing.SOUTH);
 			}
-			else if (this.canWall(world, x - 1, y, z))
+			else if (this.canWall(world, pos.south()))
 			{
-				renderWall(world, axis, list, entity, x, y, z, EnumFacing.WEST);
+				renderWall(world, axis, list, entity, pos, state, EnumFacing.SOUTH);
 			}
-			else if (this.canDoor(world, x - 1, y, z))
+			else if (this.canDoor(world, pos.south()))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, EnumFacing.WEST);
+				renderDoor(world, axis, list, entity, pos, state, EnumFacing.SOUTH);
 			}
 
-			if (this.canFence(world, x + 1, y, z))
+			if (this.canFence(world, pos.west()))
 			{
-				renderFence(world, axis, list, entity, x, y, z, EnumFacing.EAST);
+				renderFence(world, axis, list, entity, pos, state, EnumFacing.WEST);
 			}
-			else if (this.canWall(world, x + 1, y, z))
+			else if (this.canWall(world, pos.west()))
 			{
-				renderWall(world, axis, list, entity, x, y, z, EnumFacing.EAST);
+				renderWall(world, axis, list, entity, pos, state, EnumFacing.WEST);
 			}
-			else if (this.canDoor(world, x + 1, y, z))
+			else if (this.canDoor(world, pos.west()))
 			{
-				renderDoor(world, axis, list, entity, x, y, z, EnumFacing.EAST);
+				renderDoor(world, axis, list, entity, pos, state, EnumFacing.WEST);
+			}
+
+			if (this.canFence(world, pos.east()))
+			{
+				renderFence(world, axis, list, entity, pos, state, EnumFacing.EAST);
+			}
+			else if (this.canWall(world, pos.east()))
+			{
+				renderWall(world, axis, list, entity, pos, state, EnumFacing.EAST);
+			}
+			else if (this.canDoor(world, pos.east()))
+			{
+				renderDoor(world, axis, list, entity, pos, state, EnumFacing.EAST);
 			}
 		}
-
-		this.setBlockBoundsBasedOnState(world, x, y, z);
+		this.setBlockBoundsBasedOnState(world, pos);
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	private void renderFence(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, EnumFacing m)
+	private void renderFence(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, IBlockState state, EnumFacing m)
 	{
-		float x1 = x;
-		float x2 = x + 1.0F;
-		float z1 = z;
-		float z2 = z + 1.0F;
-
+		float x1 = pos.getX();
+		float x2 = pos.getX() + 1.0F;
+		float z1 = pos.getZ();
+		float z2 = pos.getZ() + 1.0F;
 		float y1 = 0.75F;
 		float y2 = 0.9375F;
 
@@ -440,7 +435,7 @@ public class BlockBambooStalk extends GrcBlockBase
 		}
 
 		this.setBlockBounds(x1, y1, z1, x2, y2, z2);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 
 		y1 = 0.375F;
 		y2 = 0.5625F;
@@ -475,68 +470,63 @@ public class BlockBambooStalk extends GrcBlockBase
 		}
 
 		this.setBlockBounds(x1, y1, z1, x2, y2, z2);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	private void renderWall(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, EnumFacing m)
+	private void renderWall(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, IBlockState state, EnumFacing facing)
 	{
-		float x1 = x;
-		float x2 = x + 1.0F;
-		float z1 = z;
-		float z2 = z + 1.0F;
-
+		float x1 = pos.getX();
+		float x2 = pos.getX() + 1.0F;
+		float z1 = pos.getZ();
+		float z2 = pos.getZ() + 1.0F;
 		final double y1 = 0.0F;
 		final double y2 = 1.0F;
-
-		if (m == EnumFacing.NORTH)
+		if (facing == EnumFacing.NORTH)
 		{
 			x1 = 0.375F;
 			x2 = 0.625F;
 			z1 = 0.0F;
 			z2 = 0.25F;
 		}
-		else if (m == EnumFacing.SOUTH)
+		else if (facing == EnumFacing.SOUTH)
 		{
 			x1 = 0.375F;
 			x2 = 0.625F;
 			z1 = 0.75F;
 			z2 = 1.0F;
 		}
-		else if (m == EnumFacing.WEST)
+		else if (facing == EnumFacing.WEST)
 		{
 			z1 = 0.375F;
 			z2 = 0.625F;
 			x1 = 0.0F;
 			x2 = 0.25F;
 		}
-		else if (m == EnumFacing.EAST)
+		else if (facing == EnumFacing.EAST)
 		{
 			z1 = 0.375F;
 			z2 = 0.625F;
 			x1 = 0.75F;
 			x2 = 1.0F;
 		}
-
 		this.setBlockBounds(x1, 0.0F, z1, x2, 1.0F, z2);
-		super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
+		super.addCollisionBoxesToList(world, pos, state, axis, list, entity);
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	private void renderDoor(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, EnumFacing m)
+	private void renderDoor(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, IBlockState state, EnumFacing m)
 	{
-		float x1 = x;
-		float x2 = x + 1.0F;
-		float z1 = z;
-		float z2 = z + 1.0F;
-
+		float x1 = pos.getX();
+		float x2 = pos.getX() + 1.0F;
+		float z1 = pos.getZ();
+		float z2 = pos.getZ() + 1.0F;
 		final float y1 = 0.0F;
 		final float y2 = 1.0F;
-
 		int tm0;
 		int tm;
-
-		if (m == EnumFacing.NORTH)
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooStalk#renderDoor");
+		/*if (m == EnumFacing.NORTH)
 		{
 			tm0 = world.getBlockMetadata(x, y, z - 1);
 			if ((tm0 & 8) > 7)
@@ -658,6 +648,6 @@ public class BlockBambooStalk extends GrcBlockBase
 				this.setBlockBounds(x1, y1, z1, x2, y2, z2);
 				super.addCollisionBoxesToList(world, x, y, z, axis, list, entity);
 			}
-		}
+		}*/
 	}
 }

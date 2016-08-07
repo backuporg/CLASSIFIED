@@ -49,7 +49,7 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable
 	public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(Blocks.leaves, 1, world.getBlockState(pos) & 3));
+		ret.add(new ItemStack(Blocks.leaves, 1));
 		return ret;
 	}
 }

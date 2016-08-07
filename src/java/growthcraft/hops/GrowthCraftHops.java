@@ -64,6 +64,11 @@ public class GrowthCraftHops
 		return instance.config;
 	}
 
+	public static ILogger getLogger()
+	{
+		return instance.logger;
+	}
+
 	@EventHandler
 	public void preload(FMLPreInitializationEvent event)
 	{
@@ -125,12 +130,11 @@ public class GrowthCraftHops
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initRenders();
-
+		CommonProxy.instance.init();
 		final VillageHandlerHops handler = new VillageHandlerHops();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
+		logger.warn("(fixme) GrowthCraftHops registerVillageTradeHandler");
+		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
 		modules.init();
 	}
 

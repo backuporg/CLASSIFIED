@@ -65,9 +65,9 @@ public class ItemBambooDoor extends GrcItemBase
 			flag2 = true;
 		}
 
-		GrowthCraftBamboo.getLogger().warn("(fixme) ItemBambooDoor#placeDoorBlock")
-		world.setBlockState(pos, block.getDefaultState()); //block, side, 2);
-		world.setBlockState(pos.up(), block.getDefaultState()); //block, 8 | (flag2 ? 1 : 0), 2);
+		GrowthCraftBamboo.getLogger().warn("(fixme) ItemBambooDoor#placeDoorBlock");
+		world.setBlockState(pos, block.getDefaultState(), BlockFlags.NONE); //block, side, 2);
+		world.setBlockState(pos.up(), block.getDefaultState(), BlockFlags.UPDATE_AND_SYNC); //block, 8 | (flag2 ? 1 : 0), 2);
 		//world.notifyBlocksOfNeighborChange(i, j, k, block);
 		//world.notifyBlocksOfNeighborChange(i, j + 1, k, block);
 	}

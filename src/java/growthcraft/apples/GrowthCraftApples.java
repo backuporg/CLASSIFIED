@@ -69,9 +69,6 @@ public class GrowthCraftApples
 		return instance.config;
 	}
 
-	/**
-	 * Only use this logger for logging GrowthCraftBees related items
-	 */
 	public static ILogger getLogger()
 	{
 		return instance.logger;
@@ -143,7 +140,8 @@ public class GrowthCraftApples
 	public void load(FMLInitializationEvent event)
 	{
 		final VillageHandlerApples handler = new VillageHandlerApples();
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
+		logger.warn("(fixme) GrowthCraftApples#registerVillageTradeHandler");
+		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 
 		modules.init();

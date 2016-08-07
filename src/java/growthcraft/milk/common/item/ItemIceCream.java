@@ -42,7 +42,7 @@ public class ItemIceCream extends GrcItemFoodBase
 		super(2, 0.3F, false);
 		setHasSubtypes(true);
 		setMaxDamage(0);
-		setUnlocalizedName("grcmilk.IceCream");
+		setUnlocalizedName("grc.ice_cream");
 		setCreativeTab(GrowthCraftMilk.creativeTab);
 	}
 
