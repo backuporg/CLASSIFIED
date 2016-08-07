@@ -44,6 +44,6 @@ public class GrcGrapesItems extends GrcModuleBase
 	public void register()
 	{
 		grapes.register("grc.grapes");
-		grapeSeeds.register("grc.grapeSeeds");
+		grapeSeeds.register("grc.grape_seeds");
 	}
 }

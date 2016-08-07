@@ -53,9 +53,9 @@ public class GrcBambooItems extends GrcModuleBase
 	public void register()
 	{
 		bamboo.register("grc.bamboo");
-		bambooDoorItem.register("grc.bambooDoorItem");
-		bambooRaft.register("grc.bambooRaft");
-		bambooCoal.register("grc.bambooCoal");
-		bambooShootFood.register("grc.bambooShootFood");
+		bambooDoorItem.register("grc.bamboo_door_item");
+		bambooRaft.register("grc.bamboo_raft");
+		bambooCoal.register("grc.bamboo_coal");
+		bambooShootFood.register("grc.bamboo_shoot_food");
 	}
 }

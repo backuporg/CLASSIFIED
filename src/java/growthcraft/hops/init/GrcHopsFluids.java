@@ -81,7 +81,7 @@ public class GrcHopsFluids extends GrcModuleBase
 		this.hopAleBooze = new Booze[9];
 		this.hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
 		this.hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.hopAle", hopAleBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.hop_ale", hopAleBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : hopAleBooze)
 		{
 			booze.setColor(GrowthCraftHops.getConfig().hopAleColor).setDensity(1080);
@@ -278,10 +278,10 @@ public class GrcHopsFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		GameRegistry.registerItem(hopAle.getItem(), "grc.hopAle");
+		GameRegistry.registerItem(hopAle.getItem(), "grc.hop_ale");
 		GameRegistry.registerItem(lager.getItem(), "grc.lager");
 
-		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hopAle", null);
+		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hop_ale", null);
 		BoozeRegistryHelper.registerBooze(lagerBooze, lagerFluids, lagerBuckets, lager, "grc.lager", null);
 		registerFermentations();
 	}

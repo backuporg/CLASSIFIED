@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,41 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.util;
+package growthcraft.fishes.client.gui;
 
-import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.fishes.common.inventory.ContainerFishTrap;
+import growthcraft.fishes.common.tileentity.TileEntityFishTrap;
+import growthcraft.core.client.gui.GrcGuiContainer;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 
-public class GrapeBlockCheck
+@SideOnly(Side.CLIENT)
+public class GuiFishTrap extends GrcGuiContainer<ContainerFishTrap, TileEntityFishTrap>
 {
-	private GrapeBlockCheck() {}
+	private static final ResourceLocation res = new ResourceLocation("grcfishes" , "textures/guis/fishtrap_gui.png");
 
-	/**
-	 * Determines if block is a grape vine.
-	 *
-	 * @param block - block to check
-	 * @return true if block is a grape vine, false otherwise
-	 */
-	public static boolean isGrapeVine(IBlockState state)
+	public GuiFishTrap(InventoryPlayer inv, TileEntityFishTrap fishTrap)
 	{
-		if (state == null) return false;
-		final Block block = state.getBlock();
-		return GrowthCraftGrapes.blocks.grapeVineBine.equals(block) ||
-			GrowthCraftGrapes.blocks.grapeVineTrunk.equals(block);
-	}
-
-	/**
-	 * Determines if block is a grape vine trunk.
-	 *
-	 * @param block - block to check
-	 * @return true if block is a grape vine trunk, false otherwise
-	 */
-	public static boolean isGrapeVineTrunk(IBlockState state)
-	{
-		if (state == null) return false;
-		final Block block = state.getBlock();
-		return GrowthCraftGrapes.blocks.grapeVineTrunk.equals(block);
+		super(res, new ContainerFishTrap(inv, fishTrap), fishTrap);
+		this.ySize = 133;
 	}
 }

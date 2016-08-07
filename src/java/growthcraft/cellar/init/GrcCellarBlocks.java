@@ -53,10 +53,10 @@ public class GrcCellarBlocks extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		fruitPress.register("grc.fruitPress");
-		fruitPresser.register("grc.fruitPresser");
-		brewKettle.register("grc.brewKettle");
-		fermentBarrel.register("grc.fermentBarrel", ItemBlockFermentBarrel.class);
-		cultureJar.register("grc.fermentJar");
+		fruitPress.register("grc.fruit_press");
+		fruitPresser.register("grc.fruit_presser");
+		brewKettle.register("grc.brew_kettle");
+		fermentBarrel.register("grc.ferment_barrel", ItemBlockFermentBarrel.class);
+		cultureJar.register("grc.ferment_barrel");
 	}
 }

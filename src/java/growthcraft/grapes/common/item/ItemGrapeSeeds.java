@@ -2,7 +2,7 @@ package growthcraft.grapes.common.item;
 
 import growthcraft.core.common.item.GrcItemBase;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.grapes.common.block.BlockGrapeVine0;
+import growthcraft.grapes.common.block.BlockGrapeVineBine;
 import growthcraft.grapes.GrowthCraftGrapes;
 
 import net.minecraft.block.state.IBlockState;
@@ -31,7 +31,7 @@ public class ItemGrapeSeeds extends GrcItemBase implements IPlantable
 		{
 			if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 			{
-				final BlockGrapeVine0 block = GrowthCraftGrapes.blocks.grapeVine0.getBlock();
+				final BlockGrapeVineBine block = GrowthCraftGrapes.blocks.grapeVineBine.getBlock();
 				if (BlockCheck.canSustainPlant(world, pos, EnumFacing.UP, block) && world.isAirBlock(pos.up()))
 				{
 					world.setBlockState(pos.up(), block.getDefaultState());
@@ -52,6 +52,6 @@ public class ItemGrapeSeeds extends GrcItemBase implements IPlantable
 	@Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
-		return GrowthCraftGrapes.blocks.grapeVine0.getBlock().getDefaultState();
+		return GrowthCraftGrapes.blocks.grapeVineBine.getBlock().getDefaultState();
 	}
 }

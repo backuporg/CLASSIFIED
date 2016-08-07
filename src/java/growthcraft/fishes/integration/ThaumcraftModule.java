@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015, 2016 IceDragon200
+ * Copyright (c) 2015 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,41 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.grapes.util;
+package growthcraft.fishes.integration;
 
-import growthcraft.grapes.GrowthCraftGrapes;
+import growthcraft.fishes.GrowthCraftFishes;
+import growthcraft.core.integration.ThaumcraftModuleBase;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+//import thaumcraft.api.ThaumcraftApi;
+//import thaumcraft.api.aspects.AspectList;
+//import thaumcraft.api.aspects.Aspect;
 
-public class GrapeBlockCheck
+import net.minecraftforge.fml.common.Optional;
+
+public class ThaumcraftModule extends ThaumcraftModuleBase
 {
-	private GrapeBlockCheck() {}
-
-	/**
-	 * Determines if block is a grape vine.
-	 *
-	 * @param block - block to check
-	 * @return true if block is a grape vine, false otherwise
-	 */
-	public static boolean isGrapeVine(IBlockState state)
+	public ThaumcraftModule()
 	{
-		if (state == null) return false;
-		final Block block = state.getBlock();
-		return GrowthCraftGrapes.blocks.grapeVineBine.equals(block) ||
-			GrowthCraftGrapes.blocks.grapeVineTrunk.equals(block);
+		super(GrowthCraftFishes.MOD_ID);
 	}
 
-	/**
-	 * Determines if block is a grape vine trunk.
-	 *
-	 * @param block - block to check
-	 * @return true if block is a grape vine trunk, false otherwise
-	 */
-	public static boolean isGrapeVineTrunk(IBlockState state)
+	@Override
+	@Optional.Method(modid="Thaumcraft")
+	protected void integrate()
 	{
-		if (state == null) return false;
-		final Block block = state.getBlock();
-		return GrowthCraftGrapes.blocks.grapeVineTrunk.equals(block);
+		GrowthCraftFishes.getLogger().warn("(fixme) GrowthCraftFishes/ThaumcraftModule#integrate");
+		//ThaumcraftApi.registerObjectTag(GrowthCraftFishes.fishTrap.asStack(), new AspectList().add(Aspect.SLIME, 1).add(Aspect.WATER, 2).add(Aspect.VOID, 1).add(Aspect.TRAP, 2));
 	}
 }

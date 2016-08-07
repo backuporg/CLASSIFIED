@@ -55,11 +55,11 @@ public class GrcBeesItems extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		honeyCombEmpty.register("grc.honeyCombEmpty");
-		honeyCombFilled.register("grc.honeyCombFilled");
-		honeyJar.register("grc.honeyJar");
+		honeyCombEmpty.register("grc.honey_comb_empty");
+		honeyCombFilled.register("grc.honey_comb_filled");
+		honeyJar.register("grc.honey_jar");
 		bee.register("grc.bee");
-		beesWax.register("grcbees.BeesWax");
+		beesWax.register("grc.bees_wax");
 	}
 
 	@Override

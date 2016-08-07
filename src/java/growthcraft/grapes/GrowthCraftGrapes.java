@@ -79,7 +79,7 @@ public class GrowthCraftGrapes
 		creativeTab = new CreativeTabsGrowthcraftGrapes("creative_tab_grcgrapes");
 		modules.preInit();
 		register();
-		blocks.grapeVine1.getBlock().setItemDrop(items.grapeSeeds.asStack(1));
+		blocks.grapeVineTrunk.getBlock().setItemDrop(items.grapeSeeds.asStack(1));
 	}
 
 	private void register()

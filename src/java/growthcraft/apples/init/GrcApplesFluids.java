@@ -49,7 +49,7 @@ public class GrcApplesFluids extends GrcModuleBase
 		appleCiderBooze = new Booze[7];
 		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
 		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.appleCider", appleCiderBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.apple_cider", appleCiderBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : appleCiderBooze)
 		{
 			booze.setColor(GrowthCraftApples.getConfig().appleCiderColor).setDensity(1010);
@@ -67,8 +67,8 @@ public class GrcApplesFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		GameRegistry.registerItem(appleCider.getItem(), "grc.appleCider");
-		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.appleCider", null);
+		GameRegistry.registerItem(appleCider.getItem(), "grc.apple_cider");
+		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.apple_cider", null);
 		// Ore Dictionary
 		OreDictionary.registerOre("foodApplejuice", appleCider.asStack());
 	}

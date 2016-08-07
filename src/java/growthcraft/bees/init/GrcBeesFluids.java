@@ -67,7 +67,7 @@ public class GrcBeesFluids extends GrcModuleBase
 		this.honeyMeadBooze = new Booze[7];
 		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		this.honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.honeyMead", honeyMeadBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.honey_mead", honeyMeadBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
 		for (Booze booze : honeyMeadBooze)
 		{
 			booze.setColor(GrowthCraftBees.getConfig().honeyMeadColor).setDensity(1000).setViscosity(1200);
@@ -88,8 +88,8 @@ public class GrcBeesFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honeyMead");
-		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honeyMead", null);
+		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honey_mead");
+		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honey_mead", null);
 		if (honey != null)
 		{
 			honey.registerObjects("grc", "Honey");

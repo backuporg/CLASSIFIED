@@ -57,8 +57,8 @@ public class ComponentVillageGrapeVineyard extends StructureVillagePieces.Villag
 			setBlockState(world, Blocks.oak_fence.getDefaultState(), loop, 2, 7, box);
 			setBlockState(world, GrowthCraftCore.blocks.oakFenceRope.getBlock().getDefaultState(), loop, 3, 1, box);
 			setBlockState(world, GrowthCraftCore.blocks.oakFenceRope.getBlock().getDefaultState(), loop, 3, 7, box);
-			setBlockState(world, GrowthCraftGrapes.blocks.grapeVine1.getBlock().getDefaultState(), loop, 1, 4, box);
-			setBlockState(world, GrowthCraftGrapes.blocks.grapeVine1.getBlock().getDefaultState(), loop, 2, 4, box);
+			setBlockState(world, GrowthCraftGrapes.blocks.grapeVineTrunk.getBlock().getDefaultState(), loop, 1, 4, box);
+			setBlockState(world, GrowthCraftGrapes.blocks.grapeVineTrunk.getBlock().getDefaultState(), loop, 2, 4, box);
 			for (int loop2 = 2; loop2 <= 6; ++loop2)
 			{
 				setBlockState(world, GrowthCraftGrapes.blocks.grapeLeaves.getBlock().getDefaultState(), loop, 3, loop2, box);
