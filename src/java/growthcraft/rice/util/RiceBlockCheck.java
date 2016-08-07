@@ -75,7 +75,7 @@ public class RiceBlockCheck
 		final IBlockState state = world.getBlockState(pos);
 		if (isPaddy(state))
 		{
-			return state.getValue(BlockPaddyBase.FLUID_LEVEL) >= amount;
+			return state.getValue(BlockPaddyBase.LEVEL) >= amount;
 		}
 		return false;
 	}

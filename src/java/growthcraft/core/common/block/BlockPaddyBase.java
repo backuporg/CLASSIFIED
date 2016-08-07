@@ -50,7 +50,7 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(LEVEL).meta;
+		return state.getValue(LEVEL);
 	}
 
 	@Override
