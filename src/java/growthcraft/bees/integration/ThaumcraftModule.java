@@ -23,20 +23,20 @@
  */
 package growthcraft.bees.integration;
 
-import growthcraft.api.core.item.ItemKey;
+//import growthcraft.api.core.item.ItemKey;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.block.BlockBeeBoxThaumcraft;
 import growthcraft.bees.common.block.EnumBeeBoxThaumcraft;
 import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.GrowthCraftBees;
-import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
+//import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.integration.thaumcraft.AspectsHelper;
+//import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.Aspect;
+//import thaumcraft.api.ThaumcraftApi;
+//import thaumcraft.api.aspects.AspectList;
+//import thaumcraft.api.aspects.Aspect;
 
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.GameRegistry;

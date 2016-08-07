@@ -125,10 +125,9 @@ public class GrowthCraftFishTrap
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		CommonProxy.instance.init();
 		userFishTrapConfig.loadUserConfig();
-
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
-
 		modules.init();
 	}
 

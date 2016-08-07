@@ -4,8 +4,8 @@ import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.GrowthCraftCellar;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
+//import net.minecraft.util.ResourceLocation;
+//import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 public class ClientProxy extends CommonProxy
 {

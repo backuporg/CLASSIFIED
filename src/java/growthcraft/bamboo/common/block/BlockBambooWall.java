@@ -6,10 +6,10 @@ import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.common.block.GrcBlockBase;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
+//import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockStairs;
+//import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

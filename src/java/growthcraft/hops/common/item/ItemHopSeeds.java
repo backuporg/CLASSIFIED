@@ -6,7 +6,6 @@ import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,8 +15,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemHopSeeds extends GrcItemBase implements IPlantable
 {

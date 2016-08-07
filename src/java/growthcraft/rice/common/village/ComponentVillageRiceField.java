@@ -9,7 +9,6 @@ import growthcraft.core.util.SchemaToVillage.IBlockEntries;
 import growthcraft.core.util.SchemaToVillage;
 import growthcraft.rice.GrowthCraftRice;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;

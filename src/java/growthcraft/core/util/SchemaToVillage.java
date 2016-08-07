@@ -26,7 +26,6 @@ package growthcraft.core.util;
 import java.util.Map;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.structure.StructureBoundingBox;

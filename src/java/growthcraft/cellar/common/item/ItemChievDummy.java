@@ -2,9 +2,6 @@ package growthcraft.cellar.common.item;
 
 import growthcraft.core.common.item.GrcItemBase;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 public class ItemChievDummy extends GrcItemBase
 {
 	public ItemChievDummy()

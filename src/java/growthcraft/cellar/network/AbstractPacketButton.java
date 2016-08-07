@@ -11,10 +11,10 @@ public abstract class AbstractPacketButton extends AbstractPacket
 
 	public AbstractPacketButton() {}
 
-	public AbstractPacketButton(BlockPos pos)
+	public AbstractPacketButton(BlockPos p_pos)
 	{
 		this.pos = new BlockPos.MutableBlockPos();
-		this.pos.set(pos.getX(), pos.getY(), pos.getZ());
+		this.pos.set(p_pos.getX(), p_pos.getY(), p_pos.getZ());
 	}
 
 	@Override

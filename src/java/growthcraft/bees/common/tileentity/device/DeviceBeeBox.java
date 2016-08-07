@@ -23,7 +23,6 @@
  */
 package growthcraft.bees.common.tileentity.device;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -38,7 +37,6 @@ import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.tileentity.device.DeviceBase;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;

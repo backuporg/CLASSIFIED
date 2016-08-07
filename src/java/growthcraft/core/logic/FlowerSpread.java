@@ -26,8 +26,9 @@ package growthcraft.core.logic;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
-import growthcraft.api.core.util.BlockFlags;
+//import growthcraft.api.core.util.BlockFlags;
 import growthcraft.api.core.util.CuboidI;
+import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -65,6 +66,7 @@ public class FlowerSpread
 			final BlockPos fpos = new BlockPos(fx, fy, fz);
 			if (canSpreadTo(block, world, fpos))
 			{
+				GrowthCraftCore.getLogger().warn("(fixme) FlowerSpread#run");
 				//world.setBlockState(fpos, block, meta, BlockFlags.UPDATE_AND_SYNC);
 				return true;
 			}

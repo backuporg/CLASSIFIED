@@ -25,9 +25,9 @@ package growthcraft.core.integration;
 
 import growthcraft.core.GrowthCraftCore;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.Aspect;
+//import thaumcraft.api.ThaumcraftApi;
+//import thaumcraft.api.aspects.AspectList;
+//import thaumcraft.api.aspects.Aspect;
 
 import net.minecraftforge.fml.common.Optional;
 

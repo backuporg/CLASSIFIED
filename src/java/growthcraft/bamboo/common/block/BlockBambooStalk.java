@@ -18,12 +18,10 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -238,22 +236,22 @@ public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 	}
 
 	@Override
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
-    {
-    	return true;
-    }
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	{
+		return true;
+	}
 
-    @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
-    {
-    	return true;
-    }
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		return true;
+	}
 
-    @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
-    {
-    	GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooStalk#grow");
-    }
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	{
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooStalk#grow");
+	}
 
 	@Override
 	public boolean isOpaqueCube()
@@ -538,7 +536,8 @@ public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	private void renderDoor(World world, AxisAlignedBB axis, List list, Entity entity, BlockPos pos, IBlockState state, EnumFacing m)
 	{
-		float x1 = pos.getX();
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooStalk#renderDoor");
+		/*float x1 = pos.getX();
 		float x2 = pos.getX() + 1.0F;
 		float z1 = pos.getZ();
 		float z2 = pos.getZ() + 1.0F;
@@ -546,8 +545,7 @@ public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 		final float y2 = 1.0F;
 		int tm0;
 		int tm;
-		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooStalk#renderDoor");
-		/*if (m == EnumFacing.NORTH)
+		if (m == EnumFacing.NORTH)
 		{
 			tm0 = world.getBlockMetadata(x, y, z - 1);
 			if ((tm0 & 8) > 7)

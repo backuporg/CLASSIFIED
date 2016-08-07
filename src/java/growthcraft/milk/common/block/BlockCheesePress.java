@@ -23,7 +23,6 @@
  */
 package growthcraft.milk.common.block;
 
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import growthcraft.milk.GrowthCraftMilk;
@@ -37,7 +36,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -79,30 +77,30 @@ public class BlockCheesePress extends GrcBlockContainer
 	{
 		if (!world.isRemote)
 		{
-			final Block block = world.getBlockState(pos.north()).getBlock();
+			/*final Block block = world.getBlockState(pos.north()).getBlock();
 			final Block block1 = world.getBlockState(pos.south()).getBlock();
 			final Block block2 = world.getBlockState(pos.west()).getBlock();
 			final Block block3 = world.getBlockState(pos.east()).getBlock();
 			byte meta = 3;
 
-			//if (block.func_149730_j() && !block1.func_149730_j())
-			//{
-			//	meta = 3;
-			//}
-			//if (block1.func_149730_j() && !block.func_149730_j())
-			//{
-			//	meta = 2;
-			//}
-			//if (block2.func_149730_j() && !block3.func_149730_j())
-			//{
-			//	meta = 5;
-			//}
-			//if (block3.func_149730_j() && !block2.func_149730_j())
-			//{
-			//	meta = 4;
-			//}
+			if (block.func_149730_j() && !block1.func_149730_j())
+			{
+				meta = 3;
+			}
+			if (block1.func_149730_j() && !block.func_149730_j())
+			{
+				meta = 2;
+			}
+			if (block2.func_149730_j() && !block3.func_149730_j())
+			{
+				meta = 5;
+			}
+			if (block3.func_149730_j() && !block2.func_149730_j())
+			{
+				meta = 4;
+			}
 
-			//world.setBlockMetadataWithNotify(pos, meta, BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockMetadataWithNotify(pos, meta, BlockFlags.UPDATE_AND_SYNC);*/
 		}
 	}
 

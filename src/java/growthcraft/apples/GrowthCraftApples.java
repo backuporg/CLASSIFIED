@@ -13,7 +13,7 @@ import growthcraft.apples.common.village.VillageHandlerApples;
 import growthcraft.apples.handler.AppleFuelHandler;
 import growthcraft.apples.init.GrcApplesFluids;
 import growthcraft.apples.init.GrcApplesRecipes;
-import growthcraft.cellar.GrowthCraftCellar;
+//import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -23,18 +23,14 @@ import growthcraft.core.util.MapGenHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
@@ -139,6 +135,7 @@ public class GrowthCraftApples
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
+		CommonProxy.instance.init();
 		final VillageHandlerApples handler = new VillageHandlerApples();
 		logger.warn("(fixme) GrowthCraftApples#registerVillageTradeHandler");
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);

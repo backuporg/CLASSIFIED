@@ -23,14 +23,14 @@
  */
 package growthcraft.hops.integration;
 
-import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
-import growthcraft.core.integration.thaumcraft.AspectsHelper;
+//import growthcraft.cellar.integration.ThaumcraftBoozeHelper;
+//import growthcraft.core.integration.thaumcraft.AspectsHelper;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 import growthcraft.hops.GrowthCraftHops;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.Aspect;
+//import thaumcraft.api.ThaumcraftApi;
+//import thaumcraft.api.aspects.AspectList;
+//import thaumcraft.api.aspects.Aspect;
 
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.event.FMLInterModComms;

@@ -26,9 +26,9 @@ package growthcraft.bamboo.integration;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.integration.ThaumcraftModuleBase;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.AspectList;
-import thaumcraft.api.aspects.Aspect;
+//import thaumcraft.api.ThaumcraftApi;
+//import thaumcraft.api.aspects.AspectList;
+//import thaumcraft.api.aspects.Aspect;
 
 import net.minecraftforge.fml.common.Optional;
 

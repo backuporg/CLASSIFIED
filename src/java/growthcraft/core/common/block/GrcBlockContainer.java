@@ -37,7 +37,6 @@ import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.ItemUtils;
 import growthcraft.core.Utils;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -67,7 +66,6 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 {
 	public static final PropertyInteger ROTATION = PropertyInteger.create("rotation", 0, 15);
 
-	protected Random rand = new Random();
 	protected Class<? extends TileEntity> tileEntityType;
 
 	public GrcBlockContainer(@Nonnull Material material)

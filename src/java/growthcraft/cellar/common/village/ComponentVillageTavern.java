@@ -6,7 +6,6 @@ import java.util.Random;
 import growthcraft.cellar.GrowthCraftCellar;
 
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;

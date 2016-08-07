@@ -5,7 +5,6 @@ import growthcraft.core.util.BlockCheck;
 import growthcraft.grapes.common.block.BlockGrapeVine0;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -15,8 +14,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemGrapeSeeds extends GrcItemBase implements IPlantable
 {

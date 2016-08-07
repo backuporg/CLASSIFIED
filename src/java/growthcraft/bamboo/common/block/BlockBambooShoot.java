@@ -2,12 +2,11 @@ package growthcraft.bamboo.common.block;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.bamboo.common.world.WorldGenBamboo;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.api.core.util.BlockFlags;
-import growthcraft.api.core.util.RenderType;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;

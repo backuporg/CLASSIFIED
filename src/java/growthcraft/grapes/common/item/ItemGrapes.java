@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 
 public class ItemGrapes extends GrcItemFoodBase
 {

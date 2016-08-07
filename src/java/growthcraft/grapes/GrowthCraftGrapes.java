@@ -4,8 +4,6 @@ import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.MapGenHelper;
 import growthcraft.grapes.common.CommonProxy;
 import growthcraft.grapes.common.village.ComponentVillageGrapeVineyard;
@@ -15,22 +13,18 @@ import growthcraft.grapes.init.GrcGrapesBlocks;
 import growthcraft.grapes.init.GrcGrapesFluids;
 import growthcraft.grapes.init.GrcGrapesItems;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
@@ -125,14 +119,13 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		CommonProxy.instance.init();
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
-
 		final VillageHandlerGrapes handler = new VillageHandlerGrapes();
 		logger.warn("(fixme) GrowthCraftGrapes#init registerVillageTradeHandler");
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
 		modules.init();
 	}
 

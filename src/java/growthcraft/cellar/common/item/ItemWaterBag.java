@@ -41,7 +41,6 @@ import growthcraft.core.util.UnitFormatter;
 import squeek.applecore.api.food.IEdible;
 import squeek.applecore.api.food.FoodValues;
 
-import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;

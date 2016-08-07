@@ -29,6 +29,7 @@ import growthcraft.core.eventhandler.EventHandlerBucketFill.IBucketEntry;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.stats.CoreAchievement;
 
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -52,14 +53,14 @@ public class SaltBucketEntry implements IBucketEntry
 		final IBlockState state = world.getBlockState(pos.getBlockPos());
 		if (state != null && Blocks.water.isAssociatedBlock(state.getBlock()))
 		{
-			//if (world.getBlockMetadata(pos) == 0)
-			//{
-			//	final BiomeGenBase biome = world.getBiomeGenForCoords(pos.blockX, pos.blockZ);
-			//	if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
-			//	{
-			//		return true;
-			//	}
-			//}
+			if ((int)state.getValue(BlockLiquid.LEVEL) == 0)
+			{
+				final BiomeGenBase biome = world.getBiomeGenForCoords(pos.getBlockPos());
+				if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.OCEAN))
+				{
+					return true;
+				}
+			}
 		}
 		return false;
 	}

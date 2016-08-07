@@ -3,7 +3,6 @@ package growthcraft.bees.common.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.common.block.GrcBlockBase;
 

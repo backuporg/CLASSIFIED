@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.BlockPaddyBase;
-import growthcraft.rice.GrowthCraftRice;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

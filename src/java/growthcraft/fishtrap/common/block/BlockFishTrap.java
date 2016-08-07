@@ -10,7 +10,6 @@ import growthcraft.core.Utils;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
 import growthcraft.fishtrap.GrowthCraftFishTrap;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.block.state.IBlockState;
@@ -19,12 +18,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFishTrap extends GrcBlockContainer
 {

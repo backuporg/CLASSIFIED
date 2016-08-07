@@ -57,13 +57,13 @@ public class ShapelessItemComparableRecipe implements IRecipe
 	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inv)
 	{
-        final ItemStack[] itemStacks = new ItemStack[inv.getSizeInventory()];
-        for (int i = 0; i < itemStacks.length; ++i)
-        {
-            final ItemStack itemstack = inv.getStackInSlot(i);
-            itemStacks[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
-        }
-        return itemStacks;
+		final ItemStack[] itemStacks = new ItemStack[inv.getSizeInventory()];
+		for (int i = 0; i < itemStacks.length; ++i)
+		{
+			final ItemStack itemstack = inv.getStackInSlot(i);
+			itemStacks[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
+		}
+		return itemStacks;
 	}
 
 	/**

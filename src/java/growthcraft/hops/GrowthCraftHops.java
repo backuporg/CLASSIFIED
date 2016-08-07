@@ -1,14 +1,11 @@
 package growthcraft.hops;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.MapGenHelper;
 import growthcraft.hops.common.block.BlockHops;
 import growthcraft.hops.common.CommonProxy;
@@ -18,20 +15,16 @@ import growthcraft.hops.common.village.ComponentVillageHopVineyard;
 import growthcraft.hops.common.village.VillageHandlerHops;
 import growthcraft.hops.init.GrcHopsFluids;
 
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(

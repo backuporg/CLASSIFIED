@@ -31,7 +31,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -181,6 +180,7 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		CommonProxy.instance.init();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 

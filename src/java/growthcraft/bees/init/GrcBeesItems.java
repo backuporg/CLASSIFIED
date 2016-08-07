@@ -32,9 +32,6 @@ import growthcraft.bees.common.item.ItemHoneyJar;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcBeesItems extends GrcModuleBase

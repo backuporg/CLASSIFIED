@@ -20,12 +20,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooSlab extends BlockSlab
 {
-	private boolean isDouble;
+	private boolean doubleSlab;
 
-	public BlockBambooSlab(boolean isDouble)
+	public BlockBambooSlab(boolean p_doubleSlab)
 	{
 		super(Material.wood);
-		this.isDouble = isDouble;
+		this.doubleSlab = p_doubleSlab;
 		this.useNeighborBrightness = true;
 		setStepSound(soundTypeWood);
 		setResistance(5.0F);
@@ -37,7 +37,7 @@ public class BlockBambooSlab extends BlockSlab
 	@Override
 	public boolean isDouble()
 	{
-		return this.isDouble;
+		return this.doubleSlab;
 	}
 
 	@Override

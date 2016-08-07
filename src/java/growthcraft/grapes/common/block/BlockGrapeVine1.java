@@ -7,7 +7,6 @@ import growthcraft.core.util.BlockCheck;
 import growthcraft.api.core.util.BlockFlags;
 import growthcraft.grapes.GrowthCraftGrapes;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;

@@ -11,7 +11,6 @@ import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.AppleCore;
 import growthcraft.core.util.BlockCheck;
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.hops.GrowthCraftHops;
 
 import net.minecraft.block.Block;
@@ -21,7 +20,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;

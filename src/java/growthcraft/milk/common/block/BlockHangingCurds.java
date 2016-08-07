@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.api.core.util.BBox;
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.core.util.BlockCheck;
 import growthcraft.milk.common.item.EnumCheeseType;

@@ -5,11 +5,11 @@ import java.util.Random;
 import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSapling;
+//import net.minecraft.block.BlockSapling;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+//import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.World;
 

@@ -41,8 +41,6 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 
@@ -148,9 +146,9 @@ public class GrowthCraftCore
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		CommonProxy.instance.init();
 		userFluidDictionary.loadUserConfig();
 		AchievementPageGrowthcraft.init();
-
 		userVinesConfig.addDefault(Blocks.vine);
 		if (BopPlatform.isLoaded())
 		{

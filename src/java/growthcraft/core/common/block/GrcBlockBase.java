@@ -23,8 +23,6 @@
  */
 package growthcraft.core.common.block;
 
-import growthcraft.core.common.block.GrcBlockBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

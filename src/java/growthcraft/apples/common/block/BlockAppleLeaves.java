@@ -4,28 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import growthcraft.apples.GrowthCraftApples;
-import growthcraft.api.core.util.BlockFlags;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockAppleLeaves extends BlockLeaves implements IGrowable
 {
@@ -58,7 +47,7 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable
 	@Override
 	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient)
 	{
-		return world.isAirBlock(pos.down()) && state.getValue(DECAYABLE) == false;
+		return world.isAirBlock(pos.down()) && !state.getValue(DECAYABLE);
 	}
 
 	@Override
@@ -81,7 +70,7 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable
 		super.updateTick(world, pos, state, rand);
 		if (!world.isRemote)
 		{
-			if (state.getValue(DECAYABLE) == false)
+			if (!state.getValue(DECAYABLE))
 			{
 				// Spawn Apple
 				if (world.rand.nextInt(GrowthCraftApples.getConfig().appleLeavesGrowthRate) == 0)

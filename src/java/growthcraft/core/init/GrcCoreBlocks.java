@@ -35,7 +35,6 @@ import growthcraft.core.common.item.ItemBlockFenceRope;
 import growthcraft.core.common.item.ItemBlockNaturaFenceRope;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.registry.FenceRopeRegistry;
-import growthcraft.core.GrowthCraftCore;
 
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;

@@ -24,20 +24,16 @@
 package growthcraft.milk.common.block;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import growthcraft.api.core.util.BBox;
 import growthcraft.core.common.block.GrcBlockContainer;
 import growthcraft.milk.common.item.EnumCheeseType;
-import growthcraft.milk.common.item.EnumCheeseStage;
+//import growthcraft.milk.common.item.EnumCheeseStage;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.GrowthCraftMilk;
-import growthcraft.core.util.ItemUtils;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;

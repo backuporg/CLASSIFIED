@@ -95,9 +95,9 @@ public abstract class GrcTileEntityInventoryBase extends GrcTileEntityCommonBase
 	}
 
 	@Override
-	public void setLockCode(LockCode code)
+	public void setLockCode(LockCode p_code)
 	{
-		this.code = code;
+		this.code = p_code;
 	}
 
 	@Override

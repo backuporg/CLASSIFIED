@@ -25,18 +25,15 @@ package growthcraft.core.common.item;
 
 import growthcraft.api.core.util.BlockFlags;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
@@ -67,11 +64,11 @@ public class GrcItemFoodPlantBlock extends GrcItemFoodBase implements IPlantable
 	{
 		final IBlockState currentState = world.getBlockState(pos);
 		final Block currentBlock = currentState.getBlock();
-        if (!currentBlock.isReplaceable(world, pos))
-        {
-            pos = pos.offset(dir);
-        }
-        final IBlockState state = getPlant(world, pos);
+		if (!currentBlock.isReplaceable(world, pos))
+		{
+			pos = pos.offset(dir);
+		}
+		final IBlockState state = getPlant(world, pos);
 		if (stack.stackSize == 0)
 		{
 			return false;

@@ -39,7 +39,6 @@ import growthcraft.api.core.effect.EffectUtils;
 import growthcraft.api.core.effect.IEffect;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.item.OreItemStacks;
-import growthcraft.api.core.util.StringUtils;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.api.milk.MilkFluidTags;
 import growthcraft.api.milk.MilkRegistry;
@@ -70,7 +69,6 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraft.util.ResourceLocation;
 
 public class GrcMilkFluids extends GrcModuleBase
 {

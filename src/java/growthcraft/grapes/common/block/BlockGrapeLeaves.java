@@ -15,17 +15,12 @@ import growthcraft.grapes.util.GrapeBlockCheck;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.biome.BiomeColorHelper;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -50,11 +45,11 @@ public class BlockGrapeLeaves extends BlockLeaves implements IBlockRope, IGrowab
 		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
 	}
 
-    @Override
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
-    {
-        return new ArrayList<ItemStack>(Arrays.asList(GrowthCraftGrapes.items.grapes.asStack()));
-    }
+	@Override
+	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
+	{
+		return new ArrayList<ItemStack>(Arrays.asList(GrowthCraftGrapes.items.grapes.asStack()));
+	}
 
 	@Override
 	public BlockPlanks.EnumType getWoodType(int meta)

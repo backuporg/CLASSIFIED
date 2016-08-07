@@ -3,7 +3,6 @@ package growthcraft.rice.common.block;
 import java.util.List;
 import java.util.Random;
 
-import growthcraft.api.core.util.BlockFlags;
 import growthcraft.core.common.block.GrcBlockBase;
 import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.common.block.IPaddyCrop;
@@ -16,10 +15,8 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
