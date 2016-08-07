@@ -8,25 +8,20 @@ import net.minecraft.util.ResourceLocation;
 
 public class PotionCellar extends Potion
 {
-	private static final ResourceLocation res = new ResourceLocation("grccellar" , "textures/guis/potion_tipsy.png");
+	private static final ResourceLocation resource = new ResourceLocation("grccellar" , "textures/guis/potion_tipsy.png");
 
-	public PotionCellar(int par1, boolean par2, int par3)
+	public PotionCellar(boolean badEffect, int potionColor)
 	{
-		super(par1, par2, par3);
-	}
-
-	@Override
-	public Potion setIconIndex(int par1, int par2)
-	{
-		super.setIconIndex(par1, par2);
-		return this;
+		super(resource, badEffect, potionColor);
+		setIconIndex(0, 0);
+		setPotionName("grc.potion.tipsy");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasStatusIcon()
 	{
-		Minecraft.getMinecraft().renderEngine.bindTexture(res);
+		Minecraft.getMinecraft().renderEngine.bindTexture(resource);
 		return true;
 	}
 }

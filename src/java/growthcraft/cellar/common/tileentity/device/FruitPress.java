@@ -27,6 +27,7 @@ import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.pressing.PressingRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.core.cellar.block.BlockFruitPresser;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.device.DeviceProgressive;
@@ -61,9 +62,9 @@ public class FruitPress extends DeviceProgressive
 	/**
 	 * @return meta - the metadata for the FruitPresser usually above the fruit press
 	 */
-	public int getPresserMetadata()
+	public boolean getPresserState()
 	{
-		return getWorld().getBlockMetadata(parent.xCoord, parent.yCoord + 1, parent.zCoord);
+		return getWorld().getBlockState(parent.getPos().up()).getValue(BlockFruitPresser.PRESS_STATE);
 	}
 
 	private boolean preparePressing()
@@ -72,8 +73,7 @@ public class FruitPress extends DeviceProgressive
 		final ItemStack primarySlotItem = inputSlot.get();
 		if (primarySlotItem == null) return false;
 
-		final int m = getPresserMetadata();
-		if (m < 2) return false;
+		if (!getPresserState()) return false;
 
 		if (fluidSlot.isFull()) return false;
 

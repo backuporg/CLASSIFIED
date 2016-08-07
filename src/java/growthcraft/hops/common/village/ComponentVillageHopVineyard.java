@@ -19,10 +19,10 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 {
 	public ComponentVillageHopVineyard(){}
 
-	public ComponentVillageHopVineyard(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int par5)
+	public ComponentVillageHopVineyard(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int type)
 	{
-		super(startPiece, par2);
-		this.coordBaseMode = par5;
+		super(startPiece, type);
+		this.coordBaseMode = facing;
 		this.boundingBox = boundingBox;
 	}
 
@@ -84,12 +84,12 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageHopVineyard buildComponent(Start startPiece, List<StructureComponent> structures, Random random, int par3, int par4, int par5, EnumFacing facing, int par7)
+	public static ComponentVillageHopVineyard buildComponent(Start startPiece, List<StructureComponent> structures, Random random, int par3, int par4, int par5, EnumFacing facing, int type)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 9, facing);
 		if (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(structures, structureboundingbox) == null)
 		{
-			return new ComponentVillageHopVineyard(startPiece, par7, random, structureboundingbox, facing);
+			return new ComponentVillageHopVineyard(startPiece, facing, random, structureboundingbox, type);
 		}
 		return null;
 	}

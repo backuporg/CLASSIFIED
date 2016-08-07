@@ -69,22 +69,22 @@ public class ComponentVillageAppleFarm extends StructureVillagePieces.Village im
 	// DO NOT REMOVE
 	public ComponentVillageAppleFarm() {}
 
-	public ComponentVillageAppleFarm(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+	public ComponentVillageAppleFarm(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int type)
 	{
-		super(startPiece, facing);
-		this.coordBaseMode = coordBaseMode;
+		super(startPiece, type);
+		this.coordBaseMode = facing;
 		this.boundingBox = boundingBox;
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, EnumFacing facing)
+	public static ComponentVillageAppleFarm buildComponent(Start startPiece, List list, Random random, int x, int y, int z, EnumFacing facing, int type)
 	{
-		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, coordBaseMode);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 11, 11, facing);
 		if (canVillageGoDeeper(structureboundingbox))
 		{
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
 			{
-				return new ComponentVillageAppleFarm(startPiece, facing, random, structureboundingbox, coordBaseMode);
+				return new ComponentVillageAppleFarm(startPiece, facing, random, structureboundingbox, type);
 			}
 		}
 		return null;

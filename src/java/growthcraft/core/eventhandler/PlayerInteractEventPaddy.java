@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,7 +24,7 @@ public class PlayerInteractEventPaddy
 	{
 		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
 		{
-			if (event.face != 1) return;
+			if (event.face != EnumFacing.UP) return;
 
 			final EntityPlayer player = event.entityPlayer;
 			final ItemStack itemstack = player.getCurrentEquippedItem();
@@ -41,7 +42,7 @@ public class PlayerInteractEventPaddy
 						(double)event.pos.getZ() + 0.5D,
 						paddyBlock.stepSound.getPlaceSound(),
 						(paddyBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-						paddyBlock.stepSound.getPitch() * 0.8F);
+						paddyBlock.stepSound.getFrequency() * 0.8F);
 					itemstack.damageItem(1, player);
 				}
 			}

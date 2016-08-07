@@ -31,7 +31,6 @@ public class BlockBrewKettle extends BlockCellarContainer
 {
 	private final BBox kettleContentsBB = BBox.newCube(2, 4, 2, 12, 10, 12).scale(1f / 16f);
 	private final boolean dropItemsInBrewKettle = GrowthCraftCellar.getConfig().dropItemsInBrewKettle;
-	private final boolean fillsWithRain = GrowthCraftCellar.getConfig().brewKettleFillsWithRain;
 	private final boolean setFireToFallenLivingEntities = GrowthCraftCellar.getConfig().setFireToFallenLivingEntities;
 	private final int rainFillPerUnit = GrowthCraftCellar.getConfig().brewKettleRainFillPerUnit;
 
@@ -49,15 +48,15 @@ public class BlockBrewKettle extends BlockCellarContainer
 	@Override
 	public void fillWithRain(World world, BlockPos pos)
 	{
-		if (fillsWithRain)
+		if (GrowthCraftCellar.getConfig().brewKettleFillsWithRain)
 		{
-			final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+			final TileEntityBrewKettle te = getTileEntity(world, pos);
 			if (te != null)
 			{
 				te.fill(EnumFacing.UP, new FluidStack(FluidRegistry.WATER, rainFillPerUnit), true);
 			}
 		}
-		super.fillWithRain(world, x, y, z);
+		super.fillWithRain(world, pos);
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class BlockBrewKettle extends BlockCellarContainer
 	{
 		if (!world.isRemote)
 		{
-			final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+			final TileEntityBrewKettle te = getTileEntity(world, pos);
 			if (te != null)
 			{
 				if (dropItemsInBrewKettle)
@@ -75,7 +74,7 @@ public class BlockBrewKettle extends BlockCellarContainer
 						final EntityItem item = (EntityItem)entity;
 						if (te.tryMergeItemIntoMainSlot(item.getEntityItem()) != null)
 						{
-							world.playSoundEffect((double)x, (double)y, (double)z, "liquid.splash", 0.3f, 0.5f);
+							world.playSoundEffect((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), "liquid.splash", 0.3f, 0.5f);
 						}
 					}
 				}
@@ -85,9 +84,9 @@ public class BlockBrewKettle extends BlockCellarContainer
 					{
 						if (te.getHeatMultiplier() >= 0.5f)
 						{
-							final float ex = (float)entity.posX - x;
-							final float ey = (float)entity.posY - y;
-							final float ez = (float)entity.posZ - z;
+							final float ex = (float)entity.posX - pos.getX();
+							final float ey = (float)entity.posY - pos.getY();
+							final float ez = (float)entity.posZ - pos.getZ();
 							if (kettleContentsBB.contains(ex, ey, ez))
 							{
 								entity.setFire(1);
@@ -102,7 +101,7 @@ public class BlockBrewKettle extends BlockCellarContainer
 	@Override
 	protected boolean playerDrainTank(World world, BlockPos pos, IFluidHandler fh, ItemStack is, EntityPlayer player)
 	{
-		final FluidStack fs = Utils.playerDrainTank(world, x, y, z, fh, is, player);
+		final FluidStack fs = Utils.playerDrainTank(world, pos, fh, is, player);
 		return fs != null && fs.amount > 0;
 	}
 
@@ -125,9 +124,6 @@ public class BlockBrewKettle extends BlockCellarContainer
 		return true;
 	}
 
-	/************
-	 * BOXES
-	 ************/
 	@Override
 	public void setBlockBoundsForItemRender()
 	{
@@ -152,9 +148,6 @@ public class BlockBrewKettle extends BlockCellarContainer
 		this.setBlockBoundsForItemRender();
 	}
 
-	/************
-	 * COMPARATOR
-	 ************/
 	@Override
 	public boolean hasComparatorInputOverride()
 	{
@@ -164,7 +157,7 @@ public class BlockBrewKettle extends BlockCellarContainer
 	@Override
 	public int getComparatorInputOverride(World world, BlockPos pos)
 	{
-		final TileEntityBrewKettle te = getTileEntity(world, x, y, z);
+		final TileEntityBrewKettle te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.getFluidAmountScaled(15, 1);

@@ -20,9 +20,6 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationH
 
 public class VillageHandlerApples implements IVillageCreationHandler
 {
-	private boolean generateAppleFarms = GrowthCraftApples.getConfig().generateAppleFarms;
-
-	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 	{
@@ -35,7 +32,7 @@ public class VillageHandlerApples implements IVillageCreationHandler
 	public PieceWeight getVillagePieceWeight(Random random, int i)
 	{
 		int num = MathHelper.getRandomIntegerInRange(random, 0 + i, 1 + i);
-		if (!generateAppleFarms)
+		if (!GrowthCraftApples.getConfig().generateAppleFarms)
 			num = 0;
 
 		return new PieceWeight(ComponentVillageAppleFarm.class, 21, num);

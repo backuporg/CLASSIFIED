@@ -18,7 +18,7 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 {
 	public ComponentVillageTavern() {}
 
-	public ComponentVillageTavern(Start startPiece, int type, Random random, StructureBoundingBox boundingBox, EnumFacing facing)
+	public ComponentVillageTavern(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int type)
 	{
 		super(startPiece, type);
 		this.coordBaseMode = facing;
@@ -68,42 +68,42 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		fillWithBlocks(world, box, 0, 2, 0, 0, 2, 6, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
 		fillWithBlocks(world, box, 0, 3, 1, 0, 3, 5, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
 		fillWithBlocks(world, box, 0, 4, 2, 0, 4, 4, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
-		setBlockState(world, Blocks.planks.getDefaultState(), 0, 0, 5, 3, box);
+		setBlockState(world, Blocks.planks.getDefaultState(), 0, 5, 3, box);
 		fillWithBlocks(world, box, 12, 2, 0, 12, 2, 6, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
 		fillWithBlocks(world, box, 12, 3, 1, 12, 3, 5, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
 		fillWithBlocks(world, box, 12, 4, 2, 12, 4, 4, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
-		setBlockState(world, Blocks.planks.getDefaultState(), 0, 12, 5, 3, box);
+		setBlockState(world, Blocks.planks.getDefaultState(), 12, 5, 3, box);
 		fillWithBlocks(world, box, 1, 2, 0, 11, 2, 0, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
 		fillWithBlocks(world, box, 1, 2, 6, 11, 2, 6, Blocks.planks.getDefaultState(), Blocks.planks.getDefaultState(), false);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 0, 2, 1, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 0, 2, 5, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 8, 2, 6, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 11, 2, 6, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 12, 4, 2, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 12, 4, 4, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 1, 2, 0, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 3, 2, 0, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 7, 2, 0, box);
-		setBlockState(world, Blocks.log.getDefaultState(), 0, 11, 2, 0, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 0, 2, 2, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 0, 2, 3, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 0, 2, 4, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 9, 2, 6, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 10, 2, 6, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 12, 4, 3, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 2, 2, 0, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 8, 2, 0, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 9, 2, 0, box);
-		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 10, 2, 0, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 0, 2, 1, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 0, 2, 5, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 8, 2, 6, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 11, 2, 6, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 12, 4, 2, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 12, 4, 4, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 1, 2, 0, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 3, 2, 0, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 7, 2, 0, box);
+		setBlockState(world, Blocks.log.getDefaultState(), 11, 2, 0, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 2, 2, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 2, 3, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 0, 2, 4, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 9, 2, 6, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 10, 2, 6, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 12, 4, 3, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 2, 2, 0, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 8, 2, 0, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 9, 2, 0, box);
+		setBlockState(world, Blocks.glass_pane.getDefaultState(), 10, 2, 0, box);
 
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 2, 1, 1, box);
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 3, 1, 1, box);
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 2, 1, 3, box);
 		setBlockState(world, Blocks.oak_stairs.getDefaultState(), 3, 1, 3, box);
-		setBlockState(world, Blocks.fence.getDefaultState(), 0, 2, 1, 2, box);
-		setBlockState(world, Blocks.fence.getDefaultState(), 0, 3, 1, 2, box);
-		setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 0, 2, 2, 2, box);
-		setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 0, 3, 2, 2, box);
+		setBlockState(world, Blocks.fence.getDefaultState(), 2, 1, 2, box);
+		setBlockState(world, Blocks.fence.getDefaultState(), 3, 1, 2, box);
+		setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 2, 2, 2, box);
+		setBlockState(world, Blocks.wooden_pressure_plate.getDefaultState(), 3, 2, 2, box);
 
 		for (z = 1; z <= 5; ++z)
 		{
@@ -139,15 +139,16 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		setBlockState(world, Blocks.stone_stairs.getDefaultState(), 7, 1, 5, box);
 		setBlockState(world, Blocks.stone_stairs.getDefaultState(), 4, 3, 5, box);
 		setBlockState(world, Blocks.stone_stairs.getDefaultState(), 6, 3, 5, box);
-		setBlockState(world, Blocks.stone_slab.getDefaultState(), 3 ^ 8, 5, 3, 5, box);
+		setBlockState(world, Blocks.stone_slab.getDefaultState(), 5, 3, 5, box);
 		fillWithBlocks(world, box, 5, 1, 6, 5, 9, 6, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
-		setBlockState(world, Blocks.iron_bars.getDefaultState(), 0, 5, 1, 5, box);
-		setBlockState(world, Blocks.netherrack.getDefaultState(), 0, 5, 0, 6, box);
-		setBlockState(world, Blocks.fire.getDefaultState(), 0, 5, 1, 6, box);
+		setBlockState(world, Blocks.iron_bars.getDefaultState(), 5, 1, 5, box);
+		setBlockState(world, Blocks.netherrack.getDefaultState(), 5, 0, 6, box);
+		setBlockState(world, Blocks.fire.getDefaultState(), 5, 1, 6, box);
 
-		placeDoorAtCurrentPosition(world, box, random, 5, 1, 0, getMetadataWithOffset(Blocks.wooden_door, 1));
+		GrowthCraftCellar.getLogger().warn("(fixme) ComponentVillageTavern#addComponentParts missing door");
+		//placeDoorAtCurrentPosition(world, box, random, 5, 1, 0, getMetadataWithOffset(Blocks.oak_door, 1));
 
-		if (getBlockAtCurrentPosition(world, 5, 0, -1, box) == Blocks.air && getBlockAtCurrentPosition(world, 5, -1, -1, box) != Blocks.air)
+		if (getBlockStateFromPos(world, 5, 0, -1, box).getBlock() == Blocks.air && getBlockStateFromPos(world, 5, -1, -1, box).getBlock() != Blocks.air)
 		{
 			setBlockState(world, Blocks.stone_stairs.getDefaultState(), 5, 0, -1, box);
 		}
@@ -165,19 +166,13 @@ public class ComponentVillageTavern extends StructureVillagePieces.Village
 		return true;
 	}
 
-	@Override
-	protected int getVillagerType(int par1)
-	{
-		return GrowthCraftCellar.getConfig().villagerBrewerID;
-	}
-
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageTavern buildComponent(Start startPiece, List list, Random rand, int par3, int par4, int par5, EnumFacing facing, int par7)
+	public static ComponentVillageTavern buildComponent(Start startPiece, List list, Random rand, int par3, int par4, int par5, EnumFacing facing, int type)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 13, 9, 8, facing);
 		if (canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(list, structureboundingbox) == null)
 		{
-			return new ComponentVillageTavern(startPiece, par7, rand, structureboundingbox, facing);
+			return new ComponentVillageTavern(startPiece, facing, rand, structureboundingbox, type);
 		}
 		return null;
 	}

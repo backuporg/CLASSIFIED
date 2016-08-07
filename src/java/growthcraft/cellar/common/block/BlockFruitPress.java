@@ -8,6 +8,7 @@ import growthcraft.cellar.util.CellarGuiType;
 import growthcraft.api.core.util.BlockFlags;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,11 +53,10 @@ public class BlockFruitPress extends BlockCellarContainer
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos)
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(world, pos);
-		final IBlockState state = world.getBlockState(pos);
-		world.setBlock(pos.up(), getPresserBlock(), getPresserBlock().getDefaultState(ROTATION, state.getValue(ROTATION)), BlockFlags.SYNC);
+		super.onBlockAdded(world, pos, state);
+		world.setBlockState(pos.up(), getPresserBlock().getDefaultState().withProperty(ROTATION, state.getValue(ROTATION)), BlockFlags.SYNC);
 	}
 
 
@@ -65,23 +65,23 @@ public class BlockFruitPress extends BlockCellarContainer
 	{
 		super.onBlockPlacedBy(world, pos, state, entity, stack);
 		final int a = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		GrowthCraftCellar.getLogger().warn("(fixme) cellar/BlockFruitPress#onBlockPlacedBy");
+		//if (a == 0 || a == 2)
+		//{
+		//	world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SYNC);
+		//}
+		//else if (a == 1 || a == 3)
+		//{
+		//	world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
+		//}
 
-		if (a == 0 || a == 2)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 0, BlockFlags.SYNC);
-		}
-		else if (a == 1 || a == 3)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 1, BlockFlags.SYNC);
-		}
-
-		world.setBlock(pos.up(), getPresserBlock(), world.getBlockMetadata(x, y, z), BlockFlags.SYNC);
+		world.setBlockState(pos.up(), getPresserBlock().getDefaultState().withProperty(ROTATION, state.getValue(ROTATION)), BlockFlags.SYNC);
 	}
 
 	@Override
-	public void onBlockHarvested(World world, BlockPos pos, int m, EntityPlayer player)
+	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		if (player.capabilities.isCreativeMode && (m & 8) != 0 && presserIsAbove(world, pos))
+		if (player.capabilities.isCreativeMode && presserIsAbove(world, pos))
 		{
 			world.destroyBlock(pos.up(), true);
 			world.getTileEntity(pos.up()).invalidate();
@@ -113,7 +113,7 @@ public class BlockFruitPress extends BlockCellarContainer
 			default:
 				return isNormalCube(world, pos);
 		}
-		return isNormalCube(world, x, y, z);
+		return isNormalCube(world, pos);
 	}
 
 	/************
@@ -122,29 +122,26 @@ public class BlockFruitPress extends BlockCellarContainer
 
 	/**
 	 * @param world - world block is in
-	 * @param x - x coord
-	 * @param y - y coord
-	 * @param z - z coord
+	 * @param pos
 	 * @return true if the BlockFruitPresser is above this block, false otherwise
 	 */
 	public boolean presserIsAbove(World world, BlockPos pos)
 	{
-		return getPresserBlock() == world.getBlock(pos.up());
+		return getPresserBlock() == world.getBlockState(pos.up()).getBlock();
 	}
 
-	@Override
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return presserIsAbove(world, x, y, z);
+		return presserIsAbove(world, pos);
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		if (y >= 255) return false;
+		if (pos.getY() >= 255) return false;
 
-		return World.doesBlockHaveSolidTopSurface(world, x, y - 1, z) &&
-			super.canPlaceBlockAt(world, x, y, z) &&
+		return World.doesBlockHaveSolidTopSurface(world, pos.down()) &&
+			super.canPlaceBlockAt(world, pos) &&
 			super.canPlaceBlockAt(world, pos.up());
 	}
 
@@ -176,7 +173,7 @@ public class BlockFruitPress extends BlockCellarContainer
 	@Override
 	public int getComparatorInputOverride(World world, BlockPos pos)
 	{
-		final TileEntityFruitPress te = getTileEntity(world, x, y, z);
+		final TileEntityFruitPress te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.getFluidAmountScaled(15, 0);

@@ -69,9 +69,9 @@ public class BlockCheesePress extends GrcBlockContainer
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos)
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(world, pos);
+		super.onBlockAdded(world, pos, state);
 		this.setDefaultDirection(world, pos);
 	}
 

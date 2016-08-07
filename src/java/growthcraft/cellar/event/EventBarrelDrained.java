@@ -26,6 +26,7 @@ package growthcraft.cellar.event;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fluids.FluidStack;
 
 /**
@@ -35,18 +36,14 @@ public class EventBarrelDrained extends Event
 {
 	public final EntityPlayer player;
 	public final World world;
-	public final int x;
-	public final int y;
-	public final int z;
+	public final BlockPos pos;
 	public FluidStack fluid;
 
-	public EventBarrelDrained(EntityPlayer pPlayer, World pWorld, int px, int py, int pz, FluidStack pFluid)
+	public EventBarrelDrained(EntityPlayer pPlayer, World pWorld, BlockPos p_pos, FluidStack pFluid)
 	{
 		this.player = pPlayer;
 		this.world = pWorld;
-		this.x = px;
-		this.y = py;
-		this.z = pz;
+		this.pos = p_pos;
 		this.fluid = pFluid;
 	}
 }

@@ -7,6 +7,7 @@ import growthcraft.core.registry.FenceRopeRegistry.FenceRopeEntry;
 import growthcraft.core.registry.FenceRopeRegistry;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,7 +16,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class ItemRope extends GrcItemBase
+public class ItemRope extends GrcPseudoItemBlock
 {
 	public ItemRope()
 	{
@@ -25,70 +26,34 @@ public class ItemRope extends GrcItemBase
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
+	protected boolean prePlaceBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing dir, float hitX, float hitY, float hitZ)
 	{
-		final Block block = world.getBlockState(pos).getBlock();
+		final Block currentBlock = world.getBlockState(pos).getBlock();
 		GrowthCraftCore.getLogger().warn("(fixme) ItemRope#onItemUse metadata");
 		final int blockMeta = 0;
-
-		if (!block.isReplaceable(world, pos))
-        {
-            pos = pos.offset(dir);
-        }
-
-		final FenceRopeEntry entry = FenceRopeRegistry.instance().getEntry(block, blockMeta);
+		final FenceRopeEntry entry = FenceRopeRegistry.instance().getEntry(currentBlock, blockMeta);
 		if (entry != null)
 		{
-			if (!player.canPlayerEdit(pos, dir, stack))
+			if (stack.stackSize == 0)
 			{
 				return false;
 			}
-			else if (stack.stackSize == 0)
+			else if (!player.canPlayerEdit(pos, dir, stack))
 			{
 				return false;
 			}
-
 			int targetMeta = entry.getFenceRopeBlockMetadata();
 			if (targetMeta == ItemKey.WILDCARD_VALUE) targetMeta = blockMeta;
-
 			world.setBlockState(pos, entry.getFenceRopeBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 			--stack.stackSize;
 			return true;
 		}
+		return false;
+	}
 
-		if (stack.stackSize == 0)
-		{
-			return false;
-		}
-		else if (!player.canPlayerEdit(pos, dir, stack))
-		{
-			return false;
-		}
-		else
-		{
-			final Block ropeBlock = GrowthCraftCore.blocks.ropeBlock.getBlock();
-			if (world.canBlockBePlaced(ropeBlock, pos, false, dir, (Entity)null, stack))
-			{
-				final int meta = ropeBlock.onBlockPlaced(world, pos, dir, hitX, hitY, hitZ, 0);
-				if (world.setBlockState(pos, ropeBlock.getDefaultState(), meta, 3))
-				{
-					if (world.getBlockState(pos).getBlock() == ropeBlock)
-					{
-						ropeBlock.onBlockPlacedBy(world, pos, state, player, stack);
-						ropeBlock.onPostBlockPlaced(world, pos, meta);
-					}
-					world.playSoundEffect(
-						(double)pos.getX() + 0.5D,
-						(double)pos.getY() + 0.5D,
-						(double)pos.getZ() + 0.5D,
-						ropeBlock.stepSound.getPlaceSound(),
-						(ropeBlock.stepSound.getVolume() + 1.0F) / 2.0F,
-						ropeBlock.stepSound.getPitch() * 0.8F);
-					--stack.stackSize;
-				}
-			}
-
-			return true;
-		}
+	@Override
+	protected Block getBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos)
+	{
+		return GrowthCraftCore.blocks.ropeBlock.getBlock();
 	}
 }

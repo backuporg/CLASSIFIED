@@ -1,7 +1,9 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.common.block.BlockFruitPresser;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -21,19 +23,18 @@ public class TileEntityFruitPresser extends TileEntity implements ITickable
 	@Override
 	public void update()
 	{
-		if (GrowthCraftCellar.blocks.fruitPresser.getBlock() != worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord))
+		if (GrowthCraftCellar.blocks.fruitPresser.equals(worldObj.getBlockState(getPos()).getBlock()))
 		{
 			invalidate();
 		}
-
-		final int meta = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
+		final IBlockState state = this.worldObj.getBlockState(getPos());
+		final boolean pressState = state.getValue(BlockFruitPresser.PRESS_STATE);
 		this.transPrev = this.trans;
-
-		if ((meta == 0 || meta == 1) && this.trans > this.transMin)
+		if (pressState && this.trans > this.transMin)
 		{
 			this.trans -= this.transSpd;
 		}
-		else if ((meta == 2 || meta == 3) && this.trans < this.transMax)
+		else if (!pressState && this.trans < this.transMax)
 		{
 			this.trans += this.transSpd;
 		}
@@ -65,13 +66,12 @@ public class TileEntityFruitPresser extends TileEntity implements ITickable
 	{
 		final NBTTagCompound nbtTag = new NBTTagCompound();
 		writeToNBT(nbtTag);
-		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+		return new S35PacketUpdateTileEntity(getPos(), 128, nbtTag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.getNbtCompound());
-		this.worldObj.func_147479_m(this.xCoord, this.yCoord, this.zCoord);
 	}
 }

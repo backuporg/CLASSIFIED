@@ -84,16 +84,12 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos);
 	}
 
-	@Override
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
 		return (world.getFullBlockLightValue(pos) >= 8 || world.canBlockSeeSky(pos)) &&
 			BlockCheck.canSustainPlant(world, x, y - 1, z, EnumFacing.UP, this);
 	}
 
-	/************
-	 * STUFF
-	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getItem(World world, BlockPos pos)

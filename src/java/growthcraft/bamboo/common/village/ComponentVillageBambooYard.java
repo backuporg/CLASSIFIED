@@ -15,6 +15,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -90,21 +91,21 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 	// DO NOT REMOVE
 	public ComponentVillageBambooYard() {}
 
-	public ComponentVillageBambooYard(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+	public ComponentVillageBambooYard(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int type)
 	{
-		super(startPiece, par2);
-		this.coordBaseMode = coordBaseMode;
+		super(startPiece, type);
+		this.coordBaseMode = facing;
 		this.boundingBox = boundingBox;
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageBambooYard buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
+	public static ComponentVillageBambooYard buildComponent(Start startPiece, List list, Random random, int x, int y, int z, EnumFacing facing, int type)
 	{
 		// the height of the structure is 15 blocks, since the maximum height of bamboo is 12~14 blocks (+1 for the water layer)
-		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 16, 12, coordBaseMode);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 16, 12, facing);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
-				return new ComponentVillageBambooYard(startPiece, par7, random, structureboundingbox, coordBaseMode);
+				return new ComponentVillageBambooYard(startPiece, facing, random, structureboundingbox, type);
 			}
 		}
 		return null;

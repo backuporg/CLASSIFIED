@@ -85,7 +85,7 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 	// DO NOT REMOVE
 	public ComponentVillageRiceField() {}
 
-	public ComponentVillageRiceField(Start startPiece, int type, Random random, StructureBoundingBox boundingBox, EnumFacing facing)
+	public ComponentVillageRiceField(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int type)
 	{
 		super(startPiece, type);
 		this.coordBaseMode = facing;
@@ -93,14 +93,14 @@ public class ComponentVillageRiceField extends StructureVillagePieces.Village im
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y, int z, EnumFacing facing, int par7)
+	public static ComponentVillageRiceField buildComponent(Start startPiece, List list, Random random, int x, int y, int z, EnumFacing facing, int type)
 	{
 		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 11, 5, 12, facing);
 		if (canVillageGoDeeper(structureboundingbox))
 		{
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null)
 			{
-				return new ComponentVillageRiceField(startPiece, par7, random, structureboundingbox, facing);
+				return new ComponentVillageRiceField(startPiece, facing, random, structureboundingbox, type);
 			}
 		}
 		return null;

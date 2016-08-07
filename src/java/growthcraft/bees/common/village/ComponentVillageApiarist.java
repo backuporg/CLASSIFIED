@@ -11,8 +11,10 @@ import growthcraft.core.util.SchemaToVillage.MultiBlockEntries;
 import growthcraft.core.util.SchemaToVillage;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
@@ -198,20 +200,20 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 	// DO NOT REMOVE
 	public ComponentVillageApiarist() {}
 
-	public ComponentVillageApiarist(Start startPiece, int par2, Random random, StructureBoundingBox boundingBox, int coordBaseMode)
+	public ComponentVillageApiarist(Start startPiece, EnumFacing facing, Random random, StructureBoundingBox boundingBox, int type)
 	{
-		super(startPiece, par2);
-		this.coordBaseMode = coordBaseMode;
+		super(startPiece, type);
+		this.coordBaseMode = facing;
 		this.boundingBox = boundingBox;
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static ComponentVillageApiarist buildComponent(Start startPiece, List list, Random random, int x, int y, int z, int coordBaseMode, int par7)
+	public static ComponentVillageApiarist buildComponent(Start startPiece, List list, Random random, int x, int y, int z, EnumFacing facing, int type)
 	{
-		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 8, 14, coordBaseMode);
+		final StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 9, 8, 14, facing);
 		if (canVillageGoDeeper(structureboundingbox)) {
 			if (StructureComponent.findIntersecting(list, structureboundingbox) == null) {
-				return new ComponentVillageApiarist(startPiece, par7, random, structureboundingbox, coordBaseMode);
+				return new ComponentVillageApiarist(startPiece, facing, random, structureboundingbox, type);
 			}
 		}
 		return null;

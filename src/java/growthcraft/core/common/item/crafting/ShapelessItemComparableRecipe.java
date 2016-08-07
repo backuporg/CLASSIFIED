@@ -48,22 +48,36 @@ public class ShapelessItemComparableRecipe implements IRecipe
 		this.recipeItems = list;
 	}
 
+	@Override
 	public ItemStack getRecipeOutput()
 	{
 		return this.recipeOutput;
 	}
 
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting inv)
+	{
+        final ItemStack[] itemStacks = new ItemStack[inv.getSizeInventory()];
+        for (int i = 0; i < itemStacks.length; ++i)
+        {
+            final ItemStack itemstack = inv.getStackInSlot(i);
+            itemStacks[i] = net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack);
+        }
+        return itemStacks;
+	}
+
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
-	public boolean matches(InventoryCrafting crafting, World world)
+	@Override
+	public boolean matches(InventoryCrafting inv, World world)
 	{
 		final List<ItemStack> recipeList = new ArrayList<ItemStack>(this.recipeItems);
 		for (int i = 0; i < 3; ++i)
 		{
 			for (int j = 0; j < 3; ++j)
 			{
-				final ItemStack actual = crafting.getStackInRowAndColumn(j, i);
+				final ItemStack actual = inv.getStackInRowAndColumn(j, i);
 				if (actual != null)
 				{
 					boolean flag = false;
@@ -91,7 +105,8 @@ public class ShapelessItemComparableRecipe implements IRecipe
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
-	public ItemStack getCraftingResult(InventoryCrafting crafting)
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inv)
 	{
 		return this.recipeOutput.copy();
 	}
@@ -99,6 +114,7 @@ public class ShapelessItemComparableRecipe implements IRecipe
 	/**
 	 * Returns the size of the recipe area
 	 */
+	@Override
 	public int getRecipeSize()
 	{
 		return this.recipeItems.size();

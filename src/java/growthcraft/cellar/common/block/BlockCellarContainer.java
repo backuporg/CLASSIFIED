@@ -48,7 +48,6 @@ public abstract class BlockCellarContainer extends GrcBlockContainer
 		super(material);
 	}
 
-
 	protected BlockCellarContainer setGuiType(@Nonnull CellarGuiType type)
 	{
 		this.guiType = type;
@@ -59,7 +58,7 @@ public abstract class BlockCellarContainer extends GrcBlockContainer
 	{
 		if (guiType != CellarGuiType.NONE)
 		{
-			player.openGui(GrowthCraftCellar.instance, guiType.ordinal(), world, pos);
+			player.openGui(GrowthCraftCellar.instance, guiType.ordinal(), world, pos.getX(), pos.getY(), pos.getZ());
 			return true;
 		}
 		return false;
@@ -68,7 +67,7 @@ public abstract class BlockCellarContainer extends GrcBlockContainer
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (super.onBlockActivated(world, pos, player, facing, hitX, hitY, hitZ)) return true;
+		if (super.onBlockActivated(world, pos, state, player, facing, hitX, hitY, hitZ)) return true;
 		return !player.isSneaking() && openGui(player, world, pos);
 	}
 }

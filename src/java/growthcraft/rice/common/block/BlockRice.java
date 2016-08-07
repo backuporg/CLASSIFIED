@@ -59,7 +59,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
 	{
 		final int meta = state.getValue(GROWTH);
 		world.setBlockState(pos, state.withProperty(GROWTH, meta + 1));
-		AppleCore.announceGrowthTick(this, world, pos, meta);
+		AppleCore.announceGrowthTick(this, world, pos, state);
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class BlockRice extends GrcBlockBase implements IPaddyCrop, ICropDataProv
 
 			if (getLightValue(world, pos.up()) >= 9 && paddyHasWater)
 			{
-				final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, random);
+				final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, random);
 				if (allowGrowthResult == Event.Result.DENY)
 					return;
 

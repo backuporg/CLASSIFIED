@@ -79,7 +79,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	{
 		final int meta = state.getValue(GROWTH);
 		world.setBlockState(pos, state.withProperty(GROWTH, meta + 1), BlockFlags.UPDATE_AND_SYNC);
-		AppleCore.announceGrowthTick(this, world, pos, meta);
+		AppleCore.announceGrowthTick(this, world, pos, state);
 	}
 
 	public void spreadLeaves(World world, BlockPos pos)
@@ -102,7 +102,7 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		}
 		else
 		{
-			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, random);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 

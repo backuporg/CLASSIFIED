@@ -93,7 +93,7 @@ public abstract class BlockGrapeVineBase extends GrcBlockBase implements IPlanta
 	{
 		final int meta = (int)state.getValue(GROWTH);
 		world.setBlockState(pos, state.withProperty(GROWTH, meta + 1), BlockFlags.SYNC);
-		AppleCore.announceGrowthTick(this, world, pos, meta);
+		AppleCore.announceGrowthTick(this, world, pos, state);
 	}
 
 	protected float getGrowthRate(World world, BlockPos pos)
@@ -213,7 +213,7 @@ public abstract class BlockGrapeVineBase extends GrcBlockBase implements IPlanta
 		super.updateTick(world, pos, state, random);
 		if (canUpdateGrowth(world, pos, state))
 		{
-			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, random);
 			if (Event.Result.DENY == allowGrowthResult)
 				return;
 

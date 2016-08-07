@@ -48,9 +48,9 @@ public class BlockBeeHive extends GrcBlockBase
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos)
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(world, x, y, z);
+		super.onBlockAdded(world, pos, state);
 		this.setDefaultDirection(world, x, y, z);
 	}
 

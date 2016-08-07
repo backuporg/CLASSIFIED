@@ -96,7 +96,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 	{
 		final int meta = (int)state.getValue(GROWTH);
 		world.setBlockState(pos, state.withProperty(GROWTH, meta + 1), BlockFlags.SYNC);
-		AppleCore.announceGrowthTick(this, world, pos, meta);
+		AppleCore.announceGrowthTick(this, world, pos, state);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class BlockThistle extends BlockBush implements ISpreadablePlant, IGrowab
 			else
 			{
 				final int growthChance = GrowthCraftMilk.getConfig().thistleGrowthChance;
-				final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, random);
+				final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, random);
 				if (allowGrowthResult == Event.Result.DENY)
 				{
 					return;

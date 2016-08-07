@@ -45,7 +45,7 @@ public class CropDataProvider implements IWailaDataProvider
 		if (block instanceof ICropDataProvider)
 		{
 			final ICropDataProvider	prov = (ICropDataProvider)block;
-			final float growth = prov.getGrowthProgress(accessor.getWorld(), accessor.getPosition(), accessor.getMetadata());
+			final float growth = prov.getGrowthProgress(accessor.getWorld(), accessor.getPosition(), accessor.getBlockState());
 			String content = EnumChatFormatting.GRAY + GrcI18n.translate("grc.format.crop.growth_prefix") + " " + EnumChatFormatting.WHITE;
 			if (growth >= 1.0f)
 			{

@@ -70,40 +70,35 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	{
 		if (!world.isRemote)
 		{
-			final IBlockState northBlock = world.getBlock(pos.north());
-			final IBlockState southBlock = world.getBlock(pos.south());
-			final IBlockState westBlock = world.getBlock(pos.west());
-			final IBlockState eastBlock = world.getBlock(pos.east());
-			int meta = 3;
-
-			if (southBlock.func_149730_j() && !northBlock.func_149730_j())
-			{
-				meta = 3;
-			}
-
-			if (northBlock.func_149730_j() && !southBlock.func_149730_j())
-			{
-				meta = 2;
-			}
-
-			if (westBlock.func_149730_j() && !eastBlock.func_149730_j())
-			{
-				meta = 5;
-			}
-
-			if (eastBlock.func_149730_j() && !westBlock.func_149730_j())
-			{
-				meta = 4;
-			}
-
-			world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
+			//final IBlockState northBlock = world.getBlock(pos.north());
+			//final IBlockState southBlock = world.getBlock(pos.south());
+			//final IBlockState westBlock = world.getBlock(pos.west());
+			//final IBlockState eastBlock = world.getBlock(pos.east());
+			//int meta = 3;
+			//if (southBlock.func_149730_j() && !northBlock.func_149730_j())
+			//{
+			//	meta = 3;
+			//}
+			//if (northBlock.func_149730_j() && !southBlock.func_149730_j())
+			//{
+			//	meta = 2;
+			//}
+			//if (westBlock.func_149730_j() && !eastBlock.func_149730_j())
+			//{
+			//	meta = 5;
+			//}
+			//if (eastBlock.func_149730_j() && !westBlock.func_149730_j())
+			//{
+			//	meta = 4;
+			//}
+			//world.setBlockMetadataWithNotify(x, y, z, meta, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
 	@Override
-	public void onBlockAdded(World world, BlockPos pos)
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(world, pos);
+		super.onBlockAdded(world, pos, state);
 		setDefaultDirection(world, pos);
 	}
 
@@ -111,8 +106,9 @@ public class BlockFermentBarrel extends BlockCellarContainer
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entity, ItemStack stack)
 	{
 		super.onBlockPlacedBy(world, pos, state, entity, stack);
-		final int meta = BlockPistonBase.determineOrientation(world, pos, entity);
-		world.setBlockMetadataWithNotify(pos, meta, BlockFlags.UPDATE_AND_SYNC);
+		GrowthCraftCellar.getLogger().warn("(fixme) BlockFermentBarrel restore rotation");
+		//final int meta = BlockPistonBase.determineOrientation(world, pos, entity);
+		//world.setBlockMetadataWithNotify(pos, meta, BlockFlags.UPDATE_AND_SYNC);
 	}
 
 	@Override

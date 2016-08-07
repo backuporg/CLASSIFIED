@@ -234,7 +234,7 @@ public class GrowthCraftCellar
 		// POTION
 		//====================
 		extendPotionsArray();
-		potionTipsy = (new PotionCellar(config.potionTipsyID, false, 0)).setIconIndex(0, 0).setPotionName("grc.potion.tipsy");
+		potionTipsy = new PotionCellar(false, 0);
 		EffectTipsy.potionTipsy = potionTipsy;
 		EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
 
