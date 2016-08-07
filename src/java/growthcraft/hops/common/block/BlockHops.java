@@ -94,15 +94,16 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
+		super.updateTick(world, pos, state, rand);
 		if (!this.canBlockStay(world, pos))
 		{
 			world.setBlockState(pos, GrowthCraftCore.blocks.ropeBlock.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 		}
 		else
 		{
-			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, random);
+			final Event.Result allowGrowthResult = AppleCore.validateGrowthTick(this, world, pos, state, rand);
 			if (allowGrowthResult == Event.Result.DENY)
 				return;
 
@@ -111,21 +112,21 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 
 			if (meta < HopsStage.BIG)
 			{
-				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
+				if (allowGrowthResult == Event.Result.ALLOW || (rand.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
 					incrementGrowth(world, pos, state);
 				}
 			}
 			else if ((meta >= HopsStage.BIG) && canSpreadLeaves(world, pos))
 			{
-				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
+				if (allowGrowthResult == Event.Result.ALLOW || (rand.nextInt((int)(this.hopVineGrowthRate / f) + 1) == 0))
 				{
 					spreadLeaves(world, pos);
 				}
 			}
 			else
 			{
-				if (allowGrowthResult == Event.Result.ALLOW || (random.nextInt((int)(this.hopVineFlowerSpawnRate / f) + 1) == 0))
+				if (allowGrowthResult == Event.Result.ALLOW || (rand.nextInt((int)(this.hopVineFlowerSpawnRate / f) + 1) == 0))
 				{
 					incrementGrowth(world, pos, state);
 				}

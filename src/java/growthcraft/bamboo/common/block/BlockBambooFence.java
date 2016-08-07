@@ -29,12 +29,6 @@ public class BlockBambooFence extends BlockFence
 	}
 
 	@Override
-	public boolean getBlocksMovement(IBlockAccess world, BlockPos pos)
-	{
-		return false;
-	}
-
-	@Override
 	public boolean canPlaceTorchOnTop(IBlockAccess world, BlockPos pos)
 	{
 		return true;

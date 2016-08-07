@@ -348,7 +348,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 			{
 				if (isHoneyEnough(6))
 				{
-					ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, worldObj, pos.x, pos.y, pos.z, false);
+					ItemUtils.addStackToPlayer(GrowthCraftBees.items.honeyJar.asStack(), player, worldObj, pos, false);
 					ItemUtils.consumeStackOnPlayer(stack, player);
 					decreaseHoney(6);
 					return true;
@@ -368,7 +368,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 				if (time > 0)
 				{
 					setTime(time);
-					worldObj.playAuxSFX(AuxFX.BONEMEAL, pos.x, pos.y, pos.z, 0);
+					worldObj.playAuxSFX(AuxFX.BONEMEAL, pos, 0);
 					ItemUtils.consumeStackOnPlayer(stack, player);
 					markForBlockUpdate();
 				}
@@ -381,7 +381,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 					final ItemStack result = GrowthCraftBees.fluids.honey.asBottleItemStack();
 					if (result != null)
 					{
-						ItemUtils.addStackToPlayer(result, player, worldObj, pos.x, pos.y, pos.z, false);
+						ItemUtils.addStackToPlayer(result, player, worldObj, pos, false);
 						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
 						decreaseHoney(2);
 						return true;
@@ -395,7 +395,7 @@ public class TileEntityBeeBox extends GrcTileEntityInventoryBase implements IIte
 					final ItemStack result = GrowthCraftBees.fluids.honey.asBucketItemStack();
 					if (result != null)
 					{
-						ItemUtils.addStackToPlayer(result, player, worldObj, pos.x, pos.y, pos.z, false);
+						ItemUtils.addStackToPlayer(result, player, worldObj, pos, false);
 						ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
 						decreaseHoney(6);
 						return true;

@@ -10,7 +10,6 @@ import growthcraft.bamboo.common.village.VillageHandlerBamboo;
 import growthcraft.bamboo.common.world.BiomeGenBamboo;
 import growthcraft.bamboo.common.world.WorldGeneratorBamboo;
 import growthcraft.bamboo.creativetab.CreativeTabsGrowthcraftBamboo;
-import growthcraft.bamboo.event.BonemealEventBamboo;
 import growthcraft.bamboo.handler.BambooFuelHandler;
 import growthcraft.bamboo.init.GrcBambooBlocks;
 import growthcraft.bamboo.init.GrcBambooItems;
@@ -90,7 +89,7 @@ public class GrowthCraftBamboo
 			bambooBiome = (new BiomeGenBamboo(config.bambooBiomeID))
 				.setColor(353825)
 				.setBiomeName("BambooForest")
-				.func_76733_a(5159473)
+				.setFillerBlockMetadata(5159473)
 				.setTemperatureRainfall(0.7F, 0.8F);
 		}
 
@@ -191,8 +190,6 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new BonemealEventBamboo());
-
 		modules.postInit();
 	}
 }

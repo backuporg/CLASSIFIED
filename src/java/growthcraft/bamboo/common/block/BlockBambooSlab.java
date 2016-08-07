@@ -8,6 +8,7 @@ import growthcraft.bamboo.GrowthCraftBamboo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -19,15 +20,43 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooSlab extends BlockSlab
 {
-	public BlockBambooSlab(boolean par2)
+	private boolean isDouble;
+
+	public BlockBambooSlab(boolean isDouble)
 	{
-		super(par2, Material.wood);
+		super(Material.wood);
+		this.isDouble = isDouble;
 		this.useNeighborBrightness = true;
 		setStepSound(soundTypeWood);
 		setResistance(5.0F);
 		setHardness(2.0F);
 		setUnlocalizedName("grc.bamboo_slab");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
+	}
+
+	@Override
+	public boolean isDouble()
+	{
+		return this.isDouble;
+	}
+
+	@Override
+	public String getUnlocalizedName(int meta)
+	{
+		return super.getUnlocalizedName();
+	}
+
+	@Override
+	public Object getVariant(ItemStack stack)
+	{
+		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooSlab#getVariant");
+		return null;
+	}
+
+	@Override
+	public IProperty<?> getVariantProperty()
+	{
+		return null;
 	}
 
 	@Override
@@ -41,12 +70,6 @@ public class BlockBambooSlab extends BlockSlab
 		}
 	}
 
-	@Override
-	public String func_150002_b(int par1)
-	{
-		return super.getUnlocalizedName();
-	}
-
 	@SideOnly(Side.CLIENT)
 	private static boolean isBlockSingleSlab(Block block)
 	{
@@ -55,7 +78,7 @@ public class BlockBambooSlab extends BlockSlab
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItem(World par1World, int par2, int par3, int par4)
+	public Item getItem(World worldIn, BlockPos pos)
 	{
 		return Item.getItemFromBlock(GrowthCraftBamboo.blocks.bambooSingleSlab.getBlock());
 	}

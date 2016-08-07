@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -29,6 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IGrowable
 {
 	//constants
+	public static final PropertyInteger GROWTH = PropertyInteger.create("growth", 0, 1);
 	private final int growth = GrowthCraftBamboo.getConfig().bambooShootGrowthRate;
 
 	public BlockBambooShoot()
@@ -41,20 +43,46 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		setUnlocalizedName("grc.bamboo_shoot");
 		setCreativeTab(null);
+		setDefaultState(blockState.getBaseState().withProperty(GROWTH, 0));
 	}
 
 	public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
-		return (float)(meta / 1.0);
+		return (float)state.getValue(GROWTH) / 1.0f;
+	}
+
+	public void growBamboo(World world, BlockPos pos, Random rand)
+	{
+		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
+		final IBlockState oldState = world.getBlockState(pos);
+		final WorldGenerator generator = new WorldGenBamboo(true);
+		world.setBlockToAir(pos);
+		if (!generator.generate(world, rand, pos))
+		{
+			world.setBlockState(pos, oldState, BlockFlags.ALL);
+		}
+	}
+
+	public void markOrGrowMarked(World world, BlockPos pos, Random random)
+	{
+		final IBlockState state = world.getBlockState(pos);
+		final int meta = state.getValue(GROWTH);
+		if (meta == 0)
+		{
+			world.setBlockState(pos, state.withProperty(GROWTH, 1), BlockFlags.SUPRESS_RENDER);
+		}
+		else
+		{
+			growBamboo(world, pos, random);
+		}
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
+		super.updateTick(world, pos, state, rand);
 		if (!world.isRemote)
 		{
-			super.updateTick(world, pos, rand);
-
 			if (getLightValue(world, pos.up()) >= 9 && rand.nextInt(this.growth) == 0)
 			{
 				markOrGrowMarked(world, pos, rand);
@@ -73,7 +101,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	{
 		if (!canBlockStay(world, pos))
 		{
-			dropBlockAsItem(world, pos, world.getBlockMetadata(pos), 0);
+			dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
 			world.setBlockToAir(pos);
 		}
 	}
@@ -86,8 +114,8 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return (world.getFullBlockLightValue(pos) >= 8 || world.canBlockSeeSky(pos)) &&
-			BlockCheck.canSustainPlant(world, x, y - 1, z, EnumFacing.UP, this);
+		return (getLightValue(world, pos) >= 8 || world.canBlockSeeSky(pos)) &&
+			BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, this);
 	}
 
 	@Override
@@ -95,32 +123,6 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	public Item getItem(World world, BlockPos pos)
 	{
 		return GrowthCraftBamboo.items.bambooShootFood.getItem();
-	}
-
-	public void growBamboo(World world, BlockPos pos, Random rand)
-	{
-		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-		final int meta = world.getBlockMetadata(pos) & 3;
-		final WorldGenerator generator = new WorldGenBamboo(true);
-		world.setBlockToAir(pos);
-		if (!generator.generate(world, rand, pos))
-		{
-			world.setBlock(pos, this, meta, BlockFlags.ALL);
-		}
-	}
-
-	public void markOrGrowMarked(World world, BlockPos pos, Random random)
-	{
-		final int meta = world.getBlockMetadata(pos);
-
-		if ((meta & 8) == 0)
-		{
-			world.setBlockMetadataWithNotify(pos, meta | 8, BlockFlags.SUPRESS_RENDER);
-		}
-		else
-		{
-			this.growBamboo(world, pos, random);
-		}
 	}
 
 	@Override
@@ -138,9 +140,9 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, IBlockState state)
 	{
-		if (random.nextFloat() < 0.45D)
+		if (rand.nextFloat() < 0.45D)
 		{
-			markOrGrowMarked(world, pos, random);
+			markOrGrowMarked(world, pos, rand);
 		}
 	}
 
@@ -151,7 +153,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return GrowthCraftBamboo.items.bambooShootFood.getItem();
 	}

@@ -119,12 +119,10 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 
 	protected void placeWorldGenAt(World world, Random random, int tx, int ty, int tz, StructureBoundingBox bb, WorldGenerator generator)
 	{
-		final int x = this.getXWithOffset(tx, tz);
-		final int y = this.getYWithOffset(ty);
-		final int z = this.getZWithOffset(tx, tz);
-		if (bb.isVecInside(x, y, z))
+		final BlockPos pos = new BlockPos(this.getXWithOffset(tx, tz), this.getYWithOffset(ty), this.getZWithOffset(tx, tz));
+		if (bb.isVecInside(pos))
 		{
-			generator.generate(world, random, x, y, z);
+			generator.generate(world, random, pos);
 		}
 	}
 
@@ -141,8 +139,8 @@ public class ComponentVillageBambooYard extends StructureVillagePieces.Village i
 			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 14, 0);
 		}
 		// clear entire bounding box
-		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air, Blocks.air, false);
-		this.fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass, Blocks.grass, false);
+		this.fillWithBlocks(world, box, 0, 0, 0, 11, 4, 12, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+		this.fillWithBlocks(world, box, 0, 0, 0, 11, 0, 12, Blocks.grass.getDefaultState(), Blocks.grass.getDefaultState(), false);
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		// okay folks, no BIG D jokes here
 		map.put('D', new BlockEntry(GrowthCraftBamboo.blocks.bambooDoor.getBlock().getDefaultState()));

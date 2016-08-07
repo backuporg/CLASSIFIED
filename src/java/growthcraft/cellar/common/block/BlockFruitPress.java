@@ -113,7 +113,6 @@ public class BlockFruitPress extends BlockCellarContainer
 			default:
 				return isNormalCube(world, pos);
 		}
-		return isNormalCube(world, pos);
 	}
 
 	/************

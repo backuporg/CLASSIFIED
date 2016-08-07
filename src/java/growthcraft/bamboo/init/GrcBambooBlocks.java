@@ -75,26 +75,26 @@ public class GrcBambooBlocks extends GrcModuleBase
 		bambooDoor       = new BlockDefinition(new BlockBambooDoor());
 		bambooFenceGate  = new BlockDefinition(new BlockBambooFenceGate());
 		bambooScaffold   = new BlockDefinition(new BlockBambooScaffold());
-		bambooFenceRope = new BlockDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bambooFenceRope"));
+		bambooFenceRope = new BlockDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bamboo_fence_rope"));
 		FenceRopeRegistry.instance().addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
 	}
 
 	@Override
 	public void register()
 	{
-		bambooBlock.register("grc.bambooBlock");
-		bambooShoot.register("grc.bambooShoot");
-		bambooStalk.register("grc.bambooStalk");
-		bambooLeaves.register("grc.bambooLeaves");
-		bambooFence.register("grc.bambooFence");
-		bambooFenceRope.register("grc.bambooFenceRope");
-		bambooWall.register("grc.bambooWall");
-		bambooStairs.register("grc.bambooStairs");
-		bambooSingleSlab.register("grc.bambooSingleSlab", ItemBambooSlab.class);
-		bambooDoubleSlab.register("grc.bambooDoubleSlab", ItemBambooSlab.class);
-		bambooDoor.register("grc.bambooDoor");
-		bambooFenceGate.register("grc.bambooFenceGate");
-		bambooScaffold.register("grc.bambooScaffold");
+		bambooBlock.register("grc.bamboo_block");
+		bambooShoot.register("grc.bamboo_shoot");
+		bambooStalk.register("grc.bamboo_stalk");
+		bambooLeaves.register("grc.bamboo_leaves");
+		bambooFence.register("grc.bamboo_fence");
+		bambooFenceRope.register("grc.bamboo_fence_rope");
+		bambooFenceGate.register("grc.bamboo_fence_gate");
+		bambooWall.register("grc.bamboo_wall");
+		bambooStairs.register("grc.bamboo_stairs");
+		bambooSingleSlab.register("grc.bamboo_single_slab", ItemBambooSlab.class);
+		bambooDoubleSlab.register("grc.bamboo_double_slab", ItemBambooSlab.class);
+		bambooDoor.register("grc.bamboo_door");
+		bambooScaffold.register("grc.bamboo_scaffold");
 
 		//====================
 		// ADDITIONAL PROPS.

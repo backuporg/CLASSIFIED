@@ -8,6 +8,7 @@ import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -29,7 +30,7 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable
 
 	public BlockBambooLeaves()
 	{
-		super(Material.leaves, false);
+		super();
 		setLightOpacity(1);
 		setStepSound(soundTypeGrass);
 		setHardness(0.2F);
@@ -37,6 +38,12 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable
 		setUnlocalizedName("grc.bamboo_leaves");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
+	}
+
+	@Override
+	public BlockPlanks.EnumType getWoodType(int meta)
+	{
+		return null;
 	}
 
 	@Override

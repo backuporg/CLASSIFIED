@@ -9,6 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import growthcraft.api.core.i18n.GrcI18n;
+import growthcraft.api.core.i18n.NullTranslator;
+
 public class EffectChanceTest
 {
 	@Test
@@ -26,6 +29,7 @@ public class EffectChanceTest
 	@Test
 	public void test_getDescription()
 	{
+		GrcI18n.setTranslator(NullTranslator.INSTANCE);
 		final EffectChance chance = new EffectChance();
 		final TestEffect testEffect = new TestEffect();
 		chance.setChance(1.0f);

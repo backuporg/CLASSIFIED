@@ -202,18 +202,16 @@ public class GrowthCraftBees
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.initSounds();
-
+		CommonProxy.instance.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
-
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
-		VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
+		logger.warn("(fixme) GrowthCraftBees registerVillagerId");
+		//VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-		VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
-		VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
-
+		logger.warn("(fixme) GrowthCraftBees registerVillageTradeHandler");
+		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
+		//VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
 		CommonProxy.instance.registerVillagerSkin();
-
 		modules.init();
 	}
 

@@ -93,9 +93,9 @@ public class BlockBeeBox extends GrcBlockContainer
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.updateTick(world, pos, rand);
+		super.updateTick(world, pos, state, rand);
 		final TileEntityBeeBox te = getTileEntity(world, pos);
 		if (te != null) te.updateBlockTick();
 	}
@@ -104,16 +104,22 @@ public class BlockBeeBox extends GrcBlockContainer
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.randomDisplayTick(world, pos, state, random);
-		if (random.nextInt(24) == 0)
+		super.randomDisplayTick(world, pos, state, rand);
+		if (rand.nextInt(24) == 0)
 		{
 			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(pos);
 			if (te != null)
 			{
 				if (te.hasBees())
 				{
-					world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
-						"grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+					world.playSound(
+						(double)pos.getX() + 0.5D,
+						(double)pos.getY() + 0.5D,
+						(double)pos.getZ() + 0.5D,
+						"grcbees:buzz",
+						1.0F + rand.nextFloat(),
+						0.3F + rand.nextFloat() * 0.7F,
+						false);
 				}
 			}
 		}
@@ -135,7 +141,7 @@ public class BlockBeeBox extends GrcBlockContainer
 			final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(pos);
 			if (te != null)
 			{
-				player.openGui(GrowthCraftBees.instance, 0, world, pos);
+				player.openGui(GrowthCraftBees.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
 				return true;
 			}
 			return false;
@@ -146,20 +152,17 @@ public class BlockBeeBox extends GrcBlockContainer
 	public void breakBlock(World world, BlockPos pos, IBlockState block)
 	{
 		final TileEntityBeeBox te = (TileEntityBeeBox)world.getTileEntity(pos);
-
 		if (te != null)
 		{
 			for (int index = 0; index < te.getSizeInventory(); ++index)
 			{
 				final ItemStack stack = te.getStackInSlot(index);
-
 				spawnAsEntity(world, pos, stack);
 			}
-
-			world.updateComparatorOutputLevel(pos, par5);
+			GrowthCraftBees.getLogger().warn("(fixme) BlockBeeBox#breakBlock updateComparatorOutputLevel");
+			//world.updateComparatorOutputLevel(pos, par5);
 		}
-
-		super.breakBlock(world, pos, par5, par6);
+		super.breakBlock(world, pos, block);
 	}
 
 	/************

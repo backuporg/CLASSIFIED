@@ -11,11 +11,12 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,24 +35,16 @@ public class BlockBambooWall extends GrcBlockBase
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 
-	@Override
-	public boolean getBlocksMovement(IBlockAccess world, BlockPos pos)
-	{
-		return false;
-	}
-
 	public boolean canConnectWallTo(IBlockAccess world, BlockPos pos)
 	{
 		if (world.isAirBlock(pos)) return false;
-
-		final Block block = world.getBlock(pos);
-
+		final IBlockState state = world.getBlockState(pos);
+		final Block block = state.getBlock();
 		if (this == block ||
 			GrowthCraftBamboo.blocks.bambooStalk.getBlock() == block ||
 			Blocks.glass_pane == block ||
 			block instanceof BlockFenceGate ||
 			block instanceof BlockFence) return true;
-
 		return false;
 	}
 
@@ -216,7 +209,7 @@ public class BlockBambooWall extends GrcBlockBase
 
 	@Override
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addCollisionBoxesToList(World world, BlockPos pos, AxisAlignedBB axis, List<AxisAlignedBB> list, Entity entity)
+	public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB axis, List<AxisAlignedBB> list, Entity entity)
 	{
 		GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooWall#addCollisionBoxesToList");
 		/*int tm;

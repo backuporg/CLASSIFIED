@@ -56,7 +56,7 @@ public class GrcBeesFluids extends GrcModuleBase
 	{
 		if (GrowthCraftBees.getConfig().honeyEnabled)
 		{
-			final Fluid honeyFluid = new GrcFluid("grc.honey")
+			final Fluid honeyFluid = new GrcFluid("grc.honey", new ResourceLocation("grcbees:honey_still"), new ResourceLocation("grcbees:honey_flow"))
 				.setColor(0xffac01)
 				.setDensity(1420)
 				.setViscosity(73600);

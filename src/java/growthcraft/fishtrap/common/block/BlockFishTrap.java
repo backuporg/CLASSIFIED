@@ -41,38 +41,37 @@ public class BlockFishTrap extends GrcBlockContainer
 		setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 
+	private boolean isWater(IBlockState state)
+	{
+		return BlockCheck.isWater(state);
+	}
+
 	private float getCatchRate(World world, BlockPos pos)
 	{
 		final int checkSize = 3;
-		final int i = x - ((checkSize - 1) / 2);
-		final int j = y - ((checkSize - 1) / 2);
-		final int k = z - ((checkSize - 1) / 2);
+		final int halfSize = (checkSize - 1) / 2;
+		final BlockPos basePos = pos.add(-halfSize, -halfSize, -halfSize);
 		float f = 1.0F;
-
 		for (int loopy = 0; loopy <= checkSize; loopy++)
 		{
 			for (int loopx = 0; loopx <= checkSize; loopx++)
 			{
 				for (int loopz = 0; loopz <= checkSize; loopz++)
 				{
-					final Block water = world.getBlock(i + loopx, j + loopy, k + loopz);
+					final IBlockState state = world.getBlockState(basePos.add(loopx, loopy, loopz));
 					float f1 = 0.0F;
 					//1.038461538461538;
-
-					if (water != null && isWater(water))
+					if (state != null && isWater(state))
 					{
 						//f1 = 1.04F;
 						f1 = 3.0F;
 						//f1 = 17.48F;
 					}
-
 					f1 /= 4.0F;
-
 					f += f1;
 				}
 			}
 		}
-
 		return f;
 	}
 
@@ -89,12 +88,10 @@ public class BlockFishTrap extends GrcBlockContainer
 		{
 			flag = Utils.isIDInList(world.getBiomeGenForCoords(pos).biomeID, GrowthCraftFishTrap.getConfig().biomesList);
 		}
-
 		if (flag)
 		{
 			f *= 1 + (75 / 100);
 		}
-
 		if (random.nextInt((int)(this.chance / f) + 1) == 0 || debugFlag)
 		{
 			final ItemStack item = pickCatch(world);
@@ -110,47 +107,37 @@ public class BlockFishTrap extends GrcBlockContainer
 		float f1 = world.rand.nextFloat();
 		final float f2 = 0.1F;
 		final float f3 = 0.05F;
-
 		if (f1 < f2)
 		{
 			return FishTrapRegistry.instance().getJunkList(world);
 		}
 		f1 -= f2;
-
 		if (f1 < f3)
 		{
 			return FishTrapRegistry.instance().getTreasureList(world);
 		}
 		f1 -= f3;
-
 		return FishTrapRegistry.instance().getFishList(world);
-	}
-
-	private boolean isWater(Block block)
-	{
-		return BlockCheck.isWater(block);
 	}
 
 	private boolean canCatch(World world, BlockPos pos)
 	{
-		return isWater(world.getBlock(pos - 1)) ||
-			isWater(world.getBlock(pos + 1)) ||
-			isWater(world.getBlock(x - 1, y, z)) ||
-			isWater(world.getBlock(x + 1, y, z));
+		return isWater(world.getBlockState(pos.north())) ||
+			isWater(world.getBlockState(pos.south())) ||
+			isWater(world.getBlockState(pos.west())) ||
+			isWater(world.getBlockState(pos.east()));
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.updateTick(world, pos, random);
-
+		super.updateTick(world, pos, state, rand);
 		final TileEntityFishTrap te = getTileEntity(world, pos);
-
 		if (te != null)
 		{
 			if (canCatch(world, pos))
 			{
-				doCatch(world, pos, random, te, false);
+				doCatch(world, pos, rand, te, false);
 			}
 		}
 	}
@@ -160,7 +147,7 @@ public class BlockFishTrap extends GrcBlockContainer
 	{
 		if (!world.isRemote)
 		{
-			player.openGui(GrowthCraftFishTrap.instance, 0, world, pos);
+			player.openGui(GrowthCraftFishTrap.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
@@ -169,13 +156,6 @@ public class BlockFishTrap extends GrcBlockContainer
 	public boolean isOpaqueCube()
 	{
 		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass()
-	{
-		return 0;
 	}
 
 	@Override

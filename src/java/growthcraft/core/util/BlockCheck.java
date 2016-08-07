@@ -145,6 +145,18 @@ public class BlockCheck
 	}
 
 	/**
+	 * Determines if state is a water block
+	 *
+	 * @param state - the state to check
+	 * @return true if the state is a water, false otherwise
+	 */
+	public static boolean isWater(IBlockState state)
+	{
+		if (state == null) return false;
+		return isWater(state.getBlock());
+	}
+
+	/**
 	 * Determines if block is a rope block
 	 *
 	 * @param block - the block to check

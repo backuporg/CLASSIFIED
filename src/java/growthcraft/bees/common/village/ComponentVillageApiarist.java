@@ -227,6 +227,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 
 	public boolean addComponentParts(World world, Random random, StructureBoundingBox box)
 	{
+		GrowthCraftBees.getLogger().warn("(fixme) ComponentVillageApiarist#addComponentParts");
 		if (this.field_143015_k < 0)
 		{
 			this.field_143015_k = this.getAverageGroundLevel(world, box);
@@ -237,7 +238,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 			this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 7, 0);
 		}
 		// clear entire bounding box
-		this.fillWithBlocks(world, box, 0, 0, 0, 9, 8, 14, Blocks.air, Blocks.air, false);
+		this.fillWithBlocks(world, box, 0, 0, 0, 9, 8, 14, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
 		final HashMap<Character, IBlockEntries> map = new HashMap<Character, IBlockEntries>();
 		// Plop down the tree first
 		//map.put('x', new BlockEntry(Blocks.log, 2));
@@ -252,7 +253,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		map.put('x', new BlockEntry(Blocks.log.getDefaultState()));
 		map.put('l', new BlockEntry(Blocks.leaves.getDefaultState()));
 		map.put('g', new BlockEntry(Blocks.glass_pane.getDefaultState()));
-		map.put('f', new BlockEntry(Blocks.fence.getDefaultState()));
+		map.put('f', new BlockEntry(Blocks.oak_fence.getDefaultState()));
 		// high slab
 		//map.put('-', new BlockEntry(Blocks.wooden_slab, 8));
 		map.put('-', new BlockEntry(Blocks.wooden_slab.getDefaultState()));
@@ -285,7 +286,7 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		map.put('8', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
 		//map.put('9', new BlockEntry(Blocks.oak_stairs, this.getMetadataWithOffset(Blocks.oak_stairs, 3)));
 		map.put('9', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
-		map.put('t', new BlockEntry(Blocks.torch));
+		map.put('t', new BlockEntry(Blocks.torch.getDefaultState()));
 		//map.put('Y', new BlockEntry(Blocks.planks, 2));
 		map.put('Y', new BlockEntry(Blocks.planks.getDefaultState()));
 		//map.put('B', new BlockEntry(Blocks.planks, 1));
@@ -295,9 +296,12 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 		//map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock(), this.getMetadataWithOffset(GrowthCraftBees.beeBox.getBlock(), random.nextInt(6))));
 		map.put('+', new BlockEntry(GrowthCraftBees.beeBox.getBlock().getDefaultState()));
 		SchemaToVillage.drawSchema(this, world, random, box, apiaristExteriorSchema, map, 0, 0, 0);
-		// Get ready to recycle for interior design
+		/**
+		 * Interior design
+		 * Get ready to recycle for interior design
+		 */
 		map.clear();
-		map.put('p', new BlockEntry(Blocks.planks));
+		map.put('p', new BlockEntry(Blocks.planks.getDefaultState()));
 		// inverted stairs for decorating interior
 		//, this.getMetadataWithOffset(Blocks.oak_stairs, 2) | 4));
 		map.put('1', new BlockEntry(Blocks.oak_stairs.getDefaultState()));
@@ -331,36 +335,31 @@ public class ComponentVillageApiarist extends StructureVillagePieces.Village imp
 				place signs beside stairs to form a chair -
 				If you happen to be a sign rotation expert, PLEASE DO FIX THIS.
 		 */
-		//this.setBlockState(world, Blocks.wall_sign, 2, 4, 1, 5, box);
-		//this.setBlockState(world, Blocks.wall_sign, 2, 6, 1, 5, box);
+		//setBlockState(world, Blocks.wall_sign, 2, 4, 1, 5, box);
+		//setBlockState(world, Blocks.wall_sign, 2, 6, 1, 5, box);
 		// Drop in the front door
-		//this.placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		//placeDoorAtCurrentPosition(world, box, random, 5, 1, 1, getMetadataWithOffset(Blocks.wooden_door, 1));
 		// Drop in the back door
-		//this.placeDoorAtCurrentPosition(world, box, random, 3, 1, 6, this.getMetadataWithOffset(Blocks.wooden_door, 1));
+		//placeDoorAtCurrentPosition(world, box, random, 3, 1, 6, getMetadataWithOffset(Blocks.wooden_door, 1));
 		// Slap that nicely placed flower pot on the counter
-		//this.setBlockState(world, Blocks.flower_pot, 3, 2, 2, 2, box);
-		this.setBlockState(world, Blocks.flower_pot.getDefaultState(), 2, 2, 2, box);
+		//setBlockState(world, Blocks.flower_pot, 3, 2, 2, 2, box);
+		setBlockState(world, Blocks.flower_pot.getDefaultState(), 2, 2, 2, box);
 		// Shove a chest behind the counter, filled with goodies
-		this.generateStructureChestContents(world, box, random, 1, 2, 5, apiaristChestContents, 3 + random.nextInt(6));
+		GrowthCraftBees.getLogger().warn("(fixme) ComponentVillageApiarist generateStructureChestContents");
+		//generateStructureChestContents(world, box, random, 1, 2, 5, apiaristChestContents, 3 + random.nextInt(6));
 		// Fix some structural madness, like buildings spawning in the air and
 		// floating on a thin layer of dirt/cobblestone
 		for (int row = 0; row < 14; ++row)
 		{
 			for (int col = 0; col < 9; ++col)
 			{
-				this.clearCurrentPositionBlocksUpwards(world, col, 8, row, box);
-				this.replaceAirAndLiquidDownwards(world, Blocks.cobblestone.getDefaultState(), col, -1, row, box);
+				clearCurrentPositionBlocksUpwards(world, col, 8, row, box);
+				replaceAirAndLiquidDownwards(world, Blocks.cobblestone.getDefaultState(), col, -1, row, box);
 			}
 		}
 		// Trap the villager behind the counter, so he shall forever sells us
 		// apiary items... Poor guy.
-		this.spawnVillagers(world, box, 1, 2, 3, 1);
+		spawnVillagers(world, box, 1, 2, 3, 1);
 		return true;
-	}
-
-	@Override
-	protected int getVillagerType(int par1)
-	{
-		return GrowthCraftBees.getConfig().villagerApiaristID;
 	}
 }

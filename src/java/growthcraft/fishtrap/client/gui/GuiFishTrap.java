@@ -1,44 +1,46 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.fishtrap.client.gui;
 
-import growthcraft.api.core.i18n.GrcI18n;
 import growthcraft.fishtrap.common.inventory.ContainerFishTrap;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishTrap;
+import growthcraft.core.client.gui.GrcGuiContainer;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class GuiFishTrap extends GuiContainer
+public class GuiFishTrap extends GrcGuiContainer<ContainerFishTrap, TileEntityFishTrap>
 {
 	private static final ResourceLocation res = new ResourceLocation("grcfishtrap" , "textures/guis/fishtrap_gui.png");
-	private TileEntityFishTrap te;
 
 	public GuiFishTrap(InventoryPlayer inv, TileEntityFishTrap fishTrap)
 	{
-		super(new ContainerFishTrap(inv, fishTrap));
-		this.te = fishTrap;
+		super(res, new ContainerFishTrap(inv, fishTrap), fishTrap);
 		this.ySize = 133;
-	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int par1, int par2)
-	{
-		final String s = this.te.getDisplayName();
-		this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-		this.fontRendererObj.drawString(GrcI18n.translate("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
-	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-	{
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(res);
-		final int w = (this.width - this.xSize) / 2;
-		final int h = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(w, h, 0, 0, this.xSize, this.ySize);
 	}
 }

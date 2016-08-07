@@ -10,6 +10,9 @@ import growthcraft.core.util.BlockCheck;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBambooStalk extends GrcBlockBase
+public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 {
 	public static final PropertyBool DRIED = PropertyBool.create("dried");
 	private final int growth = GrowthCraftBamboo.getConfig().bambooStalkGrowthRate;
@@ -148,7 +151,7 @@ public class BlockBambooStalk extends GrcBlockBase
 		if (isDried(state)) return;
 		final int offset = 4;
 		final int wideOffset = offset + 1;
-		if (world.isAreaLoaded(pos.subtract(wideOffset, wideOffset, wideOffset), pos.add(wideOffset, wideOffset, wideOffset)))
+		if (world.isAreaLoaded(pos.add(-wideOffset, -wideOffset, -wideOffset), pos.add(wideOffset, wideOffset, wideOffset)))
 		{
 			for (int x1 = -offset; x1 <= offset; ++x1)
 			{
@@ -156,7 +159,7 @@ public class BlockBambooStalk extends GrcBlockBase
 				{
 					for (int z1 = -offset; z1 <= offset; ++z1)
 					{
-						final BlockPos lPos = new BlockPos(x + x1, y + y1, z + z1);
+						final BlockPos lPos = pos.add(x1, y1, z1);
 						final IBlockState leafState = world.getBlockState(lPos);
 						if (leafState != null && leafState.getBlock() != null)
 						{
@@ -207,14 +210,14 @@ public class BlockBambooStalk extends GrcBlockBase
 
 	private boolean canFence(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlockState(pos).getBlock() == GrowthCraftBamboo.blocks.bambooFence.getBlock() ||
-			world.getBlockState(pos).getBlock() == Blocks.fence_gate ||
-			world.getBlockState(pos).getBlock() == GrowthCraftBamboo.blocks.bambooFenceGate.getBlock();
+		final IBlockState state = world.getBlockState(pos);
+		final Block block = state.getBlock();
+		return block instanceof BlockFence || block instanceof BlockFenceGate;
 	}
 
 	private boolean canWall(IBlockAccess world, BlockPos pos)
 	{
-		return world.getBlock(pos).getBlock() == GrowthCraftBamboo.blocks.bambooWall.getBlock();
+		return GrowthCraftBamboo.blocks.bambooWall.getBlock().isAssociatedBlock(world.getBlockState(pos).getBlock());
 	}
 
 	private boolean canDoor(IBlockAccess world, BlockPos pos)
@@ -233,6 +236,24 @@ public class BlockBambooStalk extends GrcBlockBase
 	{
 		return 1;
 	}
+
+	@Override
+    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+    {
+    	return true;
+    }
+
+    @Override
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    {
+    	return true;
+    }
+
+    @Override
+    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+    {
+    	GrowthCraftBamboo.getLogger().warn("(fixme) BlockBambooStalk#grow");
+    }
 
 	@Override
 	public boolean isOpaqueCube()

@@ -179,12 +179,17 @@ public class ItemUtils
 		}
 	}
 
-	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, boolean checkCreative)
+	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, BlockPos pos, boolean checkCreative)
+	{
+		addStackToPlayer(itemstack, player, world, pos.getX(), pos.getY(), pos.getZ(), checkCreative);
+	}
+
+	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, boolean checkCreative)
 	{
 		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
 	}
 
-	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, boolean checkCreative)
+	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, boolean checkCreative)
 	{
 		addStackToPlayer(itemstack, player, player.worldObj, checkCreative);
 	}

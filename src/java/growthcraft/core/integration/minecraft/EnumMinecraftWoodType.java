@@ -35,7 +35,7 @@ public enum EnumMinecraftWoodType
 	BIRCH,
 	JUNGLE,
 	ACACIA,
-	DARKOAK;
+	DARK_OAK;
 
 	public static final EnumMinecraftWoodType[] VALUES = values();
 

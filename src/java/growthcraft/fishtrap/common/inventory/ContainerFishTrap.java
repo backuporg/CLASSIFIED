@@ -15,7 +15,7 @@ public class ContainerFishTrap extends Container
 	public ContainerFishTrap(InventoryPlayer player, TileEntityFishTrap fishtrap)
 	{
 		this.te = fishtrap;
-		this.te.openInventory();
+		this.te.openInventory(player.player);
 		final byte b0 = 51;
 		int i;
 

@@ -92,10 +92,11 @@ public class DeviceBeeBox extends DeviceBase
 	private boolean canDoWork()
 	{
 		final BlockPos pos = parent.getPos();
-		if (getWorld().canLightningStrikeAt(pos.up()))
-			return false;
+		GrowthCraftBees.getLogger().warn("(fixme) DeviceBeeBox#canDoWork canLightningStrikeAt");
+		//if (getWorld().canLightningStrikeAt(pos.up()))
+		//	return false;
 		final IBlockState state = getWorld().getBlockState(pos);
-		return state.getBlock().getLightValue(world, pos) >= 7;
+		return state.getBlock().getLightValue(getWorld(), pos) >= 7;
 	}
 
 	/**
@@ -111,7 +112,7 @@ public class DeviceBeeBox extends DeviceBase
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	private List<List<IBlockState>> gatherFlowersInRadius(World world, BlockPos pos, int checkSize, List<List> list)
+	private List<IBlockState> gatherFlowersInRadius(World world, BlockPos pos, int checkSize, List<IBlockState> list)
 	{
 		final int i = pos.getX() - ((checkSize - 1) / 2);
 		final int k = pos.getZ() - ((checkSize - 1) / 2);
@@ -140,39 +141,35 @@ public class DeviceBeeBox extends DeviceBase
 	private float calcGrowthRate(World world, BlockPos pos)
 	{
 		final int checkSize = 5;
-		final int i = x - ((checkSize - 1) / 2);
-		final int k = z - ((checkSize - 1) / 2);
+		final int halfSize = (checkSize - 1) / 2;
+		final BlockPos basePos = pos.add(-halfSize, 0, -halfSize);
 		float f = 1.0F;
-
 		for (int loopx = -checkSize; loopx < checkSize; loopx++)
 		{
 			for (int loopz = -checkSize; loopz < checkSize; loopz++)
 			{
-				final Block flower = world.getBlock(i + loopx, y, k + loopz);
-				final int fm = world.getBlockMetadata(i + loopx, y, k + loopz);
-				final Block soil = world.getBlock(i + loopx, y - 1, k + loopz);
+				final BlockPos lPos = basePos.add(loopx, 0, loopz);
+				final IBlockState flowerState = world.getBlockState(lPos);
+				final IBlockState soilState = world.getBlockState(lPos.up());
 				float f1 = 0.0F;
-
-				if (soil == Blocks.grass)
+				if (Blocks.grass.isAssociatedBlock(soilState.getBlock()))
 				{
 					//f1 = 1.0F;
 					f1 = 0.36F;
-
-					if (isBlockFlower(flower, fm))
+					if (isBlockFlower(flowerState))
 					{
 						//f1 = 3.0F;
 						f1 = 1.08F;
 					}
 				}
-				else if (flower == Blocks.flower_pot && (world.getBlockMetadata(i + loopx, y, k + loopz) == 1 ||
-					world.getBlockMetadata(i + loopx, y, k + loopz) == 2))
+				//else if (flower  && (world.getBlockMetadata(i + loopx, y, k + loopz) == 1 ||
+				//	world.getBlockMetadata(i + loopx, y, k + loopz) == 2))
+				else
 				{
 					//f1 = 2.0F;
 					f1 = 0.72F;
 				}
-
 				f1 /= 4.0F;
-
 				f += f1;
 			}
 		}
@@ -290,7 +287,7 @@ public class DeviceBeeBox extends DeviceBase
 					{
 						if (entry.canPlaceAt(getWorld(), flowerPos))
 						{
-							getWorld().setBlockState(flowerPos, block.getDefaultState(), BlockFlags.SYNC);
+							getWorld().setBlockState(flowerPos, flowerState, BlockFlags.SYNC);
 						}
 					}
 				}

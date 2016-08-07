@@ -28,7 +28,7 @@ public class BiomeUtilsTest
 		}
 	}
 
-	@Test
+	/*@Test
 	public void test_testBiomeTypeTags()
 	{
 		// it should report true if the biome IS a mountain
@@ -37,7 +37,6 @@ public class BiomeUtilsTest
 			assertTrue(BiomeUtils.testBiomeTypeTags(BiomeGenBase.extremeHills, tags));
 			assertFalse(BiomeUtils.testBiomeTypeTags(BiomeGenBase.hell, tags));
 		}
-
 		// it should report true if the biome is some kind of hills or mountain
 		{
 			final TagParser.Tag[] tags = TagParser.csv.parse("MOUNTAIN,HILLS");
@@ -46,7 +45,6 @@ public class BiomeUtilsTest
 			assertTrue(BiomeUtils.testBiomeTypeTags(BiomeGenBase.taigaHills, tags));
 			assertFalse(BiomeUtils.testBiomeTypeTags(BiomeGenBase.frozenOcean, tags));
 		}
-
 		// it should report true if the biome IS a mountain, optionally a mountain hills
 		{
 			final TagParser.Tag[] tags = TagParser.csv.parse("+MOUNTAIN,HILLS");
@@ -54,5 +52,5 @@ public class BiomeUtilsTest
 			assertTrue(BiomeUtils.testBiomeTypeTags(BiomeGenBase.extremeHillsEdge, tags));
 			assertFalse(BiomeUtils.testBiomeTypeTags(BiomeGenBase.taigaHills, tags));
 		}
-	}
+	}*/
 }

@@ -2,6 +2,7 @@ package growthcraft.bamboo.common.block;
 
 import java.util.Random;
 
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.core.common.block.GrcBlockBase;
 
@@ -33,9 +34,9 @@ public class BlockBambooScaffold extends GrcBlockBase
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
+	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.updateTick(world, pos, state, random);
+		super.updateTick(world, pos, state, rand);
 		onNeighborBlockChange(world, pos, state, null);
 	}
 
@@ -52,7 +53,8 @@ public class BlockBambooScaffold extends GrcBlockBase
 				for (int j = pos.getY() + 1; j < loop; j++)
 				{
 					final BlockPos lPos = new BlockPos(pos.getX(), j, pos.getZ());
-					final Block block = world.getBlock(lPos);
+					final IBlockState lBlockState = world.getBlockState(lPos);
+					final Block block = lBlockState.getBlock();
 					if ((block == null) || (world.isAirBlock(lPos)) || (block.isReplaceable(world, lPos)))
 					{
 						if (!world.isRemote)
@@ -94,8 +96,7 @@ public class BlockBambooScaffold extends GrcBlockBase
 		else if (entity.isSneaking())
 		{
 			final double d = entity.prevPosY - entity.posY;
-			entity.boundingBox.minY += d;
-			entity.boundingBox.maxY += d;
+			entity.setEntityBoundingBox(entity.getEntityBoundingBox().offset(0, d, 0));
 			entity.posY = entity.prevPosY;
 		}
 		else
@@ -163,7 +164,7 @@ public class BlockBambooScaffold extends GrcBlockBase
 	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state)
 	{
 		final float f = 0.125F;
-		return AxisAlignedBB.getBoundingBox(
+		return AxisAlignedBB.fromBounds(
 			pos.getX() + this.minX + f,
 			pos.getY() + this.minY,
 			pos.getZ() + this.minZ + f,

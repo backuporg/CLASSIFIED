@@ -4,8 +4,6 @@ import java.util.List;
 
 import growthcraft.bamboo.GrowthCraftBamboo;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -13,11 +11,18 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityBambooRaft extends Entity
 {
@@ -37,26 +42,26 @@ public class EntityBambooRaft extends Entity
 	@SideOnly(Side.CLIENT)
 	private double velocityZ;
 
-	public EntityBambooRaft(World par1World, double par2, double par4, double par6)
+	public EntityBambooRaft(World worldIn)
 	{
-		this(par1World);
-		this.setPosition(par2, par4 + (double)this.yOffset, par6);
-		this.motionX = 0.0D;
-		this.motionY = 0.0D;
-		this.motionZ = 0.0D;
-		this.prevPosX = par2;
-		this.prevPosY = par4;
-		this.prevPosZ = par6;
-	}
-
-	public EntityBambooRaft(World par1World)
-	{
-		super(par1World);
+		super(worldIn);
 		this.isBoatEmpty = true;
 		this.speedMultiplier = 0.07D;
 		this.preventEntitySpawning = true;
 		this.setSize(1.5F, 0.6F);
-		this.yOffset = this.height / 2.0F;
+		//this.yOffset = this.height / 2.0F;
+	}
+
+	public EntityBambooRaft(World worldIn, double p_i1705_2_, double p_i1705_4_, double p_i1705_6_)
+	{
+		this(worldIn);
+		this.setPosition(p_i1705_2_, p_i1705_4_, p_i1705_6_);
+		this.motionX = 0.0D;
+		this.motionY = 0.0D;
+		this.motionZ = 0.0D;
+		this.prevPosX = p_i1705_2_;
+		this.prevPosY = p_i1705_4_;
+		this.prevPosZ = p_i1705_6_;
 	}
 
 	/**
@@ -79,17 +84,17 @@ public class EntityBambooRaft extends Entity
 	 * Returns a boundingBox used to collide the entity with other entities and blocks. This enables the entity to be
 	 * pushable on contact, like boats or minecarts.
 	 */
-	public AxisAlignedBB getCollisionBox(Entity par1Entity)
+	public AxisAlignedBB getCollisionBox(Entity entityIn)
 	{
-		return par1Entity.boundingBox;
+		return entityIn.getEntityBoundingBox();
 	}
 
 	/**
-	 * returns the bounding box for this entity
+	 * Returns the collision bounding box for this entity
 	 */
-	public AxisAlignedBB getBoundingBox()
+	public AxisAlignedBB getCollisionBoundingBox()
 	{
-		return this.boundingBox;
+		return this.getEntityBoundingBox();
 	}
 
 	/**
@@ -105,43 +110,49 @@ public class EntityBambooRaft extends Entity
 	 */
 	public double getMountedYOffset()
 	{
-		return (double)this.height * 0.0D - 0.30000001192092896D;
+		return -0.3D;
 	}
 
 	/**
 	 * Called when the entity is attacked.
 	 */
-	public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+	public boolean attackEntityFrom(DamageSource source, float amount)
 	{
-		if (this.isEntityInvulnerable())
+		if (this.isEntityInvulnerable(source))
 		{
 			return false;
 		}
 		else if (!this.worldObj.isRemote && !this.isDead)
 		{
-			this.setForwardDirection(-this.getForwardDirection());
-			this.setTimeSinceHit(10);
-			this.setDamageTaken(this.getDamageTaken() + par2 * 10.0F);
-			this.setBeenAttacked();
-			final boolean flag = par1DamageSource.getEntity() instanceof EntityPlayer &&
-				((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
-
-			if (flag || this.getDamageTaken() > 40.0F)
+			if (this.riddenByEntity != null && this.riddenByEntity == source.getEntity() && source instanceof EntityDamageSourceIndirect)
 			{
-				if (this.riddenByEntity != null)
-				{
-					this.riddenByEntity.mountEntity(this);
-				}
-
-				if (!flag)
-				{
-					this.func_145778_a(GrowthCraftBamboo.items.bambooRaft.getItem(), 1, 0.0F);
-				}
-
-				this.setDead();
+				return false;
 			}
+			else
+			{
+				this.setForwardDirection(-this.getForwardDirection());
+				this.setTimeSinceHit(10);
+				this.setDamageTaken(this.getDamageTaken() + amount * 10.0F);
+				this.setBeenAttacked();
+				boolean flag = source.getEntity() instanceof EntityPlayer && ((EntityPlayer)source.getEntity()).capabilities.isCreativeMode;
 
-			return true;
+				if (flag || this.getDamageTaken() > 40.0F)
+				{
+					if (this.riddenByEntity != null)
+					{
+						this.riddenByEntity.mountEntity(this);
+					}
+
+					if (!flag && this.worldObj.getGameRules().getBoolean("doEntityDrops"))
+					{
+						this.dropItemWithOffset(Items.boat, 1, 0.0F);
+					}
+
+					this.setDead();
+				}
+
+				return true;
+			}
 		}
 		else
 		{
@@ -168,60 +179,68 @@ public class EntityBambooRaft extends Entity
 		return !this.isDead;
 	}
 
-	/**
-	 * Sets the position and rotation. Only difference from the other one is no bounding on the rotation. Args: posX,
-	 * posY, posZ, yaw, pitch
-	 */
 	@SideOnly(Side.CLIENT)
-	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
+	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean p_180426_10_)
 	{
-		if (this.isBoatEmpty)
+		if (p_180426_10_ && this.riddenByEntity != null)
 		{
-			this.boatPosRotationIncrements = par9 + 5;
+			this.prevPosX = this.posX = x;
+			this.prevPosY = this.posY = y;
+			this.prevPosZ = this.posZ = z;
+			this.rotationYaw = yaw;
+			this.rotationPitch = pitch;
+			this.boatPosRotationIncrements = 0;
+			this.setPosition(x, y, z);
+			this.motionX = this.velocityX = 0.0D;
+			this.motionY = this.velocityY = 0.0D;
+			this.motionZ = this.velocityZ = 0.0D;
 		}
 		else
 		{
-			final double d3 = par1 - this.posX;
-			final double d4 = par3 - this.posY;
-			final double d5 = par5 - this.posZ;
-			final double d6 = d3 * d3 + d4 * d4 + d5 * d5;
-
-			if (d6 <= 1.0D)
+			if (this.isBoatEmpty)
 			{
-				return;
+				this.boatPosRotationIncrements = posRotationIncrements + 5;
+			}
+			else
+			{
+				double d0 = x - this.posX;
+				double d1 = y - this.posY;
+				double d2 = z - this.posZ;
+				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+
+				if (d3 <= 1.0D)
+				{
+					return;
+				}
+
+				this.boatPosRotationIncrements = 3;
 			}
 
-			this.boatPosRotationIncrements = 3;
+			this.boatX = x;
+			this.boatY = y;
+			this.boatZ = z;
+			this.boatYaw = (double)yaw;
+			this.boatPitch = (double)pitch;
+			this.motionX = this.velocityX;
+			this.motionY = this.velocityY;
+			this.motionZ = this.velocityZ;
 		}
-
-		this.boatX = par1;
-		this.boatY = par3;
-		this.boatZ = par5;
-		this.boatYaw = (double)par7;
-		this.boatPitch = (double)par8;
-		this.motionX = this.velocityX;
-		this.motionY = this.velocityY;
-		this.motionZ = this.velocityZ;
 	}
 
 	/**
 	 * Sets the velocity to the args. Args: x, y, z
 	 */
 	@SideOnly(Side.CLIENT)
-	public void setVelocity(double par1, double par3, double par5)
+	public void setVelocity(double x, double y, double z)
 	{
-		this.motionX = par1;
-		this.velocityX = this.motionX;
-		this.motionY = par3;
-		this.velocityY = this.motionY;
-		this.motionZ = par5;
-		this.velocityZ = this.motionZ;
+		this.velocityX = this.motionX = x;
+		this.velocityY = this.motionY = y;
+		this.velocityZ = this.motionZ = z;
 	}
 
 	/**
 	 * Called to update the entity's position/logic.
 	 */
-	@SuppressWarnings("rawtypes")
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -239,76 +258,68 @@ public class EntityBambooRaft extends Entity
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		final byte b0 = 5;
+		int i = 5;
 		double d0 = 0.0D;
 
-		for (int i = 0; i < b0; ++i)
+		for (int j = 0; j < i; ++j)
 		{
-			final double d1 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(i + 0) / (double)b0 - 0.125D;
-			final double d3 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(i + 1) / (double)b0 - 0.125D;
-			final AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox(this.boundingBox.minX, d1, this.boundingBox.minZ, this.boundingBox.maxX, d3, this.boundingBox.maxZ);
+			double d1 = this.getEntityBoundingBox().minY + (this.getEntityBoundingBox().maxY - this.getEntityBoundingBox().minY) * (double)(j + 0) / (double)i - 0.125D;
+			double d3 = this.getEntityBoundingBox().minY + (this.getEntityBoundingBox().maxY - this.getEntityBoundingBox().minY) * (double)(j + 1) / (double)i - 0.125D;
+			AxisAlignedBB axisalignedbb = new AxisAlignedBB(this.getEntityBoundingBox().minX, d1, this.getEntityBoundingBox().minZ, this.getEntityBoundingBox().maxX, d3, this.getEntityBoundingBox().maxZ);
 
 			if (this.worldObj.isAABBInMaterial(axisalignedbb, Material.water))
 			{
-				d0 += 1.0D / (double)b0;
+				d0 += 1.0D / (double)i;
 			}
 		}
 
-		final double d10 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		double d2;
-		double d4;
-		int j;
+		double d9 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
-		if (d10 > 0.26249999999999996D)
+		if (d9 > 0.2975D)
 		{
-			d2 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D);
-			d4 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D);
+			double d2 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D);
+			double d4 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D);
 
-			for (j = 0; (double)j < 1.0D + d10 * 60.0D; ++j)
+			for (int k = 0; (double)k < 1.0D + d9 * 60.0D; ++k)
 			{
-				final double d5 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);
-				final double d6 = (double)(this.rand.nextInt(2) * 2 - 1) * 0.7D;
-				double d8;
-				double d9;
+				double d5 = (double)(this.rand.nextFloat() * 2.0F - 1.0F);
+				double d6 = (double)(this.rand.nextInt(2) * 2 - 1) * 0.7D;
 
 				if (this.rand.nextBoolean())
 				{
-					d8 = this.posX - d2 * d5 * 0.8D + d4 * d6;
-					d9 = this.posZ - d4 * d5 * 0.8D - d2 * d6;
-					this.worldObj.spawnParticle("splash", d8, this.posY - 0.125D, d9, this.motionX, this.motionY, this.motionZ);
+					double d7 = this.posX - d2 * d5 * 0.8D + d4 * d6;
+					double d8 = this.posZ - d4 * d5 * 0.8D - d2 * d6;
+					this.worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, d7, this.posY - 0.125D, d8, this.motionX, this.motionY, this.motionZ, new int[0]);
 				}
 				else
 				{
-					d8 = this.posX + d2 + d4 * d5 * 0.7D;
-					d9 = this.posZ + d4 - d2 * d5 * 0.7D;
-					this.worldObj.spawnParticle("splash", d8, this.posY - 0.125D, d9, this.motionX, this.motionY, this.motionZ);
+					double d24 = this.posX + d2 + d4 * d5 * 0.7D;
+					double d25 = this.posZ + d4 - d2 * d5 * 0.7D;
+					this.worldObj.spawnParticle(EnumParticleTypes.WATER_SPLASH, d24, this.posY - 0.125D, d25, this.motionX, this.motionY, this.motionZ, new int[0]);
 				}
 			}
 		}
-
-		double d11;
-		double d12;
 
 		if (this.worldObj.isRemote && this.isBoatEmpty)
 		{
 			if (this.boatPosRotationIncrements > 0)
 			{
-				d2 = this.posX + (this.boatX - this.posX) / (double)this.boatPosRotationIncrements;
-				d4 = this.posY + (this.boatY - this.posY) / (double)this.boatPosRotationIncrements;
-				d11 = this.posZ + (this.boatZ - this.posZ) / (double)this.boatPosRotationIncrements;
-				d12 = MathHelper.wrapAngleTo180_double(this.boatYaw - (double)this.rotationYaw);
-				this.rotationYaw = (float)((double)this.rotationYaw + d12 / (double)this.boatPosRotationIncrements);
+				double d12 = this.posX + (this.boatX - this.posX) / (double)this.boatPosRotationIncrements;
+				double d16 = this.posY + (this.boatY - this.posY) / (double)this.boatPosRotationIncrements;
+				double d19 = this.posZ + (this.boatZ - this.posZ) / (double)this.boatPosRotationIncrements;
+				double d22 = MathHelper.wrapAngleTo180_double(this.boatYaw - (double)this.rotationYaw);
+				this.rotationYaw = (float)((double)this.rotationYaw + d22 / (double)this.boatPosRotationIncrements);
 				this.rotationPitch = (float)((double)this.rotationPitch + (this.boatPitch - (double)this.rotationPitch) / (double)this.boatPosRotationIncrements);
 				--this.boatPosRotationIncrements;
-				this.setPosition(d2, d4, d11);
+				this.setPosition(d12, d16, d19);
 				this.setRotation(this.rotationYaw, this.rotationPitch);
 			}
 			else
 			{
-				d2 = this.posX + this.motionX;
-				d4 = this.posY + this.motionY;
-				d11 = this.posZ + this.motionZ;
-				this.setPosition(d2, d4, d11);
+				double d13 = this.posX + this.motionX;
+				double d17 = this.posY + this.motionY;
+				double d20 = this.posZ + this.motionZ;
+				this.setPosition(d13, d17, d20);
 
 				if (this.onGround)
 				{
@@ -326,8 +337,8 @@ public class EntityBambooRaft extends Entity
 		{
 			if (d0 < 1.0D)
 			{
-				d2 = d0 * 2.0D - 1.0D;
-				this.motionY += 0.03999999910593033D * d2;
+				double d10 = d0 * 2.0D - 1.0D;
+				this.motionY += 0.03999999910593033D * d10;
 			}
 			else
 			{
@@ -339,25 +350,25 @@ public class EntityBambooRaft extends Entity
 				this.motionY += 0.007000000216066837D;
 			}
 
-			if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
+			if (this.riddenByEntity instanceof EntityLivingBase)
 			{
-				final EntityLivingBase entitylivingbase = (EntityLivingBase)this.riddenByEntity;
-				final float f = this.riddenByEntity.rotationYaw + -entitylivingbase.moveStrafing * 90.0F;
+				EntityLivingBase entitylivingbase = (EntityLivingBase)this.riddenByEntity;
+				float f = this.riddenByEntity.rotationYaw + -entitylivingbase.moveStrafing * 90.0F;
 				this.motionX += -Math.sin((double)(f * (float)Math.PI / 180.0F)) * this.speedMultiplier * (double)entitylivingbase.moveForward * 0.05000000074505806D;
 				this.motionZ += Math.cos((double)(f * (float)Math.PI / 180.0F)) * this.speedMultiplier * (double)entitylivingbase.moveForward * 0.05000000074505806D;
 			}
 
-			d2 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+			double d11 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
-			if (d2 > 0.35D)
+			if (d11 > 0.35D)
 			{
-				d4 = 0.35D / d2;
-				this.motionX *= d4;
-				this.motionZ *= d4;
-				d2 = 0.35D;
+				double d14 = 0.35D / d11;
+				this.motionX *= d14;
+				this.motionZ *= d14;
+				d11 = 0.35D;
 			}
 
-			if (d2 > d10 && this.speedMultiplier < 0.35D)
+			if (d11 > d9 && this.speedMultiplier < 0.35D)
 			{
 				this.speedMultiplier += (0.35D - this.speedMultiplier) / 35.0D;
 
@@ -376,26 +387,25 @@ public class EntityBambooRaft extends Entity
 				}
 			}
 
-			int l;
-
-			for (l = 0; l < 4; ++l)
+			for (int i1 = 0; i1 < 4; ++i1)
 			{
-				final int i1 = MathHelper.floor_double(this.posX + ((double)(l % 2) - 0.5D) * 0.8D);
-				j = MathHelper.floor_double(this.posZ + ((double)(l / 2) - 0.5D) * 0.8D);
+				int l1 = MathHelper.floor_double(this.posX + ((double)(i1 % 2) - 0.5D) * 0.8D);
+				int i2 = MathHelper.floor_double(this.posZ + ((double)(i1 / 2) - 0.5D) * 0.8D);
 
-				for (int j1 = 0; j1 < 2; ++j1)
+				for (int j2 = 0; j2 < 2; ++j2)
 				{
-					final int k = MathHelper.floor_double(this.posY) + j1;
-					final Block block = this.worldObj.getBlock(i1, k, j);
+					int l = MathHelper.floor_double(this.posY) + j2;
+					BlockPos blockpos = new BlockPos(l1, l, i2);
+					Block block = this.worldObj.getBlockState(blockpos).getBlock();
 
 					if (block == Blocks.snow_layer)
 					{
-						this.worldObj.setBlockToAir(i1, k, j);
+						this.worldObj.setBlockToAir(blockpos);
 						this.isCollidedHorizontally = false;
 					}
 					else if (block == Blocks.waterlily)
 					{
-						this.worldObj.destroyBlock(i1, k, j, true);
+						this.worldObj.destroyBlock(blockpos, true);
 						this.isCollidedHorizontally = false;
 					}
 				}
@@ -410,20 +420,23 @@ public class EntityBambooRaft extends Entity
 
 			this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-			if (this.isCollidedHorizontally && d10 > 0.2D)
+			if (this.isCollidedHorizontally && d9 > 0.2975D)
 			{
 				if (!this.worldObj.isRemote && !this.isDead)
 				{
 					this.setDead();
 
-					for (l = 0; l < 3; ++l)
+					if (this.worldObj.getGameRules().getBoolean("doEntityDrops"))
 					{
-						this.func_145778_a(GrowthCraftBamboo.blocks.bambooBlock.getItem(), 1, 0.0F);
-					}
+						for (int j1 = 0; j1 < 3; ++j1)
+						{
+							this.dropItemWithOffset(GrowthCraftBamboo.blocks.bambooBlock.getItem(), 1, 0.0F);
+						}
 
-					for (l = 0; l < 2; ++l)
-					{
-						this.func_145778_a(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
+						for (int k1 = 0; k1 < 2; ++k1)
+						{
+							this.dropItemWithOffset(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
+						}
 					}
 				}
 			}
@@ -435,39 +448,39 @@ public class EntityBambooRaft extends Entity
 			}
 
 			this.rotationPitch = 0.0F;
-			d4 = (double)this.rotationYaw;
-			d11 = this.prevPosX - this.posX;
-			d12 = this.prevPosZ - this.posZ;
+			double d15 = (double)this.rotationYaw;
+			double d18 = this.prevPosX - this.posX;
+			double d21 = this.prevPosZ - this.posZ;
 
-			if (d11 * d11 + d12 * d12 > 0.001D)
+			if (d18 * d18 + d21 * d21 > 0.001D)
 			{
-				d4 = (double)((float)(Math.atan2(d12, d11) * 180.0D / Math.PI));
+				d15 = (double)((float)(MathHelper.atan2(d21, d18) * 180.0D / Math.PI));
 			}
 
-			double d7 = MathHelper.wrapAngleTo180_double(d4 - (double)this.rotationYaw);
+			double d23 = MathHelper.wrapAngleTo180_double(d15 - (double)this.rotationYaw);
 
-			if (d7 > 20.0D)
+			if (d23 > 20.0D)
 			{
-				d7 = 20.0D;
+				d23 = 20.0D;
 			}
 
-			if (d7 < -20.0D)
+			if (d23 < -20.0D)
 			{
-				d7 = -20.0D;
+				d23 = -20.0D;
 			}
 
-			this.rotationYaw = (float)((double)this.rotationYaw + d7);
+			this.rotationYaw = (float)((double)this.rotationYaw + d23);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 
 			if (!this.worldObj.isRemote)
 			{
-				final List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+				List<Entity> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
 				if (list != null && !list.isEmpty())
 				{
-					for (int k1 = 0; k1 < list.size(); ++k1)
+					for (int k2 = 0; k2 < list.size(); ++k2)
 					{
-						final Entity entity = (Entity)list.get(k1);
+						Entity entity = (Entity)list.get(k2);
 
 						if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoat)
 						{
@@ -488,8 +501,8 @@ public class EntityBambooRaft extends Entity
 	{
 		if (this.riddenByEntity != null)
 		{
-			final double d0 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-			final double d1 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
+			double d0 = Math.cos((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
+			double d1 = Math.sin((double)this.rotationYaw * Math.PI / 180.0D) * 0.4D;
 			this.riddenByEntity.setPosition(this.posX + d0, this.posY + this.getMountedYOffset() + this.riddenByEntity.getYOffset(), this.posZ + d1);
 		}
 	}
@@ -497,25 +510,23 @@ public class EntityBambooRaft extends Entity
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
-	protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+	protected void writeEntityToNBT(NBTTagCompound tagCompound)
+	{
+	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
-	protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
-
-	@SideOnly(Side.CLIENT)
-	public float getShadowSize()
+	protected void readEntityFromNBT(NBTTagCompound tagCompund)
 	{
-		return 0.0F;
 	}
 
 	/**
 	 * First layer of player interaction
 	 */
-	public boolean interactFirst(EntityPlayer par1EntityPlayer)
+	public boolean interactFirst(EntityPlayer playerIn)
 	{
-		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
+		if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != playerIn)
 		{
 			return true;
 		}
@@ -523,66 +534,58 @@ public class EntityBambooRaft extends Entity
 		{
 			if (!this.worldObj.isRemote)
 			{
-				par1EntityPlayer.mountEntity(this);
+				playerIn.mountEntity(this);
 			}
 
 			return true;
 		}
 	}
 
-	/**
-	 * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
-	 * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
-	 */
-	protected void updateFallState(double par1, boolean par3)
+	protected void updateFallState(double y, boolean onGroundIn, Block blockIn, BlockPos pos)
 	{
-		final int i = MathHelper.floor_double(this.posX);
-		final int j = MathHelper.floor_double(this.posY);
-		final int k = MathHelper.floor_double(this.posZ);
-
-		if (par3)
+		if (onGroundIn)
 		{
 			if (this.fallDistance > 3.0F)
 			{
-				this.fall(this.fallDistance);
+				this.fall(this.fallDistance, 1.0F);
 
 				if (!this.worldObj.isRemote && !this.isDead)
 				{
 					this.setDead();
-					int l;
 
-					for (l = 0; l < 3; ++l)
+					if (this.worldObj.getGameRules().getBoolean("doEntityDrops"))
 					{
-						this.func_145778_a(GrowthCraftBamboo.blocks.bambooBlock.getItem(), 1, 0.0F);
-					}
+						for (int i = 0; i < 3; ++i)
+						{
+							this.dropItemWithOffset(GrowthCraftBamboo.blocks.bambooBlock.getItem(), 1, 0.0F);
+						}
 
-					for (l = 0; l < 2; ++l)
-					{
-						this.func_145778_a(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
+						for (int j = 0; j < 2; ++j)
+						{
+							this.dropItemWithOffset(GrowthCraftBamboo.items.bamboo.getItem(), 1, 0.0F);
+						}
 					}
 				}
 
 				this.fallDistance = 0.0F;
 			}
 		}
-		else if (this.worldObj.getBlock(i, j - 1, k).getMaterial() != Material.water && par1 < 0.0D)
+		else if (this.worldObj.getBlockState((new BlockPos(this)).down()).getBlock().getMaterial() != Material.water && y < 0.0D)
 		{
-			this.fallDistance = (float)((double)this.fallDistance - par1);
+			this.fallDistance = (float)((double)this.fallDistance - y);
 		}
 	}
 
 	/**
 	 * Sets the damage taken from the last hit.
-	 * @param damage - Damage taken
 	 */
-	public void setDamageTaken(float damage)
+	public void setDamageTaken(float p_70266_1_)
 	{
-		this.dataWatcher.updateObject(19, Float.valueOf(damage));
+		this.dataWatcher.updateObject(19, Float.valueOf(p_70266_1_));
 	}
 
 	/**
 	 * Gets the damage taken from the last hit.
-	 * @return damage taken
 	 */
 	public float getDamageTaken()
 	{
@@ -591,16 +594,14 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * Sets the time to count down from since the last time entity was hit.
-	 * @param time - since last hit
 	 */
-	public void setTimeSinceHit(int time)
+	public void setTimeSinceHit(int p_70265_1_)
 	{
-		this.dataWatcher.updateObject(17, Integer.valueOf(time));
+		this.dataWatcher.updateObject(17, Integer.valueOf(p_70265_1_));
 	}
 
 	/**
 	 * Gets the time since the last hit.
-	 * @return time since last hit
 	 */
 	public int getTimeSinceHit()
 	{
@@ -609,16 +610,14 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * Sets the forward direction of the entity.
-	 * @param direction - forward direction
 	 */
-	public void setForwardDirection(int direction)
+	public void setForwardDirection(int p_70269_1_)
 	{
-		this.dataWatcher.updateObject(18, Integer.valueOf(direction));
+		this.dataWatcher.updateObject(18, Integer.valueOf(p_70269_1_));
 	}
 
 	/**
 	 * Gets the forward direction of the entity.
-	 * @return forward direction
 	 */
 	public int getForwardDirection()
 	{
@@ -627,11 +626,10 @@ public class EntityBambooRaft extends Entity
 
 	/**
 	 * true if no player in boat
-	 * @param state - is boat empty
 	 */
 	@SideOnly(Side.CLIENT)
-	public void setIsBoatEmpty(boolean state)
+	public void setIsBoatEmpty(boolean p_70270_1_)
 	{
-		this.isBoatEmpty = state;
+		this.isBoatEmpty = p_70270_1_;
 	}
 }

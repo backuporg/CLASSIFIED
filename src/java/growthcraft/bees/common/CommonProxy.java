@@ -7,6 +7,12 @@ public class CommonProxy
 	@SidedProxy(clientSide="growthcraft.bees.client.ClientProxy", serverSide="growthcraft.bees.common.CommonProxy")
 	public static CommonProxy instance;
 
-	public void initSounds(){}
-	public void registerVillagerSkin(){}
+	public void initSounds() {}
+
+	public void init()
+	{
+		initSounds();
+	}
+
+	public void registerVillagerSkin() {}
 }

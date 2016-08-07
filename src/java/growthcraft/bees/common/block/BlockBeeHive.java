@@ -39,11 +39,47 @@ public class BlockBeeHive extends GrcBlockBase
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.randomDisplayTick(world, pos, state, random);
-		if (random.nextInt(24) == 0)
+		super.randomDisplayTick(world, pos, state, rand);
+		if (rand.nextInt(24) == 0)
 		{
-			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
-				"grcbees:buzz", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound(
+				(double)pos.getX() + 0.5D,
+				(double)pos.getY() + 0.5D,
+				(double)pos.getZ() + 0.5D,
+				"grcbees:buzz",
+				1.0F + rand.nextFloat(),
+				rand.nextFloat() * 0.7F + 0.3F,
+				false);
+		}
+	}
+
+	private void setDefaultDirection(World world, BlockPos pos)
+	{
+		if (!world.isRemote)
+		{
+			GrowthCraftBees.getLogger().warn("(fixme) BlockBeeHive#setDefaultDirection");
+			/*final Block zneg = world.getBlock(x, y, z - 1);
+			final Block zpos = world.getBlock(x, y, z + 1);
+			final Block xneg = world.getBlock(x - 1, y, z);
+			final Block xpos = world.getBlock(x + 1, y, z);
+			byte b0 = 3;
+			if (zneg.func_149730_j() && !zpos.func_149730_j())
+			{
+				b0 = 3;
+			}
+			if (zpos.func_149730_j() && !zneg.func_149730_j())
+			{
+				b0 = 2;
+			}
+			if (xneg.func_149730_j() && !xpos.func_149730_j())
+			{
+				b0 = 5;
+			}
+			if (xpos.func_149730_j() && !xneg.func_149730_j())
+			{
+				b0 = 4;
+			}
+			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SYNC);*/
 		}
 	}
 
@@ -51,41 +87,7 @@ public class BlockBeeHive extends GrcBlockBase
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state)
 	{
 		super.onBlockAdded(world, pos, state);
-		this.setDefaultDirection(world, x, y, z);
-	}
-
-	private void setDefaultDirection(World world, BlockPos pos)
-	{
-		if (!world.isRemote)
-		{
-			final Block zneg = world.getBlock(x, y, z - 1);
-			final Block zpos = world.getBlock(x, y, z + 1);
-			final Block xneg = world.getBlock(x - 1, y, z);
-			final Block xpos = world.getBlock(x + 1, y, z);
-			byte b0 = 3;
-
-			if (zneg.func_149730_j() && !zpos.func_149730_j())
-			{
-				b0 = 3;
-			}
-
-			if (zpos.func_149730_j() && !zneg.func_149730_j())
-			{
-				b0 = 2;
-			}
-
-			if (xneg.func_149730_j() && !xpos.func_149730_j())
-			{
-				b0 = 5;
-			}
-
-			if (xpos.func_149730_j() && !xneg.func_149730_j())
-			{
-				b0 = 4;
-			}
-
-			world.setBlockMetadataWithNotify(x, y, z, b0, BlockFlags.SYNC);
-		}
+		this.setDefaultDirection(world, pos);
 	}
 
 	@Override
@@ -93,31 +95,27 @@ public class BlockBeeHive extends GrcBlockBase
 	{
 		super.onBlockPlacedBy(world, pos, state, entity, stack);
 		final int face = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-		if (face == 0)
-		{
-			world.setBlockMetadataWithNotify(pos, 2, BlockFlags.SYNC);
-		}
-
-		if (face == 1)
-		{
-			world.setBlockMetadataWithNotify(pos, 5, BlockFlags.SYNC);
-		}
-
-		if (face == 2)
-		{
-			world.setBlockMetadataWithNotify(pos, 3, BlockFlags.SYNC);
-		}
-
-		if (face == 3)
-		{
-			world.setBlockMetadataWithNotify(pos, 4, BlockFlags.SYNC);
-		}
+		//if (face == 0)
+		//{
+		//	world.setBlockMetadataWithNotify(pos, 2, BlockFlags.SYNC);
+		//}
+		//if (face == 1)
+		//{
+		//	world.setBlockMetadataWithNotify(pos, 5, BlockFlags.SYNC);
+		//}
+		//if (face == 2)
+		//{
+		//	world.setBlockMetadataWithNotify(pos, 3, BlockFlags.SYNC);
+		//}
+		//if (face == 3)
+		//{
+		//	world.setBlockMetadataWithNotify(pos, 4, BlockFlags.SYNC);
+		//}
 	}
 
 	public boolean canPlaceBlockAt(World world, BlockPos pos)
 	{
-		return super.canPlaceBlockAt(world, x, y, z) && canBlockStay(world, x, y, z);
+		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos);
 	}
 
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block block)

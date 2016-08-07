@@ -16,8 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBambooDoor extends BlockDoor
 {
-	private static final String[] doorIconNames = new String[] {"grcbamboo:door_lower", "grcbamboo:door_upper"};
-
 	public BlockBambooDoor()
 	{
 		super(Material.wood);
@@ -38,6 +36,6 @@ public class BlockBambooDoor extends BlockDoor
 	@Override
 	public Item getItemDropped(IBlockState state, Random random, int fortune)
 	{
-		return (meta & 8) != 0 ? null : GrowthCraftBamboo.items.bambooDoorItem.getItem();
+		return GrowthCraftBamboo.items.bambooDoorItem.getItem();
 	}
 }
