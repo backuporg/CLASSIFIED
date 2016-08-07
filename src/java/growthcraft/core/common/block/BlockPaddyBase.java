@@ -7,8 +7,10 @@ import growthcraft.core.util.ItemUtils;
 import growthcraft.api.core.util.BlockFlags;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,13 +25,32 @@ import net.minecraftforge.fluids.FluidStack;
 
 public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 {
-	public static final PropertyInteger FLUID_LEVEL = PropertyInteger.create("fluid_level", 0, 15);
+	public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 15);
 
 	public BlockPaddyBase(Material material)
 	{
 		super(material);
 		setTickRandomly(true);
-		setDefaultState(blockState.getBaseState().withProperty(FLUID_LEVEL, 0));
+		setDefaultState(blockState.getBaseState().withProperty(LEVEL, 0));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {LEVEL});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(LEVEL, meta);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(LEVEL).meta;
 	}
 
 	@Override
@@ -41,24 +62,24 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 	@Override
 	public boolean isFilledWithFluid(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
-		return state.getValue(FLUID_LEVEL) >= getPaddyMaxFluidLevel(world, pos, state);
+		return state.getValue(LEVEL) >= getPaddyMaxFluidLevel(world, pos, state);
 	}
 
 	public void drainPaddy(World world, BlockPos pos, IBlockState state)
 	{
-		final int level = state.getValue(FLUID_LEVEL);
+		final int level = state.getValue(LEVEL);
 		if (level > 0)
 		{
-			world.setBlockState(pos, state.withProperty(FLUID_LEVEL, level - 1), BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockState(pos, state.withProperty(LEVEL, level - 1), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
 	public void fillPaddy(World world, BlockPos pos, IBlockState state)
 	{
-		final int level = state.getValue(FLUID_LEVEL);
+		final int level = state.getValue(LEVEL);
 		if (level < getPaddyMaxFluidLevel(world, pos, state) - 1)
 		{
-			world.setBlockState(pos, state.withProperty(FLUID_LEVEL,level + 1), BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockState(pos, state.withProperty(LEVEL,level + 1), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
@@ -183,8 +204,8 @@ public abstract class BlockPaddyBase extends GrcBlockBase implements IPaddy
 		final IBlockState newState = world.getBlockState(pos);
 		if (this.equals(newState.getBlock()))
 		{
-			final int meta = newState.getValue(FLUID_LEVEL);
-			final int m = state.getValue(FLUID_LEVEL);
+			final int meta = newState.getValue(LEVEL);
+			final int m = state.getValue(LEVEL);
 			if ((m == 0 && meta == 0) || (m > 0 && meta > 0))
 			{
 				return true;

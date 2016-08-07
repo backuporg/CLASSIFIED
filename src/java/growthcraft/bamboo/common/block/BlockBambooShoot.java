@@ -12,7 +12,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -43,6 +45,25 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		setUnlocalizedName("grc.bamboo_shoot");
 		setCreativeTab(null);
 		setDefaultState(blockState.getBaseState().withProperty(GROWTH, 0));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {GROWTH});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(GROWTH, meta);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(GROWTH);
 	}
 
 	public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state)

@@ -14,7 +14,9 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,6 +46,25 @@ public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 		setDefaultState(blockState.getBaseState().withProperty(DRIED, false));
 	}
 
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {DRIED});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(DRIED, meta > 0);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(DRIED) ? 8 : 0;
+	}
+
 	public boolean isDried(IBlockState state)
 	{
 		return state.getValue(DRIED);
@@ -65,7 +86,7 @@ public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.updateTick(world, pos, state, rand);
-		if ((Boolean)state.getValue(DRIED)) return;
+		if (state.getValue(DRIED)) return;
 		if (!isBambooOnGround(world, pos)) return;
 		if (rand.nextInt(this.growth) != 0) return;
 

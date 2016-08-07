@@ -29,6 +29,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class WidgetHeatIcon extends WidgetIconBase
 {
+	@SuppressWarnings({"rawtypes"})
 	public WidgetHeatIcon(WidgetManager man, int x, int y, int w, int h)
 	{
 		super(man, x, y, w, h);

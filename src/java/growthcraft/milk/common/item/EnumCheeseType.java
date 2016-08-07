@@ -76,11 +76,11 @@ public enum EnumCheeseType implements IItemStackFactory, IFluidStackFactory, ISt
 	public final List<EnumCheeseStage> stages;
 	public final List<IMultiItemStacks> waxes = new ArrayList<IMultiItemStacks>();
 
-	private EnumCheeseType(String n, int c, EnumCheeseFeature[] fets, EnumCheeseStage[] stgs)
+	private EnumCheeseType( String n, int c, EnumCheeseFeature[] fets, EnumCheeseStage[] stgs)
 	{
+		this.meta = ordinal();
 		this.name = n;
 		this.color = c;
-		this.meta = ordinal();
 		this.features = Arrays.asList(fets);
 		this.stages = Arrays.asList(stgs);
 	}

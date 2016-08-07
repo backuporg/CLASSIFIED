@@ -14,17 +14,19 @@ import growthcraft.core.util.BlockCheck;
 import growthcraft.hops.GrowthCraftHops;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -60,6 +62,25 @@ public class BlockHops extends GrcBlockBase implements IBlockRope, IPlantable, I
 		setUnlocalizedName("grc.hop_vine");
 		setCreativeTab(null);
 		setDefaultState(blockState.getBaseState().withProperty(GROWTH, HopsStage.BINE));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {GROWTH});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(GROWTH, meta);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(GROWTH);
 	}
 
 	public boolean isMature(IBlockAccess world, BlockPos pos, IBlockState state)

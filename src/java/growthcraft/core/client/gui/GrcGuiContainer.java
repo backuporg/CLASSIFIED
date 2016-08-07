@@ -51,7 +51,9 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
 {
 	protected T tileEntity;
 	protected ResourceLocation guiResource;
+	@SuppressWarnings({"rawtypes"})
 	protected TooltipManager tooltipManager;
+	@SuppressWarnings({"rawtypes"})
 	protected WidgetManager widgets;
 
 	public GrcGuiContainer(ResourceLocation res, C container, T te)
@@ -110,7 +112,7 @@ public abstract class GrcGuiContainer<C extends Container, T extends TileEntity>
 	}
 
 	@Override
-	public void drawHoveringText(List l, int x, int y, FontRenderer renderer)
+	public void drawHoveringText(List<String> l, int x, int y, FontRenderer renderer)
 	{
 		super.drawHoveringText(l, x, y, renderer);
 	}

@@ -33,7 +33,7 @@ public class ItemRice extends GrcItemBase
 				final IBlockState state = world.getBlockState(pos);
 				if (state != null && RiceBlockCheck.isPaddy(state) && world.isAirBlock(pos.up()))
 				{
-					if (((Integer)state.getValue(BlockPaddyBase.FLUID_LEVEL)) > 0)
+					if (state.getValue(BlockPaddyBase.LEVEL) > 0)
 					{
 						world.setBlockState(pos.up(), GrowthCraftRice.riceBlock.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 						--stack.stackSize;

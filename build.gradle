@@ -44,7 +44,6 @@ class StructExtApi {
 ext.thaumcraftApi = "api/thaumcraft/api"
 
 StructExtApi[] apis = [
-    new StructExtApi(name: "buildcraft", api: "api/buildcraft/api", exclusion: "**/buildcraft/api/meh"),
     //new StructExtApi(name: "forestry", api: "api/ForestryAPI/forestry/api", exclusion: "**/forestry/api/**", root: ext.forestryApiRoot),
     //new StructExtApi(name: "invtweaks", api: "api/invtweaks/api", exclusion: "**/invtweaks/api/**"),
     //new StructExtApi(name: "mfr", api: "api/powercrystals/minefactoryreloaded/api", exclusion: "**/powercrystals/minefactoryreloaded/api/**"),
@@ -118,10 +117,10 @@ repositories {
 
 dependencies {
     compile "applecore:AppleCore:${minecraft_version}-${applecore_version}:api"
-    //compile "codechicken:CodeChickenLib:${minecraft_version}-${code_chicken_lib_version}:dev"
-    compile "codechicken:CodeChickenCore:${code_chicken_core_version}:dev"
+    //compile "codechicken:CodeChickenLib:${code_chicken_lib_version}:dev"
+    //compile "codechicken:CodeChickenCore:${code_chicken_core_version}:dev"
     //compile "codechicken:NotEnoughItems:${nei_version}:dev"
-    //compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
+    compile "com.mod-buildcraft:buildcraft:${bc_version}:dev"
     compile "mcp.mobius.waila:Waila:${waila_version}:dev"
     testCompile "junit:junit:4.11"
 }

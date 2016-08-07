@@ -12,7 +12,9 @@ import growthcraft.grapes.util.GrapeBlockCheck;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -39,6 +41,25 @@ public abstract class BlockGrapeVineBase extends GrcBlockBase implements IPlanta
 		this.itemDrop = new ItemStack((Item)null, 0);
 		this.growthRateMultiplier = 1.0f;
 		setDefaultState(blockState.getBaseState().withProperty(GROWTH, 0));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {GROWTH});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(GROWTH, meta);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(GROWTH);
 	}
 
 	public void setItemDrop(ItemStack itemstack)

@@ -89,7 +89,7 @@ public class GrowthCraftHops
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(hopVine.getBlock(), "grc.hopVine");
+		GameRegistry.registerBlock(hopVine.getBlock(), "grc.hop_vine");
 
 		GameRegistry.registerItem(hops.getItem(), "grc.hops");
 		GameRegistry.registerItem(hopSeeds.getItem(), "grc.hopSeeds");

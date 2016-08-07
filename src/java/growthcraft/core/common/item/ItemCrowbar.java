@@ -38,6 +38,7 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -96,9 +97,21 @@ public class ItemCrowbar extends GrcItemBase implements IToolWrench
 	}
 
 	@Override
+	public boolean canWrench(EntityPlayer player, Entity entity)
+	{
+		return true;
+	}
+
+	@Override
 	public boolean canWrench(EntityPlayer player, BlockPos pos)
 	{
 		return true;
+	}
+
+	@Override
+	public void wrenchUsed(EntityPlayer player, Entity entity)
+	{
+		player.swingItem();
 	}
 
 	@Override

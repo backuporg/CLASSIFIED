@@ -37,10 +37,10 @@ public class BlockPaddy extends BlockPaddyBase
 		if (world.rand.nextInt(20) == 0)
 		{
 			final IBlockState state = world.getBlockState(pos);
-			final int level = state.getValue(FLUID_LEVEL);
+			final int level = state.getValue(LEVEL);
 			if (level < getPaddyMaxFluidLevel(world, pos, state))
 			{
-				world.setBlockState(pos, state.withProperty(FLUID_LEVEL, level + 1), BlockFlags.UPDATE_AND_SYNC);
+				world.setBlockState(pos, state.withProperty(LEVEL, level + 1), BlockFlags.UPDATE_AND_SYNC);
 			}
 		}
 	}

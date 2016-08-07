@@ -488,7 +488,7 @@ public class EntityBambooRaft extends Entity
 				{
 					for (int k2 = 0; k2 < list.size(); ++k2)
 					{
-						final Entity entity = (Entity)list.get(k2);
+						final Entity entity = list.get(k2);
 
 						if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityBoat)
 						{

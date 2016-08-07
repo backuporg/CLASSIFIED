@@ -61,7 +61,7 @@ public class ItemBambooRaft extends ItemBoat
 
 			for (int i = 0; i < list.size(); ++i)
 			{
-				final Entity entity = (Entity)list.get(i);
+				final Entity entity = list.get(i);
 
 				if (entity.canBeCollidedWith())
 				{

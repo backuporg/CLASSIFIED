@@ -40,7 +40,7 @@ public class WidgetManager<C extends Container, T extends TileEntity>
 		this.gui = g;
 	}
 
-	public WidgetManager add(Widget widget)
+	public WidgetManager<C, T> add(Widget widget)
 	{
 		widgets.add(widget);
 		return this;

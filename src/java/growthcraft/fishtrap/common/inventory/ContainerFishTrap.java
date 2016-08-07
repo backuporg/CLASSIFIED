@@ -48,7 +48,7 @@ public class ContainerFishTrap extends Container
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
 		ItemStack itemstack = null;
-		final Slot slot = (Slot)this.inventorySlots.get(index);
+		final Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{

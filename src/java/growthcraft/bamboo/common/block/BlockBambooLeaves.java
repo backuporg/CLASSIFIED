@@ -6,6 +6,9 @@ import growthcraft.bamboo.GrowthCraftBamboo;
 
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -26,6 +29,25 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable
 		setUnlocalizedName("grc.bamboo_leaves");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {DECAYABLE});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(DECAYABLE, (meta & 8) > 0);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(DECAYABLE) ? 8 : 0;
 	}
 
 	@Override

@@ -15,6 +15,8 @@ import growthcraft.grapes.util.GrapeBlockCheck;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -43,6 +45,25 @@ public class BlockGrapeLeaves extends BlockLeaves implements IBlockRope, IGrowab
 		setUnlocalizedName("grc.grape_leaves");
 		setCreativeTab(null);
 		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {DECAYABLE});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(DECAYABLE, (meta & 8) > 0);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(DECAYABLE) ? 8 : 0;
 	}
 
 	@Override

@@ -1,14 +1,18 @@
 package growthcraft.apples.common.block;
 
 import java.util.Random;
+
+import growthcraft.api.core.util.BlockFlags;
 import growthcraft.apples.common.world.WorldGenAppleTree;
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.core.GrowthCraftCore;
-import growthcraft.api.core.util.BlockFlags;
+
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -17,8 +21,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class BlockAppleSapling extends BlockBush implements IGrowable
 {
-	private final int growthRate = GrowthCraftApples.getConfig().appleSaplingGrowthRate;
-
 	public BlockAppleSapling()
 	{
 		super(Material.plants);
@@ -30,6 +32,25 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		final float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
 		setDefaultState(blockState.getBaseState().withProperty(BlockSapling.STAGE, 0));
+	}
+
+	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {BlockSapling.STAGE});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(BlockSapling.STAGE, meta);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(BlockSapling.STAGE);
 	}
 
 	public void growTree(World world, BlockPos pos, Random rand)
@@ -64,7 +85,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable
 		super.updateTick(world, pos, state, rand);
 		if (!world.isRemote)
 		{
-			if (getLightValue(world, pos.up()) >= 9 && rand.nextInt(growthRate) == 0)
+			if (getLightValue(world, pos.up()) >= 9 && rand.nextInt(GrowthCraftApples.getConfig().appleSaplingGrowthRate) == 0)
 			{
 				markOrGrowMarked(world, pos, rand);
 			}

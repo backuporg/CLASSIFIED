@@ -35,7 +35,9 @@ import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.GrowthCraftMilk;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,6 +69,25 @@ public class BlockCheeseBlock extends GrcBlockContainer
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes"})
+	protected BlockState createBlockState()
+	{
+		return new BlockState(this, new IProperty[] {TYPE});
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		return getDefaultState().withProperty(TYPE, EnumCheeseType.getSafeById(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(TYPE).meta;
+	}
+
+	@Override
 	protected boolean shouldRestoreBlockState(IBlockAccess world, BlockPos pos, IBlockState state, ItemStack stack)
 	{
 		return true;
@@ -86,7 +107,7 @@ public class BlockCheeseBlock extends GrcBlockContainer
 		{
 			return te.asItemStack();
 		}
-		return new ItemStack(this, 1, ((EnumCheeseType)state.getValue(TYPE)).meta);
+		return new ItemStack(this, 1, state.getValue(TYPE).meta);
 	}
 
 	@Override
