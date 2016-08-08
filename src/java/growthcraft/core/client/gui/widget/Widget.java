@@ -39,6 +39,7 @@ public class Widget
 		this.rect = r;
 	}
 
+	@SuppressWarnings({"rawtypes"})
 	public Widget(WidgetManager man, int x, int y, int w, int h)
 	{
 		this(man, new Rectangle(x, y, w, h));
