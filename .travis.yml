@@ -41,7 +41,7 @@ deploy:
   - "build/libs/growthcraft-*-complete.jar"
   - "build/libs/growthcraft-*-api.jar"
   - "build/libs/growthcraft-*-deobf.jar"
-  - "build/libs/growthcraft-*-javadoc.jar"
+  #- "build/libs/growthcraft-*-javadoc.jar"
   - "build/libs/growthcraft-*-sources.jar"
   # separate jars
   - "build/packages/growthcraft-*-complete-*.jar"
