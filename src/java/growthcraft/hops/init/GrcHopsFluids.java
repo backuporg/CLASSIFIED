@@ -48,7 +48,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraft.util.ResourceLocation;
 
 public class GrcHopsFluids extends GrcModuleBase
 {
@@ -67,7 +66,7 @@ public class GrcHopsFluids extends GrcModuleBase
 		this.lagerBooze = new Booze[7];
 		this.lagerFluids = new BlockBoozeDefinition[lagerBooze.length];
 		this.lagerBuckets = new ItemBucketBoozeDefinition[lagerBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.lager", lagerBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.lager", lagerBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
 		for (Booze booze : lagerBooze)
 		{
 			booze.setColor(GrowthCraftHops.getConfig().lagerColor).setDensity(1080);
@@ -81,7 +80,7 @@ public class GrcHopsFluids extends GrcModuleBase
 		this.hopAleBooze = new Booze[9];
 		this.hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
 		this.hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.hop_ale", hopAleBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.hop_ale", hopAleBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
 		for (Booze booze : hopAleBooze)
 		{
 			booze.setColor(GrowthCraftHops.getConfig().hopAleColor).setDensity(1080);

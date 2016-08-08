@@ -9,6 +9,6 @@ public class WorldGenAppleTree extends WorldGenTrees
 {
 	public WorldGenAppleTree(boolean blockNotify)
 	{
-		super(blockNotify, 4, Blocks.log.getDefaultState(), GrowthCraftApples.appleLeaves.getBlock().getDefaultState(), false);
+		super(blockNotify, 4, Blocks.log.getDefaultState(), GrowthCraftApples.blocks.appleLeaves.getBlock().getDefaultState(), false);
 	}
 }

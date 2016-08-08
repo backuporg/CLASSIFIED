@@ -1,8 +1,32 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.bamboo;
 
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.bamboo.common.CommonProxy;
 import growthcraft.bamboo.common.entity.EntityBambooRaft;
 import growthcraft.bamboo.common.village.ComponentVillageBambooYard;
@@ -13,6 +37,7 @@ import growthcraft.bamboo.creativetab.CreativeTabsGrowthcraftBamboo;
 import growthcraft.bamboo.handler.BambooFuelHandler;
 import growthcraft.bamboo.init.GrcBambooBlocks;
 import growthcraft.bamboo.init.GrcBambooItems;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.MapGenHelper;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -38,6 +63,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 	modid = GrowthCraftBamboo.MOD_ID,
 	name = GrowthCraftBamboo.MOD_NAME,
 	version = GrowthCraftBamboo.MOD_VERSION,
+	acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
 	dependencies = "required-after:Growthcraft"
 )
 public class GrowthCraftBamboo
@@ -48,11 +74,10 @@ public class GrowthCraftBamboo
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBamboo instance;
-
 	public static CreativeTabs creativeTab;
+	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcbamboo");
 	public static GrcBambooBlocks blocks = new GrcBambooBlocks();
 	public static GrcBambooItems items = new GrcBambooItems();
-
 	public static BiomeGenBase bambooBiome;
 
 	private ILogger logger = new GrcLogger(MOD_ID);

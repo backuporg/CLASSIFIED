@@ -61,7 +61,7 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable
 	{
 		if (world.isAirBlock(pos.down()))
 		{
-			world.setBlockState(pos.down(), GrowthCraftApples.appleBlock.getBlock().getDefaultState());
+			world.setBlockState(pos.down(), GrowthCraftApples.blocks.appleBlock.getBlock().getDefaultState());
 		}
 	}
 

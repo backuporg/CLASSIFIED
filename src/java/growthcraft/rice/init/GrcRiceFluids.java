@@ -49,7 +49,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraft.util.ResourceLocation;
 
 public class GrcRiceFluids extends GrcModuleBase
 {
@@ -64,7 +63,7 @@ public class GrcRiceFluids extends GrcModuleBase
 		riceSakeBooze = new Booze[7];
 		riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
 		riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.riceSake", riceSakeBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.riceSake", riceSakeBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
 		for (Booze booze : riceSakeBooze)
 		{
 			booze.setColor(GrowthCraftRice.getConfig().riceSakeColor).setDensity(980);

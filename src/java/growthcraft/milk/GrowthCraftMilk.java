@@ -26,7 +26,9 @@ package growthcraft.milk;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.api.milk.MilkRegistry;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.milk.common.CommonProxy;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
@@ -58,6 +60,7 @@ import net.minecraftforge.common.MinecraftForge;
 	modid = GrowthCraftMilk.MOD_ID,
 	name = GrowthCraftMilk.MOD_NAME,
 	version = GrowthCraftMilk.MOD_VERSION,
+	acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
 	dependencies = GrowthCraftMilk.MOD_DEPENDENCIES
 )
 public class GrowthCraftMilk
@@ -69,9 +72,8 @@ public class GrowthCraftMilk
 
 	@Instance(MOD_ID)
 	public static GrowthCraftMilk instance;
-
 	public static CreativeTabs creativeTab;
-
+	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcmilk");
 	public static final GrcMilkBlocks blocks = new GrcMilkBlocks();
 	public static final GrcMilkFluids fluids = new GrcMilkFluids();
 	public static final GrcMilkItems items = new GrcMilkItems();

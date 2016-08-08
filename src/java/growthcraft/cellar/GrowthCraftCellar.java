@@ -1,3 +1,26 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.cellar;
 
 import java.lang.reflect.Field;
@@ -12,10 +35,12 @@ import growthcraft.api.cellar.heatsource.user.UserHeatSourcesConfig;
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
+import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.cellar.common.booze.ModifierFunctionExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionHyperExtended;
 import growthcraft.cellar.common.booze.ModifierFunctionPotent;
 import growthcraft.cellar.common.CommonProxy;
+import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.cellar.common.item.ItemChievDummy;
 import growthcraft.cellar.common.item.ItemWaterBag;
 import growthcraft.cellar.common.item.ItemYeast;
@@ -38,8 +63,8 @@ import growthcraft.cellar.stats.CellarAchievement;
 import growthcraft.cellar.stats.GrcCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.GrcCellarUserApis;
-import growthcraft.cellar.common.item.EnumYeast;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.MapGenHelper;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -66,6 +91,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 	modid = GrowthCraftCellar.MOD_ID,
 	name = GrowthCraftCellar.MOD_NAME,
 	version = GrowthCraftCellar.MOD_VERSION,
+	acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
 	dependencies = "required-after:Growthcraft@@VERSION@"
 )
 public class GrowthCraftCellar
@@ -76,9 +102,9 @@ public class GrowthCraftCellar
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
-	public static GrcCellarBlocks blocks = new GrcCellarBlocks();
-
+	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grccellar");
 	public static CreativeTabs tab;
+	public static GrcCellarBlocks blocks = new GrcCellarBlocks();
 
 	public static ItemDefinition yeast;
 	public static ItemDefinition waterBag;

@@ -1,22 +1,41 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.apples;
 
 import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
-import growthcraft.apples.common.block.BlockApple;
-import growthcraft.apples.common.block.BlockAppleLeaves;
-import growthcraft.apples.common.block.BlockAppleSapling;
+import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.apples.common.CommonProxy;
-import growthcraft.apples.common.item.ItemAppleSeeds;
 import growthcraft.apples.common.village.ComponentVillageAppleFarm;
 import growthcraft.apples.common.village.VillageHandlerApples;
 import growthcraft.apples.handler.AppleFuelHandler;
+import growthcraft.apples.init.GrcApplesBlocks;
 import growthcraft.apples.init.GrcApplesFluids;
+import growthcraft.apples.init.GrcApplesItems;
 import growthcraft.apples.init.GrcApplesRecipes;
 //import growthcraft.cellar.GrowthCraftCellar;
-import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.MapGenHelper;
 
@@ -31,12 +50,12 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraftforge.oredict.OreDictionary;
 
 @Mod(
 	modid = GrowthCraftApples.MOD_ID,
 	name = GrowthCraftApples.MOD_NAME,
 	version = GrowthCraftApples.MOD_VERSION,
+	acceptedMinecraftVersions = GrowthCraftCore.MOD_ACC_MINECRAFT,
 	dependencies = "required-after:Growthcraft@@VERSION@;required-after:Growthcraft|Cellar@@VERSION@"
 )
 public class GrowthCraftApples
@@ -48,11 +67,9 @@ public class GrowthCraftApples
 	@Instance(MOD_ID)
 	public static GrowthCraftApples instance;
 	public static CreativeTabs creativeTab;
-
-	public static BlockDefinition appleSapling;
-	public static BlockDefinition appleLeaves;
-	public static BlockTypeDefinition<BlockApple> appleBlock;
-	public static ItemDefinition appleSeeds;
+	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcapples");
+	public static final GrcApplesBlocks blocks = new GrcApplesBlocks();
+	public static final GrcApplesItems items = new GrcApplesItems();
 	public static final GrcApplesFluids fluids = new GrcApplesFluids();
 
 	private final ILogger logger = new GrcLogger(MOD_ID);
@@ -77,16 +94,12 @@ public class GrowthCraftApples
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/apples.conf");
 
+		modules.add(blocks);
+		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
-
-		appleSapling = new BlockDefinition(new BlockAppleSapling());
-		appleLeaves = new BlockDefinition(new BlockAppleLeaves());
-		appleBlock = new BlockTypeDefinition<BlockApple>(new BlockApple());
-
-		appleSeeds = new ItemDefinition(new ItemAppleSeeds());
 
 		modules.preInit();
 		register();
@@ -94,41 +107,20 @@ public class GrowthCraftApples
 
 	public void register()
 	{
-		appleSapling.register("grc.appleSapling");
-		appleLeaves.register("grc.appleLeaves");
-		appleBlock.register("grc.appleBlock");
-		appleSeeds.register("grc.appleSeeds");
-
-		MapGenHelper.registerStructureComponent(ComponentVillageAppleFarm.class, "grc.applefarm");
-
+		MapGenHelper.registerStructureComponent(ComponentVillageAppleFarm.class, "grc.apple_farm");
 		//====================
 		// ADDITIONAL PROPS.
 		//====================
-		Blocks.fire.setFireInfo(appleLeaves.getBlock(), 30, 60);
-
-		//====================
-		// ORE DICTIONARY
-		//====================
-		OreDictionary.registerOre("saplingTree", appleSapling.getItem());
-		OreDictionary.registerOre("treeSapling", appleSapling.getItem());
-		OreDictionary.registerOre("seedApple", appleSeeds.getItem());
-		OreDictionary.registerOre("treeLeaves", appleLeaves.asStack(1, OreDictionary.WILDCARD_VALUE));
-		// For Pam's HarvestCraft
-		// Uses the same OreDict. names as HarvestCraft
-		OreDictionary.registerOre("listAllseed", appleSeeds.getItem());
-		// Common
-		OreDictionary.registerOre("foodApple", Items.apple);
-		OreDictionary.registerOre("foodFruit", Items.apple);
+		Blocks.fire.setFireInfo(blocks.appleLeaves.getBlock(), 30, 60);
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addShapelessRecipe(appleSeeds.asStack(), Items.apple);
-
+		GameRegistry.addShapelessRecipe(items.appleSeeds.asStack(), Items.apple);
 		//====================
 		// SMELTING
 		//====================
 		GameRegistry.registerFuelHandler(new AppleFuelHandler());
-
+		// modules registration phase
 		modules.register();
 	}
 

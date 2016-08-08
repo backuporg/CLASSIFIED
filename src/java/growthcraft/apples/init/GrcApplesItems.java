@@ -21,27 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.client.resource;
+package growthcraft.apples.init;
 
-import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.apples.common.item.ItemAppleSeeds;
+import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.GrcModuleBase;
+import net.minecraft.init.Items;
+import net.minecraftforge.oredict.OreDictionary;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.util.ResourceLocation;
-
-@SideOnly(Side.CLIENT)
-public class GrcCellarResources
+public class GrcApplesItems extends GrcModuleBase
 {
-	public static GrcCellarResources INSTANCE;
+	public ItemDefinition appleSeeds;
 
-	/// Guis
-	public final ResourceLocation textureGuiBrewKettle = GrowthCraftCellar.resources.create("textures/guis/brewkettle_gui.png");
-	public final ResourceLocation textureGuiFermentBarrel = GrowthCraftCellar.resources.create("textures/guis/fermentbarrel_gui.png");
-	public final ResourceLocation textureGuiCultureJar = GrowthCraftCellar.resources.create("textures/guis/gui_ferment_jar.png");
-	public final ResourceLocation textureGuiFruitPress = GrowthCraftCellar.resources.create("textures/guis/fruitpress_gui.png");
-
-	public GrcCellarResources()
+	@Override
+	public void preInit()
 	{
-		INSTANCE = this;
+		appleSeeds = new ItemDefinition(new ItemAppleSeeds());
+	}
+
+	@Override
+	public void register()
+	{
+		appleSeeds.register("grc.apple_seeds");
+
+		OreDictionary.registerOre("seedApple", appleSeeds.getItem());
+		// For Pam's HarvestCraft
+		// Uses the same OreDict. names as HarvestCraft
+		OreDictionary.registerOre("listAllseed", appleSeeds.getItem());
+		// Common
+		OreDictionary.registerOre("foodApple", Items.apple);
+		OreDictionary.registerOre("foodFruit", Items.apple);
 	}
 }

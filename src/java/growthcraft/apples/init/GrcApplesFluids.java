@@ -28,6 +28,7 @@ import growthcraft.apples.GrowthCraftApples;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
@@ -49,7 +50,7 @@ public class GrcApplesFluids extends GrcModuleBase
 		appleCiderBooze = new Booze[7];
 		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
 		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.apple_cider", appleCiderBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.apple_cider", appleCiderBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
 		for (Booze booze : appleCiderBooze)
 		{
 			booze.setColor(GrowthCraftApples.getConfig().appleCiderColor).setDensity(1010);

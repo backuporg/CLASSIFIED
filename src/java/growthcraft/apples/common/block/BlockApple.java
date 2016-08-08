@@ -141,7 +141,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
 		final IBlockState state = world.getBlockState(pos.up());
-		return GrowthCraftApples.appleLeaves.equals(state.getBlock());
+		return GrowthCraftApples.blocks.appleLeaves.equals(state.getBlock());
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class ItemAppleSeeds extends GrcPseudoItemBlock implements IPlantable
 	@Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
-		return GrowthCraftApples.appleSapling.getBlock().getDefaultState();
+		return GrowthCraftApples.blocks.appleSapling.getBlock().getDefaultState();
 	}
 
 	@Override

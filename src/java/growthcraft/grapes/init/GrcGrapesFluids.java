@@ -35,6 +35,7 @@ import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.definition.ItemDefinition;
@@ -63,7 +64,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 		this.grapeWineBooze = new Booze[8];
 		this.grapeWineFluids = new BlockBoozeDefinition[grapeWineBooze.length];
 		this.grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.grape_wine", grapeWineBooze, new ResourceLocation("grccellar:booze_still"), new ResourceLocation("grccellar:booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids("grc.grape_wine", grapeWineBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
 		for (Booze booze : grapeWineBooze)
 		{
 			booze.setColor(GrowthCraftGrapes.getConfig().grapeWineColor).setDensity(1120);

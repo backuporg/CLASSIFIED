@@ -21,27 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.cellar.client.resource;
+package growthcraft.api.core.util;
 
-import growthcraft.cellar.GrowthCraftCellar;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.util.ResourceLocation;
 
-@SideOnly(Side.CLIENT)
-public class GrcCellarResources
+/**
+ * You will get frustrated having to import ResourceLocation and then remembering the domain you want the resource from.
+ * NO MORE I SAY, I WANT MORE MAGIC IN MY LIFE.
+ */
+public class DomainResourceLocationFactory
 {
-	public static GrcCellarResources INSTANCE;
+	private final String domain;
 
-	/// Guis
-	public final ResourceLocation textureGuiBrewKettle = GrowthCraftCellar.resources.create("textures/guis/brewkettle_gui.png");
-	public final ResourceLocation textureGuiFermentBarrel = GrowthCraftCellar.resources.create("textures/guis/fermentbarrel_gui.png");
-	public final ResourceLocation textureGuiCultureJar = GrowthCraftCellar.resources.create("textures/guis/gui_ferment_jar.png");
-	public final ResourceLocation textureGuiFruitPress = GrowthCraftCellar.resources.create("textures/guis/fruitpress_gui.png");
-
-	public GrcCellarResources()
+	/**
+	 * @param p_domain name of the domain that will be prefixed to the resource locations created by the factory
+	 */
+	public DomainResourceLocationFactory(String p_domain)
 	{
-		INSTANCE = this;
+		this.domain = p_domain;
+	}
+
+	/**
+	 * @return domain the domain this factory serves up
+	 */
+	public String getDomainName()
+	{
+		return domain;
+	}
+
+	/**
+	 * @return ResouceLocation
+	 */
+	public ResourceLocation create(String name)
+	{
+		return new ResourceLocation(domain, name);
 	}
 }
