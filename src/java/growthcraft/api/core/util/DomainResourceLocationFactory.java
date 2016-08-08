@@ -24,6 +24,9 @@
 package growthcraft.api.core.util;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * You will get frustrated having to import ResourceLocation and then remembering the domain you want the resource from.
@@ -50,19 +53,37 @@ public class DomainResourceLocationFactory
 	}
 
 	/**
-	 * @return ResouceLocation
-	 */
-	public ResourceLocation create(String name)
-	{
-		return new ResourceLocation(domain, name);
-	}
-
-	/**
 	 * @param str str to append to the domain
 	 * @return domained string
 	 */
 	public String join(String str)
 	{
-		return String.format("%s:%s", domain, str);
+		return String.format("%s:%s", getDomainName(), str);
+	}
+
+	/**
+	 * @return resource location
+	 */
+	public ResourceLocation create(String name)
+	{
+		return new ResourceLocation(getDomainName(), name);
+	}
+
+	/**
+	 * @return model resouce location
+	 */
+	@SideOnly(Side.CLIENT)
+	public ModelResourceLocation createModel(String name, String variant)
+	{
+		return new ModelResourceLocation(create(name), variant);
+	}
+
+	/**
+	 * @return model resouce location
+	 */
+	@SideOnly(Side.CLIENT)
+	public ModelResourceLocation createModel(String name)
+	{
+		return new ModelResourceLocation(name);
 	}
 }
