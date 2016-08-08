@@ -63,6 +63,7 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -82,16 +83,17 @@ public class GrowthCraftBees
 
 	@Instance(MOD_ID)
 	public static GrowthCraftBees instance;
-	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcbees");
+	public static final DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcbees");
 	public static CreativeTabs tab;
-
 	public static BlockTypeDefinition<BlockBeeBox> beeBox;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
 	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
 	public static BlockDefinition beeHive;
-	public static GrcBeesItems items = new GrcBeesItems();
-	public static GrcBeesFluids fluids = new GrcBeesFluids();
+	public static final GrcBeesItems items = new GrcBeesItems();
+	public static final GrcBeesFluids fluids = new GrcBeesFluids();
+
+	public static final VillagerProfession apiaristProfession = new VillagerProfession(resources.join("apiarist"), resources.join("textures/entity/apiarist.png"));
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBeesConfig config = new GrcBeesConfig();
@@ -225,13 +227,11 @@ public class GrowthCraftBees
 		CommonProxy.instance.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
-		logger.warn("(fixme) GrowthCraftBees registerVillagerId");
-		//VillagerRegistry.instance().registerVillagerId(config.villagerApiaristID);
+		VillagerRegistry.instance().register(apiaristProfession);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
 		logger.warn("(fixme) GrowthCraftBees registerVillageTradeHandler");
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, new VillageHandlerBees());
 		//VillagerRegistry.instance().registerVillageTradeHandler(config.villagerApiaristID, handler);
-		CommonProxy.instance.registerVillagerSkin();
 		modules.init();
 	}
 

@@ -56,4 +56,13 @@ public class DomainResourceLocationFactory
 	{
 		return new ResourceLocation(domain, name);
 	}
+
+	/**
+	 * @param str str to append to the domain
+	 * @return domained string
+	 */
+	public String join(String str)
+	{
+		return String.format("%s:%s", domain, str);
+	}
 }

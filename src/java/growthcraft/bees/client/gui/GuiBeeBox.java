@@ -2,6 +2,7 @@ package growthcraft.bees.client.gui;
 
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
+import growthcraft.bees.GrowthCraftBees;
 import growthcraft.core.client.gui.GrcGuiContainer;
 
 import net.minecraftforge.fml.relauncher.Side;
@@ -12,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class GuiBeeBox extends GrcGuiContainer<ContainerBeeBox, TileEntityBeeBox>
 {
-	private static final ResourceLocation res = new ResourceLocation("grcbees" , "textures/guis/beebox_gui.png");
+	private static final ResourceLocation res = GrowthCraftBees.resources.create("textures/guis/beebox_gui.png");
 	private TileEntityBeeBox te;
 
 	public GuiBeeBox(InventoryPlayer inv, TileEntityBeeBox beeBox)

@@ -190,7 +190,7 @@ public class GrowthCraftCore
 		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventCore());
 		MinecraftForge.EVENT_BUS.register(new PlayerInteractEventPaddy());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingDeathCore());
-		FMLCommonHandler.instance().bus().register(new EventHandlerItemCraftedEventCore());
+		MinecraftForge.EVENT_BUS.register(new EventHandlerItemCraftedEventCore());
 
 		modules.postInit();
 		if (config.dumpGameRegistry) growthcraft.core.util.GameRegistryDumper.run();

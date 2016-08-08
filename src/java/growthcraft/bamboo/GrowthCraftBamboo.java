@@ -75,9 +75,9 @@ public class GrowthCraftBamboo
 	@Instance(MOD_ID)
 	public static GrowthCraftBamboo instance;
 	public static CreativeTabs creativeTab;
-	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcbamboo");
-	public static GrcBambooBlocks blocks = new GrcBambooBlocks();
-	public static GrcBambooItems items = new GrcBambooItems();
+	public static final DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcbamboo");
+	public static final GrcBambooBlocks blocks = new GrcBambooBlocks();
+	public static final GrcBambooItems items = new GrcBambooItems();
 	public static BiomeGenBase bambooBiome;
 
 	private ILogger logger = new GrcLogger(MOD_ID);

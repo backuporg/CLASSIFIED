@@ -67,7 +67,7 @@ public class GrowthCraftApples
 	@Instance(MOD_ID)
 	public static GrowthCraftApples instance;
 	public static CreativeTabs creativeTab;
-	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcapples");
+	public static final DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcapples");
 	public static final GrcApplesBlocks blocks = new GrcApplesBlocks();
 	public static final GrcApplesItems items = new GrcApplesItems();
 	public static final GrcApplesFluids fluids = new GrcApplesFluids();

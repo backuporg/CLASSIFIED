@@ -78,6 +78,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -102,10 +103,10 @@ public class GrowthCraftCellar
 
 	@Instance(MOD_ID)
 	public static GrowthCraftCellar instance;
-	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grccellar");
+	public static final DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grccellar");
 	public static CreativeTabs tab;
-	public static GrcCellarBlocks blocks = new GrcCellarBlocks();
-
+	public static final GrcCellarBlocks blocks = new GrcCellarBlocks();
+	public static final VillagerProfession brewerProfession = new VillagerProfession(resources.join("brewer"), resources.join("textures/entity/brewer.png"));
 	public static ItemDefinition yeast;
 	public static ItemDefinition waterBag;
 
@@ -329,8 +330,7 @@ public class GrowthCraftCellar
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
 
-		logger.warn("(fixme) cellar/registerVillagerId brewer");
-		//VillagerRegistry.instance().registerVillagerId(config.villagerBrewerID);
+		VillagerRegistry.instance().register(brewerProfession);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
 
 		CommonProxy.instance.init();
@@ -343,7 +343,7 @@ public class GrowthCraftCellar
 	{
 		userApis.loadConfigs();
 		packetPipeline.postInitialise();
-		FMLCommonHandler.instance().bus().register(new EventHandlerItemCraftedEventCellar());
+		MinecraftForge.EVENT_BUS.register(new EventHandlerItemCraftedEventCellar());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingUpdateEventCellar());
 		MinecraftForge.EVENT_BUS.register(new EventHandlerCauldronUseItem());
 

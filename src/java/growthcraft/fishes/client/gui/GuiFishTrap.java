@@ -25,6 +25,7 @@ package growthcraft.fishes.client.gui;
 
 import growthcraft.fishes.common.inventory.ContainerFishTrap;
 import growthcraft.fishes.common.tileentity.TileEntityFishTrap;
+import growthcraft.fishes.GrowthCraftFishes;
 import growthcraft.core.client.gui.GrcGuiContainer;
 
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,7 +36,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class GuiFishTrap extends GrcGuiContainer<ContainerFishTrap, TileEntityFishTrap>
 {
-	private static final ResourceLocation res = new ResourceLocation("grcfishes" , "textures/guis/fishtrap_gui.png");
+	private static final ResourceLocation res = GrowthCraftFishes.resources.create("textures/guis/fishtrap_gui.png");
 
 	public GuiFishTrap(InventoryPlayer inv, TileEntityFishTrap fishTrap)
 	{

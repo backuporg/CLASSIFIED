@@ -7,9 +7,6 @@ public class GrcCellarConfig extends ConfigBase
 	@ConfigOption(catergory="Potions", name="Potion Tipsy ID")
 	public int potionTipsyID = 50;
 
-	@ConfigOption(catergory="Villager", name="Brewer ID")
-	public int villagerBrewerID = 6677;
-
 
 	@ConfigOption(catergory="Events", name="Enable Discard Button", desc="Enable and show the Discard button from certain cellar blocks.")
 	public boolean enableDiscardButton = true;

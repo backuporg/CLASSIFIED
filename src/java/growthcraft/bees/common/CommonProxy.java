@@ -13,6 +13,4 @@ public class CommonProxy
 	{
 		initSounds();
 	}
-
-	public void registerVillagerSkin() {}
 }

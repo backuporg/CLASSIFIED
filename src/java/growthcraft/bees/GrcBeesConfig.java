@@ -41,9 +41,6 @@ public class GrcBeesConfig extends ConfigBase
 	public int honeyMeadColor = 0xA3610C;
 
 
-	@ConfigOption(catergory="Village", name="Apiarist ID")
-	public int villagerApiaristID = 7766;
-
 	@ConfigOption(catergory="Village", name="Spawn Village Apiarist Structure", desc="Should the apiarist structure be generated in villages?")
 	public boolean generateApiaristStructure;
 

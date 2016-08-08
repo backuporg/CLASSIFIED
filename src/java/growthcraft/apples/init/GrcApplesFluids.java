@@ -35,7 +35,6 @@ import growthcraft.core.common.GrcModuleBase;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraft.util.ResourceLocation;
 
 public class GrcApplesFluids extends GrcModuleBase
 {
