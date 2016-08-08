@@ -1,5 +1,5 @@
 # Blocks
-tile.grc.appleBlock.name=Maçã
+tile.grc.apple_block.name=Maçã
 tile.grc.appleSapling.name=Rebento de Macieira
 tile.grc.appleLeaves.name=Folhas de Macieira
 # Items
@@ -17,7 +17,7 @@ fluid.grc.appleCider6=Sidra
 
 ## Fluid Buckets
 item.bucket.fluid.grc.appleCider0.name=Balde de Sidra
-item.bucket.fluid.grc.appleCider1.name=Balde de Sidra 
+item.bucket.fluid.grc.appleCider1.name=Balde de Sidra
 item.bucket.fluid.grc.appleCider2.name=Balde de Sidra
 item.bucket.fluid.grc.appleCider3.name=Balde de Sidra
 item.bucket.fluid.grc.appleCider4.name=Balde de Néctar Suave
