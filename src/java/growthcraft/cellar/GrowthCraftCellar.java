@@ -193,14 +193,14 @@ public class GrowthCraftCellar
 		modules.register();
 
 		GameRegistry.registerItem(yeast.getItem(), "grc.yeast");
-		GameRegistry.registerItem(waterBag.getItem(), "grc.waterBag");
-		GameRegistry.registerItem(chievItemDummy.getItem(), "grc.chievItemDummy");
+		GameRegistry.registerItem(waterBag.getItem(), "grc.water_bag");
+		GameRegistry.registerItem(chievItemDummy.getItem(), "grc.chiev_item_dummy");
 
-		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruitPress");
-		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruitPresser");
-		GameRegistry.registerTileEntity(TileEntityBrewKettle.class, "grc.tileentity.brewKettle");
-		GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, "grc.tileentity.fermentBarrel");
-		GameRegistry.registerTileEntity(TileEntityCultureJar.class, "grc.tileentity.fermentJar");
+		GameRegistry.registerTileEntity(TileEntityFruitPress.class, "grc.tileentity.fruit_press");
+		GameRegistry.registerTileEntity(TileEntityFruitPresser.class, "grc.tileentity.fruit_presser");
+		GameRegistry.registerTileEntity(TileEntityBrewKettle.class, "grc.tileentity.brew_kettle");
+		GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, "grc.tileentity.ferment_barrel");
+		GameRegistry.registerTileEntity(TileEntityCultureJar.class, "grc.tileentity.culture_jar");
 
 		MapGenHelper.registerStructureComponent(ComponentVillageTavern.class, "grc.tavern");
 

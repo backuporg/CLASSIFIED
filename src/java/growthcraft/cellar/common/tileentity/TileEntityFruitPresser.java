@@ -62,6 +62,7 @@ public class TileEntityFruitPresser extends TileEntity implements ITickable
 	}
 
 	@Override
+	@SuppressWarnings({"rawtypes"})
 	public Packet getDescriptionPacket()
 	{
 		final NBTTagCompound nbtTag = new NBTTagCompound();

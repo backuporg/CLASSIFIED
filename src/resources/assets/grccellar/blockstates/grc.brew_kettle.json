@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "grccellar:blocks/brew_kettle",
+    "textures": {
+      "base": "grccellar:blocks/brew_kettle/base",
+      "feet": "grccellar:blocks/brew_kettle/feet",
+      "side": "grccellar:blocks/brew_kettle/side",
+      "top": "grccellar:blocks/brew_kettle/top"
+    }
+  },
+  "variants": {
+    "normal": [{
+    }]
+  }
+}
