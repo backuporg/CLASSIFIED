@@ -1,26 +1,26 @@
 # Creative Tabs
 itemGroup.creative_tab_grcbamboo=Growthcraft Bamboo
 # Blocks
-tile.grc.bambooBlock.name=Bamboo
-tile.grc.bambooDoor.name=Bamboo Door
-tile.grc.bambooFence.name=Bamboo Fence
-tile.grc.bambooFenceGate.name=Bamboo Fence Gate
-tile.grc.bambooFenceRope.name=Bamboo Fence with Rope
-tile.grc.bambooLeaves.name=Bamboo Leaves
-tile.grc.bambooScaffold.name=Bamboo Scaffold
-tile.grc.bambooShoot.name=Bamboo Shoot
-tile.grc.bambooSlab.name=Bamboo Slab
-tile.grc.bambooStairs.name=Bamboo Stairs
-tile.grc.bambooStalk.name=Bamboo
-tile.grc.bambooWall.name=Bamboo Wall
+tile.grc.bamboo_block.name=Bamboo
+tile.grc.bamboo_door.name=Bamboo Door
+tile.grc.bamboo_fence.name=Bamboo Fence
+tile.grc.bamboo_fence_gate.name=Bamboo Fence Gate
+tile.grc.bamboo_fence_rope.name=Bamboo Fence with Rope
+tile.grc.bamboo_leaves.name=Bamboo Leaves
+tile.grc.bamboo_scaffold.name=Bamboo Scaffold
+tile.grc.bamboo_shoot.name=Bamboo Shoot
+tile.grc.bamboo_slab.name=Bamboo Slab
+tile.grc.bamboo_stairs.name=Bamboo Stairs
+tile.grc.bamboo_stalk.name=Bamboo
+tile.grc.bamboo_wall.name=Bamboo Wall
 
 # Items
 item.grc.bamboo.name=Bamboo
-item.grc.bambooDoor.name=Bamboo Door
-item.grc.bambooSlab.name=Bamboo Slab
-item.grc.bambooRaft.name=Bamboo Raft
-item.grc.bambooCoal.name=Bamboo Charcoal
-item.grc.bambooShootFood.name=Bamboo Shoot
+item.grc.bamboo_door_item.name=Bamboo Door
+item.grc.bamboo_slab.name=Bamboo Slab
+item.grc.bamboo_raft.name=Bamboo Raft
+item.grc.bamboo_coal.name=Bamboo Charcoal
+item.grc.bamboo_shoot_food.name=Bamboo Shoot
 
 # Entities
-entity.Growthcraft|Bamboo.bambooRaft.name=Bamboo Raft
+entity.Growthcraft|Bamboo.bamboo_raft.name=Bamboo Raft

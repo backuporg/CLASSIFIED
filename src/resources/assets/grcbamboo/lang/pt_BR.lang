@@ -1,26 +1,26 @@
 # Creative Tabs
 itemGroup.creative_tab_grcbamboo=Growthcraft Bambu
 # Blocks
-tile.grc.bambooBlock.name=Bambu
-tile.grc.bambooDoor.name=Porta de Bambu
-tile.grc.bambooFence.name=Cerca de Bambu
-tile.grc.bambooFenceGate.name=Portão de Cerca de Bambu
-tile.grc.bambooFenceRope.name=Cerca de Bambu com Corda
-tile.grc.bambooLeaves.name=Folhas de Bambu
-tile.grc.bambooScaffold.name=Andaime de Bambu
-tile.grc.bambooShoot.name=Broto de Bambu
-tile.grc.bambooSlab.name=Meio-Bloco de Bambu
-tile.grc.bambooStairs.name=Escadas de Bambu
-tile.grc.bambooStalk.name=Bambu
-tile.grc.bambooWall.name=Muro de Bambu
+tile.grc.bamboo_block.name=Bambu
+tile.grc.bamboo_door.name=Porta de Bambu
+tile.grc.bamboo_fence.name=Cerca de Bambu
+tile.grc.bamboo_fence_gate.name=Portão de Cerca de Bambu
+tile.grc.bamboo_fence_rope.name=Cerca de Bambu com Corda
+tile.grc.bamboo_leaves.name=Folhas de Bambu
+tile.grc.bamboo_scaffold.name=Andaime de Bambu
+tile.grc.bamboo_shoot.name=Broto de Bambu
+tile.grc.bamboo_slab.name=Meio-Bloco de Bambu
+tile.grc.bamboo_stairs.name=Escadas de Bambu
+tile.grc.bamboo_stalk.name=Bambu
+tile.grc.bamboo_wall.name=Muro de Bambu
 
 # Items
 item.grc.bamboo.name=Bambu
-item.grc.bambooDoor.name=Porta de Bambu
-item.grc.bambooSlab.name=Meio-Bloco de Bambu
-item.grc.bambooRaft.name=Jangada de Bambu
-item.grc.bambooCoal.name=Carvão de Bambu
-item.grc.bambooShootFood.name=Broto de Bambu
+item.grc.bamboo_door_item.name=Porta de Bambu
+item.grc.bamboo_slab.name=Meio-Bloco de Bambu
+item.grc.bamboo_raft.name=Jangada de Bambu
+item.grc.bamboo_coal.name=Carvão de Bambu
+item.grc.bamboo_shoot_food.name=Broto de Bambu
 
 # Entities
-entity.Growthcraft|Bamboo.bambooRaft.name=Jangada de Bambu
+entity.Growthcraft|Bamboo.bamboo_raft.name=Jangada de Bambu

@@ -1,34 +1,34 @@
 # Blocks
 tile.grc.apple_block.name=Яблоко
-tile.grc.appleSapling.name=Саженец яблони
-tile.grc.appleLeaves.name=Листва яблони
+tile.grc.apple_sapling.name=Саженец яблони
+tile.grc.apple_leaves.name=Листва яблони
 # Items
-item.grc.appleSeeds.name=Яблочный огрызок
+item.grc.apple_seeds.name=Яблочный огрызок
 
 # Booze
 ## Fluids
-fluid.grc.appleCider0=Яблочный сидр
-fluid.grc.appleCider1=Яблочный сидр
-fluid.grc.appleCider2=Яблочный сидр
-fluid.grc.appleCider3=Яблочный сидр
-fluid.grc.appleCider4=Нежный нектар
-fluid.grc.appleCider5=Яблочный сидр
-fluid.grc.appleCider6=Яблочный сидр
+fluid.grc.apple_cider0=Яблочный сидр
+fluid.grc.apple_cider1=Яблочный сидр
+fluid.grc.apple_cider2=Яблочный сидр
+fluid.grc.apple_cider3=Яблочный сидр
+fluid.grc.apple_cider4=Нежный нектар
+fluid.grc.apple_cider5=Яблочный сидр
+fluid.grc.apple_cider6=Яблочный сидр
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=Ведро яблочного сидра
-item.bucket.fluid.grc.appleCider1.name=Ведро яблочного сидра
-item.bucket.fluid.grc.appleCider2.name=Ведро яблочного сидра
-item.bucket.fluid.grc.appleCider3.name=Ведро яблочного сидра
-item.bucket.fluid.grc.appleCider4.name=Ведро нежного нектара
-item.bucket.fluid.grc.appleCider5.name=Ведро яблочного сидра
-item.bucket.fluid.grc.appleCider6.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider0.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider1.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider2.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider3.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider4.name=Ведро нежного нектара
+item.bucket.fluid.grc.apple_cider5.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider6.name=Ведро яблочного сидра
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider0.name=Яблочный сидр
-tile.fluid.grc.appleCider1.name=Яблочный сидр
-tile.fluid.grc.appleCider2.name=Яблочный сидр
-tile.fluid.grc.appleCider3.name=Яблочный сидр
-tile.fluid.grc.appleCider4.name=Нежный нектар
-tile.fluid.grc.appleCider5.name=Яблочный сидр
-tile.fluid.grc.appleCider6.name=Яблочный сидр
+tile.fluid.grc.apple_cider0.name=Яблочный сидр
+tile.fluid.grc.apple_cider1.name=Яблочный сидр
+tile.fluid.grc.apple_cider2.name=Яблочный сидр
+tile.fluid.grc.apple_cider3.name=Яблочный сидр
+tile.fluid.grc.apple_cider4.name=Нежный нектар
+tile.fluid.grc.apple_cider5.name=Яблочный сидр
+tile.fluid.grc.apple_cider6.name=Яблочный сидр

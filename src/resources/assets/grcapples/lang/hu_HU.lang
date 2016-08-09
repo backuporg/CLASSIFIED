@@ -1,34 +1,34 @@
 # Blocks
 tile.grc.apple_block.name=Alma
-tile.grc.appleSapling.name=Almafa csemete
-tile.grc.appleLeaves.name=Almafa levél
+tile.grc.apple_sapling.name=Almafa csemete
+tile.grc.apple_leaves.name=Almafa levél
 # Items
-item.grc.appleSeeds.name=Alma csutka
+item.grc.apple_seeds.name=Alma csutka
 
 # Booze
 ## Fluids
-fluid.grc.appleCider0=Almabor
-fluid.grc.appleCider1=Almabor
-fluid.grc.appleCider2=Almabor
-fluid.grc.appleCider3=Almabor
-fluid.grc.appleCider4=fluid.grc.appleCider4
-fluid.grc.appleCider5=fluid.grc.appleCider5
-fluid.grc.appleCider6=fluid.grc.appleCider6
+fluid.grc.apple_cider0=Almabor
+fluid.grc.apple_cider1=Almabor
+fluid.grc.apple_cider2=Almabor
+fluid.grc.apple_cider3=Almabor
+fluid.grc.apple_cider4=fluid.grc.apple_cider4
+fluid.grc.apple_cider5=fluid.grc.apple_cider5
+fluid.grc.apple_cider6=fluid.grc.apple_cider6
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=item.bucket.fluid.grc.appleCider0.name
-item.bucket.fluid.grc.appleCider1.name=item.bucket.fluid.grc.appleCider1.name
-item.bucket.fluid.grc.appleCider2.name=item.bucket.fluid.grc.appleCider2.name
-item.bucket.fluid.grc.appleCider3.name=item.bucket.fluid.grc.appleCider3.name
-item.bucket.fluid.grc.appleCider4.name=item.bucket.fluid.grc.appleCider4.name
-item.bucket.fluid.grc.appleCider5.name=item.bucket.fluid.grc.appleCider5.name
-item.bucket.fluid.grc.appleCider6.name=item.bucket.fluid.grc.appleCider6.name
+item.bucket.fluid.grc.apple_cider0.name=item.bucket.fluid.grc.apple_cider0.name
+item.bucket.fluid.grc.apple_cider1.name=item.bucket.fluid.grc.apple_cider1.name
+item.bucket.fluid.grc.apple_cider2.name=item.bucket.fluid.grc.apple_cider2.name
+item.bucket.fluid.grc.apple_cider3.name=item.bucket.fluid.grc.apple_cider3.name
+item.bucket.fluid.grc.apple_cider4.name=item.bucket.fluid.grc.apple_cider4.name
+item.bucket.fluid.grc.apple_cider5.name=item.bucket.fluid.grc.apple_cider5.name
+item.bucket.fluid.grc.apple_cider6.name=item.bucket.fluid.grc.apple_cider6.name
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider0.name=Almabor
-tile.fluid.grc.appleCider1.name=Almabor
-tile.fluid.grc.appleCider2.name=Almabor
-tile.fluid.grc.appleCider3.name=Almabor
-tile.fluid.grc.appleCider4.name=tile.fluid.grc.appleCider4.name
-tile.fluid.grc.appleCider5.name=tile.fluid.grc.appleCider5.name
-tile.fluid.grc.appleCider6.name=tile.fluid.grc.appleCider6.name
+tile.fluid.grc.apple_cider0.name=Almabor
+tile.fluid.grc.apple_cider1.name=Almabor
+tile.fluid.grc.apple_cider2.name=Almabor
+tile.fluid.grc.apple_cider3.name=Almabor
+tile.fluid.grc.apple_cider4.name=tile.fluid.grc.apple_cider4.name
+tile.fluid.grc.apple_cider5.name=tile.fluid.grc.apple_cider5.name
+tile.fluid.grc.apple_cider6.name=tile.fluid.grc.apple_cider6.name

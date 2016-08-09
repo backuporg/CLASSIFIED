@@ -1,34 +1,34 @@
 # Blocks
 tile.grc.apple_block.name=苹果
-tile.grc.appleSapling.name=苹果树苗
-tile.grc.appleLeaves.name=苹果树叶
+tile.grc.apple_sapling.name=苹果树苗
+tile.grc.apple_leaves.name=苹果树叶
 # Items
-item.grc.appleSeeds.name=苹果核
+item.grc.apple_seeds.name=苹果核
 
 # Booze
 ## Fluids
-fluid.grc.appleCider0=苹果西打酒
-fluid.grc.appleCider1=苹果西打酒
-fluid.grc.appleCider2=苹果西打酒
-fluid.grc.appleCider3=苹果西打酒
-fluid.grc.appleCider4=Silken Nectar
-fluid.grc.appleCider5=苹果西打酒
-fluid.grc.appleCider6=苹果西打酒
+fluid.grc.apple_cider0=苹果西打酒
+fluid.grc.apple_cider1=苹果西打酒
+fluid.grc.apple_cider2=苹果西打酒
+fluid.grc.apple_cider3=苹果西打酒
+fluid.grc.apple_cider4=Silken Nectar
+fluid.grc.apple_cider5=苹果西打酒
+fluid.grc.apple_cider6=苹果西打酒
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=苹果西打酒桶
-item.bucket.fluid.grc.appleCider1.name=苹果西打酒桶
-item.bucket.fluid.grc.appleCider2.name=苹果西打酒桶
-item.bucket.fluid.grc.appleCider3.name=苹果西打酒桶
-item.bucket.fluid.grc.appleCider4.name=Silken Nectar Bucket
-item.bucket.fluid.grc.appleCider5.name=苹果西打酒桶
-item.bucket.fluid.grc.appleCider6.name=苹果西打酒桶
+item.bucket.fluid.grc.apple_cider0.name=苹果西打酒桶
+item.bucket.fluid.grc.apple_cider1.name=苹果西打酒桶
+item.bucket.fluid.grc.apple_cider2.name=苹果西打酒桶
+item.bucket.fluid.grc.apple_cider3.name=苹果西打酒桶
+item.bucket.fluid.grc.apple_cider4.name=Silken Nectar Bucket
+item.bucket.fluid.grc.apple_cider5.name=苹果西打酒桶
+item.bucket.fluid.grc.apple_cider6.name=苹果西打酒桶
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider0.name=苹果西打酒
-tile.fluid.grc.appleCider1.name=苹果西打酒
-tile.fluid.grc.appleCider2.name=苹果西打酒
-tile.fluid.grc.appleCider3.name=苹果西打酒
-tile.fluid.grc.appleCider4.name=Silken Nectar
-tile.fluid.grc.appleCider5.name=苹果西打酒
-tile.fluid.grc.appleCider6.name=苹果西打酒
+tile.fluid.grc.apple_cider0.name=苹果西打酒
+tile.fluid.grc.apple_cider1.name=苹果西打酒
+tile.fluid.grc.apple_cider2.name=苹果西打酒
+tile.fluid.grc.apple_cider3.name=苹果西打酒
+tile.fluid.grc.apple_cider4.name=Silken Nectar
+tile.fluid.grc.apple_cider5.name=苹果西打酒
+tile.fluid.grc.apple_cider6.name=苹果西打酒

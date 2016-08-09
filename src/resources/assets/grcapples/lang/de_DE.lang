@@ -1,34 +1,34 @@
 # Blocks
 tile.grc.apple_block.name=Apfel
-tile.grc.appleSapling.name=Apfelbaum Setzling
-tile.grc.appleLeaves.name=Apfelbaum Blätter
+tile.grc.apple_sapling.name=Apfelbaum Setzling
+tile.grc.apple_leaves.name=Apfelbaum Blätter
 # Items
-item.grc.appleSeeds.name=Apfelkern
+item.grc.apple_seeds.name=Apfelkern
 
 # Booze
 ## Fluids
-fluid.grc.appleCider0=Apfelwein
-fluid.grc.appleCider1=Apfelwein
-fluid.grc.appleCider2=Apfelwein
-fluid.grc.appleCider3=Apfelwein
-fluid.grc.appleCider4=fluid.grc.appleCider4
-fluid.grc.appleCider5=fluid.grc.appleCider5
-fluid.grc.appleCider6=fluid.grc.appleCider6
+fluid.grc.apple_cider0=Apfelwein
+fluid.grc.apple_cider1=Apfelwein
+fluid.grc.apple_cider2=Apfelwein
+fluid.grc.apple_cider3=Apfelwein
+fluid.grc.apple_cider4=fluid.grc.apple_cider4
+fluid.grc.apple_cider5=fluid.grc.apple_cider5
+fluid.grc.apple_cider6=fluid.grc.apple_cider6
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=item.bucket.fluid.grc.appleCider0.name
-item.bucket.fluid.grc.appleCider1.name=item.bucket.fluid.grc.appleCider1.name
-item.bucket.fluid.grc.appleCider2.name=item.bucket.fluid.grc.appleCider2.name
-item.bucket.fluid.grc.appleCider3.name=item.bucket.fluid.grc.appleCider3.name
-item.bucket.fluid.grc.appleCider4.name=item.bucket.fluid.grc.appleCider4.name
-item.bucket.fluid.grc.appleCider5.name=item.bucket.fluid.grc.appleCider5.name
-item.bucket.fluid.grc.appleCider6.name=item.bucket.fluid.grc.appleCider6.name
+item.bucket.fluid.grc.apple_cider0.name=item.bucket.fluid.grc.apple_cider0.name
+item.bucket.fluid.grc.apple_cider1.name=item.bucket.fluid.grc.apple_cider1.name
+item.bucket.fluid.grc.apple_cider2.name=item.bucket.fluid.grc.apple_cider2.name
+item.bucket.fluid.grc.apple_cider3.name=item.bucket.fluid.grc.apple_cider3.name
+item.bucket.fluid.grc.apple_cider4.name=item.bucket.fluid.grc.apple_cider4.name
+item.bucket.fluid.grc.apple_cider5.name=item.bucket.fluid.grc.apple_cider5.name
+item.bucket.fluid.grc.apple_cider6.name=item.bucket.fluid.grc.apple_cider6.name
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider0.name=Apfelwein
-tile.fluid.grc.appleCider1.name=Apfelwein
-tile.fluid.grc.appleCider2.name=Apfelwein
-tile.fluid.grc.appleCider3.name=Apfelwein
-tile.fluid.grc.appleCider4.name=tile.fluid.grc.appleCider4.name
-tile.fluid.grc.appleCider5.name=tile.fluid.grc.appleCider5.name
-tile.fluid.grc.appleCider6.name=tile.fluid.grc.appleCider6.name
+tile.fluid.grc.apple_cider0.name=Apfelwein
+tile.fluid.grc.apple_cider1.name=Apfelwein
+tile.fluid.grc.apple_cider2.name=Apfelwein
+tile.fluid.grc.apple_cider3.name=Apfelwein
+tile.fluid.grc.apple_cider4.name=tile.fluid.grc.apple_cider4.name
+tile.fluid.grc.apple_cider5.name=tile.fluid.grc.apple_cider5.name
+tile.fluid.grc.apple_cider6.name=tile.fluid.grc.apple_cider6.name

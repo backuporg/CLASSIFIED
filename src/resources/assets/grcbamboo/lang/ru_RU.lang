@@ -1,26 +1,26 @@
 # Creative Tabs
 itemGroup.creative_tab_grcbamboo=Growthcraft: Бамбук
 # Blocks
-tile.grc.bambooBlock.name=Бамбук
-tile.grc.bambooDoor.name=Бамбуковая дверь
-tile.grc.bambooFence.name=Бамбуковый забор
-tile.grc.bambooFenceGate.name=Бамбуковая калитка
-tile.grc.bambooFenceRope.name=Бамбуковый забор с веревкой
-tile.grc.bambooLeaves.name=Бамбуковая листва
-tile.grc.bambooScaffold.name=Бамбуковые леса
-tile.grc.bambooShoot.name=Бамбуковый побег
-tile.grc.bambooSlab.name=Бамбуковая плита
-tile.grc.bambooStairs.name=Бамбуковые ступеньки
-tile.grc.bambooStalk.name=Бамбук
-tile.grc.bambooWall.name=Бамбуковая стена
+tile.grc.bamboo_block.name=Бамбук
+tile.grc.bamboo_door.name=Бамбуковая дверь
+tile.grc.bamboo_fence.name=Бамбуковый забор
+tile.grc.bamboo_fence_gate.name=Бамбуковая калитка
+tile.grc.bamboo_fence_rope.name=Бамбуковый забор с веревкой
+tile.grc.bamboo_leaves.name=Бамбуковая листва
+tile.grc.bamboo_scaffold.name=Бамбуковые леса
+tile.grc.bamboo_shoot.name=Бамбуковый побег
+tile.grc.bamboo_slab.name=Бамбуковая плита
+tile.grc.bamboo_stairs.name=Бамбуковые ступеньки
+tile.grc.bamboo_stalk.name=Бамбук
+tile.grc.bamboo_wall.name=Бамбуковая стена
 
 # Items
 item.grc.bamboo.name=Бамбук
-item.grc.bambooDoor.name=Бамбуковая дверь
-item.grc.bambooSlab.name=Бамбуковая плита
-item.grc.bambooRaft.name=Бамбуковый плот
-item.grc.bambooCoal.name=Бамбуковый древесный уголь
-item.grc.bambooShootFood.name=Бамбуковый побег
+item.grc.bamboo_door_item.name=Бамбуковая дверь
+item.grc.bamboo_slab.name=Бамбуковая плита
+item.grc.bamboo_raft.name=Бамбуковый плот
+item.grc.bamboo_coal.name=Бамбуковый древесный уголь
+item.grc.bamboo_shoot_food.name=Бамбуковый побег
 
 # Entities
-entity.Growthcraft|Bamboo.bambooRaft.name=Бамбуковый плот
+entity.Growthcraft|Bamboo.bamboo_raft.name=Бамбуковый плот

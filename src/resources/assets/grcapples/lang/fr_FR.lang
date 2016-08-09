@@ -1,34 +1,34 @@
 # Blocks
 tile.grc.apple_block.name=Pommes
-tile.grc.appleSapling.name=Pousse de pommier
-tile.grc.appleLeaves.name=Feuilles de pommier
+tile.grc.apple_sapling.name=Pousse de pommier
+tile.grc.apple_leaves.name=Feuilles de pommier
 # Items
-item.grc.appleSeeds.name=Trognon de pomme
+item.grc.apple_seeds.name=Trognon de pomme
 
 # Booze
 ## Fluids
-fluid.grc.appleCider0=Cidre de pomme
-fluid.grc.appleCider1=Cidre de pomme
-fluid.grc.appleCider2=Cidre de pomme
-fluid.grc.appleCider3=Cidre de pomme
-fluid.grc.appleCider4=fluid.grc.appleCider4
-fluid.grc.appleCider5=Cidre de pomme
-fluid.grc.appleCider6=Cidre de pomme
+fluid.grc.apple_cider0=Cidre de pomme
+fluid.grc.apple_cider1=Cidre de pomme
+fluid.grc.apple_cider2=Cidre de pomme
+fluid.grc.apple_cider3=Cidre de pomme
+fluid.grc.apple_cider4=fluid.grc.apple_cider4
+fluid.grc.apple_cider5=Cidre de pomme
+fluid.grc.apple_cider6=Cidre de pomme
 
 ## Fluid Buckets
-item.bucket.fluid.grc.appleCider0.name=Seau de cidre de pomme
-item.bucket.fluid.grc.appleCider1.name=Seau de cidre de pomme
-item.bucket.fluid.grc.appleCider2.name=Seau de cidre de pomme
-item.bucket.fluid.grc.appleCider3.name=Seau de cidre de pomme
-item.bucket.fluid.grc.appleCider4.name=item.bucket.fluid.grc.appleCider4.name
-item.bucket.fluid.grc.appleCider5.name=Seau de cidre de pomme
-item.bucket.fluid.grc.appleCider6.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider0.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider1.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider2.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider3.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider4.name=item.bucket.fluid.grc.apple_cider4.name
+item.bucket.fluid.grc.apple_cider5.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider6.name=Seau de cidre de pomme
 
 ## Fluid Blocks
-tile.fluid.grc.appleCider0.name=Cidre de pomme
-tile.fluid.grc.appleCider1.name=Cidre de pomme
-tile.fluid.grc.appleCider2.name=Cidre de pomme
-tile.fluid.grc.appleCider3.name=Cidre de pomme
-tile.fluid.grc.appleCider4.name=tile.fluid.grc.appleCider4.name
-tile.fluid.grc.appleCider5.name=Cidre de pomme
-tile.fluid.grc.appleCider6.name=Cidre de pomme
+tile.fluid.grc.apple_cider0.name=Cidre de pomme
+tile.fluid.grc.apple_cider1.name=Cidre de pomme
+tile.fluid.grc.apple_cider2.name=Cidre de pomme
+tile.fluid.grc.apple_cider3.name=Cidre de pomme
+tile.fluid.grc.apple_cider4.name=tile.fluid.grc.apple_cider4.name
+tile.fluid.grc.apple_cider5.name=Cidre de pomme
+tile.fluid.grc.apple_cider6.name=Cidre de pomme

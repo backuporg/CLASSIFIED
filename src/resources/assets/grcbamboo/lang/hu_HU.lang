@@ -1,26 +1,26 @@
 # Creative Tabs
 itemGroup.creative_tab_grcbamboo=itemGroup.creative_tab_grcbamboo
 # Blocks
-tile.grc.bambooBlock.name=tile.grc.bambooBlock.name
-tile.grc.bambooDoor.name=tile.grc.bambooDoor.name
-tile.grc.bambooFence.name=tile.grc.bambooFence.name
-tile.grc.bambooFenceGate.name=tile.grc.bambooFenceGate.name
-tile.grc.bambooFenceRope.name=tile.grc.bambooFenceRope.name
-tile.grc.bambooLeaves.name=tile.grc.bambooLeaves.name
-tile.grc.bambooScaffold.name=tile.grc.bambooScaffold.name
-tile.grc.bambooShoot.name=tile.grc.bambooShoot.name
-tile.grc.bambooSlab.name=tile.grc.bambooSlab.name
-tile.grc.bambooStairs.name=tile.grc.bambooStairs.name
-tile.grc.bambooStalk.name=tile.grc.bambooStalk.name
-tile.grc.bambooWall.name=tile.grc.bambooWall.name
+tile.grc.bamboo_block.name=tile.grc.bamboo_block.name
+tile.grc.bamboo_door.name=tile.grc.bamboo_door.name
+tile.grc.bamboo_fence.name=tile.grc.bamboo_fence.name
+tile.grc.bamboo_fence_gate.name=tile.grc.bamboo_fence_gate.name
+tile.grc.bamboo_fence_rope.name=tile.grc.bamboo_fence_rope.name
+tile.grc.bamboo_leaves.name=tile.grc.bamboo_leaves.name
+tile.grc.bamboo_scaffold.name=tile.grc.bamboo_scaffold.name
+tile.grc.bamboo_shoot.name=tile.grc.bamboo_shoot.name
+tile.grc.bamboo_slab.name=tile.grc.bamboo_slab.name
+tile.grc.bamboo_stairs.name=tile.grc.bamboo_stairs.name
+tile.grc.bamboo_stalk.name=tile.grc.bamboo_stalk.name
+tile.grc.bamboo_wall.name=tile.grc.bamboo_wall.name
 
 # Items
 item.grc.bamboo.name=item.grc.bamboo.name
-item.grc.bambooDoor.name=item.grc.bambooDoor.name
-item.grc.bambooSlab.name=item.grc.bambooSlab.name
-item.grc.bambooRaft.name=item.grc.bambooRaft.name
-item.grc.bambooCoal.name=item.grc.bambooCoal.name
-item.grc.bambooShootFood.name=item.grc.bambooShootFood.name
+item.grc.bamboo_door_item.name=item.grc.bamboo_door_item.name
+item.grc.bamboo_slab.name=item.grc.bamboo_slab.name
+item.grc.bamboo_raft.name=item.grc.bamboo_raft.name
+item.grc.bamboo_coal.name=item.grc.bamboo_coal.name
+item.grc.bamboo_shoot_food.name=item.grc.bamboo_shoot_food.name
 
 # Entities
-entity.Growthcraft|Bamboo.bambooRaft.name=entity.Growthcraft|Bamboo.bambooRaft.name
+entity.Growthcraft|Bamboo.bamboo_raft.name=entity.Growthcraft|Bamboo.bamboo_raft.name
