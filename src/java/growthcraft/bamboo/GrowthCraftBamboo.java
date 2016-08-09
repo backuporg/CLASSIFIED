@@ -133,7 +133,7 @@ public class GrowthCraftBamboo
 
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBamboo(), 0);
 
-		EntityRegistry.registerModEntity(EntityBambooRaft.class, "bambooRaft", 1, this, 80, 3, true);
+		EntityRegistry.registerModEntity(EntityBambooRaft.class, "bamboo_raft", 1, this, 80, 3, true);
 
 		//====================
 		// CRAFTING
@@ -150,7 +150,7 @@ public class GrowthCraftBamboo
 		GameRegistry.addShapedRecipe(blocks.bambooScaffold.asStack(16), "BBB", " A ", "A A", 'A', items.bamboo.getItem(), 'B', blocks.bambooBlock.getBlock());
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Blocks.torch, 2), new Object[] {"A", "B", 'A', items.bambooCoal.getItem(), 'B', "stickWood"}));
 
-		MapGenHelper.registerStructureComponent(ComponentVillageBambooYard.class, "grc.bambooyard");
+		MapGenHelper.registerStructureComponent(ComponentVillageBambooYard.class, "grc.bamboo_yard");
 
 		registerOres();
 
