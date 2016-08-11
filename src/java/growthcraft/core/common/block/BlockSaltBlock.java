@@ -40,7 +40,7 @@ public class BlockSaltBlock extends GrcBlockBase
 		setHardness(2.0F);
 		setResistance(10.0F);
 		setStepSound(soundTypePiston);
-		setUnlocalizedName("grc.salt_block");
+		setUnlocalizedName("salt_block");
 		setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 

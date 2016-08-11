@@ -26,7 +26,7 @@ public class BlockRope extends GrcBlockBase implements IBlockRope
 		super(Material.circuits);
 		this.setHardness(0.5F);
 		//this.setStepSound(soundWoodFootstep);
-		this.setUnlocalizedName("grc.rope_block");
+		this.setUnlocalizedName("rope_block");
 		this.setCreativeTab(null);
 	}
 

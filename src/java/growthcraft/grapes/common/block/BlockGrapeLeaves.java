@@ -42,28 +42,31 @@ public class BlockGrapeLeaves extends BlockLeaves implements IBlockRope, IGrowab
 		setHardness(0.2F);
 		setLightOpacity(1);
 		setStepSound(soundTypeGrass);
-		setUnlocalizedName("grc.grape_leaves");
+		setUnlocalizedName("grape_leaves");
 		setCreativeTab(null);
-		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
+		setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, false));
 	}
 
 	@Override
 	@SuppressWarnings({"rawtypes"})
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {DECAYABLE});
+		return new BlockState(this, new IProperty[] {DECAYABLE,CHECK_DECAY});
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(DECAYABLE, (meta & 8) > 0);
+		return getDefaultState()
+			.withProperty(DECAYABLE, (meta & 8) > 0)
+			.withProperty(CHECK_DECAY, (meta & 4) > 0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(DECAYABLE) ? 8 : 0;
+		return (state.getValue(DECAYABLE) ? 8 : 0) |
+			(state.getValue(CHECK_DECAY) ? 4 : 0);
 	}
 
 	@Override

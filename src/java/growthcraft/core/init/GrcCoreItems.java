@@ -54,11 +54,11 @@ public class GrcCoreItems extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		rope.register("grc.rope");
-		salt.register("grc.salt");
-		saltBottle.register("grc.salt_bottle");
-		saltBucket.register("grc.salt_bucket");
-		crowbar.register("grc.crowbar");
+		rope.register("rope");
+		salt.register("salt");
+		saltBottle.register("salt_bottle");
+		saltBucket.register("salt_bucket");
+		crowbar.register("crowbar");
 	}
 
 	@Override

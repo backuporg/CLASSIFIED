@@ -52,10 +52,10 @@ public class GrcBambooItems extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		bamboo.register("grc.bamboo");
-		bambooDoorItem.register("grc.bamboo_door_item");
-		bambooRaft.register("grc.bamboo_raft");
-		bambooCoal.register("grc.bamboo_coal");
-		bambooShootFood.register("grc.bamboo_shoot_food");
+		bamboo.register("bamboo");
+		bambooDoorItem.register("bamboo_door_item");
+		bambooRaft.register("bamboo_raft");
+		bambooCoal.register("bamboo_coal");
+		bambooShootFood.register("bamboo_shoot_food");
 	}
 }

@@ -26,28 +26,31 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable
 		setStepSound(soundTypeGrass);
 		setHardness(0.2F);
 		setTickRandomly(true);
-		setUnlocalizedName("grc.bamboo_leaves");
+		setUnlocalizedName("bamboo_leaves");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
-		setDefaultState(blockState.getBaseState().withProperty(BlockLeaves.DECAYABLE, false));
+		setDefaultState(blockState.getBaseState().withProperty(DECAYABLE, false).withProperty(CHECK_DECAY, true));
 	}
 
 	@Override
 	@SuppressWarnings({"rawtypes"})
 	protected BlockState createBlockState()
 	{
-		return new BlockState(this, new IProperty[] {DECAYABLE});
+		return new BlockState(this, new IProperty[] {DECAYABLE,CHECK_DECAY});
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
-		return getDefaultState().withProperty(DECAYABLE, (meta & 8) > 0);
+		return getDefaultState()
+			.withProperty(DECAYABLE, (meta & 8) > 0)
+			.withProperty(CHECK_DECAY, (meta & 4) > 0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		return state.getValue(DECAYABLE) ? 8 : 0;
+		return (state.getValue(DECAYABLE) ? 8 : 0) |
+			(state.getValue(CHECK_DECAY) ? 4 : 0);
 	}
 
 	@Override

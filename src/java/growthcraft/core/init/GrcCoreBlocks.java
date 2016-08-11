@@ -32,13 +32,9 @@ import growthcraft.core.common.block.BlockSaltBlock;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.common.item.ItemBlockFenceRope;
-import growthcraft.core.common.item.ItemBlockNaturaFenceRope;
 import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.registry.FenceRopeRegistry;
 
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -63,13 +59,13 @@ public class GrcCoreBlocks extends GrcModuleBase
 	{
 		this.saltBlock = new BlockDefinition(new BlockSaltBlock());
 		this.ropeBlock = new BlockDefinition(new BlockRope());
-		this.oakFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.oak_fence, "grc.oak_fence_rope"));
-		this.spruceFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.spruce_fence, "grc.spruce_fence_rope"));
-		this.birchFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.birch_fence, "grc.birch_fence_rope"));
-		this.jungleFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.jungle_fence, "grc.jungle_fence_rope"));
-		this.darkOakFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.dark_oak_fence, "grc.dark_oak_fence_rope"));
-		this.acaciaFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.acacia_fence, "grc.acacia_fence_rope"));
-		this.netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "grc.nether_brick_fence_rope"));
+		this.oakFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.oak_fence, "oak_fence_rope"));
+		this.spruceFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.spruce_fence, "spruce_fence_rope"));
+		this.birchFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.birch_fence, "birch_fence_rope"));
+		this.jungleFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.jungle_fence, "jungle_fence_rope"));
+		this.darkOakFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.dark_oak_fence, "dark_oak_fence_rope"));
+		this.acaciaFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.acacia_fence, "acacia_fence_rope"));
+		this.netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "nether_brick_fence_rope"));
 
 		FenceRopeRegistry.instance().addEntry(Blocks.oak_fence, oakFenceRope.getBlock());
 		FenceRopeRegistry.instance().addEntry(Blocks.spruce_fence, spruceFenceRope.getBlock());
@@ -83,15 +79,15 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		oakFenceRope.register("grc.oak_fence_rope", ItemBlockFenceRope.class);
-		spruceFenceRope.register("grc.spruce_fence_rope", ItemBlockFenceRope.class);
-		birchFenceRope.register("grc.birch_fence_rope", ItemBlockFenceRope.class);
-		jungleFenceRope.register("grc.jungle_fence_rope", ItemBlockFenceRope.class);
-		darkOakFenceRope.register("grc.dark_oak_fence_rope", ItemBlockFenceRope.class);
-		acaciaFenceRope.register("grc.acacia_fence_rope", ItemBlockFenceRope.class);
-		ropeBlock.register("grc.rope_block");
-		saltBlock.register("grc.salt_block");
-		netherBrickFenceRope.register("grc.nether_brick_fence_rope", ItemBlockFenceRope.class);
+		oakFenceRope.register("oak_fence_rope", ItemBlockFenceRope.class);
+		spruceFenceRope.register("spruce_fence_rope", ItemBlockFenceRope.class);
+		birchFenceRope.register("birch_fence_rope", ItemBlockFenceRope.class);
+		jungleFenceRope.register("jungle_fence_rope", ItemBlockFenceRope.class);
+		darkOakFenceRope.register("dark_oak_fence_rope", ItemBlockFenceRope.class);
+		acaciaFenceRope.register("acacia_fence_rope", ItemBlockFenceRope.class);
+		ropeBlock.register("rope_block");
+		saltBlock.register("salt_block");
+		netherBrickFenceRope.register("nether_brick_fence_rope", ItemBlockFenceRope.class);
 
 		Blocks.fire.setFireInfo(oakFenceRope.getBlock(), 5, 20);
 		Blocks.fire.setFireInfo(spruceFenceRope.getBlock(), 5, 20);
@@ -99,93 +95,6 @@ public class GrcCoreBlocks extends GrcModuleBase
 		Blocks.fire.setFireInfo(jungleFenceRope.getBlock(), 5, 20);
 		Blocks.fire.setFireInfo(darkOakFenceRope.getBlock(), 5, 20);
 		Blocks.fire.setFireInfo(acaciaFenceRope.getBlock(), 5, 20);
-	}
-
-	private void initEtfuturum()
-	{
-		final String modId = "etfuturum";
-		if (Loader.isModLoaded(modId))
-		{
-			final String[] woodTypes = { "oak", "spruce", "birch", "jungle", "acacia", "dark_oak" };
-			for (String woodTypeName : woodTypes)
-			{
-				final Block block = GameRegistry.findBlock(modId, "fence_" + woodTypeName);
-				if (block != null)
-				{
-					final String basename = "grc.etfuturum_fence_rope_" + woodTypeName;
-					final BlockDefinition fp = new BlockDefinition(new BlockFenceRope(block, basename));
-					fp.register(basename, ItemBlockFenceRope.class);
-					Blocks.fire.setFireInfo(fp.getBlock(), 5, 20);
-					FenceRopeRegistry.instance().addEntry(block, fp.getBlock());
-				}
-			}
-		}
-	}
-
-	private void initWoodstuff()
-	{
-		final String modId = "woodstuff";
-		if (Loader.isModLoaded(modId))
-		{
-			final String[] names = {
-				// aether
-				"skyrootPlank",
-				// arsmagica2
-				"planksWitchwood",
-				// BiomesOPlenty
-				"planks",
-				// Botania
-				"livingwood",
-				"dreamwood",
-				// dendrology
-				"wood0",
-				// enhancedbiomes
-				"enhancedbiomes.tile.planksEB",
-				// erebus
-				"planks",
-				"planks_scorched",
-				// erebus
-				"planks_varnished",
-				// erebus
-				"petrifiedWoodPlanks",
-				// ExtrabiomesXL
-				"planks",
-				// Forestry
-				"planks",
-				// Highlands
-				"hl_woodPlanks",
-				// Natura
-				"planks",
-				// RidiculousWorld
-				"RidiculousPlanks",
-				// Thaumcraft
-				"blockWoodenDevice",
-				// totemic
-				"redCedarPlank",
-				// TwilightForest
-				"tile.TFTowerStone",
-				// witchery
-				"witchwood",
-			};
-			// TODO
-		}
-	}
-
-	private void initNatura()
-	{
-		final String modId = "Natura";
-
-		if (Loader.isModLoaded(modId))
-		{
-			final Block block = GameRegistry.findBlock(modId, "Natura.fence");
-			if (block != null)
-			{
-				this.naturaFenceRope = new BlockDefinition(new BlockFenceRope(block, "grc.natura_fence_rope"));
-				naturaFenceRope.register("grc.natura_fence_rope", ItemBlockNaturaFenceRope.class);
-				Blocks.fire.setFireInfo(naturaFenceRope.getBlock(), 5, 20);
-				FenceRopeRegistry.instance().addEntry(block, naturaFenceRope.getBlock());
-			}
-		}
 	}
 
 	@Override

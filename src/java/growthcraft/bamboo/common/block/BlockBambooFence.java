@@ -22,7 +22,7 @@ public class BlockBambooFence extends BlockFence
 		setResistance(5.0F);
 		setHardness(2.0F);
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
-		setUnlocalizedName("grc.bamboo_fence");
+		setUnlocalizedName("bamboo_fence");
 	}
 
 	@Override

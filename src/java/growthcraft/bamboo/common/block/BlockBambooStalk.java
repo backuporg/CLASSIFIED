@@ -41,7 +41,7 @@ public class BlockBambooStalk extends GrcBlockBase implements IGrowable
 		setStepSound(soundTypeWood);
 		setHardness(2.0F);
 		setTickRandomly(true);
-		setUnlocalizedName("grc.bamboo_stalk");
+		setUnlocalizedName("bamboo_stalk");
 		setCreativeTab(null);
 		setDefaultState(blockState.getBaseState().withProperty(DRIED, false));
 	}

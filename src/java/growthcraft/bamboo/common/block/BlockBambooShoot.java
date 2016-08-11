@@ -42,7 +42,7 @@ public class BlockBambooShoot extends BlockBush implements ICropDataProvider, IG
 		setTickRandomly(true);
 		final float f = 0.4F;
 		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
-		setUnlocalizedName("grc.bamboo_shoot");
+		setUnlocalizedName("bamboo_shoot");
 		setCreativeTab(null);
 		setDefaultState(blockState.getBaseState().withProperty(GROWTH, 0));
 	}

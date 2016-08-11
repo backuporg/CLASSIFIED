@@ -42,7 +42,7 @@ public class GrcApplesItems extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		appleSeeds.register("grc.apple_seeds");
+		appleSeeds.register("apple_seeds");
 
 		OreDictionary.registerOre("seedApple", appleSeeds.getItem());
 		// For Pam's HarvestCraft

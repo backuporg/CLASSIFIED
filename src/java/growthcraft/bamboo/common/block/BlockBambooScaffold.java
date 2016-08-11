@@ -29,7 +29,7 @@ public class BlockBambooScaffold extends GrcBlockBase
 		setStepSound(soundTypeWood);
 		setResistance(0.2F);
 		setHardness(0.5F);
-		setUnlocalizedName("grc.bamboo_scaffold");
+		setUnlocalizedName("bamboo_scaffold");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 

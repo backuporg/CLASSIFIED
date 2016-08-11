@@ -50,7 +50,7 @@ public class BlockApple extends GrcBlockBase implements IGrowable, ICropDataProv
 		setHardness(0.2F);
 		setResistance(5.0F);
 		setStepSound(soundTypeWood);
-		setUnlocalizedName("grc.apple_block");
+		setUnlocalizedName("apple_block");
 		setCreativeTab(null);
 	}
 

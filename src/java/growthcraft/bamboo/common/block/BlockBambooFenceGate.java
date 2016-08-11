@@ -13,7 +13,7 @@ public class BlockBambooFenceGate extends BlockFenceGate
 		setStepSound(soundTypeWood);
 		setHardness(2.0F);
 		setResistance(5.0F);
-		setUnlocalizedName("grc.bamboo_fence_gate");
+		setUnlocalizedName("bamboo_fence_gate");
 		setCreativeTab(GrowthCraftBamboo.creativeTab);
 	}
 }

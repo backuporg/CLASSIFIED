@@ -22,7 +22,7 @@ public class BlockBambooDoor extends BlockDoor
 		setHardness(3.0F);
 		disableStats();
 		setCreativeTab(null);
-		setUnlocalizedName("grc.bamboo_door");
+		setUnlocalizedName("bamboo_door");
 	}
 
 	@Override

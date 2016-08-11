@@ -108,7 +108,9 @@ public class GrcMilkFluids extends GrcModuleBase
 	private void preInitKumisFluids()
 	{
 		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
-		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
+		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids,
+			GrowthCraftCellar.resources.create("booze_still"),
+			GrowthCraftCellar.resources.create("booze_flow"));
 		for (Booze booze : kumisFluids)
 		{
 			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
@@ -130,7 +132,10 @@ public class GrcMilkFluids extends GrcModuleBase
 		if (GrowthCraftMilk.getConfig().milkEnabled)
 		{
 			this.milk = FluidFactory.instance().create(
-				new GrcFluid("grc.milk", GrowthCraftMilk.resources.create("fluids/milk_still"), GrowthCraftMilk.resources.create("fluids/milk_flow")).setDensity(1030).setViscosity(3000),
+				new GrcFluid("grc.milk",
+					GrowthCraftMilk.resources.create("fluids/milk_still"),
+					GrowthCraftMilk.resources.create("fluids/milk_flow")
+				).setDensity(1030).setViscosity(3000),
 				FluidFactory.FEATURE_FOOD_BOTTLE | FluidFactory.FEATURE_BLOCK);
 			milk.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(milk.getFluid(), 4, 0.3f, false));
 			milk.foodBottle.getItem().setEffect(milkEffect).setAlwaysEdible();

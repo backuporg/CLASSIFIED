@@ -82,19 +82,19 @@ public class GrcBambooBlocks extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		bambooBlock.register("grc.bamboo_block");
-		bambooShoot.register("grc.bamboo_shoot");
-		bambooStalk.register("grc.bamboo_stalk");
-		bambooLeaves.register("grc.bamboo_leaves");
-		bambooFence.register("grc.bamboo_fence");
-		bambooFenceRope.register("grc.bamboo_fence_rope");
-		bambooFenceGate.register("grc.bamboo_fence_gate");
-		bambooWall.register("grc.bamboo_wall");
-		bambooStairs.register("grc.bamboo_stairs");
-		bambooSingleSlab.register("grc.bamboo_single_slab", ItemBambooSlab.class);
-		bambooDoubleSlab.register("grc.bamboo_double_slab", ItemBambooSlab.class);
-		bambooDoor.register("grc.bamboo_door");
-		bambooScaffold.register("grc.bamboo_scaffold");
+		bambooBlock.register("bamboo_block");
+		bambooShoot.register("bamboo_shoot");
+		bambooStalk.register("bamboo_stalk");
+		bambooLeaves.register("bamboo_leaves");
+		bambooFence.register("bamboo_fence");
+		bambooFenceRope.register("bamboo_fence_rope");
+		bambooFenceGate.register("bamboo_fence_gate");
+		bambooWall.register("bamboo_wall");
+		bambooStairs.register("bamboo_stairs");
+		bambooSingleSlab.register("bamboo_single_slab", ItemBambooSlab.class);
+		bambooDoubleSlab.register("bamboo_double_slab", ItemBambooSlab.class);
+		bambooDoor.register("bamboo_door");
+		bambooScaffold.register("bamboo_scaffold");
 
 		//====================
 		// ADDITIONAL PROPS.

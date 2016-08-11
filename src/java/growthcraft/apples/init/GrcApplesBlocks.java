@@ -48,9 +48,9 @@ public class GrcApplesBlocks extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		appleSapling.register("grc.apple_sapling");
-		appleLeaves.register("grc.apple_leaves");
-		appleBlock.register("grc.apple_block");
+		appleSapling.register("apple_sapling");
+		appleLeaves.register("apple_leaves");
+		appleBlock.register("apple_block");
 
 		OreDictionary.registerOre("saplingTree", appleSapling.getItem());
 		OreDictionary.registerOre("treeSapling", appleSapling.getItem());
