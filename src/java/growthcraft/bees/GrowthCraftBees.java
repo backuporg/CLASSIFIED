@@ -93,7 +93,7 @@ public class GrowthCraftBees
 	public static final GrcBeesItems items = new GrcBeesItems();
 	public static final GrcBeesFluids fluids = new GrcBeesFluids();
 
-	public static final VillagerProfession apiaristProfession = new VillagerProfession(resources.join("apiarist"), resources.join("textures/entity/apiarist.png"));
+	public static VillagerProfession apiaristProfession;
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcBeesConfig config = new GrcBeesConfig();
@@ -153,6 +153,7 @@ public class GrowthCraftBees
 
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 
+		apiaristProfession = new VillagerProfession(resources.join("apiarist"), resources.join("textures/entity/apiarist.png"));
 		initBlocksAndItems();
 	}
 

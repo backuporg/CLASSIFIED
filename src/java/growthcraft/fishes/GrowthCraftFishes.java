@@ -107,10 +107,7 @@ public class GrowthCraftFishes
 
 	private void register()
 	{
-		//====================
-		// REGISTRIES
-		//====================
-		GameRegistry.registerBlock(fishTrap.getBlock(), "grc.fish_trap");
+		fishTrap.register("fish_trap");
 
 		GameRegistry.registerTileEntity(TileEntityFishTrap.class, "grc.tileentity.fish_trap");
 

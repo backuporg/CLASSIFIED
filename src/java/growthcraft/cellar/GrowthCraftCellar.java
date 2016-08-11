@@ -105,7 +105,7 @@ public class GrowthCraftCellar
 	public static final DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grccellar");
 	public static CreativeTabs tab;
 	public static final GrcCellarBlocks blocks = new GrcCellarBlocks();
-	public static final VillagerProfession brewerProfession = new VillagerProfession(resources.join("brewer"), resources.join("textures/entity/brewer.png"));
+	public static VillagerProfession brewerProfession;
 	public static ItemDefinition yeast;
 	public static ItemDefinition waterBag;
 
@@ -189,6 +189,7 @@ public class GrowthCraftCellar
 		waterBag = new ItemDefinition(new ItemWaterBag());
 		chievItemDummy = new ItemDefinition(new ItemChievDummy());
 
+		brewerProfession = new VillagerProfession(resources.join("brewer"), resources.join("textures/entity/brewer.png"));
 		modules.preInit();
 		register();
 	}

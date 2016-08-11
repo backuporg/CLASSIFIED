@@ -40,7 +40,7 @@ public class BlockBrewKettle extends BlockCellarContainer
 		setStepSound(soundTypeMetal);
 		setTileEntityType(TileEntityBrewKettle.class);
 		setHardness(2.0F);
-		setUnlocalizedName("grc.brew_kettle");
+		setUnlocalizedName("brew_kettle");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setGuiType(CellarGuiType.BREW_KETTLE);
 	}

@@ -19,7 +19,7 @@ public class BlockCultureJar extends BlockCellarContainer
 		super(Material.glass);
 		setHardness(0.3F);
 		setStepSound(soundTypeGlass);
-		setUnlocalizedName("grc.culture_jar");
+		setUnlocalizedName("culture_jar");
 		setCreativeTab(GrowthCraftCellar.tab);
 		setTileEntityType(TileEntityCultureJar.class);
 		setGuiType(CellarGuiType.FERMENT_JAR);

@@ -23,16 +23,12 @@
  */
 package growthcraft.core.init;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.block.BlockSaltBlock;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.common.item.ItemBlockFenceRope;
-import growthcraft.core.integration.minecraft.EnumMinecraftWoodType;
 import growthcraft.core.registry.FenceRopeRegistry;
 
 import net.minecraft.init.Blocks;
@@ -48,11 +44,7 @@ public class GrcCoreBlocks extends GrcModuleBase
 	public BlockDefinition jungleFenceRope;
 	public BlockDefinition darkOakFenceRope;
 	public BlockDefinition acaciaFenceRope;
-
 	public BlockDefinition netherBrickFenceRope;
-	public BlockDefinition naturaFenceRope;
-	public Map<EnumMinecraftWoodType, BlockDefinition> etfuturumFenceRopes = new HashMap<EnumMinecraftWoodType, BlockDefinition>();
-	public Map<String, BlockDefinition> woodstuffFenceRopes = new HashMap<String, BlockDefinition>();
 
 	@Override
 	public void preInit()

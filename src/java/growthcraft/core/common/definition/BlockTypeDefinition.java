@@ -35,6 +35,8 @@ import net.minecraft.item.ItemStack;
 
 public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
+	public String registeredName;
+
 	public BlockTypeDefinition(@Nonnull T block)
 	{
 		super(block);
@@ -107,6 +109,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	public void register(String name, Class<? extends ItemBlock> itemClass)
 	{
 		GameRegistry.registerBlock(getBlock(), itemClass, name);
+		this.registeredName = name;
 	}
 
 	/**
@@ -115,5 +118,6 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	public void register(String name)
 	{
 		GameRegistry.registerBlock(getBlock(), name);
+		this.registeredName = name;
 	}
 }
