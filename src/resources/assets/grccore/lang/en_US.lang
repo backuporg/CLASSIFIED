@@ -2,71 +2,50 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=Fence with Rope (Acacia)
-tile.grc.etfuturum_fence_rope_birch.name=Fence with Rope (Birch)
-tile.grc.etfuturum_fence_rope_dark_oak.name=Fence with Rope (Dark Oak)
-tile.grc.etfuturum_fence_rope_jungle.name=Fence with Rope (Jungle)
-tile.grc.etfuturum_fence_rope_oak.name=Fence with Rope (Oak)
-tile.grc.etfuturum_fence_rope_spruce.name=Fence with Rope (Spruce)
-tile.grc.fenceRope.name=Fence with Rope
-tile.grc.netherBrickFenceRope.name=Fence with Rope (Nether Brick)
-tile.grc.naturaFenceRope.name=Fence with Rope (%s)
-tile.grc.ropeBlock.name=Rope
-tile.grccore.salt_block.name=Salt Block
+tile.grc.acacia_fence_rope.name=Fence with Rope (Acacia)
+tile.grc.birch_fence_rope.name=Fence with Rope (Birch)
+tile.grc.dark_oak_fence_rope.name=Fence with Rope (Dark Oak)
+tile.grc.jungle_fence_rope.name=Fence with Rope (Jungle)
+tile.grc.oak_fence_rope.name=Fence with Rope (Oak)
+tile.grc.spruce_fence_rope.name=Fence with Rope (Spruce)
+tile.grc.nether_brick_fence_rope.name=Fence with Rope (Nether Brick)
+tile.grc.rope_block.name=Rope
+tile.grc.salt_block.name=Salt Block
 
 # Items
 item.grc.rope.name=Rope
-item.grccore.salt.name=Salt
-item.grccore.bucketSalt.name=Salt Bucket
-item.grccore.bottleSalt.name=Salt Bottle
-item.grccore.crowbar.black.name=Crowbar (Black)
-item.grccore.crowbar.red.name=Crowbar (Red)
-item.grccore.crowbar.green.name=Crowbar (Green)
-item.grccore.crowbar.brown.name=Crowbar (Brown)
-item.grccore.crowbar.blue.name=Crowbar (Blue)
-item.grccore.crowbar.purple.name=Crowbar (Purple)
-item.grccore.crowbar.cyan.name=Crowbar (Cyan)
-item.grccore.crowbar.light_gray.name=Crowbar (Light Gray)
-item.grccore.crowbar.gray.name=Crowbar (Gray)
-item.grccore.crowbar.pink.name=Crowbar (Pink)
-item.grccore.crowbar.lime.name=Crowbar (Lime)
-item.grccore.crowbar.yellow.name=Crowbar (Yellow)
-item.grccore.crowbar.light_blue.name=Crowbar (Light Blue)
-item.grccore.crowbar.magenta.name=Crowbar (Magenta)
-item.grccore.crowbar.orange.name=Crowbar (Orange)
-item.grccore.crowbar.white.name=Crowbar (White)
+item.grc.salt.name=Salt
+item.grc.bucket_salt.name=Salt Bucket
+item.grc.bottle_salt.name=Salt Bottle
+item.grc.crowbar.black.name=Crowbar (Black)
+item.grc.crowbar.red.name=Crowbar (Red)
+item.grc.crowbar.green.name=Crowbar (Green)
+item.grc.crowbar.brown.name=Crowbar (Brown)
+item.grc.crowbar.blue.name=Crowbar (Blue)
+item.grc.crowbar.purple.name=Crowbar (Purple)
+item.grc.crowbar.cyan.name=Crowbar (Cyan)
+item.grc.crowbar.light_gray.name=Crowbar (Light Gray)
+item.grc.crowbar.gray.name=Crowbar (Gray)
+item.grc.crowbar.pink.name=Crowbar (Pink)
+item.grc.crowbar.lime.name=Crowbar (Lime)
+item.grc.crowbar.yellow.name=Crowbar (Yellow)
+item.grc.crowbar.light_blue.name=Crowbar (Light Blue)
+item.grc.crowbar.magenta.name=Crowbar (Magenta)
+item.grc.crowbar.orange.name=Crowbar (Orange)
+item.grc.crowbar.white.name=Crowbar (White)
 
 # Fluids
 fluid.tile.water=Water
 fluid.tile.lava=Lava
 
 ## Salt Water
-fluid.grccore.SaltWater=Salt Water
-tile.grccore.BlockFluidSaltWater.name=Salt Water
-item.grccore.BottleFluidSaltWater.name=Salt Water Bottle
-item.bucket.fluid.grccore.SaltWater.name=Salt Water Bucket
+fluid.grc.salt_water=Salt Water
+tile.grccore.fluid_block_salt_water.name=Salt Water
+item.grc.fluid_bottle_salt_water.name=Salt Water Bottle
+item.bucket.fluid.grc.salt_water.name=Salt Water Bucket
 
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
-
-# Colors
-grc.color.Black=Black
-grc.color.Blue=Blue
-grc.color.Brown=Brown
-grc.color.Cyan=Cyan
-grc.color.Gray=Gray
-grc.color.Green=Green
-grc.color.LightBlue=Light Blue
-grc.color.LightGray=Light Gray
-grc.color.Lime=Lime
-grc.color.Magenta=Magenta
-grc.color.Orange=Orange
-grc.color.Pink=Pink
-grc.color.Purple=Purple
-grc.color.Red=Red
-grc.color.Transparent=Transparent
-grc.color.White=White
-grc.color.Yellow=Yellow
 
 # Formats and Units
 grc.format.value.true=YES

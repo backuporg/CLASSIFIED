@@ -2,11 +2,11 @@
 itemGroup.creative_tab_grccellar=Growthcraft Keller
 
 # Blocks
-tile.grc.fruitPress.name=Fruchtpresse
-tile.grc.fruitPresser.name=Fruchtpresse
-tile.grc.brewKettle.name=Braukessel
-tile.grc.fermentBarrel.name=Reifefass
-tile.grc.fermentJar.name=tile.grc.fermentJar.name
+tile.grc.fruit_press.name=Fruchtpresse
+tile.grc.fruit_presser.name=Fruchtpresse
+tile.grc.brew_kettle.name=Braukessel
+tile.grc.ferment_barrel.name=Reifefass
+tile.grc.ferment_jar.name=tile.grc.ferment_jar.name
 
 # Items
 # Please remove this field once all other module translations have been updated,
@@ -20,29 +20,29 @@ item.grc.yeast3.name=item.grc.yeast3.name
 item.grc.yeast4.name=item.grc.yeast4.name
 
 # Water Bags
-item.grc.waterBag0.name=item.grc.waterBag0.name
-item.grc.waterBag1.name=item.grc.waterBag1.name
-item.grc.waterBag2.name=item.grc.waterBag2.name
-item.grc.waterBag3.name=item.grc.waterBag3.name
-item.grc.waterBag4.name=item.grc.waterBag4.name
-item.grc.waterBag5.name=item.grc.waterBag5.name
-item.grc.waterBag6.name=item.grc.waterBag6.name
-item.grc.waterBag7.name=item.grc.waterBag7.name
-item.grc.waterBag8.name=item.grc.waterBag8.name
-item.grc.waterBag9.name=item.grc.waterBag9.name
-item.grc.waterBag10.name=item.grc.waterBag10.name
-item.grc.waterBag11.name=item.grc.waterBag11.name
-item.grc.waterBag12.name=item.grc.waterBag12.name
-item.grc.waterBag13.name=item.grc.waterBag13.name
-item.grc.waterBag14.name=item.grc.waterBag14.name
-item.grc.waterBag15.name=item.grc.waterBag15.name
-item.grc.waterBag16.name=item.grc.waterBag16.name
+item.grc.water_bag.white.name=item.grc.water_bag.white.name
+item.grc.water_bag.orange.name=item.grc.water_bag.orange.name
+item.grc.water_bag.magenta.name=item.grc.water_bag.magenta.name
+item.grc.water_bag.light_blue.name=item.grc.water_bag.light_blue.name
+item.grc.water_bag.yellow.name=item.grc.water_bag.yellow.name
+item.grc.water_bag.lime.name=item.grc.water_bag.lime.name
+item.grc.water_bag.pink.name=item.grc.water_bag.pink.name
+item.grc.water_bag.gray.name=item.grc.water_bag.gray.name
+item.grc.water_bag.silver.name=item.grc.water_bag.silver.name
+item.grc.water_bag.cyan.name=item.grc.water_bag.cyan.name
+item.grc.water_bag.purple.name=item.grc.water_bag.purple.name
+item.grc.water_bag.blue.name=item.grc.water_bag.blue.name
+item.grc.water_bag.brown.name=item.grc.water_bag.brown.name
+item.grc.water_bag.green.name=item.grc.water_bag.green.name
+item.grc.water_bag.red.name=item.grc.water_bag.red.name
+item.grc.water_bag.black.name=item.grc.water_bag.black.name
+item.grc.water_bag.name=item.grc.water_bag.name
 
 # Containers
-container.grc.fruitPress=Fruchtpresse
+container.grc.fruit_press=Fruchtpresse
 container.grc.brewKettle=Braukessel
-container.grc.fermentBarrel=Reifefass
-container.grc.CultureJar=container.grc.CultureJar
+container.grc.ferment_barrel=Reifefass
+container.grc.culture_jar=container.grc.culture_jar
 
 # Other
 grc.potion.tipsy=Angetrunken
@@ -72,22 +72,20 @@ gui.grc.cantferment=Kann nicht gären
 gui.grccellar.ferment_barrel.progress_name=gui.grccellar.ferment_barrel.progress_name
 
 # Achievements
-achievement.craftBarrel=Ein Fass aufmachen
-achievement.craftBarrel.desc=achievement.craftBarrel.desc=Craft a fermenting barrel with three wooden planks and six iron ingots.
-achievement.fermentBooze=Was soll sich klären, muss erst gären
-achievement.fermentBooze.desc=Stelle Alkohol durch gärung her.
-achievement.getDrunk=Es braut sich etwas zusammen
-achievement.getDrunk.desc=Erreiche Angetrunkenheit V.
-achievement.onTheGo=achievement.onTheGo
-achievement.onTheGo.desc=achievement.onTheGo.desc
+achievement.craft_barrel=Ein Fass aufmachen
+achievement.craft_barrel.desc=achievement.craft_barrel.desc=Craft a fermenting barrel with three wooden planks and six iron ingots.
+achievement.ferment_booze=Was soll sich klären, muss erst gären
+achievement.ferment_booze.desc=Stelle Alkohol durch gärung her.
+achievement.get_drunk=Es braut sich etwas zusammen
+achievement.get_drunk.desc=Erreiche Angetrunkenheit V.
+achievement.on_the_go=achievement.on_the_go
+achievement.on_the_go.desc=achievement.on_the_go.desc
 
 # Tooltips (Number is a percentage)
 # number is a percentage
-grc.cellar.format.waterBag.name=grc.cellar.format.waterBag.name
+grc.cellar.format.water_bag.name=grc.cellar.format.water_bag.name
 grc.cellar.format.fluid_container.contents=grc.cellar.format.fluid_container.contents
 grc.cellar.format.tipsy_chance=grc.cellar.format.tipsy_chance
-grc.cellar.item.booze_bucket.deprecated=grc.cellar.item.booze_bucket.deprecated
-grc.cellar.item.booze_bucket.deprecated_suffix=grc.cellar.item.booze_bucket.deprecated_suffix
 
 grc.cellar.brew_kettle.brewing_prefix=grc.cellar.brew_kettle.brewing_prefix
 grc.cellar.brew_kettle.itemslot.item=grc.cellar.brew_kettle.itemslot.item

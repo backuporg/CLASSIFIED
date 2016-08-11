@@ -143,7 +143,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
 	@Override
 	public String getDefaultInventoryName()
 	{
-		return "container.grc.CultureJar";
+		return "container.grc.culture_jar";
 	}
 
 	protected void markForFluidUpdate()

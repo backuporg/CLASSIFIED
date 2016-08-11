@@ -1,5 +1,5 @@
 # Blocks
-tile.grc.fishTrap.name=Filet de poisson
+tile.grc.fish_trap.name=Filet de poisson
 
 # Containers
-container.grc.fishTrap=Filet de poisson
+container.grc.fish_trap=Filet de poisson

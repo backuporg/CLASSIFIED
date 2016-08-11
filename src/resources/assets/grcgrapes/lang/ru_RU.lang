@@ -2,19 +2,18 @@
 itemGroup.creative_tab_grcgrapes=Growthcraft: Виноград
 
 # Blocks
-tile.grc.grapeVine0.name=Виноградный ствол
-tile.grc.grapeVine1.name=Виноградный ствол
-tile.grc.grapeLeaves.name=Виноградная листва
-tile.grc.grapeBlock.name=Обыкновенный виноград
+tile.grc.grape_vine_bine.name=Виноградный ствол
+tile.grc.grape_vine_trunk.name=Виноградный ствол
+tile.grc.grape_leaves.name=Виноградная листва
+tile.grc.grape_block.name=Обыкновенный виноград
 
 # Items
 item.grc.grapes.purple.name=Обыкновенный виноград
 item.grc.grapes.green.name=Белый виноград
 item.grc.grapes.red.name=Красный виноград
-item.grc.grapeSeeds.name=Семена обыкновенного винограда
+item.grc.grape_seeds.name=Семена обыкновенного винограда
 
 # Fluids
-fluid.grc.grapeWine=Виноградное вино
 fluid.grc.grapeWine0=Виноградное вино
 fluid.grc.grapeWine1=Виноградное вино
 fluid.grc.grapeWine2=Виноградное вино
@@ -25,7 +24,6 @@ fluid.grc.grapeWine6=Виноградное вино
 fluid.grc.grapeWine7=Виноградное вино
 
 # Fluid Buckets
-item.bucket.fluid.grc.grapeWine.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine0.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine1.name=Ведро виноградного вина
 item.bucket.fluid.grc.grapeWine2.name=Ведро виноградного вина
@@ -36,7 +34,6 @@ item.bucket.fluid.grc.grapeWine6.name=Ведро виноградного вин
 item.bucket.fluid.grc.grapeWine7.name=Ведро виноградного вина
 
 # Fluid Blocks
-tile.fluid.grc.grapeWine.name=Виноградное вино
 tile.fluid.grc.grapeWine0.name=Виноградное вино
 tile.fluid.grc.grapeWine1.name=Виноградное вино
 tile.fluid.grc.grapeWine2.name=Виноградное вино

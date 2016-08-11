@@ -2,71 +2,50 @@
 itemGroup.creative_tab_grccore=Growthcraft
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
-tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
-tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
-tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
-tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
-tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
-tile.grc.fenceRope.name=Cerca com Corda
-tile.grc.netherBrickFenceRope.name=Cerca de Tijolo do Nether com Corda
-tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
-tile.grc.ropeBlock.name=Corda
-tile.grccore.salt_block.name=tile.grccore.salt_block.name
+tile.grc.acacia_fence_rope.name=tile.grc.etfuturum_fence_rope_acacia.name
+tile.grc.birch_fence_rope.name=tile.grc.etfuturum_fence_rope_birch.name
+tile.grc.dark_oak_fence_rope.name=tile.grc.etfuturum_fence_rope_dark_oak.name
+tile.grc.jungle_fence_rope.name=tile.grc.etfuturum_fence_rope_jungle.name
+tile.grc.oak_fence_rope.name=Cerca com Corda
+tile.grc.spruce_fence_rope.name=tile.grc.etfuturum_fence_rope_spruce.name
+tile.grc.nether_brick_fence_rope.name=Cerca de Tijolo do Nether com Corda
+tile.grc.rope_block.name=Corda
+tile.grc.salt_block.name=tile.grc.salt_block.name
 
 # Items
 item.grc.rope.name=Corda
-item.grccore.salt.name=Sal
-item.grccore.bucketSalt.name=Balde de Sal
-item.grccore.bottleSalt.name=Frasco de Sal
-item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
-item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
-item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
-item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
-item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
-item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
-item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
-item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
-item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
-item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
-item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
-item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
-item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
-item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
-item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
-item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
+item.grc.salt.name=Sal
+item.grc.bucket_salt.name=Balde de Sal
+item.grc.bottle_salt.name=Frasco de Sal
+item.grc.crowbar.black.name=item.grc.crowbar.black.name
+item.grc.crowbar.red.name=item.grc.crowbar.red.name
+item.grc.crowbar.green.name=item.grc.crowbar.green.name
+item.grc.crowbar.brown.name=item.grc.crowbar.brown.name
+item.grc.crowbar.blue.name=item.grc.crowbar.blue.name
+item.grc.crowbar.purple.name=item.grc.crowbar.purple.name
+item.grc.crowbar.cyan.name=item.grc.crowbar.cyan.name
+item.grc.crowbar.light_gray.name=item.grc.crowbar.light_gray.name
+item.grc.crowbar.gray.name=item.grc.crowbar.gray.name
+item.grc.crowbar.pink.name=item.grc.crowbar.pink.name
+item.grc.crowbar.lime.name=item.grc.crowbar.lime.name
+item.grc.crowbar.yellow.name=item.grc.crowbar.yellow.name
+item.grc.crowbar.light_blue.name=item.grc.crowbar.light_blue.name
+item.grc.crowbar.magenta.name=item.grc.crowbar.magenta.name
+item.grc.crowbar.orange.name=item.grc.crowbar.orange.name
+item.grc.crowbar.white.name=item.grc.crowbar.white.name
 
 # Fluids
 fluid.tile.water=Água
 fluid.tile.lava=Lava
 
 ## Salt Water
-fluid.grccore.SaltWater=Água Salgada
-tile.grccore.BlockFluidSaltWater.name=Água Salgada
-item.grccore.BottleFluidSaltWater.name=Frasco de Água Salgada
-item.bucket.fluid.grccore.SaltWater.name=Balde de Água Salgada
+fluid.grc.salt_water=Água Salgada
+tile.grccore.fluid_block_salt_water.name=Água Salgada
+item.grc.fluid_bottle_salt_water.name=Frasco de Água Salgada
+item.bucket.fluid.grc.salt_water.name=Balde de Água Salgada
 
 # Other
 achievementPage.pageGrowthCraft=Growthcraft
-
-# Colors
-grc.color.Black=Preto
-grc.color.Blue=Azul
-grc.color.Brown=Castanho
-grc.color.Cyan=Azul Ciano
-grc.color.Gray=Cinzento
-grc.color.Green=Verde
-grc.color.LightBlue=Azul Claro
-grc.color.LightGray=Cinzento Claro
-grc.color.Lime=Verde Lima
-grc.color.Magenta=Magenta
-grc.color.Orange=Laranja
-grc.color.Pink=Cor-de-rosa
-grc.color.Purple=Roxo
-grc.color.Red=Vermelho
-grc.color.Transparent=Transparente
-grc.color.White=Branco
-grc.color.Yellow=Amarelo
 
 # Formats and Units
 grc.format.value.true=Sim

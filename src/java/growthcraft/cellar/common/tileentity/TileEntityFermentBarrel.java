@@ -79,7 +79,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	@Override
 	public String getDefaultInventoryName()
 	{
-		return "container.grc.fermentBarrel";
+		return "container.grc.ferment_barrel";
 	}
 
 	protected void markForRecipeRecheck()

@@ -3,140 +3,59 @@ itemGroup.creative_tab_grcbees=Growthcraft|蜜蜂
 
 # Blocks
 ## Vanilla Bee Boxes
-tile.grc.BeeBox.Minecraft.oak.name=橡木蜂箱
-tile.grc.BeeBox.Minecraft.spruce.name=云杉蜂箱
-tile.grc.BeeBox.Minecraft.birch.name=白桦蜂箱
-tile.grc.BeeBox.Minecraft.jungle.name=从林木蜂箱
-tile.grc.BeeBox.Minecraft.acacia.name=金合欢蜂箱
-tile.grc.BeeBox.Minecraft.darkoak.name=深色橡木蜂箱
+tile.grc.bee_box.minecraft.oak.name=橡木蜂箱
+tile.grc.bee_box.minecraft.spruce.name=云杉蜂箱
+tile.grc.bee_box.minecraft.birch.name=白桦蜂箱
+tile.grc.bee_box.minecraft.jungle.name=从林木蜂箱
+tile.grc.bee_box.minecraft.acacia.name=金合欢蜂箱
+tile.grc.bee_box.minecraft.darkoak.name=深色橡木蜂箱
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.BeeBox.Nether.0.name=恶毒蜂箱
+tile.grc.bee_box.Nether.0.name=恶毒蜂箱
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.BeeBox.Bamboo.0.name=竹蜂箱
+tile.grc.bee_box.Bamboo.0.name=竹蜂箱
 
 ## Thaumcraft Bee Boxes
-tile.grc.BeeBox.Thaumcraft.greatwood.name=宏伟之木蜂箱
-tile.grc.BeeBox.Thaumcraft.silverwood.name=银木蜂箱
-
-## Forestry Bee Boxes - this is just insane...
-### Regular
-tile.grc.BeeBox.Forestry.0.Normal.larch.name=落叶树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.teak.name=柚树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.acacia.name=金合欢蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.lime.name=酸橙蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.chestnut.name=栗树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.wenge.name=崖豆树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.baobab.name=猴面包树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.sequoia.name=红杉蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.kapok.name=木棉蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.ebony.name=乌檀树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.mahogany.name=桃心树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.balsa.name=巴尔杉蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.willow.name=柳树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.walnut.name=胡桃树蜂箱
-tile.grc.BeeBox.Forestry.0.Normal.greenheart.name=绿樟树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.cherry.name=樱树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.mahoe.name=高槿蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.poplar.name=白杨树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.palm.name=棕榈树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.papaya.name=木瓜树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.pine.name=松树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.plum.name=李子树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.maple.name=枫树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.citrus.name=柑橘树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.giganteum.name=巨杉树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.ipe.name=重蚁树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.padauk.name=紫檀树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.cocobolo.name=黄檀树蜂箱
-tile.grc.BeeBox.Forestry.1.Normal.zebrawood.name=斑木树蜂箱
-### Fire Proof
-tile.grc.BeeBox.Forestry.0.Fireproof.larch.name=落叶树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.teak.name=柚树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.acacia.name=金合欢蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.lime.name=酸橙蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.chestnut.name=栗树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.wenge.name=崖豆树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.baobab.name=猴面包树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.sequoia.name=红杉蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.kapok.name=木棉蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.ebony.name=乌檀树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.mahogany.name=桃心树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.balsa.name=巴尔杉蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.willow.name=柳树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.walnut.name=胡桃树蜂箱(防火)
-tile.grc.BeeBox.Forestry.0.Fireproof.greenheart.name=绿樟树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.cherry.name=樱树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.mahoe.name=高槿蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.poplar.name=白杨树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.palm.name=棕榈树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.papaya.name=木瓜树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.pine.name=松树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.plum.name=李子树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.maple.name=枫树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.citrus.name=柑橘树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.giganteum.name=巨杉树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.ipe.name=重蚁树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.padauk.name=紫檀树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.cocobolo.name=黄檀树蜂箱(防火)
-tile.grc.BeeBox.Forestry.1.Fireproof.zebrawood.name=斑木树蜂箱(防火)
+tile.grc.bee_box.thaumcraft.greatwood.name=宏伟之木蜂箱
+tile.grc.bee_box.thaumcraft.silverwood.name=银木蜂箱
 
 ## BiomesOPlenty
-tile.grc.BeeBox.BiomesOPlenty.sacred_oak.name=神圣橡木蜂箱
-tile.grc.BeeBox.BiomesOPlenty.cherry.name=樱花树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.dark.name=黑暗树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.fir.name=杉树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.ethereal.name=天域树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.magic.name=魔法树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.mangrove.name=红树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.palm.name=棕榈树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.redwood.name=红木蜂箱
-tile.grc.BeeBox.BiomesOPlenty.willow.name=柳木蜂箱
-tile.grc.BeeBox.BiomesOPlenty.bamboo_thatching.name=竹板蜂箱
-tile.grc.BeeBox.BiomesOPlenty.pine.name=松木蜂箱
-tile.grc.BeeBox.BiomesOPlenty.hell_bark.name=地狱皮树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.jacaranda.name=蓝花楹树蜂箱
-tile.grc.BeeBox.BiomesOPlenty.mahogany.name=桃花心木蜂箱
+tile.grc.bee_box.biomes_o_plenty.sacred_oak.name=神圣橡木蜂箱
+tile.grc.bee_box.biomes_o_plenty.cherry.name=樱花树蜂箱
+tile.grc.bee_box.biomes_o_plenty.dark.name=黑暗树蜂箱
+tile.grc.bee_box.biomes_o_plenty.fir.name=杉树蜂箱
+tile.grc.bee_box.biomes_o_plenty.ethereal.name=天域树蜂箱
+tile.grc.bee_box.biomes_o_plenty.magic.name=魔法树蜂箱
+tile.grc.bee_box.biomes_o_plenty.mangrove.name=红树蜂箱
+tile.grc.bee_box.biomes_o_plenty.palm.name=棕榈树蜂箱
+tile.grc.bee_box.biomes_o_plenty.redwood.name=红木蜂箱
+tile.grc.bee_box.biomes_o_plenty.willow.name=柳木蜂箱
+tile.grc.bee_box.biomes_o_plenty.bamboo_thatching.name=竹板蜂箱
+tile.grc.bee_box.biomes_o_plenty.pine.name=松木蜂箱
+tile.grc.bee_box.biomes_o_plenty.hell_bark.name=地狱皮树蜂箱
+tile.grc.bee_box.biomes_o_plenty.jacaranda.name=蓝花楹树蜂箱
+tile.grc.bee_box.biomes_o_plenty.mahogany.name=桃花心木蜂箱
 
 ## Botania
-tile.grc.BeeBox.Botania.living_wood.name=活木蜂箱
-tile.grc.BeeBox.Botania.dream_wood.name=梦之木蜂箱
-tile.grc.BeeBox.Botania.shimmer_wood.name=微光木蜂箱
-tile.grc.BeeBox.Botania.shimmer_wood.desc=tile.grc.BeeBox.Botania.shimmer_wood.desc
-
-## Natura
-tile.grc.BeeBox.Natura.apple.name=tile.grc.BeeBox.Natura.apple.name
-tile.grc.BeeBox.Natura.blood.name=tile.grc.BeeBox.Natura.blood.name
-tile.grc.BeeBox.Natura.bush.name=tile.grc.BeeBox.Natura.bush.name
-tile.grc.BeeBox.Natura.darkwood.name=tile.grc.BeeBox.Natura.darkwood.name
-tile.grc.BeeBox.Natura.eucalyptus.name=tile.grc.BeeBox.Natura.eucalyptus.name
-tile.grc.BeeBox.Natura.fusewood.name=tile.grc.BeeBox.Natura.fusewood.name
-tile.grc.BeeBox.Natura.ghost.name=tile.grc.BeeBox.Natura.ghost.name
-tile.grc.BeeBox.Natura.maple.name=tile.grc.BeeBox.Natura.maple.name
-tile.grc.BeeBox.Natura.purpleheart.name=tile.grc.BeeBox.Natura.purpleheart.name
-tile.grc.BeeBox.Natura.redwood.name=tile.grc.BeeBox.Natura.redwood.name
-tile.grc.BeeBox.Natura.sakura.name=tile.grc.BeeBox.Natura.sakura.name
-tile.grc.BeeBox.Natura.silverbell.name=tile.grc.BeeBox.Natura.silverbell.name
-tile.grc.BeeBox.Natura.tiger.name=tile.grc.BeeBox.Natura.tiger.name
-tile.grc.BeeBox.Natura.willow.name=tile.grc.BeeBox.Natura.willow.name
+tile.grc.bee_box.botania.living_wood.name=活木蜂箱
+tile.grc.bee_box.botania.dream_wood.name=梦之木蜂箱
+tile.grc.bee_box.botania.shimmer_wood.name=微光木蜂箱
+tile.grc.bee_box.botania.shimmer_wood.desc=tile.grc.bee_box.botania.shimmer_wood.desc
 
 # Other Blocks
-tile.grc.beeHive.name=蜂巢
+tile.grc.bee_hive.name=蜂巢
 
 # Items
-item.grc.honeyComb.empty.name=蜂窝
-item.grc.honeyComb.full.name=蜂窝
-item.grc.honeyJar.name=蜂蜜
+item.grc.honey_comb.empty.name=蜂窝
+item.grc.honey_comb.filled.name=蜂窝
+item.grc.honey_jar.name=蜂蜜
 item.grc.bee.name=蜜蜂
 item.grc.FoodBottleFluidHoney.name=蜂蜜瓶
 item.grc.BucketFluidHoney.name=蜂蜜桶
-item.grcbees.BeesWax.normal.name=蜜蜡
-item.grcbees.BeesWax.red.name=红蜜蜡
-item.grcbees.BeesWax.black.name=黑蜜蜡
-
-# Tooltips
-grc.bees.item.honeyComb.deprecated=本物品已经废弃，请通过工作台合成进行升级。
+item.grc.bees_wax.normal.name=蜜蜡
+item.grc.bees_wax.red.name=红蜜蜡
+item.grc.bees_wax.black.name=黑蜜蜡
 
 # Containers
 container.grc.beeBox=蜂箱

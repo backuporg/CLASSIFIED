@@ -1,10 +1,10 @@
 # Blocks
-tile.grc.paddyField.name=稻田
-tile.grc.riceBlock.name=稻米
+tile.grc.paddy_field.name=稻田
+tile.grc.rice_block.name=稻米
 
 # Items
 item.grc.rice.name=稻米
-item.grc.riceBall.name=饭团
+item.grc.rice_ball.name=饭团
 
 # Fluids
 fluid.grc.riceSake0=米酒

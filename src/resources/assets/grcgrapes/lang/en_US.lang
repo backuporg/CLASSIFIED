@@ -2,16 +2,16 @@
 itemGroup.creative_tab_grcgrapes=Growthcraft Grapes
 
 # Blocks
-tile.grc.grapeVine0.name=Grape Trunk
-tile.grc.grapeVine1.name=Grape Trunk
-tile.grc.grapeLeaves.name=Grape Leaves
-tile.grc.grapeBlock.name=Grapes
+tile.grc.grape_vine_bine.name=Grape Trunk
+tile.grc.grape_vine_trunk.name=Grape Trunk
+tile.grc.grape_leaves.name=Grape Leaves
+tile.grc.grape_block.name=Grapes
 
 # Items
 item.grc.grapes.purple.name=Grapes
 item.grc.grapes.green.name=White Grapes
 item.grc.grapes.red.name=Red Grapes
-item.grc.grapeSeeds.name=Grape Seeds
+item.grc.grape_seeds.name=Grape Seeds
 
 # Fluids
 fluid.grc.grapeWine0=Grape Juice

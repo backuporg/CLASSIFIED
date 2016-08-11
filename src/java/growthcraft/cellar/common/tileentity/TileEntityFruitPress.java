@@ -49,7 +49,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
 	@Override
 	public String getDefaultInventoryName()
 	{
-		return "container.grc.fruitPress";
+		return "container.grc.fruit_press";
 	}
 
 	@Override

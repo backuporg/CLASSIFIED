@@ -2,11 +2,11 @@
 itemGroup.creative_tab_grccellar=Growthcraft Cellar
 
 # Blocks
-tile.grc.fruitPress.name=Mechanical Press
-tile.grc.fruitPresser.name=Mechanical Press
-tile.grc.brewKettle.name=Brew Kettle
-tile.grc.fermentBarrel.name=Fermentation Barrel
-tile.grc.fermentJar.name=Culture Jar
+tile.grc.fruit_press.name=Mechanical Press
+tile.grc.fruit_presser.name=Mechanical Press
+tile.grc.brew_kettle.name=Brew Kettle
+tile.grc.ferment_barrel.name=Fermentation Barrel
+tile.grc.ferment_jar.name=Culture Jar
 
 # Items
 # Please remove this field once all other module translations have been updated,
@@ -20,29 +20,29 @@ item.grc.yeast3.name=Ethereal Yeast
 item.grc.yeast4.name=Origin Yeast
 
 # Water Bags
-item.grc.waterBag0.name=Water Bag (White)
-item.grc.waterBag1.name=Water Bag (Orange)
-item.grc.waterBag2.name=Water Bag (Magenta)
-item.grc.waterBag3.name=Water Bag (Light Blue)
-item.grc.waterBag4.name=Water Bag (Yellow)
-item.grc.waterBag5.name=Water Bag (Lime)
-item.grc.waterBag6.name=Water Bag (Pink)
-item.grc.waterBag7.name=Water Bag (Gray)
-item.grc.waterBag8.name=Water Bag (Light Gray)
-item.grc.waterBag9.name=Water Bag (Cyan)
-item.grc.waterBag10.name=Water Bag (Purple)
-item.grc.waterBag11.name=Water Bag (Blue)
-item.grc.waterBag12.name=Water Bag (Brown)
-item.grc.waterBag13.name=Water Bag (Green)
-item.grc.waterBag14.name=Water Bag (Red)
-item.grc.waterBag15.name=Water Bag (Black)
-item.grc.waterBag16.name=Water Bag
+item.grc.water_bag.white.name=Water Bag (White)
+item.grc.water_bag.orange.name=Water Bag (Orange)
+item.grc.water_bag.magenta.name=Water Bag (Magenta)
+item.grc.water_bag.light_blue.name=Water Bag (Light Blue)
+item.grc.water_bag.yellow.name=Water Bag (Yellow)
+item.grc.water_bag.lime.name=Water Bag (Lime)
+item.grc.water_bag.pink.name=Water Bag (Pink)
+item.grc.water_bag.gray.name=Water Bag (Gray)
+item.grc.water_bag.silver.name=Water Bag (Light Gray)
+item.grc.water_bag.cyan.name=Water Bag (Cyan)
+item.grc.water_bag.purple.name=Water Bag (Purple)
+item.grc.water_bag.blue.name=Water Bag (Blue)
+item.grc.water_bag.brown.name=Water Bag (Brown)
+item.grc.water_bag.green.name=Water Bag (Green)
+item.grc.water_bag.red.name=Water Bag (Red)
+item.grc.water_bag.black.name=Water Bag (Black)
+item.grc.water_bag.name=Water Bag
 
 # Containers
-container.grc.fruitPress=Mechanical Press
+container.grc.fruit_press=Mechanical Press
 container.grc.brewKettle=Brew Kettle
-container.grc.fermentBarrel=Fermentation Barrel
-container.grc.CultureJar=Culture Jar
+container.grc.ferment_barrel=Fermentation Barrel
+container.grc.culture_jar=Culture Jar
 
 # Other
 grc.potion.tipsy=Tipsy
@@ -72,22 +72,20 @@ gui.grc.cantferment=Cannot Ferment.
 gui.grccellar.ferment_barrel.progress_name=Fermenting
 
 # Achievements
-achievement.craftBarrel=Cooper Extraction
-achievement.craftBarrel.desc=Craft a fermentation barrel with three wooden planks and six iron ingots.
-achievement.fermentBooze=It's The Yeast I Could Do...
-achievement.fermentBooze.desc=Ferment an alcoholic beverage.
-achievement.getDrunk=Is Trouble Brewing?
-achievement.getDrunk.desc=Acquire Tipsy V.
-achievement.onTheGo=On The Go
-achievement.onTheGo.desc=Craft a Water Bag
+achievement.craft_barrel=Cooper Extraction
+achievement.craft_barrel.desc=Craft a fermentation barrel with three wooden planks and six iron ingots.
+achievement.ferment_booze=It's The Yeast I Could Do...
+achievement.ferment_booze.desc=Ferment an alcoholic beverage.
+achievement.get_drunk=Is Trouble Brewing?
+achievement.get_drunk.desc=Acquire Tipsy V.
+achievement.on_the_go=On The Go
+achievement.on_the_go.desc=Craft a Water Bag
 
 # Tooltips (Number is a percentage)
 # number is a percentage
-grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.water_bag.name=%s (%s)
 grc.cellar.format.fluid_container.contents=Contains: %2$dmB/%3$dmB of %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance of Tipsy
-grc.cellar.item.booze_bucket.deprecated=DEPRECATED, craft to get updated bucket
-grc.cellar.item.booze_bucket.deprecated_suffix= (DEPRECATED)
 
 grc.cellar.brew_kettle.brewing_prefix=Brewing :
 grc.cellar.brew_kettle.itemslot.item=Item : %s

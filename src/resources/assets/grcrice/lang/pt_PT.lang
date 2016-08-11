@@ -1,10 +1,10 @@
 # Blocks
-tile.grc.paddyField.name=Arrozal
-tile.grc.riceBlock.name=Arroz
+tile.grc.paddy_field.name=Arrozal
+tile.grc.rice_block.name=Arroz
 
 # Items
 item.grc.rice.name=Cereal de Arroz
-item.grc.riceBall.name=Onigiri
+item.grc.rice_ball.name=Onigiri
 
 # Fluids
 fluid.grc.riceSake0=Saquê

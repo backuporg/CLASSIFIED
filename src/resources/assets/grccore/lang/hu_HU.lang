@@ -2,71 +2,50 @@
 itemGroup.creative_tab_grccore=itemGroup.creative_tab_grccore
 
 # Blocks
-tile.grc.etfuturum_fence_rope_acacia.name=tile.grc.etfuturum_fence_rope_acacia.name
-tile.grc.etfuturum_fence_rope_birch.name=tile.grc.etfuturum_fence_rope_birch.name
-tile.grc.etfuturum_fence_rope_dark_oak.name=tile.grc.etfuturum_fence_rope_dark_oak.name
-tile.grc.etfuturum_fence_rope_jungle.name=tile.grc.etfuturum_fence_rope_jungle.name
-tile.grc.etfuturum_fence_rope_oak.name=tile.grc.etfuturum_fence_rope_oak.name
-tile.grc.etfuturum_fence_rope_spruce.name=tile.grc.etfuturum_fence_rope_spruce.name
-tile.grc.fenceRope.name=tile.grc.fenceRope.name
-tile.grc.netherBrickFenceRope.name=tile.grc.netherBrickFenceRope.name
-tile.grc.naturaFenceRope.name=tile.grc.naturaFenceRope.name
-tile.grc.ropeBlock.name=tile.grc.ropeBlock.name
-tile.grccore.salt_block.name=tile.grccore.salt_block.name
+tile.grc.acacia_fence_rope.name=tile.grc.etfuturum_fence_rope_acacia.name
+tile.grc.birch_fence_rope.name=tile.grc.etfuturum_fence_rope_birch.name
+tile.grc.dark_oak_fence_rope.name=tile.grc.etfuturum_fence_rope_dark_oak.name
+tile.grc.jungle_fence_rope.name=tile.grc.etfuturum_fence_rope_jungle.name
+tile.grc.oak_fence_rope.name=tile.grc.etfuturum_fence_rope_oak.name
+tile.grc.spruce_fence_rope.name=tile.grc.etfuturum_fence_rope_spruce.name
+tile.grc.nether_brick_fence_rope.name=tile.grc.nether_brick_fence_rope.name
+tile.grc.rope_block.name=tile.grc.rope_block.name
+tile.grc.salt_block.name=tile.grc.salt_block.name
 
 # Items
 item.grc.rope.name=item.grc.rope.name
-item.grccore.salt.name=item.grccore.salt.name
-item.grccore.bucketSalt.name=item.grccore.bucketSalt.name
-item.grccore.bottleSalt.name=item.grccore.bottleSalt.name
-item.grccore.crowbar.black.name=item.grccore.crowbar.black.name
-item.grccore.crowbar.red.name=item.grccore.crowbar.red.name
-item.grccore.crowbar.green.name=item.grccore.crowbar.green.name
-item.grccore.crowbar.brown.name=item.grccore.crowbar.brown.name
-item.grccore.crowbar.blue.name=item.grccore.crowbar.blue.name
-item.grccore.crowbar.purple.name=item.grccore.crowbar.purple.name
-item.grccore.crowbar.cyan.name=item.grccore.crowbar.cyan.name
-item.grccore.crowbar.light_gray.name=item.grccore.crowbar.light_gray.name
-item.grccore.crowbar.gray.name=item.grccore.crowbar.gray.name
-item.grccore.crowbar.pink.name=item.grccore.crowbar.pink.name
-item.grccore.crowbar.lime.name=item.grccore.crowbar.lime.name
-item.grccore.crowbar.yellow.name=item.grccore.crowbar.yellow.name
-item.grccore.crowbar.light_blue.name=item.grccore.crowbar.light_blue.name
-item.grccore.crowbar.magenta.name=item.grccore.crowbar.magenta.name
-item.grccore.crowbar.orange.name=item.grccore.crowbar.orange.name
-item.grccore.crowbar.white.name=item.grccore.crowbar.white.name
+item.grc.salt.name=item.grc.salt.name
+item.grc.bucket_salt.name=item.grc.bucket_salt.name
+item.grc.bottle_salt.name=item.grc.bottle_salt.name
+item.grc.crowbar.black.name=item.grc.crowbar.black.name
+item.grc.crowbar.red.name=item.grc.crowbar.red.name
+item.grc.crowbar.green.name=item.grc.crowbar.green.name
+item.grc.crowbar.brown.name=item.grc.crowbar.brown.name
+item.grc.crowbar.blue.name=item.grc.crowbar.blue.name
+item.grc.crowbar.purple.name=item.grc.crowbar.purple.name
+item.grc.crowbar.cyan.name=item.grc.crowbar.cyan.name
+item.grc.crowbar.light_gray.name=item.grc.crowbar.light_gray.name
+item.grc.crowbar.gray.name=item.grc.crowbar.gray.name
+item.grc.crowbar.pink.name=item.grc.crowbar.pink.name
+item.grc.crowbar.lime.name=item.grc.crowbar.lime.name
+item.grc.crowbar.yellow.name=item.grc.crowbar.yellow.name
+item.grc.crowbar.light_blue.name=item.grc.crowbar.light_blue.name
+item.grc.crowbar.magenta.name=item.grc.crowbar.magenta.name
+item.grc.crowbar.orange.name=item.grc.crowbar.orange.name
+item.grc.crowbar.white.name=item.grc.crowbar.white.name
 
 # Fluids
 fluid.tile.water=fluid.tile.water
 fluid.tile.lava=fluid.tile.lava
 
 ## Salt Water
-fluid.grccore.SaltWater=fluid.grccore.SaltWater
-tile.grccore.BlockFluidSaltWater.name=tile.grccore.BlockFluidSaltWater.name
-item.grccore.BottleFluidSaltWater.name=item.grccore.BottleFluidSaltWater.name
-item.bucket.fluid.grccore.SaltWater.name=item.bucket.fluid.grccore.SaltWater.name
+fluid.grc.salt_water=fluid.grc.salt_water
+tile.grccore.fluid_block_salt_water.name=tile.grccore.fluid_block_salt_water.name
+item.grc.fluid_bottle_salt_water.name=item.grc.fluid_bottle_salt_water.name
+item.bucket.fluid.grc.salt_water.name=item.bucket.fluid.grc.salt_water.name
 
 # Other
 achievementPage.pageGrowthCraft=achievementPage.pageGrowthCraft
-
-# Colors
-grc.color.Black=grc.color.Black
-grc.color.Blue=grc.color.Blue
-grc.color.Brown=grc.color.Brown
-grc.color.Cyan=grc.color.Cyan
-grc.color.Gray=grc.color.Gray
-grc.color.Green=grc.color.Green
-grc.color.LightBlue=grc.color.LightBlue
-grc.color.LightGray=grc.color.LightGray
-grc.color.Lime=grc.color.Lime
-grc.color.Magenta=grc.color.Magenta
-grc.color.Orange=grc.color.Orange
-grc.color.Pink=grc.color.Pink
-grc.color.Purple=grc.color.Purple
-grc.color.Red=grc.color.Red
-grc.color.Transparent=grc.color.Transparent
-grc.color.White=grc.color.White
-grc.color.Yellow=grc.color.Yellow
 
 # Formats and Units
 grc.format.value.true=grc.format.value.true

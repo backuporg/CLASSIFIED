@@ -2,11 +2,11 @@
 itemGroup.creative_tab_grccellar=Growthcraft Adega
 
 # Blocks
-tile.grc.fruitPress.name=Espremedor de Frutas
-tile.grc.fruitPresser.name=Espremedor de Frutas
-tile.grc.brewKettle.name=Caldeira de Praparação
-tile.grc.fermentBarrel.name=Barril de Fermentação
-tile.grc.fermentJar.name=Jarro de Cultura
+tile.grc.fruit_press.name=Espremedor de Frutas
+tile.grc.fruit_presser.name=Espremedor de Frutas
+tile.grc.brew_kettle.name=Caldeira de Praparação
+tile.grc.ferment_barrel.name=Barril de Fermentação
+tile.grc.ferment_jar.name=Jarro de Cultura
 
 # Items
 # Please remove this field once all other module translations have been updated,
@@ -20,29 +20,29 @@ item.grc.yeast3.name=Levedura Etérea
 item.grc.yeast4.name=Levedura Original
 
 # Water Bags
-item.grc.waterBag0.name=Cantil (Branco)
-item.grc.waterBag1.name=Cantil (Laranja)
-item.grc.waterBag2.name=Cantil (Magenta)
-item.grc.waterBag3.name=Cantil (Azul Claro)
-item.grc.waterBag4.name=Cantil (Amarelo)
-item.grc.waterBag5.name=Cantil (Lima)
-item.grc.waterBag6.name=Cantil (Rosa)
-item.grc.waterBag7.name=Cantil (Cinza)
-item.grc.waterBag8.name=Cantil (Cinza Claro)
-item.grc.waterBag9.name=Cantil (Ciano)
-item.grc.waterBag10.name=Cantil (Roxo)
-item.grc.waterBag11.name=Cantil (Azul)
-item.grc.waterBag12.name=Cantil (Marrom)
-item.grc.waterBag13.name=Cantil (Verde)
-item.grc.waterBag14.name=Cantil (Vermelho)
-item.grc.waterBag15.name=Cantil (Preto)
-item.grc.waterBag16.name=Cantil
+item.grc.water_bag.white.name=Cantil (Branco)
+item.grc.water_bag.orange.name=Cantil (Laranja)
+item.grc.water_bag.magenta.name=Cantil (Magenta)
+item.grc.water_bag.light_blue.name=Cantil (Azul Claro)
+item.grc.water_bag.yellow.name=Cantil (Amarelo)
+item.grc.water_bag.lime.name=Cantil (Lima)
+item.grc.water_bag.pink.name=Cantil (Rosa)
+item.grc.water_bag.gray.name=Cantil (Cinza)
+item.grc.water_bag.silver.name=Cantil (Cinza Claro)
+item.grc.water_bag.cyan.name=Cantil (Ciano)
+item.grc.water_bag.purple.name=Cantil (Roxo)
+item.grc.water_bag.blue.name=Cantil (Azul)
+item.grc.water_bag.brown.name=Cantil (Marrom)
+item.grc.water_bag.green.name=Cantil (Verde)
+item.grc.water_bag.red.name=Cantil (Vermelho)
+item.grc.water_bag.black.name=Cantil (Preto)
+item.grc.water_bag.name=Cantil
 
 # Containers
-container.grc.fruitPress=Espremedor de Frutas
+container.grc.fruit_press=Espremedor de Frutas
 container.grc.brewKettle=Caldeira de Preparação
-container.grc.fermentBarrel=Barril de Fermentação
-container.grc.CultureJar=Jarro de Cultura
+container.grc.ferment_barrel=Barril de Fermentação
+container.grc.culture_jar=Jarro de Cultura
 
 # Other
 grc.potion.tipsy=Embriaguez
@@ -72,22 +72,20 @@ gui.grc.cantferment=Não Pode Fermentar
 gui.grccellar.ferment_barrel.progress_name=Fermentando
 
 # Achievements
-achievement.craftBarrel=Fabricação de Barris
-achievement.craftBarrel.desc=Produza um Barril de Fermentação com 3 Tábuas de Madeira e 6 Barras de Ferro
-achievement.fermentBooze=É o que eu posso fermentar...
-achievement.fermentBooze.desc=Fermente uma bebida alcóolica
-achievement.getDrunk=O Problema é Fazer?
-achievement.getDrunk.desc=Alcance Embriguez 5
-achievement.onTheGo=Preparando para Viagem
-achievement.onTheGo.desc=Crafte um cantil
+achievement.craft_barrel=Fabricação de Barris
+achievement.craft_barrel.desc=Produza um Barril de Fermentação com 3 Tábuas de Madeira e 6 Barras de Ferro
+achievement.ferment_booze=É o que eu posso fermentar...
+achievement.ferment_booze.desc=Fermente uma bebida alcóolica
+achievement.get_drunk=O Problema é Fazer?
+achievement.get_drunk.desc=Alcance Embriguez 5
+achievement.on_the_go=Preparando para Viagem
+achievement.on_the_go.desc=Crafte um cantil
 
 # Tooltips (Number is a percentage)
 # number is a percentage
-grc.cellar.format.waterBag.name=%s (%s)
+grc.cellar.format.water_bag.name=%s (%s)
 grc.cellar.format.fluid_container.contents=Contém: %2$dmB/%3$dmB de %1$s
 grc.cellar.format.tipsy_chance=%d%% Chance de Embriaguez
-grc.cellar.item.booze_bucket.deprecated=OBSOLETO, crafte para receber a versão atualizada
-grc.cellar.item.booze_bucket.deprecated_suffix= (OBSOLETO)
 
 grc.cellar.brew_kettle.brewing_prefix=Preparando :
 grc.cellar.brew_kettle.itemslot.item=Item : %s

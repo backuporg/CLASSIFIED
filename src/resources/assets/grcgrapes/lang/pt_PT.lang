@@ -2,16 +2,16 @@
 itemGroup.creative_tab_grcgrapes=Growthcraft Uvas
 
 # Blocks
-tile.grc.grapeVine0.name=Tronco de Videira
-tile.grc.grapeVine1.name=Tronco de Videira
-tile.grc.grapeLeaves.name=Folhas de Videira
-tile.grc.grapeBlock.name=Uvas
+tile.grc.grape_vine_bine.name=Tronco de Videira
+tile.grc.grape_vine_trunk.name=Tronco de Videira
+tile.grc.grape_leaves.name=Folhas de Videira
+tile.grc.grape_block.name=Uvas
 
 # Items
 item.grc.grapes.purple.name=Uvas
 item.grc.grapes.green.name=Uvas Verdes
 item.grc.grapes.red.name=Uvas Vermelhas
-item.grc.grapeSeeds.name=Sementes de Uva
+item.grc.grape_seeds.name=Sementes de Uva
 
 # Fluids
 fluid.grc.grapeWine0=Vinho

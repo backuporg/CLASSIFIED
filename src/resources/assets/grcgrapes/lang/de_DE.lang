@@ -2,16 +2,16 @@
 itemGroup.creative_tab_grcgrapes=itemGroup.creative_tab_grcgrapes
 
 # Blocks
-tile.grc.grapeVine0.name=Weinrebe Stamm
-tile.grc.grapeVine1.name=Weinrebe Stamm
-tile.grc.grapeLeaves.name=Weinblätter
-tile.grc.grapeBlock.name=Weintraube
+tile.grc.grape_vine_bine.name=Weinrebe Stamm
+tile.grc.grape_vine_trunk.name=Weinrebe Stamm
+tile.grc.grape_leaves.name=Weinblätter
+tile.grc.grape_block.name=Weintraube
 
 # Items
 item.grc.grapes.purple.name=Weintraube
 item.grc.grapes.green.name=item.grc.grapes.green.name
 item.grc.grapes.red.name=item.grc.grapes.red.name
-item.grc.grapeSeeds.name=Traubensamen
+item.grc.grape_seeds.name=Traubensamen
 
 # Fluids
 fluid.grc.grapeWine0=Wein

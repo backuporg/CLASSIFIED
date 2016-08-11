@@ -2,16 +2,16 @@
 itemGroup.creative_tab_grcgrapes=Growthcraft|葡萄
 
 # Blocks
-tile.grc.grapeVine0.name=葡萄树干
-tile.grc.grapeVine1.name=葡萄树干
-tile.grc.grapeLeaves.name=葡萄叶
-tile.grc.grapeBlock.name=葡萄
+tile.grc.grape_vine_bine.name=葡萄树干
+tile.grc.grape_vine_trunk.name=葡萄树干
+tile.grc.grape_leaves.name=葡萄叶
+tile.grc.grape_block.name=葡萄
 
 # Items
 item.grc.grapes.purple.name=葡萄
 item.grc.grapes.green.name=绿葡萄
 item.grc.grapes.red.name=红葡萄
-item.grc.grapeSeeds.name=葡萄籽
+item.grc.grape_seeds.name=葡萄籽
 
 # Fluids
 fluid.grc.grapeWine0=葡萄酒
