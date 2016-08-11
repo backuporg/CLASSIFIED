@@ -44,6 +44,7 @@ import squeek.applecore.api.food.FoodValues;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -402,7 +403,12 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + stack.getItemDamage();
+		final int meta = stack.getItemDamage()
+		if (meta >= 0 && meta <= 15)
+		{
+			return String.format("%s.%s", super.getUnlocalizedName(stack), EnumDyeColor.byDyeDamage(meta).name);
+		}
+		return super.getUnlocalizedName(stack);
 	}
 
 	@Override
@@ -412,7 +418,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 		final String fluidName = UnitFormatter.fluidName(getFluid(stack));
 		if (fluidName != null)
 		{
-			return GrcI18n.translate("grc.cellar.format.waterBag.name", basename, fluidName);
+			return GrcI18n.translate("grc.cellar.format.water_bag.name", basename, fluidName);
 		}
 		return basename;
 	}
