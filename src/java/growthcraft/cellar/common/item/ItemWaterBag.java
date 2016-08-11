@@ -403,7 +403,7 @@ public class ItemWaterBag extends GrcItemBase implements IFluidContainerItem, IE
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		final int meta = stack.getItemDamage()
+		final int meta = stack.getItemDamage();
 		if (meta >= 0 && meta <= 15)
 		{
 			return String.format("%s.%s", super.getUnlocalizedName(stack), EnumDyeColor.byDyeDamage(meta).name);
