@@ -81,8 +81,8 @@ public class GrcMilkFluids extends GrcModuleBase
 	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
 	public Map<Fluid, EnumCheeseType> fluidToCheeseType = new HashMap<Fluid, EnumCheeseType>();
 	public GrcFluid[] kumisFluids;
-	public BlockBoozeDefinition[] kumisFluidBlocks = new BlockBoozeDefinition[kumisFluids.length];
-	public ItemBucketBoozeDefinition[] kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
+	public BlockBoozeDefinition[] kumisFluidBlocks;
+	public ItemBucketBoozeDefinition[] kumisFluidBuckets;
 	public ItemDefinition kumisBottle;
 
 	private void preInitCheeseFluids()
@@ -113,6 +113,8 @@ public class GrcMilkFluids extends GrcModuleBase
 			builder.create("grc.kumis_intoxicated"),
 			builder.create("grc.kumis_poisoned")
 		};
+		this.kumisFluidBlocks = new BlockBoozeDefinition[kumisFluids.length];
+		this.kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
 		BoozeRegistryHelper.registerBoozeFluids(kumisFluids);
 		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
 		for (GrcFluid booze : kumisFluids)
