@@ -96,8 +96,9 @@ public class GrowthCraftHops
 
 		modules.add(fluids);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
-
+		modules.freeze();
 		//====================
 		// INIT
 		//====================
@@ -149,7 +150,6 @@ public class GrowthCraftHops
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		final VillageHandlerHops handler = new VillageHandlerHops();
 		logger.warn("(fixme) GrowthCraftHops registerVillageTradeHandler");
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);

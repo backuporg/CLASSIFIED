@@ -100,6 +100,7 @@ public class GrowthCraftGrapes
 		modules.add(items);
 		modules.add(fluids);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.grapes.integration.ThaumcraftModule());
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftGrapes("creative_tab_grcgrapes");
@@ -145,7 +146,6 @@ public class GrowthCraftGrapes
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(items.grapes.asStack(), 1, 2, 10));
 		final VillageHandlerGrapes handler = new VillageHandlerGrapes();

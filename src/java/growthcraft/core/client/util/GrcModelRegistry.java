@@ -23,6 +23,8 @@
  */
 package growthcraft.core.client.util;
 
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.GrowthCraftCore;
@@ -38,6 +40,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GrcModelRegistry
 {
 	private static GrcModelRegistry instance_;
+	private final ILogger logger = new GrcLogger("grcmodel_registry");
 
 	public static GrcModelRegistry instance()
 	{
@@ -61,6 +64,13 @@ public class GrcModelRegistry
 
 	public void register(BlockTypeDefinition<? extends Block> def, int meta, DomainResourceLocationFactory drl)
 	{
-		register(def, meta, drl.createModel(def.registeredName, "inventory"));
+		if (def != null)
+		{
+			register(def, meta, drl.createModel(def.registeredName, "inventory"));
+		}
+		else
+		{
+			logger.error("null BlockTypeDefinition defintion passed in for registering!");
+		}
 	}
 }

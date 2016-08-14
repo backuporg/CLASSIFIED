@@ -91,11 +91,10 @@ public class GrowthCraftFishes
 
 		userFishTrapConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/entries.json");
 		modules.add(userFishTrapConfig);
-
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishes.integration.ThaumcraftModule());
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
-
+		modules.freeze();
 		//====================
 		// INIT
 		//====================
@@ -148,7 +147,6 @@ public class GrowthCraftFishes
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		userFishTrapConfig.loadUserConfig();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
 		modules.init();

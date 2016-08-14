@@ -77,11 +77,11 @@ public class GrowthCraftRice
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
 
-	public static GrcRiceFluids fluids = new GrcRiceFluids();
+	public static final GrcRiceFluids fluids = new GrcRiceFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcRiceConfig config = new GrcRiceConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcRiceConfig config = new GrcRiceConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcRiceConfig getConfig()
 	{
@@ -101,7 +101,7 @@ public class GrowthCraftRice
 
 		modules.add(fluids);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
@@ -152,7 +152,6 @@ public class GrowthCraftRice
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, paddyField.getBlock());
 		final VillageHandlerRice handler = new VillageHandlerRice();
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);

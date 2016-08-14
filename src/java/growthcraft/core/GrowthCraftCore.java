@@ -117,28 +117,25 @@ public class GrowthCraftCore
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/core.conf");
 		if (config.debugEnabled) logger.info("Pre-Initializing %s", MOD_ID);
-
 		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
-
 		userVinesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/vines.json");
 		userFluidDictionary.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/core/fluid_dictionary.json");
 		modules.add(userVinesConfig);
 		modules.add(userFluidDictionary);
-
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.core.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.core.integration.Waila());
 		if (config.enableAppleCoreIntegration) modules.add(new growthcraft.core.integration.AppleCore());
 		//if (config.enableNEIIntegration) modules.add(new growthcraft.core.integration.nei.NEIModule());
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled)
 		{
 			CoreRegistry.instance().setLogger(logger);
 			modules.setLogger(logger);
 		}
-
+		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraft("creative_tab_grccore");
 
 		EMPTY_BOTTLE = new ItemStack(Items.glass_bottle);
@@ -153,9 +150,7 @@ public class GrowthCraftCore
 			FluidUtils.getFluidData().clear();
 		}
 		if (config.changeWaterBottleContainer) Items.potionitem.setContainerItem(Items.glass_bottle);
-
 		RecipeSorter.register("grcShaplessComparable", ShapelessItemComparableRecipe.class, RecipeSorter.Category.SHAPELESS, "");
-
 		modules.preInit();
 		register();
 	}
@@ -169,7 +164,6 @@ public class GrowthCraftCore
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		userFluidDictionary.loadUserConfig();
 		AchievementPageGrowthcraft.init();
 		userVinesConfig.addDefault(Blocks.vine);
