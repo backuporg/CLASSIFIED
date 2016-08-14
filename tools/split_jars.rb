@@ -22,7 +22,7 @@ end
 
 def sh(cmd)
   verbose cmd
-  system(cmd) || fail("Command Failed")
+  system(cmd) || fail("Command Failed `#{cmd}`")
 end
 
 mcmod_info = JSON.parse File.read("src/resources/mcmod.info")

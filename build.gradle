@@ -154,7 +154,7 @@ test {
 
 task deobfJar(type: Jar) {
     classifier = "deobf"
-    //from sourceSets.main.output
+    from sourceSets.main.output
     from(sourceSets.api.output) {
         for (StructExtApi api in apis) {
             exclude api.exclusion
