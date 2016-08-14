@@ -7,28 +7,28 @@ item.grc.rice.name=Grain de riz
 item.grc.rice_ball.name=Onigiri
 
 # Fluids
-fluid.grc.riceSake0=Sake
-fluid.grc.riceSake1=Sake
-fluid.grc.riceSake2=Sake
-fluid.grc.riceSake3=Sake
-fluid.grc.riceSake4=fluid.grc.riceSake4
-fluid.grc.riceSake5=fluid.grc.riceSake5
-fluid.grc.riceSake6=fluid.grc.riceSake6
+fluid.grc.rice_sake_young=Sake
+fluid.grc.rice_sake_fermented=Sake
+fluid.grc.rice_sake_potent=Sake
+fluid.grc.rice_sake_extended=Sake
+fluid.grc.rice_sake_hyper_extended=fluid.grc.rice_sake_hyper_extended
+fluid.grc.rice_sake_intoxicated=fluid.grc.rice_sake_intoxicated
+fluid.grc.rice_sake_poisoned=fluid.grc.rice_sake_poisoned
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake0.name=Seau de sake
-item.bucket.fluid.grc.riceSake1.name=Seau de sake
-item.bucket.fluid.grc.riceSake2.name=Seau de sake
-item.bucket.fluid.grc.riceSake3.name=Seau de sake
-item.bucket.fluid.grc.riceSake4.name=item.bucket.fluid.grc.riceSake4.name
-item.bucket.fluid.grc.riceSake5.name=item.bucket.fluid.grc.riceSake5.name
-item.bucket.fluid.grc.riceSake6.name=item.bucket.fluid.grc.riceSake6.name
+item.bucket.fluid.grc.rice_sake_young.name=Seau de sake
+item.bucket.fluid.grc.rice_sake_fermented.name=Seau de sake
+item.bucket.fluid.grc.rice_sake_potent.name=Seau de sake
+item.bucket.fluid.grc.rice_sake_extended.name=Seau de sake
+item.bucket.fluid.grc.rice_sake_hyper_extended.name=item.bucket.fluid.grc.rice_sake_hyper_extended.name
+item.bucket.fluid.grc.rice_sake_intoxicated.name=item.bucket.fluid.grc.rice_sake_intoxicated.name
+item.bucket.fluid.grc.rice_sake_poisoned.name=item.bucket.fluid.grc.rice_sake_poisoned.name
 
 # Fluid Blocks
-tile.fluid.grc.riceSake0.name=Sake
-tile.fluid.grc.riceSake1.name=Sake
-tile.fluid.grc.riceSake2.name=Sake
-tile.fluid.grc.riceSake3.name=Sake
-tile.fluid.grc.riceSake4.name=tile.fluid.grc.riceSake4.name
-tile.fluid.grc.riceSake5.name=tile.fluid.grc.riceSake5.name
-tile.fluid.grc.riceSake6.name=tile.fluid.grc.riceSake6.name
+tile.fluid.grc.rice_sake_young.name=Sake
+tile.fluid.grc.rice_sake_fermented.name=Sake
+tile.fluid.grc.rice_sake_potent.name=Sake
+tile.fluid.grc.rice_sake_extended.name=Sake
+tile.fluid.grc.rice_sake_hyper_extended.name=tile.fluid.grc.rice_sake_hyper_extended.name
+tile.fluid.grc.rice_sake_intoxicated.name=tile.fluid.grc.rice_sake_intoxicated.name
+tile.fluid.grc.rice_sake_poisoned.name=tile.fluid.grc.rice_sake_poisoned.name

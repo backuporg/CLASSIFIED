@@ -23,22 +23,22 @@
  */
 package growthcraft.apples.init;
 
-import growthcraft.api.cellar.booze.Booze;
+import growthcraft.api.core.GrcFluid;
 import growthcraft.apples.GrowthCraftApples;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.util.FluidFactory;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcApplesFluids extends GrcModuleBase
 {
-	public Booze[] appleCiderBooze;
+	public GrcFluid[] appleCiderBooze;
 	public BlockBoozeDefinition[] appleCiderFluids;
 	public ItemDefinition appleCider;
 	public ItemBucketBoozeDefinition[] appleCiderBuckets;
@@ -46,11 +46,20 @@ public class GrcApplesFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		appleCiderBooze = new Booze[7];
+		final FluidFactory.FluidBuilder builder = BoozeRegistryHelper.newBoozeBuilder();
+		this.appleCiderBooze = new GrcFluid[] {
+			builder.create("grc.apple_cider_young"),
+			builder.create("grc.apple_cider_fermented"),
+			builder.create("grc.apple_cider_potent"),
+			builder.create("grc.apple_cider_extended"),
+			builder.create("grc.apple_cider_magical"),
+			builder.create("grc.apple_cider_intoxicated"),
+			builder.create("grc.apple_cider_poisoned")
+		};
 		appleCiderFluids = new BlockBoozeDefinition[appleCiderBooze.length];
 		appleCiderBuckets = new ItemBucketBoozeDefinition[appleCiderBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.apple_cider", appleCiderBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : appleCiderBooze)
+		BoozeRegistryHelper.registerBoozeFluids(appleCiderBooze);
+		for (GrcFluid booze : appleCiderBooze)
 		{
 			booze.setColor(GrowthCraftApples.getConfig().appleCiderColor).setDensity(1010);
 		}
@@ -68,7 +77,7 @@ public class GrcApplesFluids extends GrcModuleBase
 	public void register()
 	{
 		GameRegistry.registerItem(appleCider.getItem(), "grc.apple_cider");
-		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider, "grc.apple_cider", null);
+		BoozeRegistryHelper.registerBooze(appleCiderBooze, appleCiderFluids, appleCiderBuckets, appleCider);
 		// Ore Dictionary
 		OreDictionary.registerOre("foodApplejuice", appleCider.asStack());
 	}

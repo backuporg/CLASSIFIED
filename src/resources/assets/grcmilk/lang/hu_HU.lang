@@ -128,14 +128,14 @@ tile.grc.fluid_block_rennet.name=tile.grc.fluid_block_rennet.name
 tile.grc.fluid_block_skim_milk.name=tile.grc.fluid_block_skim_milk.name
 tile.grc.fluid_block_whey.name=tile.grc.fluid_block_whey.name
 ### Bottles
-item.grc.food_fluid_bottle_butter_milk.name=item.grc.food_fluid_bottle_butter_milk.name
+item.grc.fluid_bottle_butter_milk.name=item.grc.fluid_bottle_butter_milk.name
 item.grc.fluid_bottle_cream.name=item.grc.fluid_bottle_cream.name
 item.grc.fluid_bottle_milk_curds.name=item.grc.fluid_bottle_milk_curds.name
-item.grc.food_fluid_bottle_milk.name=item.grc.food_fluid_bottle_milk.name
+item.grc.fluid_bottle_milk.name=item.grc.fluid_bottle_milk.name
 item.grc.fluid_bottle_pasteurized_milk.name=item.grc.fluid_bottle_pasteurized_milk.name
 item.grc.fluid_bottle_rennet.name=item.grc.fluid_bottle_rennet.name
-item.grc.food_fluid_bottle_skim_milk.name=item.grc.food_fluid_bottle_skim_milk.name
-item.grc.food_fluid_bottle_whey.name=item.grc.food_fluid_bottle_whey.name
+item.grc.fluid_bottle_skim_milk.name=item.grc.fluid_bottle_skim_milk.name
+item.grc.fluid_bottle_whey.name=item.grc.fluid_bottle_whey.name
 ### Buckets
 item.bucket.fluid.grc.butter_milk.name=item.bucket.fluid.grc.butter_milk.name
 item.bucket.fluid.grc.cream.name=item.bucket.fluid.grc.cream.name
@@ -147,29 +147,29 @@ item.bucket.fluid.grc.skim_milk.name=item.bucket.fluid.grc.skim_milk.name
 item.bucket.fluid.grc.whey.name=item.bucket.fluid.grc.whey.name
 
 ## Booze
-fluid.grc.Kumis0=fluid.grc.Kumis0
-fluid.grc.Kumis1=fluid.grc.Kumis1
-fluid.grc.Kumis2=fluid.grc.Kumis2
-fluid.grc.Kumis3=fluid.grc.Kumis3
-fluid.grc.Kumis4=fluid.grc.Kumis4
-fluid.grc.Kumis5=fluid.grc.Kumis5
-fluid.grc.Kumis5.desc=fluid.grc.Kumis5.desc
+fluid.grc.kumis_fermented=fluid.grc.kumis_fermented
+fluid.grc.kumis_potent=fluid.grc.kumis_potent
+fluid.grc.kumis_extended=fluid.grc.kumis_extended
+fluid.grc.kumis_hyper_extended=fluid.grc.kumis_hyper_extended
+fluid.grc.kumis_intoxicated=fluid.grc.kumis_intoxicated
+fluid.grc.kumis_poisoned=fluid.grc.kumis_poisoned
+fluid.grc.kumis_poisoned.desc=fluid.grc.kumis_poisoned.desc
 
 ## Booze Blocks
-tile.fluid.grc.Kumis0.name=tile.fluid.grc.Kumis0.name
-tile.fluid.grc.Kumis1.name=tile.fluid.grc.Kumis1.name
-tile.fluid.grc.Kumis2.name=tile.fluid.grc.Kumis2.name
-tile.fluid.grc.Kumis3.name=tile.fluid.grc.Kumis3.name
-tile.fluid.grc.Kumis4.name=tile.fluid.grc.Kumis4.name
-tile.fluid.grc.Kumis5.name=tile.fluid.grc.Kumis5.name
+tile.fluid.grc.kumis_fermented.name=tile.fluid.grc.kumis_fermented.name
+tile.fluid.grc.kumis_potent.name=tile.fluid.grc.kumis_potent.name
+tile.fluid.grc.kumis_extended.name=tile.fluid.grc.kumis_extended.name
+tile.fluid.grc.kumis_hyper_extended.name=tile.fluid.grc.kumis_hyper_extended.name
+tile.fluid.grc.kumis_intoxicated.name=tile.fluid.grc.kumis_intoxicated.name
+tile.fluid.grc.kumis_poisoned.name=tile.fluid.grc.kumis_poisoned.name
 
 ## Booze Bucket
-item.bucket.fluid.grc.Kumis0.name=item.bucket.fluid.grc.Kumis0.name
-item.bucket.fluid.grc.Kumis1.name=item.bucket.fluid.grc.Kumis1.name
-item.bucket.fluid.grc.Kumis2.name=item.bucket.fluid.grc.Kumis2.name
-item.bucket.fluid.grc.Kumis3.name=item.bucket.fluid.grc.Kumis3.name
-item.bucket.fluid.grc.Kumis4.name=item.bucket.fluid.grc.Kumis4.name
-item.bucket.fluid.grc.Kumis5.name=item.bucket.fluid.grc.Kumis5.name
+item.bucket.fluid.grc.kumis_fermented.name=item.bucket.fluid.grc.kumis_fermented.name
+item.bucket.fluid.grc.kumis_potent.name=item.bucket.fluid.grc.kumis_potent.name
+item.bucket.fluid.grc.kumis_extended.name=item.bucket.fluid.grc.kumis_extended.name
+item.bucket.fluid.grc.kumis_hyper_extended.name=item.bucket.fluid.grc.kumis_hyper_extended.name
+item.bucket.fluid.grc.kumis_intoxicated.name=item.bucket.fluid.grc.kumis_intoxicated.name
+item.bucket.fluid.grc.kumis_poisoned.name=item.bucket.fluid.grc.kumis_poisoned.name
 
 # Effects
 grc.effect.milk=grc.effect.milk

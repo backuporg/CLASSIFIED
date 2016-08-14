@@ -24,14 +24,12 @@
 package growthcraft.bees.init;
 
 import growthcraft.api.bees.BeesFluidTag;
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.core.CoreRegistry;
 import growthcraft.api.core.GrcFluid;
 import growthcraft.bees.GrowthCraftBees;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
-import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
@@ -46,7 +44,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class GrcBeesFluids extends GrcModuleBase
 {
 	public FluidFactory.FluidDetails honey;
-	public Booze[] honeyMeadBooze;
+	public GrcFluid[] honeyMeadBooze;
 	public ItemDefinition honeyMeadBottle;
 	public ItemBucketBoozeDefinition[] honeyMeadBuckets;
 	public BlockBoozeDefinition[] honeyMeadFluids;
@@ -64,11 +62,20 @@ public class GrcBeesFluids extends GrcModuleBase
 			honey.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(this.honey.getFluid(), 2, 0.2f, false));
 			honey.refreshItemColor();
 		}
-		this.honeyMeadBooze = new Booze[7];
+		final FluidFactory.FluidBuilder builder = BoozeRegistryHelper.newBoozeBuilder();
+		this.honeyMeadBooze = new GrcFluid[] {
+			builder.create("grc.honey_mead_young"),
+			builder.create("grc.honey_mead_fermented"),
+			builder.create("grc.honey_mead_potent"),
+			builder.create("grc.honey_mead_extended"),
+			builder.create("grc.honey_mead_hyper_extended"),
+			builder.create("grc.honey_mead_intoxicated"),
+			builder.create("grc.honey_mead_poisoned")
+		};
 		this.honeyMeadFluids = new BlockBoozeDefinition[honeyMeadBooze.length];
 		this.honeyMeadBuckets = new ItemBucketBoozeDefinition[honeyMeadBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.honey_mead", honeyMeadBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : honeyMeadBooze)
+		BoozeRegistryHelper.registerBoozeFluids(honeyMeadBooze);
+		for (GrcFluid booze : honeyMeadBooze)
 		{
 			booze.setColor(GrowthCraftBees.getConfig().honeyMeadColor).setDensity(1000).setViscosity(1200);
 		}
@@ -89,10 +96,10 @@ public class GrcBeesFluids extends GrcModuleBase
 	public void register()
 	{
 		GameRegistry.registerItem(honeyMeadBottle.getItem(), "grc.honey_mead");
-		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle, "grc.honey_mead", null);
+		BoozeRegistryHelper.registerBooze(honeyMeadBooze, honeyMeadFluids, honeyMeadBuckets, honeyMeadBottle);
 		if (honey != null)
 		{
-			honey.registerObjects("grc", "Honey");
+			honey.registerObjects("grc", "honey");
 			CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
 		}
 	}

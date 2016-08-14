@@ -23,12 +23,12 @@
  */
 package growthcraft.grapes.init;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
@@ -40,6 +40,7 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.FluidFactory;
 import growthcraft.grapes.common.item.EnumGrapes;
 import growthcraft.grapes.GrowthCraftGrapes;
 
@@ -51,7 +52,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcGrapesFluids extends GrcModuleBase
 {
-	public Booze[] grapeWineBooze;
+	public GrcFluid[] grapeWineBooze;
 	public BlockBoozeDefinition[] grapeWineFluids;
 	public ItemDefinition grapeWine;
 	public ItemBucketBoozeDefinition[] grapeWineBuckets;
@@ -59,11 +60,21 @@ public class GrcGrapesFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.grapeWineBooze = new Booze[8];
+		final FluidFactory.FluidBuilder builder = BoozeRegistryHelper.newBoozeBuilder();
+		this.grapeWineBooze = new GrcFluid[] {
+			builder.create("grc.grape_wine_young"),
+			builder.create("grc.grape_wine_fermented"),
+			builder.create("grc.grape_wine_potent"),
+			builder.create("grc.grape_wine_extended"),
+			builder.create("grc.grape_wine_hyper_extended"),
+			builder.create("grc.grape_wine_fortified"),
+			builder.create("grc.grape_wine_intoxicated"),
+			builder.create("grc.grape_wine_poisoned")
+		};
 		this.grapeWineFluids = new BlockBoozeDefinition[grapeWineBooze.length];
 		this.grapeWineBuckets = new ItemBucketBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.grape_wine", grapeWineBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : grapeWineBooze)
+		BoozeRegistryHelper.registerBoozeFluids(grapeWineBooze);
+		for (GrcFluid booze : grapeWineBooze)
 		{
 			booze.setColor(GrowthCraftGrapes.getConfig().grapeWineColor).setDensity(1120);
 		}
@@ -174,7 +185,7 @@ public class GrcGrapesFluids extends GrcModuleBase
 	{
 		grapeWine.register("grc.grapeWine");
 
-		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine, "grc.grapeWine", null);
+		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluids, grapeWineBuckets, grapeWine);
 		registerFermentations();
 
 		OreDictionary.registerOre("foodGrapejuice", grapeWine.asStack(1, 0));

@@ -25,27 +25,27 @@ package growthcraft.cellar.util;
 
 import java.util.List;
 import java.util.ArrayList;
-import javax.annotation.Nullable;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeEffect;
 import growthcraft.api.cellar.booze.BoozeEntry;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.booze.IBoozeRegistry;
 import growthcraft.api.cellar.CellarRegistry;
 import growthcraft.api.core.CoreRegistry;
+import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.fluids.IFluidDictionary;
 import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.ItemBucketBoozeDefinition;
 import growthcraft.cellar.common.item.ItemBlockFluidBooze;
 import growthcraft.cellar.common.item.ItemBucketBooze;
+import growthcraft.cellar.GrowthCraftCellar;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.FluidFactory;
 
 import net.minecraft.init.Items;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -56,13 +56,17 @@ public class BoozeRegistryHelper
 {
 	private BoozeRegistryHelper() {}
 
-	public static void initializeBoozeFluids(String basename, Booze[] boozes, ResourceLocation still, ResourceLocation flowing)
+	public static FluidFactory.FluidBuilder newBoozeBuilder()
 	{
-		for (int i = 0; i < boozes.length; ++i)
+		return FluidFactory.instance().newBuilder(GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
+	}
+
+	public static void registerBoozeFluids(GrcFluid[] boozes)
+	{
+		for (GrcFluid booze : boozes)
 		{
-			boozes[i] = new Booze(basename + i, still, flowing);
-			FluidRegistry.registerFluid(boozes[i]);
-			CellarRegistry.instance().booze().registerBooze(boozes[i]);
+			FluidRegistry.registerFluid(booze);
+			CellarRegistry.instance().booze().registerBooze(booze);
 		}
 	}
 
@@ -93,12 +97,14 @@ public class BoozeRegistryHelper
 		}
 	}
 
-	public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle, String basename, @Nullable ItemDefinition oldBucket)
+	public static void registerBooze(Fluid[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemBucketBoozeDefinition[] buckets, ItemDefinition bottle)
 	{
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			buckets[i].register(basename + "Bucket." + i);
-			fluidBlocks[i].register(basename + "Fluid." + i, ItemBlockFluidBooze.class);
+			final Fluid booze = boozes[i];
+			final String basename = booze.getUnlocalizedName();
+			buckets[i].register(basename + "_bucket");
+			fluidBlocks[i].register(basename + "_fluid_block", ItemBlockFluidBooze.class);
 
 			EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 
@@ -108,13 +114,7 @@ public class BoozeRegistryHelper
 			final FluidStack fluidStack = new FluidStack(boozes[i], GrowthCraftCore.getConfig().bottleCapacity);
 			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, i), GrowthCraftCore.EMPTY_BOTTLE);
 
-
 			GameRegistry.addShapelessRecipe(bottle.asStack(3, i), buckets[i].getItem(), Items.glass_bottle, Items.glass_bottle, Items.glass_bottle);
-			// forward compat recipe
-			if (oldBucket != null)
-			{
-				GameRegistry.addShapelessRecipe(buckets[i].asStack(), oldBucket.asStack(1, i));
-			}
 		}
 	}
 

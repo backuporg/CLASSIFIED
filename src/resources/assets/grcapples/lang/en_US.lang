@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Apple Core
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Apple Juice
-fluid.grc.apple_cider1=Apple Cider
-fluid.grc.apple_cider2=Apple Cider
-fluid.grc.apple_cider3=Apple Cider
-fluid.grc.apple_cider4=Silken Nectar
-fluid.grc.apple_cider5=Apple Cider
-fluid.grc.apple_cider6=Apple Cider
+fluid.grc.apple_cider_young=Apple Juice
+fluid.grc.apple_cider_fermented=Apple Cider
+fluid.grc.apple_cider_potent=Apple Cider
+fluid.grc.apple_cider_extended=Apple Cider
+fluid.grc.apple_cider_magical=Silken Nectar
+fluid.grc.apple_cider_intoxicated=Apple Cider
+fluid.grc.apple_cider_poisoned=Apple Cider
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=Apple Juice Bucket
-item.bucket.fluid.grc.apple_cider1.name=Apple Cider Bucket
-item.bucket.fluid.grc.apple_cider2.name=Apple Cider Bucket
-item.bucket.fluid.grc.apple_cider3.name=Apple Cider Bucket
-item.bucket.fluid.grc.apple_cider4.name=Silken Nectar Bucket
-item.bucket.fluid.grc.apple_cider5.name=Apple Cider Bucket
-item.bucket.fluid.grc.apple_cider6.name=Apple Cider Bucket
+item.bucket.fluid.grc.apple_cider_young.name=Apple Juice Bucket
+item.bucket.fluid.grc.apple_cider_fermented.name=Apple Cider Bucket
+item.bucket.fluid.grc.apple_cider_potent.name=Apple Cider Bucket
+item.bucket.fluid.grc.apple_cider_extended.name=Apple Cider Bucket
+item.bucket.fluid.grc.apple_cider_magical.name=Silken Nectar Bucket
+item.bucket.fluid.grc.apple_cider_intoxicated.name=Apple Cider Bucket
+item.bucket.fluid.grc.apple_cider_poisoned.name=Apple Cider Bucket
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Apple Juice
-tile.fluid.grc.apple_cider1.name=Apple Cider
-tile.fluid.grc.apple_cider2.name=Apple Cider
-tile.fluid.grc.apple_cider3.name=Apple Cider
-tile.fluid.grc.apple_cider4.name=Silken Nectar
-tile.fluid.grc.apple_cider5.name=Apple Cider
-tile.fluid.grc.apple_cider6.name=Apple Cider
+tile.fluid.grc.apple_cider_young.name=Apple Juice
+tile.fluid.grc.apple_cider_fermented.name=Apple Cider
+tile.fluid.grc.apple_cider_potent.name=Apple Cider
+tile.fluid.grc.apple_cider_extended.name=Apple Cider
+tile.fluid.grc.apple_cider_magical.name=Silken Nectar
+tile.fluid.grc.apple_cider_intoxicated.name=Apple Cider
+tile.fluid.grc.apple_cider_poisoned.name=Apple Cider

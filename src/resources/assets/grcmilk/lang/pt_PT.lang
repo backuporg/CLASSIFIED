@@ -128,14 +128,14 @@ tile.grc.fluid_block_rennet.name=Coalho
 tile.grc.fluid_block_skim_milk.name=Leite Desnatado
 tile.grc.fluid_block_whey.name=Soro
 ### Bottles
-item.grc.food_fluid_bottle_butter_milk.name=Frasco de Leitelho
+item.grc.fluid_bottle_butter_milk.name=Frasco de Leitelho
 item.grc.fluid_bottle_cream.name=Frasco de Nata
 item.grc.fluid_bottle_milk_curds.name=Frasco de Coalhada de Leite
-item.grc.food_fluid_bottle_milk.name=Frasco de Leite
+item.grc.fluid_bottle_milk.name=Frasco de Leite
 item.grc.fluid_bottle_pasteurized_milk.name=Frasco de Leite Pastorizado
 item.grc.fluid_bottle_rennet.name=Frasco de Coalho
-item.grc.food_fluid_bottle_skim_milk.name=Frasco de Leite Desnatado
-item.grc.food_fluid_bottle_whey.name=Frasco de Soro
+item.grc.fluid_bottle_skim_milk.name=Frasco de Leite Desnatado
+item.grc.fluid_bottle_whey.name=Frasco de Soro
 ### Buckets
 item.bucket.fluid.grc.butter_milk.name=Balde de Leitelho
 item.bucket.fluid.grc.cream.name=Balde de Nata
@@ -147,29 +147,29 @@ item.bucket.fluid.grc.skim_milk.name=Balde de Leite Desnatado
 item.bucket.fluid.grc.whey.name=Balde de Soro
 
 ## Booze
-fluid.grc.Kumis0=Kumis
-fluid.grc.Kumis1=Kumis
-fluid.grc.Kumis2=Kumis
-fluid.grc.Kumis3=Kumis
-fluid.grc.Kumis4=Kumis
-fluid.grc.Kumis5=Leite Vil
-fluid.grc.Kumis5.desc=Até as coisas mais doces podem tornar-se corruptas.
+fluid.grc.kumis_fermented=Kumis
+fluid.grc.kumis_potent=Kumis
+fluid.grc.kumis_extended=Kumis
+fluid.grc.kumis_hyper_extended=Kumis
+fluid.grc.kumis_intoxicated=Kumis
+fluid.grc.kumis_poisoned=Leite Vil
+fluid.grc.kumis_poisoned.desc=Até as coisas mais doces podem tornar-se corruptas.
 
 ## Booze Blocks
-tile.fluid.grc.Kumis0.name=Kumis
-tile.fluid.grc.Kumis1.name=Kumis
-tile.fluid.grc.Kumis2.name=Kumis
-tile.fluid.grc.Kumis3.name=Kumis
-tile.fluid.grc.Kumis4.name=Kumis
-tile.fluid.grc.Kumis5.name=Leite Vil
+tile.fluid.grc.kumis_fermented.name=Kumis
+tile.fluid.grc.kumis_potent.name=Kumis
+tile.fluid.grc.kumis_extended.name=Kumis
+tile.fluid.grc.kumis_hyper_extended.name=Kumis
+tile.fluid.grc.kumis_intoxicated.name=Kumis
+tile.fluid.grc.kumis_poisoned.name=Leite Vil
 
 ## Booze Bucket
-item.bucket.fluid.grc.Kumis0.name=Balde de Kumis
-item.bucket.fluid.grc.Kumis1.name=Balde de Kumis
-item.bucket.fluid.grc.Kumis2.name=Balde de Kumis
-item.bucket.fluid.grc.Kumis3.name=Balde de Kumis
-item.bucket.fluid.grc.Kumis4.name=Balde de Kumis
-item.bucket.fluid.grc.Kumis5.name=Balde de Leite Vil
+item.bucket.fluid.grc.kumis_fermented.name=Balde de Kumis
+item.bucket.fluid.grc.kumis_potent.name=Balde de Kumis
+item.bucket.fluid.grc.kumis_extended.name=Balde de Kumis
+item.bucket.fluid.grc.kumis_hyper_extended.name=Balde de Kumis
+item.bucket.fluid.grc.kumis_intoxicated.name=Balde de Kumis
+item.bucket.fluid.grc.kumis_poisoned.name=Balde de Leite Vil
 
 # Effects
 grc.effect.milk=Remove todos os efeitos (Exceto bebedeira)
