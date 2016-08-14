@@ -23,12 +23,12 @@
  */
 package growthcraft.hops.init;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
@@ -40,6 +40,7 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.FluidFactory;
 import growthcraft.hops.GrowthCraftHops;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -51,8 +52,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcHopsFluids extends GrcModuleBase
 {
-	public Booze[] hopAleBooze;
-	public Booze[] lagerBooze;
+	public GrcFluid[] hopAleBooze;
+	public GrcFluid[] lagerBooze;
 	public BlockBoozeDefinition[] hopAleFluids;
 	public BlockBoozeDefinition[] lagerFluids;
 	public ItemDefinition hopAle;
@@ -63,25 +64,42 @@ public class GrcHopsFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.lagerBooze = new Booze[7];
+		final FluidFactory.FluidBuilder builder = BoozeRegistryHelper.newBoozeBuilder();
+		this.lagerBooze = new GrcFluid[] {
+			builder.create("grc.lager_young"),
+			builder.create("grc.lager_fermented"),
+			builder.create("grc.lager_potent"),
+			builder.create("grc.lager_extended"),
+			builder.create("grc.lager_hyper_extended"),
+			builder.create("grc.lager_intoxicated"),
+			builder.create("grc.lager_poisoned")
+		};
 		this.lagerFluids = new BlockBoozeDefinition[lagerBooze.length];
 		this.lagerBuckets = new ItemBucketBoozeDefinition[lagerBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.lager", lagerBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : lagerBooze)
+		BoozeRegistryHelper.registerBoozeFluids(lagerBooze);
+		for (GrcFluid booze : lagerBooze)
 		{
 			booze.setColor(GrowthCraftHops.getConfig().lagerColor).setDensity(1080);
 		}
 		BoozeRegistryHelper.initializeBooze(lagerBooze, lagerFluids, lagerBuckets);
 		BoozeRegistryHelper.setBoozeFoodStats(lagerBooze, 1, -0.6f);
 		BoozeRegistryHelper.setBoozeFoodStats(lagerBooze[0], 1, 0.3f);
-
 		this.lager = new ItemDefinition(new ItemBoozeBottle(lagerBooze));
-
-		this.hopAleBooze = new Booze[9];
+		this.hopAleBooze = new GrcFluid[] {
+			builder.create("grc.hop_ale_young"),
+			builder.create("grc.hop_ale_fermented"),
+			builder.create("grc.hop_ale_potent"),
+			builder.create("grc.hop_ale_extended"),
+			builder.create("grc.ale"),
+			builder.create("grc.hop_ale_hyper_extended"),
+			builder.create("grc.hop_ale_chilled"),
+			builder.create("grc.hop_ale_intoxicated"),
+			builder.create("grc.hop_ale_poisoned")
+		};
 		this.hopAleFluids = new BlockBoozeDefinition[hopAleBooze.length];
 		this.hopAleBuckets = new ItemBucketBoozeDefinition[hopAleBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.hop_ale", hopAleBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : hopAleBooze)
+		BoozeRegistryHelper.registerBoozeFluids(hopAleBooze);
+		for (GrcFluid booze : hopAleBooze)
 		{
 			booze.setColor(GrowthCraftHops.getConfig().hopAleColor).setDensity(1080);
 		}
@@ -280,8 +298,8 @@ public class GrcHopsFluids extends GrcModuleBase
 		GameRegistry.registerItem(hopAle.getItem(), "grc.hop_ale");
 		GameRegistry.registerItem(lager.getItem(), "grc.lager");
 
-		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle, "grc.hop_ale", null);
-		BoozeRegistryHelper.registerBooze(lagerBooze, lagerFluids, lagerBuckets, lager, "grc.lager", null);
+		BoozeRegistryHelper.registerBooze(hopAleBooze, hopAleFluids, hopAleBuckets, hopAle);
+		BoozeRegistryHelper.registerBooze(lagerBooze, lagerFluids, lagerBuckets, lager);
 		registerFermentations();
 	}
 }

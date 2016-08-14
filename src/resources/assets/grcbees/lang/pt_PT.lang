@@ -11,10 +11,10 @@ tile.grc.bee_box.minecraft.acacia.name=Apiário de Acácia
 tile.grc.bee_box.minecraft.darkoak.name=Apiário de Carvalho Escuro
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.bee_box.Nether.0.name=Apiário Malígno
+tile.grc.bee_box.nether.0.name=Apiário Malígno
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.bee_box.Bamboo.0.name=Apiário de Bambu
+tile.grc.bee_box.bamboo.0.name=Apiário de Bambu
 
 ## Thaumcraft Bee Boxes
 tile.grc.bee_box.thaumcraft.greatwood.name=Apiário de Greatwood
@@ -51,8 +51,8 @@ item.grc.honey_comb.empty.name=Favo Vazio
 item.grc.honey_comb.filled.name=Favo de Mel
 item.grc.honey_jar.name=Mel
 item.grc.bee.name=Abelha
-item.grc.FoodBottleFluidHoney.name=Frasco de Mel
-item.grc.BucketFluidHoney.name=Balde de Mel
+item.grc.fluid_bottle_honey.name=Frasco de Mel
+item.grc.fluid_bucket_honey.name=Balde de Mel
 item.grc.bees_wax.normal.name=Cera de Abelhas
 item.grc.bees_wax.red.name=Cera Vermelha de Abelhas
 item.grc.bees_wax.black.name=Cera Preta de Abelhas
@@ -62,36 +62,36 @@ container.grc.beeBox=Apiário
 
 # Fluids
 fluid.grc.honey=Mel
-fluid.grc.honeyMead0=Hidromel
-fluid.grc.honeyMead1=Hidromel
-fluid.grc.honeyMead2=Hidromel
-fluid.grc.honeyMead3=Hidromel
-fluid.grc.honeyMead4=Hidromel
-fluid.grc.honeyMead5=Hidromel
-fluid.grc.honeyMead6=Hidromel
+fluid.grc.honey_mead_young=Hidromel
+fluid.grc.honey_mead_fermented=Hidromel
+fluid.grc.honey_mead_potent=Hidromel
+fluid.grc.honey_mead_extended=Hidromel
+fluid.grc.honey_mead_hyper_extended=Hidromel
+fluid.grc.honey_mead_intoxicated=Hidromel
+fluid.grc.honey_mead_poisoned=Hidromel
 
 # Fluid Bottles
 item.grc.BottleFluidHoney.name=Mel
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=Balde de Mel
-item.bucket.fluid.grc.honeyMead0.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead1.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead2.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead3.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead4.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead5.name=Balde de Hidromel
-item.bucket.fluid.grc.honeyMead6.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_young.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_fermented.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_potent.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_extended.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_hyper_extended.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_intoxicated.name=Balde de Hidromel
+item.bucket.fluid.grc.honey_mead_poisoned.name=Balde de Hidromel
 
 # Fluid Blocks
-tile.grc.BlockFluidHoney.name=Mel
-tile.fluid.grc.honeyMead0.name=Hidromel
-tile.fluid.grc.honeyMead1.name=Hidromel
-tile.fluid.grc.honeyMead2.name=Hidromel
-tile.fluid.grc.honeyMead3.name=Hidromel
-tile.fluid.grc.honeyMead4.name=Hidromel
-tile.fluid.grc.honeyMead5.name=Hidromel
-tile.fluid.grc.honeyMead6.name=Hidromel
+tile.grc.fluid_block_honey.name=Mel
+tile.fluid.grc.honey_mead_young.name=Hidromel
+tile.fluid.grc.honey_mead_fermented.name=Hidromel
+tile.fluid.grc.honey_mead_potent.name=Hidromel
+tile.fluid.grc.honey_mead_extended.name=Hidromel
+tile.fluid.grc.honey_mead_hyper_extended.name=Hidromel
+tile.fluid.grc.honey_mead_intoxicated.name=Hidromel
+tile.fluid.grc.honey_mead_poisoned.name=Hidromel
 
 # Fluid Tags
 grc.fluids.tag.mead=grc.fluids.tag.mead

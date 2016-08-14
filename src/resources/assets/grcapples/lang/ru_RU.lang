@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Яблочный огрызок
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Яблочный сидр
-fluid.grc.apple_cider1=Яблочный сидр
-fluid.grc.apple_cider2=Яблочный сидр
-fluid.grc.apple_cider3=Яблочный сидр
-fluid.grc.apple_cider4=Нежный нектар
-fluid.grc.apple_cider5=Яблочный сидр
-fluid.grc.apple_cider6=Яблочный сидр
+fluid.grc.apple_cider_young=Яблочный сидр
+fluid.grc.apple_cider_fermented=Яблочный сидр
+fluid.grc.apple_cider_potent=Яблочный сидр
+fluid.grc.apple_cider_extended=Яблочный сидр
+fluid.grc.apple_cider_magical=Нежный нектар
+fluid.grc.apple_cider_intoxicated=Яблочный сидр
+fluid.grc.apple_cider_poisoned=Яблочный сидр
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=Ведро яблочного сидра
-item.bucket.fluid.grc.apple_cider1.name=Ведро яблочного сидра
-item.bucket.fluid.grc.apple_cider2.name=Ведро яблочного сидра
-item.bucket.fluid.grc.apple_cider3.name=Ведро яблочного сидра
-item.bucket.fluid.grc.apple_cider4.name=Ведро нежного нектара
-item.bucket.fluid.grc.apple_cider5.name=Ведро яблочного сидра
-item.bucket.fluid.grc.apple_cider6.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider_young.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider_fermented.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider_potent.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider_extended.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider_magical.name=Ведро нежного нектара
+item.bucket.fluid.grc.apple_cider_intoxicated.name=Ведро яблочного сидра
+item.bucket.fluid.grc.apple_cider_poisoned.name=Ведро яблочного сидра
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Яблочный сидр
-tile.fluid.grc.apple_cider1.name=Яблочный сидр
-tile.fluid.grc.apple_cider2.name=Яблочный сидр
-tile.fluid.grc.apple_cider3.name=Яблочный сидр
-tile.fluid.grc.apple_cider4.name=Нежный нектар
-tile.fluid.grc.apple_cider5.name=Яблочный сидр
-tile.fluid.grc.apple_cider6.name=Яблочный сидр
+tile.fluid.grc.apple_cider_young.name=Яблочный сидр
+tile.fluid.grc.apple_cider_fermented.name=Яблочный сидр
+tile.fluid.grc.apple_cider_potent.name=Яблочный сидр
+tile.fluid.grc.apple_cider_extended.name=Яблочный сидр
+tile.fluid.grc.apple_cider_magical.name=Нежный нектар
+tile.fluid.grc.apple_cider_intoxicated.name=Яблочный сидр
+tile.fluid.grc.apple_cider_poisoned.name=Яблочный сидр

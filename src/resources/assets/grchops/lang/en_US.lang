@@ -3,67 +3,67 @@ tile.grc.hop_vine.name=Hops
 
 # Items
 item.grc.hops.name=Hops
-item.grc.hopSeeds.name=Hop Seeds
+item.grc.hop_seeds.name=Hop Seeds
 
 # Fluids
-fluid.grc.hopAle0=Ale Wort
-fluid.grc.hopAle1=Ale
-fluid.grc.hopAle2=Ale
-fluid.grc.hopAle3=Ale
-fluid.grc.hopAle4=Ale Wort
-fluid.grc.hopAle5=Ale
-fluid.grc.hopAle6=Ale
-fluid.grc.hopAle7=Ale
-fluid.grc.hopAle8=Ale
+fluid.grc.hop_ale_young=Ale Wort
+fluid.grc.hop_ale_fermented=Ale
+fluid.grc.hop_ale_potent=Ale
+fluid.grc.hop_ale_extended=Ale
+fluid.grc.ale=Ale Wort
+fluid.grc.hop_ale_hyper_extended=Ale
+fluid.grc.hop_ale_chilled=Ale
+fluid.grc.hop_ale_intoxicated=Ale
+fluid.grc.hop_ale_poisoned=Ale
 
-fluid.grc.lager0=Lager Wort
-fluid.grc.lager1=Lager
-fluid.grc.lager2=Lager
-fluid.grc.lager3=Lager
-fluid.grc.lager4=Lager
-fluid.grc.lager5=Lager
-fluid.grc.lager6=Lager
+fluid.grc.lager_young=Lager Wort
+fluid.grc.lager_fermented=Lager
+fluid.grc.lager_potent=Lager
+fluid.grc.lager_extended=Lager
+fluid.grc.lager_hyper_extended=Lager
+fluid.grc.lager_hyper_intoxicated=Lager
+fluid.grc.lager_hyper_poisoned=Lager
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle0.name=Ale Wort Bucket
-item.bucket.fluid.grc.hopAle1.name=Ale Bucket
-item.bucket.fluid.grc.hopAle2.name=Ale Wort Bucket
-item.bucket.fluid.grc.hopAle3.name=Ale Bucket
-item.bucket.fluid.grc.hopAle4.name=Ale Bucket
-item.bucket.fluid.grc.hopAle5.name=Ale Bucket
-item.bucket.fluid.grc.hopAle6.name=Ale Bucket
-item.bucket.fluid.grc.hopAle7.name=Ale Bucket
-item.bucket.fluid.grc.hopAle8.name=Ale Bucket
+item.bucket.fluid.grc.hop_ale_young.name=Ale Wort Bucket
+item.bucket.fluid.grc.hop_ale_fermented.name=Ale Bucket
+item.bucket.fluid.grc.hop_ale_potent.name=Ale Bucket
+item.bucket.fluid.grc.hop_ale_extended.name=Ale Bucket
+item.bucket.fluid.grc.ale.name=Ale Wort Bucket
+item.bucket.fluid.grc.hop_ale_hyper_extended.name=Ale Bucket
+item.bucket.fluid.grc.hop_ale_chilled.name=Ale Bucket
+item.bucket.fluid.grc.hop_ale_intoxicated.name=Ale Bucket
+item.bucket.fluid.grc.hop_ale_poisoned.name=Ale Bucket
 
 item.bucket.fluid.grc.lager.name=Lager Wort Bucket
-item.bucket.fluid.grc.lager0.name=Lager Bucket
-item.bucket.fluid.grc.lager1.name=Lager Bucket
-item.bucket.fluid.grc.lager2.name=Lager Bucket
-item.bucket.fluid.grc.lager3.name=Lager Bucket
-item.bucket.fluid.grc.lager4.name=Lager Bucket
-item.bucket.fluid.grc.lager5.name=Lager Bucket
-item.bucket.fluid.grc.lager6.name=Lager Bucket
+item.bucket.fluid.grc.lager_young.name=Lager Bucket
+item.bucket.fluid.grc.lager_fermented.name=Lager Bucket
+item.bucket.fluid.grc.lager_potent.name=Lager Bucket
+item.bucket.fluid.grc.lager_extended.name=Lager Bucket
+item.bucket.fluid.grc.lager_hyper_extended.name=Lager Bucket
+item.bucket.fluid.grc.lager_hyper_intoxicated.name=Lager Bucket
+item.bucket.fluid.grc.lager_hyper_poisoned.name=Lager Bucket
 
 # Fluid Blocks
 tile.fluid.grc.hopAle.name=Ale Wort
-tile.fluid.grc.hopAle0.name=Ale
-tile.fluid.grc.hopAle1.name=Ale
-tile.fluid.grc.hopAle2.name=Ale
-tile.fluid.grc.hopAle3.name=Ale Wort
-tile.fluid.grc.hopAle4.name=Ale
-tile.fluid.grc.hopAle5.name=Ale
-tile.fluid.grc.hopAle6.name=Ale
-tile.fluid.grc.hopAle7.name=Ale
-tile.fluid.grc.hopAle8.name=Ale
+tile.fluid.grc.hop_ale_young.name=Ale
+tile.fluid.grc.hop_ale_fermented.name=Ale
+tile.fluid.grc.hop_ale_potent.name=Ale
+tile.fluid.grc.hop_ale_extended.name=Ale
+tile.fluid.grc.ale.name=Ale Wort
+tile.fluid.grc.hop_ale_hyper_extended.name=Ale
+tile.fluid.grc.hop_ale_chilled.name=Ale
+tile.fluid.grc.hop_ale_intoxicated.name=Ale
+tile.fluid.grc.hop_ale_poisoned.name=Ale
 
 tile.fluid.grc.lager.name=Lager Wort
-tile.fluid.grc.lager0.name=Lager
-tile.fluid.grc.lager1.name=Lager
-tile.fluid.grc.lager2.name=Lager
-tile.fluid.grc.lager3.name=Lager
-tile.fluid.grc.lager4.name=Lager
-tile.fluid.grc.lager5.name=Lager
-tile.fluid.grc.lager6.name=Lager
+tile.fluid.grc.lager_young.name=Lager
+tile.fluid.grc.lager_fermented.name=Lager
+tile.fluid.grc.lager_potent.name=Lager
+tile.fluid.grc.lager_extended.name=Lager
+tile.fluid.grc.lager_hyper_extended.name=Lager
+tile.fluid.grc.lager_hyper_intoxicated.name=Lager
+tile.fluid.grc.lager_hyper_poisoned.name=Lager
 
 # Fluid Tooltips
-fluid.grc.hopAle4.modifier=No Hops, Young
+fluid.grc.ale.modifier=No Hops, Young

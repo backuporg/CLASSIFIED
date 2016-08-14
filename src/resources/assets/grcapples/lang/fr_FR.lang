@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Trognon de pomme
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Cidre de pomme
-fluid.grc.apple_cider1=Cidre de pomme
-fluid.grc.apple_cider2=Cidre de pomme
-fluid.grc.apple_cider3=Cidre de pomme
-fluid.grc.apple_cider4=fluid.grc.apple_cider4
-fluid.grc.apple_cider5=Cidre de pomme
-fluid.grc.apple_cider6=Cidre de pomme
+fluid.grc.apple_cider_young=Cidre de pomme
+fluid.grc.apple_cider_fermented=Cidre de pomme
+fluid.grc.apple_cider_potent=Cidre de pomme
+fluid.grc.apple_cider_extended=Cidre de pomme
+fluid.grc.apple_cider_magical=fluid.grc.apple_cider_magical
+fluid.grc.apple_cider_intoxicated=Cidre de pomme
+fluid.grc.apple_cider_poisoned=Cidre de pomme
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=Seau de cidre de pomme
-item.bucket.fluid.grc.apple_cider1.name=Seau de cidre de pomme
-item.bucket.fluid.grc.apple_cider2.name=Seau de cidre de pomme
-item.bucket.fluid.grc.apple_cider3.name=Seau de cidre de pomme
-item.bucket.fluid.grc.apple_cider4.name=item.bucket.fluid.grc.apple_cider4.name
-item.bucket.fluid.grc.apple_cider5.name=Seau de cidre de pomme
-item.bucket.fluid.grc.apple_cider6.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider_young.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider_fermented.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider_potent.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider_extended.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider_magical.name=item.bucket.fluid.grc.apple_cider_magical.name
+item.bucket.fluid.grc.apple_cider_intoxicated.name=Seau de cidre de pomme
+item.bucket.fluid.grc.apple_cider_poisoned.name=Seau de cidre de pomme
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Cidre de pomme
-tile.fluid.grc.apple_cider1.name=Cidre de pomme
-tile.fluid.grc.apple_cider2.name=Cidre de pomme
-tile.fluid.grc.apple_cider3.name=Cidre de pomme
-tile.fluid.grc.apple_cider4.name=tile.fluid.grc.apple_cider4.name
-tile.fluid.grc.apple_cider5.name=Cidre de pomme
-tile.fluid.grc.apple_cider6.name=Cidre de pomme
+tile.fluid.grc.apple_cider_young.name=Cidre de pomme
+tile.fluid.grc.apple_cider_fermented.name=Cidre de pomme
+tile.fluid.grc.apple_cider_potent.name=Cidre de pomme
+tile.fluid.grc.apple_cider_extended.name=Cidre de pomme
+tile.fluid.grc.apple_cider_magical.name=tile.fluid.grc.apple_cider_magical.name
+tile.fluid.grc.apple_cider_intoxicated.name=Cidre de pomme
+tile.fluid.grc.apple_cider_poisoned.name=Cidre de pomme

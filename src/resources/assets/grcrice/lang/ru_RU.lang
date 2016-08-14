@@ -7,28 +7,28 @@ item.grc.rice.name=Зёрна заливного риса
 item.grc.rice_ball.name=Онигири
 
 # Fluids
-fluid.grc.riceSake0=Сакэ
-fluid.grc.riceSake1=Сакэ
-fluid.grc.riceSake2=Сакэ
-fluid.grc.riceSake3=Сакэ
-fluid.grc.riceSake4=Божественное сакэ
-fluid.grc.riceSake5=Сакэ
-fluid.grc.riceSake6=Сакэ
+fluid.grc.rice_sake_young=Сакэ
+fluid.grc.rice_sake_fermented=Сакэ
+fluid.grc.rice_sake_potent=Сакэ
+fluid.grc.rice_sake_extended=Сакэ
+fluid.grc.rice_sake_hyper_extended=Божественное сакэ
+fluid.grc.rice_sake_intoxicated=Сакэ
+fluid.grc.rice_sake_poisoned=Сакэ
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake0.name=Ведро сакэ
-item.bucket.fluid.grc.riceSake1.name=Ведро сакэ
-item.bucket.fluid.grc.riceSake2.name=Ведро сакэ
-item.bucket.fluid.grc.riceSake3.name=Ведро сакэ
-item.bucket.fluid.grc.riceSake4.name=Ведро божественного сакэ
-item.bucket.fluid.grc.riceSake5.name=Ведро сакэ
-item.bucket.fluid.grc.riceSake6.name=Ведро сакэ
+item.bucket.fluid.grc.rice_sake_young.name=Ведро сакэ
+item.bucket.fluid.grc.rice_sake_fermented.name=Ведро сакэ
+item.bucket.fluid.grc.rice_sake_potent.name=Ведро сакэ
+item.bucket.fluid.grc.rice_sake_extended.name=Ведро сакэ
+item.bucket.fluid.grc.rice_sake_hyper_extended.name=Ведро божественного сакэ
+item.bucket.fluid.grc.rice_sake_intoxicated.name=Ведро сакэ
+item.bucket.fluid.grc.rice_sake_poisoned.name=Ведро сакэ
 
 # Fluid Blocks
-tile.fluid.grc.riceSake0.name=Сакэ
-tile.fluid.grc.riceSake1.name=Сакэ
-tile.fluid.grc.riceSake2.name=Сакэ
-tile.fluid.grc.riceSake3.name=Сакэ
-tile.fluid.grc.riceSake4.name=Божественное сакэ
-tile.fluid.grc.riceSake5.name=Сакэ
-tile.fluid.grc.riceSake6.name=Сакэ
+tile.fluid.grc.rice_sake_young.name=Сакэ
+tile.fluid.grc.rice_sake_fermented.name=Сакэ
+tile.fluid.grc.rice_sake_potent.name=Сакэ
+tile.fluid.grc.rice_sake_extended.name=Сакэ
+tile.fluid.grc.rice_sake_hyper_extended.name=Божественное сакэ
+tile.fluid.grc.rice_sake_intoxicated.name=Сакэ
+tile.fluid.grc.rice_sake_poisoned.name=Сакэ

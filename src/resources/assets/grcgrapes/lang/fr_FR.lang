@@ -14,31 +14,31 @@ item.grc.grapes.red.name=item.grc.grapes.red.name
 item.grc.grape_seeds.name=Pépins de raisin commun
 
 # Fluids
-fluid.grc.grapeWine0=Vin
-fluid.grc.grapeWine1=Vin
-fluid.grc.grapeWine2=Vin
-fluid.grc.grapeWine3=Vin
-fluid.grc.grapeWine4=fluid.grc.grapeWine4
-fluid.grc.grapeWine5=fluid.grc.grapeWine5
-fluid.grc.grapeWine6=fluid.grc.grapeWine6
-fluid.grc.grapeWine7=fluid.grc.grapeWine7
+fluid.grc.grape_wine_young=Vin
+fluid.grc.grape_wine_fermented=Vin
+fluid.grc.grape_wine_potent=Vin
+fluid.grc.grape_wine_extended=Vin
+fluid.grc.grape_wine_hyper_extended=fluid.grc.grape_wine_hyper_extended
+fluid.grc.grape_wine_fortified=fluid.grc.grape_wine_fortified
+fluid.grc.grape_wine_intoxicated=fluid.grc.grape_wine_intoxicated
+fluid.grc.grape_wine_poisoned=fluid.grc.grape_wine_poisoned
 
 # Fluid Buckets
-item.bucket.fluid.grc.grapeWine0.name=Seau de vin
-item.bucket.fluid.grc.grapeWine1.name=Seau de vin
-item.bucket.fluid.grc.grapeWine2.name=Seau de vin
-item.bucket.fluid.grc.grapeWine3.name=Seau de vin
-item.bucket.fluid.grc.grapeWine4.name=item.bucket.fluid.grc.grapeWine4.name
-item.bucket.fluid.grc.grapeWine5.name=item.bucket.fluid.grc.grapeWine5.name
-item.bucket.fluid.grc.grapeWine6.name=item.bucket.fluid.grc.grapeWine6.name
-item.bucket.fluid.grc.grapeWine7.name=item.bucket.fluid.grc.grapeWine7.name
+item.bucket.fluid.grc.grape_wine_young.name=Seau de vin
+item.bucket.fluid.grc.grape_wine_fermented.name=Seau de vin
+item.bucket.fluid.grc.grape_wine_potent.name=Seau de vin
+item.bucket.fluid.grc.grape_wine_extended.name=Seau de vin
+item.bucket.fluid.grc.grape_wine_hyper_extended.name=item.bucket.fluid.grc.grape_wine_hyper_extended.name
+item.bucket.fluid.grc.grape_wine_fortified.name=item.bucket.fluid.grc.grape_wine_fortified.name
+item.bucket.fluid.grc.grape_wine_intoxicated.name=item.bucket.fluid.grc.grape_wine_intoxicated.name
+item.bucket.fluid.grc.grape_wine_poisoned.name=item.bucket.fluid.grc.grape_wine_poisoned.name
 
 # Fluid Blocks
-tile.fluid.grc.grapeWine0.name=Vin
-tile.fluid.grc.grapeWine1.name=Vin
-tile.fluid.grc.grapeWine2.name=Vin
-tile.fluid.grc.grapeWine3.name=Vin
-tile.fluid.grc.grapeWine4.name=tile.fluid.grc.grapeWine4.name
-tile.fluid.grc.grapeWine5.name=tile.fluid.grc.grapeWine5.name
-tile.fluid.grc.grapeWine6.name=tile.fluid.grc.grapeWine6.name
-tile.fluid.grc.grapeWine7.name=tile.fluid.grc.grapeWine7.name
+tile.fluid.grc.grape_wine_young.name=Vin
+tile.fluid.grc.grape_wine_fermented.name=Vin
+tile.fluid.grc.grape_wine_potent.name=Vin
+tile.fluid.grc.grape_wine_extended.name=Vin
+tile.fluid.grc.grape_wine_hyper_extended.name=tile.fluid.grc.grape_wine_hyper_extended.name
+tile.fluid.grc.grape_wine_fortified.name=tile.fluid.grc.grape_wine_fortified.name
+tile.fluid.grc.grape_wine_intoxicated.name=tile.fluid.grc.grape_wine_intoxicated.name
+tile.fluid.grc.grape_wine_poisoned.name=tile.fluid.grc.grape_wine_poisoned.name
