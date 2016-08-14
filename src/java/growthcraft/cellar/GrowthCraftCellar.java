@@ -160,7 +160,7 @@ public class GrowthCraftCellar
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.cellar.integration.ThaumcraftModule());
 		// ALWAYS set the user modules as last, this ensures that other modules are given a chance to setup defaults and such.
 		modules.add(userApis);
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
 
@@ -326,15 +326,10 @@ public class GrowthCraftCellar
 	{
 		registerOres();
 		registerYeast();
-
 		packetPipeline.initialise();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerCellar());
-
 		VillagerRegistry.instance().register(brewerProfession);
 		VillagerRegistry.instance().registerVillageCreationHandler(new VillageHandlerCellar());
-
-		CommonProxy.instance.init();
-
 		modules.init();
 	}
 

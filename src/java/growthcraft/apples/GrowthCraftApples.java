@@ -100,7 +100,7 @@ public class GrowthCraftApples
 		modules.add(recipes);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.apples.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
-
+		modules.add(CommonProxy.instance);
 		modules.preInit();
 		register();
 	}
@@ -127,12 +127,10 @@ public class GrowthCraftApples
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		final VillageHandlerApples handler = new VillageHandlerApples();
 		logger.warn("(fixme) GrowthCraftApples#registerVillageTradeHandler");
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
 		modules.init();
 	}
 

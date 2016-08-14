@@ -126,31 +126,26 @@ public class GrowthCraftBees
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
-
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
-
 		userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
 		modules.add(userBeesConfig);
-
 		userFlowersConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/flowers.json");
 		modules.add(userFlowersConfig);
-
 		//userHoneyConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/honey.json");
 		//modules.add(userHoneyConfig);
-
 		if (config.enableGrcBambooIntegration) modules.add(new growthcraft.bees.integration.GrcBambooModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.bees.integration.Waila());
 		if (config.enableBoPIntegration) modules.add(new growthcraft.bees.integration.BoPModule());
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bees.integration.ThaumcraftModule());
-
 		if (config.debugEnabled)
 		{
 			BeesRegistry.instance().setLogger(logger);
 			modules.setLogger(logger);
 		}
-
+		modules.add(CommonProxy.instance);
+		modules.freeze();
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
 
 		apiaristProfession = new VillagerProfession(resources.join("apiarist"), resources.join("textures/entity/apiarist.png"));
@@ -225,7 +220,6 @@ public class GrowthCraftBees
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerBees());
 		final VillageHandlerBeesApiarist handler = new VillageHandlerBeesApiarist();
 		VillagerRegistry.instance().register(apiaristProfession);

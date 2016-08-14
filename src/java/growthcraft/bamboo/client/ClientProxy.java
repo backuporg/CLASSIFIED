@@ -27,9 +27,9 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void init()
+	public void preInit()
 	{
-		super.init();
+		super.preInit();
 		registerBlockStates();
 	}
 }
