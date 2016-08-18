@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Alma csutka
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Almabor
-fluid.grc.apple_cider1=Almabor
-fluid.grc.apple_cider2=Almabor
-fluid.grc.apple_cider3=Almabor
-fluid.grc.apple_cider4=fluid.grc.apple_cider4
-fluid.grc.apple_cider5=fluid.grc.apple_cider5
-fluid.grc.apple_cider6=fluid.grc.apple_cider6
+fluid.grc.apple_cider_young=Almabor
+fluid.grc.apple_cider_fermented=Almabor
+fluid.grc.apple_cider_potent=Almabor
+fluid.grc.apple_cider_extended=Almabor
+fluid.grc.apple_cider_magical=fluid.grc.apple_cider_magical
+fluid.grc.apple_cider_intoxicated=fluid.grc.apple_cider_intoxicated
+fluid.grc.apple_cider_poisoned=fluid.grc.apple_cider_poisoned
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=item.bucket.fluid.grc.apple_cider0.name
-item.bucket.fluid.grc.apple_cider1.name=item.bucket.fluid.grc.apple_cider1.name
-item.bucket.fluid.grc.apple_cider2.name=item.bucket.fluid.grc.apple_cider2.name
-item.bucket.fluid.grc.apple_cider3.name=item.bucket.fluid.grc.apple_cider3.name
-item.bucket.fluid.grc.apple_cider4.name=item.bucket.fluid.grc.apple_cider4.name
-item.bucket.fluid.grc.apple_cider5.name=item.bucket.fluid.grc.apple_cider5.name
-item.bucket.fluid.grc.apple_cider6.name=item.bucket.fluid.grc.apple_cider6.name
+item.bucket.fluid.grc.apple_cider_young.name=item.bucket.fluid.grc.apple_cider_young.name
+item.bucket.fluid.grc.apple_cider_fermented.name=item.bucket.fluid.grc.apple_cider_fermented.name
+item.bucket.fluid.grc.apple_cider_potent.name=item.bucket.fluid.grc.apple_cider_potent.name
+item.bucket.fluid.grc.apple_cider_extended.name=item.bucket.fluid.grc.apple_cider_extended.name
+item.bucket.fluid.grc.apple_cider_magical.name=item.bucket.fluid.grc.apple_cider_magical.name
+item.bucket.fluid.grc.apple_cider_intoxicated.name=item.bucket.fluid.grc.apple_cider_intoxicated.name
+item.bucket.fluid.grc.apple_cider_poisoned.name=item.bucket.fluid.grc.apple_cider_poisoned.name
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Almabor
-tile.fluid.grc.apple_cider1.name=Almabor
-tile.fluid.grc.apple_cider2.name=Almabor
-tile.fluid.grc.apple_cider3.name=Almabor
-tile.fluid.grc.apple_cider4.name=tile.fluid.grc.apple_cider4.name
-tile.fluid.grc.apple_cider5.name=tile.fluid.grc.apple_cider5.name
-tile.fluid.grc.apple_cider6.name=tile.fluid.grc.apple_cider6.name
+tile.fluid.grc.apple_cider_young.name=Almabor
+tile.fluid.grc.apple_cider_fermented.name=Almabor
+tile.fluid.grc.apple_cider_potent.name=Almabor
+tile.fluid.grc.apple_cider_extended.name=Almabor
+tile.fluid.grc.apple_cider_magical.name=tile.fluid.grc.apple_cider_magical.name
+tile.fluid.grc.apple_cider_intoxicated.name=tile.fluid.grc.apple_cider_intoxicated.name
+tile.fluid.grc.apple_cider_poisoned.name=tile.fluid.grc.apple_cider_poisoned.name

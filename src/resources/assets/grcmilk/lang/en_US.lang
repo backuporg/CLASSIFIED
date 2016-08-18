@@ -128,14 +128,14 @@ tile.grc.fluid_block_rennet.name=Rennet
 tile.grc.fluid_block_skim_milk.name=Skim Milk
 tile.grc.fluid_block_whey.name=Whey
 ### Bottles
-item.grc.food_fluid_bottle_butter_milk.name=Butter Milk Bottle
+item.grc.fluid_bottle_butter_milk.name=Butter Milk Bottle
 item.grc.fluid_bottle_cream.name=Cream Bottle
 item.grc.fluid_bottle_milk_curds.name=Milk Curds Bottle
-item.grc.food_fluid_bottle_milk.name=Milk Bottle
+item.grc.fluid_bottle_milk.name=Milk Bottle
 item.grc.fluid_bottle_pasteurized_milk.name=Pasteurized Milk Bottle
 item.grc.fluid_bottle_rennet.name=Rennet Bottle
-item.grc.food_fluid_bottle_skim_milk.name=Skim Milk Bottle
-item.grc.food_fluid_bottle_whey.name=Whey Bottle
+item.grc.fluid_bottle_skim_milk.name=Skim Milk Bottle
+item.grc.fluid_bottle_whey.name=Whey Bottle
 ### Buckets
 item.bucket.fluid.grc.butter_milk.name=Butter Milk Bucket
 item.bucket.fluid.grc.cream.name=Cream Bucket
@@ -147,29 +147,29 @@ item.bucket.fluid.grc.skim_milk.name=Skim Milk Bucket
 item.bucket.fluid.grc.whey.name=Whey Bucket
 
 ## Booze
-fluid.grc.Kumis0=Kumis
-fluid.grc.Kumis1=Kumis
-fluid.grc.Kumis2=Kumis
-fluid.grc.Kumis3=Kumis
-fluid.grc.Kumis4=Kumis
-fluid.grc.Kumis5=Vile Milk
-fluid.grc.Kumis5.desc=Even the sweetest of things can become corrupt.
+fluid.grc.kumis_fermented=Kumis
+fluid.grc.kumis_potent=Kumis
+fluid.grc.kumis_extended=Kumis
+fluid.grc.kumis_hyper_extended=Kumis
+fluid.grc.kumis_intoxicated=Kumis
+fluid.grc.kumis_poisoned=Vile Milk
+fluid.grc.kumis_poisoned.desc=Even the sweetest of things can become corrupt.
 
 ## Booze Blocks
-tile.fluid.grc.Kumis0.name=Kumis
-tile.fluid.grc.Kumis1.name=Kumis
-tile.fluid.grc.Kumis2.name=Kumis
-tile.fluid.grc.Kumis3.name=Kumis
-tile.fluid.grc.Kumis4.name=Kumis
-tile.fluid.grc.Kumis5.name=Vile Milk
+tile.fluid.grc.kumis_fermented.name=Kumis
+tile.fluid.grc.kumis_potent.name=Kumis
+tile.fluid.grc.kumis_extended.name=Kumis
+tile.fluid.grc.kumis_hyper_extended.name=Kumis
+tile.fluid.grc.kumis_intoxicated.name=Kumis
+tile.fluid.grc.kumis_poisoned.name=Vile Milk
 
 ## Booze Bucket
-item.bucket.fluid.grc.Kumis0.name=Kumis Bucket
-item.bucket.fluid.grc.Kumis1.name=Kumis Bucket
-item.bucket.fluid.grc.Kumis2.name=Kumis Bucket
-item.bucket.fluid.grc.Kumis3.name=Kumis Bucket
-item.bucket.fluid.grc.Kumis4.name=Kumis Bucket
-item.bucket.fluid.grc.Kumis5.name=Vile Milk Bucket
+item.bucket.fluid.grc.kumis_fermented.name=Kumis Bucket
+item.bucket.fluid.grc.kumis_potent.name=Kumis Bucket
+item.bucket.fluid.grc.kumis_extended.name=Kumis Bucket
+item.bucket.fluid.grc.kumis_hyper_extended.name=Kumis Bucket
+item.bucket.fluid.grc.kumis_intoxicated.name=Kumis Bucket
+item.bucket.fluid.grc.kumis_poisoned.name=Vile Milk Bucket
 
 # Effects
 grc.effect.milk=Removes all effects (Except Tipsy)

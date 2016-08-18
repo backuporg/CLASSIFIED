@@ -1,35 +1,46 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.bamboo.client;
 
-import growthcraft.api.core.util.DomainResourceLocationFactory;
-import growthcraft.core.client.util.GrcModelRegistry;
-import growthcraft.bamboo.GrowthCraftBamboo;
 import growthcraft.bamboo.common.CommonProxy;
+import growthcraft.bamboo.GrowthCraftBamboo;
+import growthcraft.core.client.renderer.block.statemap.GrcDomainStateMapper;
+import growthcraft.core.client.util.GrcModelRegistry;
 
 public class ClientProxy extends CommonProxy
 {
 	private void registerBlockStates()
 	{
 		final GrcModelRegistry gmr = GrcModelRegistry.instance();
-		final DomainResourceLocationFactory res = GrowthCraftBamboo.resources;
-		gmr.register(GrowthCraftBamboo.blocks.bambooBlock, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooShoot, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooStalk, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooLeaves, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooFence, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooFenceRope, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooWall, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooStairs, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooSingleSlab, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooDoubleSlab, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooDoor, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooFenceGate, 0, res);
-		gmr.register(GrowthCraftBamboo.blocks.bambooScaffold, 0, res);
+		gmr.registerAll(GrowthCraftBamboo.blocks.all, 0, GrowthCraftBamboo.resources);
+		gmr.setCustomStateMapperForAll(GrowthCraftBamboo.blocks.all, new GrcDomainStateMapper(GrowthCraftBamboo.resources));
 	}
 
 	@Override
-	public void init()
+	public void register()
 	{
-		super.init();
+		super.register();
 		registerBlockStates();
 	}
 }

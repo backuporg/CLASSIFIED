@@ -11,10 +11,10 @@ tile.grc.bee_box.minecraft.acacia.name=金合欢蜂箱
 tile.grc.bee_box.minecraft.darkoak.name=深色橡木蜂箱
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.bee_box.Nether.0.name=恶毒蜂箱
+tile.grc.bee_box.nether.0.name=恶毒蜂箱
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.bee_box.Bamboo.0.name=竹蜂箱
+tile.grc.bee_box.bamboo.0.name=竹蜂箱
 
 ## Thaumcraft Bee Boxes
 tile.grc.bee_box.thaumcraft.greatwood.name=宏伟之木蜂箱
@@ -51,8 +51,8 @@ item.grc.honey_comb.empty.name=蜂窝
 item.grc.honey_comb.filled.name=蜂窝
 item.grc.honey_jar.name=蜂蜜
 item.grc.bee.name=蜜蜂
-item.grc.FoodBottleFluidHoney.name=蜂蜜瓶
-item.grc.BucketFluidHoney.name=蜂蜜桶
+item.grc.fluid_bottle_honey.name=蜂蜜瓶
+item.grc.fluid_bucket_honey.name=蜂蜜桶
 item.grc.bees_wax.normal.name=蜜蜡
 item.grc.bees_wax.red.name=红蜜蜡
 item.grc.bees_wax.black.name=黑蜜蜡
@@ -62,36 +62,36 @@ container.grc.beeBox=蜂箱
 
 # Fluids
 fluid.grc.honey=蜂蜜
-fluid.grc.honeyMead0=蜜酒
-fluid.grc.honeyMead1=蜜酒
-fluid.grc.honeyMead2=蜜酒
-fluid.grc.honeyMead3=蜜酒
-fluid.grc.honeyMead4=蜜酒
-fluid.grc.honeyMead5=蜜酒
-fluid.grc.honeyMead6=蜜酒
+fluid.grc.honey_mead_young=蜜酒
+fluid.grc.honey_mead_fermented=蜜酒
+fluid.grc.honey_mead_potent=蜜酒
+fluid.grc.honey_mead_extended=蜜酒
+fluid.grc.honey_mead_hyper_extended=蜜酒
+fluid.grc.honey_mead_intoxicated=蜜酒
+fluid.grc.honey_mead_poisoned=蜜酒
 
 # Fluid Bottles
 item.grc.BottleFluidHoney.name=蜂蜜
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=蜂蜜桶
-item.bucket.fluid.grc.honeyMead0.name=蜜酒桶
-item.bucket.fluid.grc.honeyMead1.name=蜜酒桶
-item.bucket.fluid.grc.honeyMead2.name=蜜酒桶
-item.bucket.fluid.grc.honeyMead3.name=蜜酒桶
-item.bucket.fluid.grc.honeyMead4.name=蜜酒桶
-item.bucket.fluid.grc.honeyMead5.name=蜜酒桶
-item.bucket.fluid.grc.honeyMead6.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_young.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_fermented.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_potent.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_extended.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_hyper_extended.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_intoxicated.name=蜜酒桶
+item.bucket.fluid.grc.honey_mead_poisoned.name=蜜酒桶
 
 # Fluid Blocks
-tile.grc.BlockFluidHoney.name=蜂蜜
-tile.fluid.grc.honeyMead0.name=蜜酒
-tile.fluid.grc.honeyMead1.name=蜜酒
-tile.fluid.grc.honeyMead2.name=蜜酒
-tile.fluid.grc.honeyMead3.name=蜜酒
-tile.fluid.grc.honeyMead4.name=蜜酒
-tile.fluid.grc.honeyMead5.name=蜜酒
-tile.fluid.grc.honeyMead6.name=蜜酒
+tile.grc.fluid_block_honey.name=蜂蜜
+tile.fluid.grc.honey_mead_young.name=蜜酒
+tile.fluid.grc.honey_mead_fermented.name=蜜酒
+tile.fluid.grc.honey_mead_potent.name=蜜酒
+tile.fluid.grc.honey_mead_extended.name=蜜酒
+tile.fluid.grc.honey_mead_hyper_extended.name=蜜酒
+tile.fluid.grc.honey_mead_intoxicated.name=蜜酒
+tile.fluid.grc.honey_mead_poisoned.name=蜜酒
 
 # Fluid Tags
 grc.fluids.tag.mead=grc.fluids.tag.mead

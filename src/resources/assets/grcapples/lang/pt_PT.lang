@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Caroço de Maçã
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Sidra
-fluid.grc.apple_cider1=Sidra
-fluid.grc.apple_cider2=Sidra
-fluid.grc.apple_cider3=Sidra
-fluid.grc.apple_cider4=Néctar Suave
-fluid.grc.apple_cider5=Sidra
-fluid.grc.apple_cider6=Sidra
+fluid.grc.apple_cider_young=Sidra
+fluid.grc.apple_cider_fermented=Sidra
+fluid.grc.apple_cider_potent=Sidra
+fluid.grc.apple_cider_extended=Sidra
+fluid.grc.apple_cider_magical=Néctar Suave
+fluid.grc.apple_cider_intoxicated=Sidra
+fluid.grc.apple_cider_poisoned=Sidra
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=Balde de Sidra
-item.bucket.fluid.grc.apple_cider1.name=Balde de Sidra
-item.bucket.fluid.grc.apple_cider2.name=Balde de Sidra
-item.bucket.fluid.grc.apple_cider3.name=Balde de Sidra
-item.bucket.fluid.grc.apple_cider4.name=Balde de Néctar Suave
-item.bucket.fluid.grc.apple_cider5.name=Balde de Sidra
-item.bucket.fluid.grc.apple_cider6.name=Balde de Sidra
+item.bucket.fluid.grc.apple_cider_young.name=Balde de Sidra
+item.bucket.fluid.grc.apple_cider_fermented.name=Balde de Sidra
+item.bucket.fluid.grc.apple_cider_potent.name=Balde de Sidra
+item.bucket.fluid.grc.apple_cider_extended.name=Balde de Sidra
+item.bucket.fluid.grc.apple_cider_magical.name=Balde de Néctar Suave
+item.bucket.fluid.grc.apple_cider_intoxicated.name=Balde de Sidra
+item.bucket.fluid.grc.apple_cider_poisoned.name=Balde de Sidra
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Sidra
-tile.fluid.grc.apple_cider1.name=Sidra
-tile.fluid.grc.apple_cider2.name=Sidra
-tile.fluid.grc.apple_cider3.name=Sidra
-tile.fluid.grc.apple_cider4.name=Néctar Suave
-tile.fluid.grc.apple_cider5.name=Sidra
-tile.fluid.grc.apple_cider6.name=Sidra
+tile.fluid.grc.apple_cider_young.name=Sidra
+tile.fluid.grc.apple_cider_fermented.name=Sidra
+tile.fluid.grc.apple_cider_potent.name=Sidra
+tile.fluid.grc.apple_cider_extended.name=Sidra
+tile.fluid.grc.apple_cider_magical.name=Néctar Suave
+tile.fluid.grc.apple_cider_intoxicated.name=Sidra
+tile.fluid.grc.apple_cider_poisoned.name=Sidra

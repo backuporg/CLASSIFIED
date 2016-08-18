@@ -181,12 +181,6 @@ public class BlockBeeBox extends GrcBlockContainer
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random random, int fortune)
-	{
-		return GrowthCraftBees.beeBox.getItem();
-	}
-
-	@Override
 	public int quantityDropped(Random random)
 	{
 		return 1;

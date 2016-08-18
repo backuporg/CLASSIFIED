@@ -7,28 +7,28 @@ item.grc.rice.name=稻米
 item.grc.rice_ball.name=饭团
 
 # Fluids
-fluid.grc.riceSake0=米酒
-fluid.grc.riceSake1=米酒
-fluid.grc.riceSake2=米酒
-fluid.grc.riceSake3=米酒
-fluid.grc.riceSake4=圣清酒
-fluid.grc.riceSake5=米酒
-fluid.grc.riceSake6=米酒
+fluid.grc.rice_sake_young=米酒
+fluid.grc.rice_sake_fermented=米酒
+fluid.grc.rice_sake_potent=米酒
+fluid.grc.rice_sake_extended=米酒
+fluid.grc.rice_sake_hyper_extended=圣清酒
+fluid.grc.rice_sake_intoxicated=米酒
+fluid.grc.rice_sake_poisoned=米酒
 
 # Fluid Buckets
-item.bucket.fluid.grc.riceSake0.name=米酒桶
-item.bucket.fluid.grc.riceSake1.name=米酒桶
-item.bucket.fluid.grc.riceSake2.name=米酒桶
-item.bucket.fluid.grc.riceSake3.name=米酒桶
-item.bucket.fluid.grc.riceSake4.name=圣清酒桶
-item.bucket.fluid.grc.riceSake5.name=米酒桶
-item.bucket.fluid.grc.riceSake6.name=米酒桶
+item.bucket.fluid.grc.rice_sake_young.name=米酒桶
+item.bucket.fluid.grc.rice_sake_fermented.name=米酒桶
+item.bucket.fluid.grc.rice_sake_potent.name=米酒桶
+item.bucket.fluid.grc.rice_sake_extended.name=米酒桶
+item.bucket.fluid.grc.rice_sake_hyper_extended.name=圣清酒桶
+item.bucket.fluid.grc.rice_sake_intoxicated.name=米酒桶
+item.bucket.fluid.grc.rice_sake_poisoned.name=米酒桶
 
 # Fluid Blocks
-tile.fluid.grc.riceSake0.name=米酒
-tile.fluid.grc.riceSake1.name=米酒
-tile.fluid.grc.riceSake2.name=米酒
-tile.fluid.grc.riceSake3.name=米酒
-tile.fluid.grc.riceSake4.name=圣清酒
-tile.fluid.grc.riceSake5.name=米酒
-tile.fluid.grc.riceSake6.name=米酒
+tile.fluid.grc.rice_sake_young.name=米酒
+tile.fluid.grc.rice_sake_fermented.name=米酒
+tile.fluid.grc.rice_sake_potent.name=米酒
+tile.fluid.grc.rice_sake_extended.name=米酒
+tile.fluid.grc.rice_sake_hyper_extended.name=圣清酒
+tile.fluid.grc.rice_sake_intoxicated.name=米酒
+tile.fluid.grc.rice_sake_poisoned.name=米酒

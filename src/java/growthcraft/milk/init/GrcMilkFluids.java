@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.cellar.util.ICellarBoozeBuilder;
@@ -71,8 +70,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class GrcMilkFluids extends GrcModuleBase
 {
-	private static final String kumisBasename = "grcmilk.Kumis";
-
 	public FluidFactory.FluidDetails butterMilk;
 	public FluidFactory.FluidDetails cream;
 	public FluidFactory.FluidDetails milk;
@@ -83,9 +80,9 @@ public class GrcMilkFluids extends GrcModuleBase
 	public FluidFactory.FluidDetails pasteurizedMilk;
 	public Map<EnumCheeseType, FluidFactory.FluidDetails> cheeses = new HashMap<EnumCheeseType, FluidFactory.FluidDetails>();
 	public Map<Fluid, EnumCheeseType> fluidToCheeseType = new HashMap<Fluid, EnumCheeseType>();
-	public Booze[] kumisFluids = new Booze[6];
-	public BlockBoozeDefinition[] kumisFluidBlocks = new BlockBoozeDefinition[kumisFluids.length];
-	public ItemBucketBoozeDefinition[] kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
+	public GrcFluid[] kumisFluids;
+	public BlockBoozeDefinition[] kumisFluidBlocks;
+	public ItemBucketBoozeDefinition[] kumisFluidBuckets;
 	public ItemDefinition kumisBottle;
 
 	private void preInitCheeseFluids()
@@ -107,11 +104,20 @@ public class GrcMilkFluids extends GrcModuleBase
 
 	private void preInitKumisFluids()
 	{
+		final FluidFactory.FluidBuilder builder = BoozeRegistryHelper.newBoozeBuilder();
+		this.kumisFluids = new GrcFluid[] {
+			builder.create("grc.kumis_fermented"),
+			builder.create("grc.kumis_potent"),
+			builder.create("grc.kumis_extended"),
+			builder.create("grc.kumis_hyper_extended"),
+			builder.create("grc.kumis_intoxicated"),
+			builder.create("grc.kumis_poisoned")
+		};
+		this.kumisFluidBlocks = new BlockBoozeDefinition[kumisFluids.length];
+		this.kumisFluidBuckets = new ItemBucketBoozeDefinition[kumisFluids.length];
+		BoozeRegistryHelper.registerBoozeFluids(kumisFluids);
 		this.kumisBottle = new ItemDefinition(new ItemBoozeBottle(kumisFluids));
-		BoozeRegistryHelper.initializeBoozeFluids(kumisBasename, kumisFluids,
-			GrowthCraftCellar.resources.create("booze_still"),
-			GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : kumisFluids)
+		for (GrcFluid booze : kumisFluids)
 		{
 			booze.setColor(GrowthCraftMilk.getConfig().kumisColor).setDensity(1030).setViscosity(3000);
 		}
@@ -333,7 +339,7 @@ public class GrcMilkFluids extends GrcModuleBase
 			pair.getValue().registerObjects("grc", "cheese_" + pair.getKey().name);
 		}
 
-		BoozeRegistryHelper.registerBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBottle, kumisBasename, null);
+		BoozeRegistryHelper.registerBooze(kumisFluids, kumisFluidBlocks, kumisFluidBuckets, kumisBottle);
 
 		CoreRegistry.instance().fluidDictionary().addFluidTags(cream.getFluid(), MilkFluidTags.CREAM);
 		CoreRegistry.instance().fluidDictionary().addFluidTags(curds.getFluid(), MilkFluidTags.MILK_CURDS);

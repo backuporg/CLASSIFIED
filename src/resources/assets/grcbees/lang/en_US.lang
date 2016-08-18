@@ -11,10 +11,10 @@ tile.grc.bee_box.minecraft.acacia.name=Acacia Bee Box
 tile.grc.bee_box.minecraft.darkoak.name=Dark Oak Bee Box
 
 ## Growthcraft|Nether Bee Boxes
-tile.grc.bee_box.Nether.0.name=Malice Bee Box
+tile.grc.bee_box.nether.0.name=Malice Bee Box
 
 ## Growthcraft|Bamboo Bee Boxes
-tile.grc.bee_box.Bamboo.0.name=Bamboo Bee Box
+tile.grc.bee_box.bamboo.0.name=Bamboo Bee Box
 
 ## Thaumcraft Bee Boxes
 tile.grc.bee_box.thaumcraft.greatwood.name=Greatwood Bee Box
@@ -51,8 +51,8 @@ item.grc.honey_comb.empty.name=Empty Honeycomb
 item.grc.honey_comb.filled.name=Honeycomb
 item.grc.honey_jar.name=Honey
 item.grc.bee.name=Bee
-item.grc.FoodBottleFluidHoney.name=Honey Bottle
-item.grc.BucketFluidHoney.name=Honey Bucket
+item.grc.fluid_bottle_honey.name=Honey Bottle
+item.grc.fluid_bucket_honey.name=Honey Bucket
 item.grc.bees_wax.normal.name=Beeswax
 item.grc.bees_wax.red.name=Red Beeswax
 item.grc.bees_wax.black.name=Black Beeswax
@@ -62,36 +62,36 @@ container.grc.beeBox=Bee Box
 
 # Fluids
 fluid.grc.honey=Honey
-fluid.grc.honeyMead0=Mead Must
-fluid.grc.honeyMead1=Mead
-fluid.grc.honeyMead2=Mead
-fluid.grc.honeyMead3=Mead
-fluid.grc.honeyMead4=Mead
-fluid.grc.honeyMead5=Mead
-fluid.grc.honeyMead6=Mead
+fluid.grc.honey_mead_young=Mead Must
+fluid.grc.honey_mead_fermented=Mead
+fluid.grc.honey_mead_potent=Mead
+fluid.grc.honey_mead_extended=Mead
+fluid.grc.honey_mead_hyper_extended=Mead
+fluid.grc.honey_mead_intoxicated=Mead
+fluid.grc.honey_mead_poisoned=Mead
 
 # Fluid Bottles
 item.grc.BottleFluidHoney.name=Honey
 
 # Fluid Buckets
 item.bucket.fluid.grc.honey.name=Honey Bucket
-item.bucket.fluid.grc.honeyMead0.name=Mead Must Bucket
-item.bucket.fluid.grc.honeyMead1.name=Mead Bucket
-item.bucket.fluid.grc.honeyMead2.name=Mead Bucket
-item.bucket.fluid.grc.honeyMead3.name=Mead Bucket
-item.bucket.fluid.grc.honeyMead4.name=Mead Bucket
-item.bucket.fluid.grc.honeyMead5.name=Mead Bucket
-item.bucket.fluid.grc.honeyMead6.name=Mead Bucket
+item.bucket.fluid.grc.honey_mead_young.name=Mead Must Bucket
+item.bucket.fluid.grc.honey_mead_fermented.name=Mead Bucket
+item.bucket.fluid.grc.honey_mead_potent.name=Mead Bucket
+item.bucket.fluid.grc.honey_mead_extended.name=Mead Bucket
+item.bucket.fluid.grc.honey_mead_hyper_extended.name=Mead Bucket
+item.bucket.fluid.grc.honey_mead_intoxicated.name=Mead Bucket
+item.bucket.fluid.grc.honey_mead_poisoned.name=Mead Bucket
 
 # Fluid Blocks
-tile.grc.BlockFluidHoney.name=Honey
-tile.fluid.grc.honeyMead0.name=Mead Must
-tile.fluid.grc.honeyMead1.name=Mead
-tile.fluid.grc.honeyMead2.name=Mead
-tile.fluid.grc.honeyMead3.name=Mead
-tile.fluid.grc.honeyMead4.name=Mead
-tile.fluid.grc.honeyMead5.name=Mead
-tile.fluid.grc.honeyMead6.name=Mead
+tile.grc.fluid_block_honey.name=Honey
+tile.fluid.grc.honey_mead_young.name=Mead Must
+tile.fluid.grc.honey_mead_fermented.name=Mead
+tile.fluid.grc.honey_mead_potent.name=Mead
+tile.fluid.grc.honey_mead_extended.name=Mead
+tile.fluid.grc.honey_mead_hyper_extended.name=Mead
+tile.fluid.grc.honey_mead_intoxicated.name=Mead
+tile.fluid.grc.honey_mead_poisoned.name=Mead
 
 # Fluid Tags
 grc.fluids.tag.mead=Mead

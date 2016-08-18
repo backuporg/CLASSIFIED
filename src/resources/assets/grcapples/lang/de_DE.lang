@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Apfelkern
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Apfelwein
-fluid.grc.apple_cider1=Apfelwein
-fluid.grc.apple_cider2=Apfelwein
-fluid.grc.apple_cider3=Apfelwein
-fluid.grc.apple_cider4=fluid.grc.apple_cider4
-fluid.grc.apple_cider5=fluid.grc.apple_cider5
-fluid.grc.apple_cider6=fluid.grc.apple_cider6
+fluid.grc.apple_cider_young=Apfelwein
+fluid.grc.apple_cider_fermented=Apfelwein
+fluid.grc.apple_cider_potent=Apfelwein
+fluid.grc.apple_cider_extended=Apfelwein
+fluid.grc.apple_cider_magical=fluid.grc.apple_cider_magical
+fluid.grc.apple_cider_intoxicated=fluid.grc.apple_cider_intoxicated
+fluid.grc.apple_cider_poisoned=fluid.grc.apple_cider_poisoned
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=item.bucket.fluid.grc.apple_cider0.name
-item.bucket.fluid.grc.apple_cider1.name=item.bucket.fluid.grc.apple_cider1.name
-item.bucket.fluid.grc.apple_cider2.name=item.bucket.fluid.grc.apple_cider2.name
-item.bucket.fluid.grc.apple_cider3.name=item.bucket.fluid.grc.apple_cider3.name
-item.bucket.fluid.grc.apple_cider4.name=item.bucket.fluid.grc.apple_cider4.name
-item.bucket.fluid.grc.apple_cider5.name=item.bucket.fluid.grc.apple_cider5.name
-item.bucket.fluid.grc.apple_cider6.name=item.bucket.fluid.grc.apple_cider6.name
+item.bucket.fluid.grc.apple_cider_young.name=item.bucket.fluid.grc.apple_cider_young.name
+item.bucket.fluid.grc.apple_cider_fermented.name=item.bucket.fluid.grc.apple_cider_fermented.name
+item.bucket.fluid.grc.apple_cider_potent.name=item.bucket.fluid.grc.apple_cider_potent.name
+item.bucket.fluid.grc.apple_cider_extended.name=item.bucket.fluid.grc.apple_cider_extended.name
+item.bucket.fluid.grc.apple_cider_magical.name=item.bucket.fluid.grc.apple_cider_magical.name
+item.bucket.fluid.grc.apple_cider_intoxicated.name=item.bucket.fluid.grc.apple_cider_intoxicated.name
+item.bucket.fluid.grc.apple_cider_poisoned.name=item.bucket.fluid.grc.apple_cider_poisoned.name
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Apfelwein
-tile.fluid.grc.apple_cider1.name=Apfelwein
-tile.fluid.grc.apple_cider2.name=Apfelwein
-tile.fluid.grc.apple_cider3.name=Apfelwein
-tile.fluid.grc.apple_cider4.name=tile.fluid.grc.apple_cider4.name
-tile.fluid.grc.apple_cider5.name=tile.fluid.grc.apple_cider5.name
-tile.fluid.grc.apple_cider6.name=tile.fluid.grc.apple_cider6.name
+tile.fluid.grc.apple_cider_young.name=Apfelwein
+tile.fluid.grc.apple_cider_fermented.name=Apfelwein
+tile.fluid.grc.apple_cider_potent.name=Apfelwein
+tile.fluid.grc.apple_cider_extended.name=Apfelwein
+tile.fluid.grc.apple_cider_magical.name=tile.fluid.grc.apple_cider_magical.name
+tile.fluid.grc.apple_cider_intoxicated.name=tile.fluid.grc.apple_cider_intoxicated.name
+tile.fluid.grc.apple_cider_poisoned.name=tile.fluid.grc.apple_cider_poisoned.name

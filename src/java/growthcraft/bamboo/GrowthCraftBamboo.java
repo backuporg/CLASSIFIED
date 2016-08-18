@@ -99,15 +99,14 @@ public class GrowthCraftBamboo
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bamboo.conf");
-
 		modules.add(blocks);
 		modules.add(items);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.bamboo.integration.ThaumcraftModule());
 		if (config.debugEnabled) modules.setLogger(logger);
-
+		modules.add(CommonProxy.instance);
+		modules.freeze();
 		creativeTab = new CreativeTabsGrowthcraftBamboo("creative_tab_grcbamboo");
 		modules.preInit();
-
 		if (config.generateBambooBiome)
 		{
 			bambooBiome = (new BiomeGenBamboo(config.bambooBiomeID))
@@ -116,7 +115,6 @@ public class GrowthCraftBamboo
 				.setFillerBlockMetadata(5159473)
 				.setTemperatureRainfall(0.7F, 0.8F);
 		}
-
 		register();
 	}
 
@@ -205,10 +203,8 @@ public class GrowthCraftBamboo
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		final VillageHandlerBamboo handler = new VillageHandlerBamboo();
 		VillagerRegistry.instance().registerVillageCreationHandler(handler);
-
 		modules.init();
 	}
 

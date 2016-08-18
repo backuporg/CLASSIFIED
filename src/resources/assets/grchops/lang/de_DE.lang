@@ -3,67 +3,67 @@ tile.grc.hop_vine.name=Hopfen
 
 # Items
 item.grc.hops.name=Hopfen
-item.grc.hopSeeds.name=Hopfensamen
+item.grc.hop_seeds.name=Hopfensamen
 
 # Fluids
-fluid.grc.hopAle0=Bier
-fluid.grc.hopAle1=Bier
-fluid.grc.hopAle2=Bier
-fluid.grc.hopAle3=Bier
-fluid.grc.hopAle4=Bier
-fluid.grc.hopAle5=fluid.grc.hopAle5
-fluid.grc.hopAle6=fluid.grc.hopAle6
-fluid.grc.hopAle7=fluid.grc.hopAle7
-fluid.grc.hopAle8=fluid.grc.hopAle8
+fluid.grc.hop_ale_young=Bier
+fluid.grc.hop_ale_fermented=Bier
+fluid.grc.hop_ale_potent=Bier
+fluid.grc.hop_ale_extended=Bier
+fluid.grc.ale=Bier
+fluid.grc.hop_ale_hyper_extended=fluid.grc.hop_ale_hyper_extended
+fluid.grc.hop_ale_chilled=fluid.grc.hop_ale_chilled
+fluid.grc.hop_ale_intoxicated=fluid.grc.hop_ale_intoxicated
+fluid.grc.hop_ale_poisoned=fluid.grc.hop_ale_poisoned
 
-fluid.grc.lager0=fluid.grc.lager0
-fluid.grc.lager1=fluid.grc.lager1
-fluid.grc.lager2=fluid.grc.lager2
-fluid.grc.lager3=fluid.grc.lager3
-fluid.grc.lager4=fluid.grc.lager4
-fluid.grc.lager5=fluid.grc.lager5
-fluid.grc.lager6=fluid.grc.lager6
+fluid.grc.lager_young=fluid.grc.lager_young
+fluid.grc.lager_fermented=fluid.grc.lager_fermented
+fluid.grc.lager_potent=fluid.grc.lager_potent
+fluid.grc.lager_extended=fluid.grc.lager_extended
+fluid.grc.lager_hyper_extended=fluid.grc.lager_hyper_extended
+fluid.grc.lager_hyper_intoxicated=fluid.grc.lager_hyper_intoxicated
+fluid.grc.lager_hyper_poisoned=fluid.grc.lager_hyper_poisoned
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle0.name=item.bucket.fluid.grc.hopAle0.name
-item.bucket.fluid.grc.hopAle1.name=item.bucket.fluid.grc.hopAle1.name
-item.bucket.fluid.grc.hopAle2.name=item.bucket.fluid.grc.hopAle2.name
-item.bucket.fluid.grc.hopAle3.name=item.bucket.fluid.grc.hopAle3.name
-item.bucket.fluid.grc.hopAle4.name=item.bucket.fluid.grc.hopAle4.name
-item.bucket.fluid.grc.hopAle5.name=item.bucket.fluid.grc.hopAle5.name
-item.bucket.fluid.grc.hopAle6.name=item.bucket.fluid.grc.hopAle6.name
-item.bucket.fluid.grc.hopAle7.name=item.bucket.fluid.grc.hopAle7.name
-item.bucket.fluid.grc.hopAle8.name=item.bucket.fluid.grc.hopAle8.name
+item.bucket.fluid.grc.hop_ale_young.name=item.bucket.fluid.grc.hop_ale_young.name
+item.bucket.fluid.grc.hop_ale_fermented.name=item.bucket.fluid.grc.hop_ale_fermented.name
+item.bucket.fluid.grc.hop_ale_potent.name=item.bucket.fluid.grc.hop_ale_potent.name
+item.bucket.fluid.grc.hop_ale_extended.name=item.bucket.fluid.grc.hop_ale_extended.name
+item.bucket.fluid.grc.ale.name=item.bucket.fluid.grc.ale.name
+item.bucket.fluid.grc.hop_ale_hyper_extended.name=item.bucket.fluid.grc.hop_ale_hyper_extended.name
+item.bucket.fluid.grc.hop_ale_chilled.name=item.bucket.fluid.grc.hop_ale_chilled.name
+item.bucket.fluid.grc.hop_ale_intoxicated.name=item.bucket.fluid.grc.hop_ale_intoxicated.name
+item.bucket.fluid.grc.hop_ale_poisoned.name=item.bucket.fluid.grc.hop_ale_poisoned.name
 
 item.bucket.fluid.grc.lager.name=item.bucket.fluid.grc.lager.name
-item.bucket.fluid.grc.lager0.name=item.bucket.fluid.grc.lager0.name
-item.bucket.fluid.grc.lager1.name=item.bucket.fluid.grc.lager1.name
-item.bucket.fluid.grc.lager2.name=item.bucket.fluid.grc.lager2.name
-item.bucket.fluid.grc.lager3.name=item.bucket.fluid.grc.lager3.name
-item.bucket.fluid.grc.lager4.name=item.bucket.fluid.grc.lager4.name
-item.bucket.fluid.grc.lager5.name=item.bucket.fluid.grc.lager5.name
-item.bucket.fluid.grc.lager6.name=item.bucket.fluid.grc.lager6.name
+item.bucket.fluid.grc.lager_young.name=item.bucket.fluid.grc.lager_young.name
+item.bucket.fluid.grc.lager_fermented.name=item.bucket.fluid.grc.lager_fermented.name
+item.bucket.fluid.grc.lager_potent.name=item.bucket.fluid.grc.lager_potent.name
+item.bucket.fluid.grc.lager_extended.name=item.bucket.fluid.grc.lager_extended.name
+item.bucket.fluid.grc.lager_hyper_extended.name=item.bucket.fluid.grc.lager_hyper_extended.name
+item.bucket.fluid.grc.lager_hyper_intoxicated.name=item.bucket.fluid.grc.lager_hyper_intoxicated.name
+item.bucket.fluid.grc.lager_hyper_poisoned.name=item.bucket.fluid.grc.lager_hyper_poisoned.name
 
 # Fluid Blocks
 tile.fluid.grc.hopAle.name=Bier
-tile.fluid.grc.hopAle0.name=Bier
-tile.fluid.grc.hopAle1.name=Bier
-tile.fluid.grc.hopAle2.name=Bier
-tile.fluid.grc.hopAle3.name=Bier
-tile.fluid.grc.hopAle4.name=Bier
-tile.fluid.grc.hopAle5.name=tile.fluid.grc.hopAle5.name
-tile.fluid.grc.hopAle6.name=tile.fluid.grc.hopAle6.name
-tile.fluid.grc.hopAle7.name=tile.fluid.grc.hopAle7.name
-tile.fluid.grc.hopAle8.name=tile.fluid.grc.hopAle8.name
+tile.fluid.grc.hop_ale_young.name=Bier
+tile.fluid.grc.hop_ale_fermented.name=Bier
+tile.fluid.grc.hop_ale_potent.name=Bier
+tile.fluid.grc.hop_ale_extended.name=Bier
+tile.fluid.grc.ale.name=Bier
+tile.fluid.grc.hop_ale_hyper_extended.name=tile.fluid.grc.hop_ale_hyper_extended.name
+tile.fluid.grc.hop_ale_chilled.name=tile.fluid.grc.hop_ale_chilled.name
+tile.fluid.grc.hop_ale_intoxicated.name=tile.fluid.grc.hop_ale_intoxicated.name
+tile.fluid.grc.hop_ale_poisoned.name=tile.fluid.grc.hop_ale_poisoned.name
 
 tile.fluid.grc.lager.name=tile.fluid.grc.lager.name
-tile.fluid.grc.lager0.name=tile.fluid.grc.lager0.name
-tile.fluid.grc.lager1.name=tile.fluid.grc.lager1.name
-tile.fluid.grc.lager2.name=tile.fluid.grc.lager2.name
-tile.fluid.grc.lager3.name=tile.fluid.grc.lager3.name
-tile.fluid.grc.lager4.name=tile.fluid.grc.lager4.name
-tile.fluid.grc.lager5.name=tile.fluid.grc.lager5.name
-tile.fluid.grc.lager6.name=tile.fluid.grc.lager6.name
+tile.fluid.grc.lager_young.name=tile.fluid.grc.lager_young.name
+tile.fluid.grc.lager_fermented.name=tile.fluid.grc.lager_fermented.name
+tile.fluid.grc.lager_potent.name=tile.fluid.grc.lager_potent.name
+tile.fluid.grc.lager_extended.name=tile.fluid.grc.lager_extended.name
+tile.fluid.grc.lager_hyper_extended.name=tile.fluid.grc.lager_hyper_extended.name
+tile.fluid.grc.lager_hyper_intoxicated.name=tile.fluid.grc.lager_hyper_intoxicated.name
+tile.fluid.grc.lager_hyper_poisoned.name=tile.fluid.grc.lager_hyper_poisoned.name
 
 # Fluid Tooltips
-fluid.grc.hopAle4.modifier=Ungehopft, Jung
+fluid.grc.ale.modifier=Ungehopft, Jung

@@ -7,28 +7,28 @@ item.grc.apple_seeds.name=Sementes de Maçã
 
 # Booze
 ## Fluids
-fluid.grc.apple_cider0=Suco de Maçã
-fluid.grc.apple_cider1=Sidra de Maçã
-fluid.grc.apple_cider2=Sidra de Maçã
-fluid.grc.apple_cider3=Sidra de Maçã
-fluid.grc.apple_cider4=Néctar Suave
-fluid.grc.apple_cider5=Sidra de Maçã
-fluid.grc.apple_cider6=Sidra de Maçã
+fluid.grc.apple_cider_young=Suco de Maçã
+fluid.grc.apple_cider_fermented=Sidra de Maçã
+fluid.grc.apple_cider_potent=Sidra de Maçã
+fluid.grc.apple_cider_extended=Sidra de Maçã
+fluid.grc.apple_cider_magical=Néctar Suave
+fluid.grc.apple_cider_intoxicated=Sidra de Maçã
+fluid.grc.apple_cider_poisoned=Sidra de Maçã
 
 ## Fluid Buckets
-item.bucket.fluid.grc.apple_cider0.name=Balde de Suco de Maçã
-item.bucket.fluid.grc.apple_cider1.name=Balde de Sidra de Maçã
-item.bucket.fluid.grc.apple_cider2.name=Balde de Sidra de Maçã
-item.bucket.fluid.grc.apple_cider3.name=Balde de Sidra de Maçã
-item.bucket.fluid.grc.apple_cider4.name=Balde de Néctar Suave
-item.bucket.fluid.grc.apple_cider5.name=Balde de Sidra de Maçã
-item.bucket.fluid.grc.apple_cider6.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.apple_cider_young.name=Balde de Suco de Maçã
+item.bucket.fluid.grc.apple_cider_fermented.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.apple_cider_potent.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.apple_cider_extended.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.apple_cider_magical.name=Balde de Néctar Suave
+item.bucket.fluid.grc.apple_cider_intoxicated.name=Balde de Sidra de Maçã
+item.bucket.fluid.grc.apple_cider_poisoned.name=Balde de Sidra de Maçã
 
 ## Fluid Blocks
-tile.fluid.grc.apple_cider0.name=Suco de Maçã
-tile.fluid.grc.apple_cider1.name=Sidra de Maçã
-tile.fluid.grc.apple_cider2.name=Sidra de Maçã
-tile.fluid.grc.apple_cider3.name=Sidra de Maçã
-tile.fluid.grc.apple_cider4.name=Néctar Suave
-tile.fluid.grc.apple_cider5.name=Sidra de Maçã
-tile.fluid.grc.apple_cider6.name=Sidra de Maçã
+tile.fluid.grc.apple_cider_young.name=Suco de Maçã
+tile.fluid.grc.apple_cider_fermented.name=Sidra de Maçã
+tile.fluid.grc.apple_cider_potent.name=Sidra de Maçã
+tile.fluid.grc.apple_cider_extended.name=Sidra de Maçã
+tile.fluid.grc.apple_cider_magical.name=Néctar Suave
+tile.fluid.grc.apple_cider_intoxicated.name=Sidra de Maçã
+tile.fluid.grc.apple_cider_poisoned.name=Sidra de Maçã

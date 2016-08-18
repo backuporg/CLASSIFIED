@@ -115,6 +115,7 @@ public class GrowthCraftMilk
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.milk.integration.ThaumcraftModule());
 		if (config.enableWailaIntegration) modules.add(new growthcraft.milk.integration.Waila());
 		modules.add(userApis);
+		modules.add(CommonProxy.instance);
 		modules.freeze();
 		GrcMilkEffects.init();
 
@@ -147,10 +148,8 @@ public class GrowthCraftMilk
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		modules.init();
 		userApis.loadConfigs();
-		CommonProxy.instance.registerWorldGen();
 	}
 
 	@EventHandler

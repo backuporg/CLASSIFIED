@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 IceDragon200
+ * Copyright (c) 2016 IceDragon200
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package growthcraft.api.cellar.booze;
+package growthcraft.core.common;
 
-import javax.annotation.Nonnull;
+import java.util.LinkedList;
+import java.util.List;
 
-import growthcraft.api.core.GrcFluid;
+import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Item;
 
-public class Booze extends GrcFluid
+public class GrcModuleItems extends GrcModuleBase
 {
-	public Booze(@Nonnull String fluidName, @Nonnull ResourceLocation still, @Nonnull ResourceLocation flowing)
+	// All items that had defintions created via the interface
+	public final List<ItemTypeDefinition<? extends Item>> all = new LinkedList<ItemTypeDefinition<? extends Item>>();
+
+	/**
+	 * Creates a basic ItemDefintion from the given item
+	 *
+	 * @param item the item to wrap
+	 * @return definition
+	 */
+	protected ItemDefinition newDefinition(Item item)
 	{
-		super(fluidName, still, flowing);
+		final ItemDefinition def = new ItemDefinition(item);
+		all.add(def);
+		return def;
+	}
+
+	/**
+	 * Creates a ItemTypeDefintion from the given item
+	 *
+	 * @param item the item to wrap and type by
+	 * @return typed definition
+	 */
+	protected <T extends Item> ItemTypeDefinition<T> newTypedDefinition(T item)
+	{
+		final ItemTypeDefinition<T> def = new ItemTypeDefinition<T>(item);
+		all.add(def);
+		return def;
 	}
 }

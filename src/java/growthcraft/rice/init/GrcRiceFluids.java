@@ -23,12 +23,12 @@
  */
 package growthcraft.rice.init;
 
-import growthcraft.api.cellar.booze.Booze;
 import growthcraft.api.cellar.booze.BoozeTag;
 import growthcraft.api.cellar.common.Residue;
 import growthcraft.api.core.effect.EffectAddPotionEffect;
 import growthcraft.api.core.effect.EffectWeightedRandomList;
 import growthcraft.api.core.effect.SimplePotionEffectFactory;
+import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.item.OreItemStacks;
 import growthcraft.api.core.util.TickUtils;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
@@ -41,6 +41,7 @@ import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.GrcModuleBase;
 import growthcraft.core.GrowthCraftCore;
+import growthcraft.core.util.FluidFactory;
 import growthcraft.rice.GrowthCraftRice;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -52,7 +53,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class GrcRiceFluids extends GrcModuleBase
 {
-	public Booze[] riceSakeBooze;
+	public GrcFluid[] riceSakeBooze;
 	public BlockBoozeDefinition[] riceSakeFluids;
 	public ItemDefinition riceSake;
 	public ItemBucketBoozeDefinition[] riceSakeBuckets;
@@ -60,11 +61,20 @@ public class GrcRiceFluids extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		riceSakeBooze = new Booze[7];
-		riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
-		riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("grc.riceSake", riceSakeBooze, GrowthCraftCellar.resources.create("booze_still"), GrowthCraftCellar.resources.create("booze_flow"));
-		for (Booze booze : riceSakeBooze)
+		final FluidFactory.FluidBuilder builder = BoozeRegistryHelper.newBoozeBuilder();
+		this.riceSakeBooze = new GrcFluid[] {
+			builder.create("grc.rice_sake_young"),
+			builder.create("grc.rice_sake_fermented"),
+			builder.create("grc.rice_sake_potent"),
+			builder.create("grc.rice_sake_extended"),
+			builder.create("grc.rice_sake_hyper_extended"),
+			builder.create("grc.rice_sake_intoxicated"),
+			builder.create("grc.rice_sake_poisoned")
+		};
+		this.riceSakeFluids = new BlockBoozeDefinition[riceSakeBooze.length];
+		this.riceSakeBuckets = new ItemBucketBoozeDefinition[riceSakeBooze.length];
+		BoozeRegistryHelper.registerBoozeFluids(riceSakeBooze);
+		for (GrcFluid booze : riceSakeBooze)
 		{
 			booze.setColor(GrowthCraftRice.getConfig().riceSakeColor).setDensity(980);
 		}
@@ -151,9 +161,8 @@ public class GrcRiceFluids extends GrcModuleBase
 	@Override
 	public void register()
 	{
-		GameRegistry.registerItem(riceSake.getItem(), "grc.riceSake");
-
-		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake, "grc.riceSake", null);
+		GameRegistry.registerItem(riceSake.getItem(), "grc.rice_sake");
+		BoozeRegistryHelper.registerBooze(riceSakeBooze, riceSakeFluids, riceSakeBuckets, riceSake);
 		registerRecipes();
 	}
 }

@@ -77,11 +77,11 @@ public class GrowthCraftRice
 	public static ItemDefinition rice;
 	public static ItemDefinition riceBall;
 
-	public static GrcRiceFluids fluids = new GrcRiceFluids();
+	public static final GrcRiceFluids fluids = new GrcRiceFluids();
 
-	private ILogger logger = new GrcLogger(MOD_ID);
-	private GrcRiceConfig config = new GrcRiceConfig();
-	private ModuleContainer modules = new ModuleContainer();
+	private final ILogger logger = new GrcLogger(MOD_ID);
+	private final GrcRiceConfig config = new GrcRiceConfig();
+	private final ModuleContainer modules = new ModuleContainer();
 
 	public static GrcRiceConfig getConfig()
 	{
@@ -101,7 +101,7 @@ public class GrowthCraftRice
 
 		modules.add(fluids);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.rice.integration.ThaumcraftModule());
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
 
 		//====================
@@ -122,15 +122,15 @@ public class GrowthCraftRice
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(riceBlock.getBlock(), "grc.riceBlock");
-		GameRegistry.registerBlock(paddyField.getBlock(), "grc.paddyField");
+		GameRegistry.registerBlock(riceBlock.getBlock(), "rice_block");
+		GameRegistry.registerBlock(paddyField.getBlock(), "paddy_field");
 
-		GameRegistry.registerItem(rice.getItem(), "grc.rice");
-		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
+		GameRegistry.registerItem(rice.getItem(), "rice");
+		GameRegistry.registerItem(riceBall.getItem(), "rice_ball");
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
-		MapGenHelper.registerStructureComponent(ComponentVillageRiceField.class, "grc.ricefield");
+		MapGenHelper.registerStructureComponent(ComponentVillageRiceField.class, "grc.rice_field");
 
 		//====================
 		// ORE DICTIONARY
@@ -152,7 +152,6 @@ public class GrowthCraftRice
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		PlayerInteractEventPaddy.paddyBlocks.put(Blocks.farmland, paddyField.getBlock());
 		final VillageHandlerRice handler = new VillageHandlerRice();
 		//VillagerRegistry.instance().registerVillageTradeHandler(GrowthCraftCellar.getConfig().villagerBrewerID, handler);

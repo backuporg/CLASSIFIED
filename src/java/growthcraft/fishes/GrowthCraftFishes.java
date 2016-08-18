@@ -29,12 +29,11 @@ import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.api.fishtrap.FishTrapEntry;
 import growthcraft.api.fishtrap.user.UserFishTrapConfig;
-import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.fishes.client.gui.GuiHandlerFishTrap;
-import growthcraft.fishes.common.block.BlockFishTrap;
 import growthcraft.fishes.common.CommonProxy;
 import growthcraft.fishes.common.tileentity.TileEntityFishTrap;
+import growthcraft.fishes.init.GrcFishesBlocks;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -66,7 +65,7 @@ public class GrowthCraftFishes
 	@Instance(MOD_ID)
 	public static GrowthCraftFishes instance;
 	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcfishes");
-	public static BlockDefinition fishTrap;
+	public static final GrcFishesBlocks blocks = new GrcFishesBlocks();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
 	private GrcFishtrapConfig config = new GrcFishtrapConfig();
@@ -88,27 +87,19 @@ public class GrowthCraftFishes
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/fishtrap.conf");
-
+		modules.add(blocks);
 		userFishTrapConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/fishtrap/entries.json");
 		modules.add(userFishTrapConfig);
-
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.fishes.integration.ThaumcraftModule());
-
+		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
-
-		//====================
-		// INIT
-		//====================
-		fishTrap = new BlockDefinition(new BlockFishTrap());
-
+		modules.freeze();
 		modules.preInit();
 		register();
 	}
 
 	private void register()
 	{
-		fishTrap.register("fish_trap");
-
 		GameRegistry.registerTileEntity(TileEntityFishTrap.class, "grc.tileentity.fish_trap");
 
 		// Will use same chances as Fishing Rods
@@ -140,7 +131,7 @@ public class GrowthCraftFishes
 		//====================
 		// CRAFTING
 		//====================
-		GameRegistry.addRecipe(new ShapedOreRecipe(fishTrap.asStack(1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.fishTrap.asStack(1), "ACA", "CBC", "ACA", 'A', "plankWood", 'B', Items.lead, 'C', Items.string));
 
 		modules.register();
 	}
@@ -148,7 +139,6 @@ public class GrowthCraftFishes
 	@EventHandler
 	public void load(FMLInitializationEvent event)
 	{
-		CommonProxy.instance.init();
 		userFishTrapConfig.loadUserConfig();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandlerFishTrap());
 		modules.init();

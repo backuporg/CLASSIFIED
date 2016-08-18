@@ -3,67 +3,67 @@ tile.grc.hop_vine.name=啤酒花
 
 # Items
 item.grc.hops.name=啤酒花
-item.grc.hopSeeds.name=啤酒花种子
+item.grc.hop_seeds.name=啤酒花种子
 
 # Fluids
-fluid.grc.hopAle0=麦芽酒
-fluid.grc.hopAle1=麦芽酒
-fluid.grc.hopAle2=麦芽酒
-fluid.grc.hopAle3=麦芽酒
-fluid.grc.hopAle4=麦芽酒
-fluid.grc.hopAle5=麦芽酒
-fluid.grc.hopAle6=麦芽酒
-fluid.grc.hopAle7=麦芽酒
-fluid.grc.hopAle8=麦芽酒
+fluid.grc.hop_ale_young=麦芽酒
+fluid.grc.hop_ale_fermented=麦芽酒
+fluid.grc.hop_ale_potent=麦芽酒
+fluid.grc.hop_ale_extended=麦芽酒
+fluid.grc.ale=麦芽酒
+fluid.grc.hop_ale_hyper_extended=麦芽酒
+fluid.grc.hop_ale_chilled=麦芽酒
+fluid.grc.hop_ale_intoxicated=麦芽酒
+fluid.grc.hop_ale_poisoned=麦芽酒
 
-fluid.grc.lager0=拉格啤酒
-fluid.grc.lager1=拉格啤酒
-fluid.grc.lager2=拉格啤酒
-fluid.grc.lager3=拉格啤酒
-fluid.grc.lager4=拉格啤酒
-fluid.grc.lager5=拉格啤酒
-fluid.grc.lager6=拉格啤酒
+fluid.grc.lager_young=拉格啤酒
+fluid.grc.lager_fermented=拉格啤酒
+fluid.grc.lager_potent=拉格啤酒
+fluid.grc.lager_extended=拉格啤酒
+fluid.grc.lager_hyper_extended=拉格啤酒
+fluid.grc.lager_hyper_intoxicated=拉格啤酒
+fluid.grc.lager_hyper_poisoned=拉格啤酒
 
 # Fluid Buckets
-item.bucket.fluid.grc.hopAle0.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle1.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle2.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle3.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle4.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle5.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle6.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle7.name=麦芽酒桶
-item.bucket.fluid.grc.hopAle8.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_young.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_fermented.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_potent.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_extended.name=麦芽酒桶
+item.bucket.fluid.grc.ale.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_hyper_extended.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_chilled.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_intoxicated.name=麦芽酒桶
+item.bucket.fluid.grc.hop_ale_poisoned.name=麦芽酒桶
 
 item.bucket.fluid.grc.lager.name=拉格啤酒桶
-item.bucket.fluid.grc.lager0.name=拉格啤酒桶
-item.bucket.fluid.grc.lager1.name=拉格啤酒桶
-item.bucket.fluid.grc.lager2.name=拉格啤酒桶
-item.bucket.fluid.grc.lager3.name=拉格啤酒桶
-item.bucket.fluid.grc.lager4.name=拉格啤酒桶
-item.bucket.fluid.grc.lager5.name=拉格啤酒桶
-item.bucket.fluid.grc.lager6.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_young.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_fermented.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_potent.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_extended.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_hyper_extended.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_hyper_intoxicated.name=拉格啤酒桶
+item.bucket.fluid.grc.lager_hyper_poisoned.name=拉格啤酒桶
 
 # Fluid Blocks
 tile.fluid.grc.hopAle.name=麦芽酒
-tile.fluid.grc.hopAle0.name=麦芽酒
-tile.fluid.grc.hopAle1.name=麦芽酒
-tile.fluid.grc.hopAle2.name=麦芽酒
-tile.fluid.grc.hopAle3.name=麦芽酒
-tile.fluid.grc.hopAle4.name=麦芽酒
-tile.fluid.grc.hopAle5.name=麦芽酒
-tile.fluid.grc.hopAle6.name=麦芽酒
-tile.fluid.grc.hopAle7.name=麦芽酒
-tile.fluid.grc.hopAle8.name=麦芽酒
+tile.fluid.grc.hop_ale_young.name=麦芽酒
+tile.fluid.grc.hop_ale_fermented.name=麦芽酒
+tile.fluid.grc.hop_ale_potent.name=麦芽酒
+tile.fluid.grc.hop_ale_extended.name=麦芽酒
+tile.fluid.grc.ale.name=麦芽酒
+tile.fluid.grc.hop_ale_hyper_extended.name=麦芽酒
+tile.fluid.grc.hop_ale_chilled.name=麦芽酒
+tile.fluid.grc.hop_ale_intoxicated.name=麦芽酒
+tile.fluid.grc.hop_ale_poisoned.name=麦芽酒
 
 tile.fluid.grc.lager.name=拉格啤酒
-tile.fluid.grc.lager0.name=拉格啤酒
-tile.fluid.grc.lager1.name=拉格啤酒
-tile.fluid.grc.lager2.name=拉格啤酒
-tile.fluid.grc.lager3.name=拉格啤酒
-tile.fluid.grc.lager4.name=拉格啤酒
-tile.fluid.grc.lager5.name=拉格啤酒
-tile.fluid.grc.lager6.name=拉格啤酒
+tile.fluid.grc.lager_young.name=拉格啤酒
+tile.fluid.grc.lager_fermented.name=拉格啤酒
+tile.fluid.grc.lager_potent.name=拉格啤酒
+tile.fluid.grc.lager_extended.name=拉格啤酒
+tile.fluid.grc.lager_hyper_extended.name=拉格啤酒
+tile.fluid.grc.lager_hyper_intoxicated.name=拉格啤酒
+tile.fluid.grc.lager_hyper_poisoned.name=拉格啤酒
 
 # Fluid Tooltips
-fluid.grc.hopAle4.modifier=无啤酒花，轻度
+fluid.grc.ale.modifier=无啤酒花，轻度

@@ -23,14 +23,19 @@
  */
 package growthcraft.core.client.util;
 
+import java.util.List;
+import javax.annotation.Nonnull;
+
+import growthcraft.api.core.log.GrcLogger;
+import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.GrowthCraftCore;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -38,6 +43,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GrcModelRegistry
 {
 	private static GrcModelRegistry instance_;
+	private final ILogger logger = new GrcLogger("grcmodel_registry");
 
 	public static GrcModelRegistry instance()
 	{
@@ -48,19 +54,51 @@ public class GrcModelRegistry
 		return instance_;
 	}
 
-	public void registerItem(Item item, int meta, ModelResourceLocation location)
+	public void registerItem(@Nonnull Item item, int meta, @Nonnull ModelResourceLocation location)
 	{
-		GrowthCraftCore.getLogger().info("Registering Model item=%s meta=%d location=%s", item, meta, location);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, location);
+		logger.debug("Registering Model item=%s meta=%d location=%s", item, meta, location);
+		ModelLoader.setCustomModelResourceLocation(item, meta, location);
 	}
 
-	public void register(BlockTypeDefinition<? extends Block> def, int meta, ModelResourceLocation location)
+	public void register(@Nonnull BlockTypeDefinition<? extends Block> def, int meta, @Nonnull ModelResourceLocation location)
 	{
-		registerItem(def.getItem(), meta, location);
+		final Item item = def.getItem();
+		if (item != null)
+		{
+			registerItem(item, meta, location);
+		}
+		else
+		{
+			logger.error("BlockTypeDefinition `%s` returned an invalid Item! location='%s'", def, location);
+		}
 	}
 
-	public void register(BlockTypeDefinition<? extends Block> def, int meta, DomainResourceLocationFactory drl)
+	public void register(@Nonnull BlockTypeDefinition<? extends Block> def, int meta, @Nonnull DomainResourceLocationFactory drl)
 	{
-		register(def, meta, drl.createModel(def.registeredName, "inventory"));
+		if (def != null)
+		{
+			register(def, meta, drl.createModel(def.registeredName, "inventory"));
+		}
+		else
+		{
+			logger.error("null BlockTypeDefinition defintion passed in for registering! location='%s'", drl);
+		}
+	}
+
+	public void registerAll(List<BlockTypeDefinition<? extends Block>> defs, int meta, @Nonnull DomainResourceLocationFactory drl)
+	{
+		for (BlockTypeDefinition<? extends Block> def : defs)
+		{
+			register(def, meta, drl);
+		}
+	}
+
+	public void setCustomStateMapperForAll(List<BlockTypeDefinition<? extends Block>> defs, StateMapperBase stateMapper)
+	{
+		for (BlockTypeDefinition<? extends Block> def : defs)
+		{
+			logger.info("Setting Custom State Mapper for block=%s stateMapper='%s'", def.getBlock(), stateMapper);
+			ModelLoader.setCustomStateMapper(def.getBlock(), stateMapper);
+		}
 	}
 }

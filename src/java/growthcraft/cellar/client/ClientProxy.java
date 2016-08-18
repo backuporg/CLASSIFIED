@@ -1,9 +1,32 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 IceDragon200
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package growthcraft.cellar.client;
 
-import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.cellar.client.resource.GrcCellarResources;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.GrowthCraftCellar;
+import growthcraft.core.client.renderer.block.statemap.GrcDomainStateMapper;
 import growthcraft.core.client.util.GrcModelRegistry;
 
 public class ClientProxy extends CommonProxy
@@ -11,12 +34,15 @@ public class ClientProxy extends CommonProxy
 	private void registerBlockStates()
 	{
 		final GrcModelRegistry gmr = GrcModelRegistry.instance();
-		final DomainResourceLocationFactory res = GrowthCraftCellar.resources;
-		gmr.register(GrowthCraftCellar.blocks.brewKettle, 0, res.createModel("brew_kettle", "inventory"));
-		gmr.register(GrowthCraftCellar.blocks.cultureJar, 0, res.createModel("culture_jar", "inventory"));
-		gmr.register(GrowthCraftCellar.blocks.fermentBarrel, 0, res.createModel("ferment_barrel", "inventory"));
-		gmr.register(GrowthCraftCellar.blocks.fruitPress, 0, res.createModel("fruit_press", "inventory"));
-		gmr.register(GrowthCraftCellar.blocks.fruitPresser, 0, res.createModel("fruit_presser", "inventory"));
+		gmr.registerAll(GrowthCraftCellar.blocks.all, 0, GrowthCraftCellar.resources);
+		gmr.setCustomStateMapperForAll(GrowthCraftCellar.blocks.all, new GrcDomainStateMapper(GrowthCraftCellar.resources));
+	}
+
+	@Override
+	public void register()
+	{
+		super.register();
+		registerBlockStates();
 	}
 
 	@Override
@@ -24,6 +50,5 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init();
 		new GrcCellarResources();
-		registerBlockStates();
 	}
 }

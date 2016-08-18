@@ -38,9 +38,9 @@ public class ItemHopSeeds extends GrcItemBase implements IPlantable
 		}
 		else if (player.canPlayerEdit(pos, dir, stack) && player.canPlayerEdit(pos.up(), dir, stack))
 		{
-			if (BlockCheck.canSustainPlant(world, pos, EnumFacing.UP, GrowthCraftHops.hopVine.getBlock()) && BlockCheck.isRope(world, pos.up()))
+			if (BlockCheck.canSustainPlant(world, pos, EnumFacing.UP, GrowthCraftHops.blocks.hopVine.getBlock()) && BlockCheck.isRope(world, pos.up()))
 			{
-				world.setBlockState(pos.up(), GrowthCraftHops.hopVine.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+				world.setBlockState(pos.up(), GrowthCraftHops.blocks.hopVine.getBlock().getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 				--stack.stackSize;
 				return true;
 			}
@@ -58,6 +58,6 @@ public class ItemHopSeeds extends GrcItemBase implements IPlantable
 	@Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
-		return GrowthCraftHops.hopVine.getBlock().getDefaultState();
+		return GrowthCraftHops.blocks.hopVine.getBlock().getDefaultState();
 	}
 }

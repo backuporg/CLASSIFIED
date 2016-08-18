@@ -23,8 +23,24 @@
  */
 package growthcraft.milk.client;
 
+import growthcraft.core.client.renderer.block.statemap.GrcDomainStateMapper;
+import growthcraft.core.client.util.GrcModelRegistry;
 import growthcraft.milk.common.CommonProxy;
+import growthcraft.milk.GrowthCraftMilk;
 
 public class ClientProxy extends CommonProxy
 {
+	private void registerBlockStates()
+	{
+		final GrcModelRegistry gmr = GrcModelRegistry.instance();
+		gmr.registerAll(GrowthCraftMilk.blocks.all, 0, GrowthCraftMilk.resources);
+		gmr.setCustomStateMapperForAll(GrowthCraftMilk.blocks.all, new GrcDomainStateMapper(GrowthCraftMilk.resources));
+	}
+
+	@Override
+	public void register()
+	{
+		super.register();
+		registerBlockStates();
+	}
 }

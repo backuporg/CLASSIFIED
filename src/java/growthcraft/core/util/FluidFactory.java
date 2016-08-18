@@ -23,13 +23,14 @@
  */
 package growthcraft.core.util;
 
+import growthcraft.api.core.GrcFluid;
 import growthcraft.api.core.util.NumUtils;
 import growthcraft.api.core.util.ObjectUtils;
 import growthcraft.core.common.definition.FluidDefinition;
 import growthcraft.core.common.definition.GrcBlockFluidDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
-import growthcraft.core.common.item.ItemBucketFluid;
 import growthcraft.core.common.item.ItemBottleFluid;
+import growthcraft.core.common.item.ItemBucketFluid;
 import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.eventhandler.EventHandlerBucketFill;
 import growthcraft.core.GrowthCraftCore;
@@ -37,6 +38,7 @@ import growthcraft.core.GrowthCraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -117,29 +119,36 @@ public class FluidFactory
 
 		public FluidDetails registerObjects(String prefix, String basename)
 		{
+			if (bottle != null && foodBottle != null)
+			{
+				GrowthCraftCore.getLogger().error("Food Bottle and Regular Bottle present in FluidDetails for '%s;", basename);
+			}
+			final String blockName = String.format("%s.fluid_block_%s", prefix, basename);
+			final String bottleName = String.format("%s.fluid_bottle_%s", prefix, basename);
+			final String bucketName = String.format("%s.fluid_bucket_%s", prefix, basename);
 			if (block != null)
 			{
-				block.getBlock().setUnlocalizedName(prefix + ".fluid_block_" + basename);
-				block.register(prefix + ".fluid_block_" + basename);
+				block.getBlock().setUnlocalizedName(blockName);
+				block.register(blockName);
 			}
 			if (bottle != null)
 			{
-				bottle.getItem().setUnlocalizedName(prefix + ".fluid_bottle_" + basename);
-				bottle.register(prefix + ".fluid_bottle_" + basename);
+				bottle.getItem().setUnlocalizedName(bottleName);
+				bottle.register(bottleName);
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
 			}
 			if (foodBottle != null)
 			{
-				foodBottle.getItem().setUnlocalizedName(prefix + ".food_fluid_bottle_" + basename);
-				foodBottle.register(prefix + ".fluid_bottle_" + basename);
+				foodBottle.getItem().setUnlocalizedName(bottleName);
+				foodBottle.register(bottleName);
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthCraftCore.getConfig().bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, foodBottle.asStack(1), GrowthCraftCore.EMPTY_BOTTLE);
 			}
 			if (bucket != null)
 			{
-				bucket.getItem().setUnlocalizedName(prefix + ".fluid_bucket_" + basename);
-				bucket.register(prefix + ".fluid_bucket_" + basename);
+				bucket.getItem().setUnlocalizedName(bucketName);
+				bucket.register(bucketName);
 				final FluidStack boozeStack = fluid.asFluidStack(FluidContainerRegistry.BUCKET_VOLUME);
 				FluidContainerRegistry.registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
 			}
@@ -190,6 +199,23 @@ public class FluidFactory
 		}
 	}
 
+	public static class FluidBuilder
+	{
+		private final ResourceLocation still;
+		private final ResourceLocation flowing;
+
+		public FluidBuilder(ResourceLocation p_still, ResourceLocation p_flowing)
+		{
+			this.still = p_still;
+			this.flowing = p_flowing;
+		}
+
+		public GrcFluid create(String name)
+		{
+			return new GrcFluid(name, still, flowing);
+		}
+	}
+
 	public static final int FEATURE_BLOCK = 1;
 	public static final int FEATURE_BOTTLE = 2;
 	public static final int FEATURE_FOOD_BOTTLE = 4;
@@ -223,6 +249,11 @@ public class FluidFactory
 	public FluidDetails create(Fluid fluid)
 	{
 		return create(fluid, FEATURE_ALL_NON_EDIBLE);
+	}
+
+	public FluidBuilder newBuilder(ResourceLocation p_still, ResourceLocation p_flowing)
+	{
+		return new FluidBuilder(p_still, p_flowing);
 	}
 
 	public static FluidFactory instance()
