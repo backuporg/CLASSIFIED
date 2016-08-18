@@ -27,14 +27,14 @@ import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.block.BlockRope;
 import growthcraft.core.common.block.BlockSaltBlock;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.core.common.item.ItemBlockFenceRope;
 import growthcraft.core.registry.FenceRopeRegistry;
 
 import net.minecraft.init.Blocks;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcCoreBlocks extends GrcModuleBase
+public class GrcCoreBlocks extends GrcModuleBlocks
 {
 	public BlockDefinition ropeBlock;
 	public BlockDefinition saltBlock;
@@ -49,15 +49,15 @@ public class GrcCoreBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		this.saltBlock = new BlockDefinition(new BlockSaltBlock());
-		this.ropeBlock = new BlockDefinition(new BlockRope());
-		this.oakFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.oak_fence, "oak_fence_rope"));
-		this.spruceFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.spruce_fence, "spruce_fence_rope"));
-		this.birchFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.birch_fence, "birch_fence_rope"));
-		this.jungleFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.jungle_fence, "jungle_fence_rope"));
-		this.darkOakFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.dark_oak_fence, "dark_oak_fence_rope"));
-		this.acaciaFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.acacia_fence, "acacia_fence_rope"));
-		this.netherBrickFenceRope = new BlockDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "nether_brick_fence_rope"));
+		this.saltBlock = newDefinition(new BlockSaltBlock());
+		this.ropeBlock = newDefinition(new BlockRope());
+		this.oakFenceRope = newDefinition(new BlockFenceRope(Blocks.oak_fence, "oak_fence_rope"));
+		this.spruceFenceRope = newDefinition(new BlockFenceRope(Blocks.spruce_fence, "spruce_fence_rope"));
+		this.birchFenceRope = newDefinition(new BlockFenceRope(Blocks.birch_fence, "birch_fence_rope"));
+		this.jungleFenceRope = newDefinition(new BlockFenceRope(Blocks.jungle_fence, "jungle_fence_rope"));
+		this.darkOakFenceRope = newDefinition(new BlockFenceRope(Blocks.dark_oak_fence, "dark_oak_fence_rope"));
+		this.acaciaFenceRope = newDefinition(new BlockFenceRope(Blocks.acacia_fence, "acacia_fence_rope"));
+		this.netherBrickFenceRope = newDefinition(new BlockFenceRope(Blocks.nether_brick_fence, "nether_brick_fence_rope"));
 
 		FenceRopeRegistry.instance().addEntry(Blocks.oak_fence, oakFenceRope.getBlock());
 		FenceRopeRegistry.instance().addEntry(Blocks.spruce_fence, spruceFenceRope.getBlock());

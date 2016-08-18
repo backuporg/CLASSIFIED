@@ -60,9 +60,9 @@ public class ComponentVillageHopVineyard extends StructureVillagePieces.Village
 			{
 				this.setBlockState(world, Blocks.oak_fence.getDefaultState(), loop, loop2, 1, box);
 				this.setBlockState(world, Blocks.oak_fence.getDefaultState(), loop, loop2, 7, box);
-				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), loop, loop2, 2, box);
-				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), loop, loop2, 4, box);
-				this.setBlockState(world, GrowthCraftHops.hopVine.getBlock().getDefaultState(), loop, loop2, 6, box);
+				this.setBlockState(world, GrowthCraftHops.blocks.hopVine.getBlock().getDefaultState(), loop, loop2, 2, box);
+				this.setBlockState(world, GrowthCraftHops.blocks.hopVine.getBlock().getDefaultState(), loop, loop2, 4, box);
+				this.setBlockState(world, GrowthCraftHops.blocks.hopVine.getBlock().getDefaultState(), loop, loop2, 6, box);
 			}
 		}
 		for (loop = 0; loop < 9; ++loop)

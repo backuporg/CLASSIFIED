@@ -25,18 +25,18 @@ package growthcraft.apples.init;
 
 import growthcraft.apples.common.item.ItemAppleSeeds;
 import growthcraft.core.common.definition.ItemDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleItems;
 import net.minecraft.init.Items;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcApplesItems extends GrcModuleBase
+public class GrcApplesItems extends GrcModuleItems
 {
 	public ItemDefinition appleSeeds;
 
 	@Override
 	public void preInit()
 	{
-		appleSeeds = new ItemDefinition(new ItemAppleSeeds());
+		appleSeeds = newDefinition(new ItemAppleSeeds());
 	}
 
 	@Override

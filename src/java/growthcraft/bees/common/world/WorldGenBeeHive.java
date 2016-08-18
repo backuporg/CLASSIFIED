@@ -25,7 +25,7 @@ public class WorldGenBeeHive extends WorldGenerator
 				random.nextInt(4) - random.nextInt(4),
 				random.nextInt(8) - random.nextInt(8));
 
-			final BlockBeeHive beeHive = (BlockBeeHive)GrowthCraftBees.beeHive.getBlock();
+			final BlockBeeHive beeHive = GrowthCraftBees.blocks.beeHive.getBlock();
 			if (world.isAirBlock(lPos) && beeHive.canBlockStay(world, lPos))
 			{
 				//				System.out.println(x + " " + y + " " + z);

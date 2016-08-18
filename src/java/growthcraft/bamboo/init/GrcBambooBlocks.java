@@ -38,13 +38,13 @@ import growthcraft.bamboo.common.item.ItemBambooSlab;
 import growthcraft.core.common.block.BlockFenceRope;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import growthcraft.core.registry.FenceRopeRegistry;
 
 import net.minecraft.block.BlockSlab;
 import net.minecraft.init.Blocks;
 
-public class GrcBambooBlocks extends GrcModuleBase
+public class GrcBambooBlocks extends GrcModuleBlocks
 {
 	public BlockTypeDefinition<BlockBamboo> bambooBlock;
 	public BlockTypeDefinition<BlockBambooShoot> bambooShoot;
@@ -63,19 +63,19 @@ public class GrcBambooBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		bambooBlock      = new BlockTypeDefinition<BlockBamboo>(new BlockBamboo());
-		bambooShoot      = new BlockTypeDefinition<BlockBambooShoot>(new BlockBambooShoot());
-		bambooStalk      = new BlockTypeDefinition<BlockBambooStalk>(new BlockBambooStalk());
-		bambooLeaves     = new BlockDefinition(new BlockBambooLeaves());
-		bambooFence      = new BlockDefinition(new BlockBambooFence());
-		bambooWall       = new BlockDefinition(new BlockBambooWall());
-		bambooStairs     = new BlockDefinition(new BlockBambooStairs());
-		bambooSingleSlab = new BlockTypeDefinition<BlockSlab>(new BlockBambooSlab(false));
-		bambooDoubleSlab = new BlockTypeDefinition<BlockSlab>(new BlockBambooSlab(true));
-		bambooDoor       = new BlockDefinition(new BlockBambooDoor());
-		bambooFenceGate  = new BlockDefinition(new BlockBambooFenceGate());
-		bambooScaffold   = new BlockDefinition(new BlockBambooScaffold());
-		bambooFenceRope = new BlockDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bamboo_fence_rope"));
+		bambooBlock      = newTypedDefinition(new BlockBamboo());
+		bambooShoot      = newTypedDefinition(new BlockBambooShoot());
+		bambooStalk      = newTypedDefinition(new BlockBambooStalk());
+		bambooLeaves     = newDefinition(new BlockBambooLeaves());
+		bambooFence      = newDefinition(new BlockBambooFence());
+		bambooWall       = newDefinition(new BlockBambooWall());
+		bambooStairs     = newDefinition(new BlockBambooStairs());
+		bambooSingleSlab = newTypedDefinition(new BlockBambooSlab(false));
+		bambooDoubleSlab = newTypedDefinition(new BlockBambooSlab(true));
+		bambooDoor       = newDefinition(new BlockBambooDoor());
+		bambooFenceGate  = newDefinition(new BlockBambooFenceGate());
+		bambooScaffold   = newDefinition(new BlockBambooScaffold());
+		bambooFenceRope = newDefinition(new BlockFenceRope(bambooFence.getBlock(), "grc.bamboo_fence_rope"));
 		FenceRopeRegistry.instance().addEntry(bambooFence.getBlock(), bambooFenceRope.getBlock());
 	}
 

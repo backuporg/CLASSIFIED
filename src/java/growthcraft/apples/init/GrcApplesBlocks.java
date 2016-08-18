@@ -28,10 +28,10 @@ import growthcraft.apples.common.block.BlockAppleLeaves;
 import growthcraft.apples.common.block.BlockAppleSapling;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
-import growthcraft.core.common.GrcModuleBase;
+import growthcraft.core.common.GrcModuleBlocks;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class GrcApplesBlocks extends GrcModuleBase
+public class GrcApplesBlocks extends GrcModuleBlocks
 {
 	public BlockDefinition appleSapling;
 	public BlockDefinition appleLeaves;
@@ -40,9 +40,9 @@ public class GrcApplesBlocks extends GrcModuleBase
 	@Override
 	public void preInit()
 	{
-		appleSapling = new BlockDefinition(new BlockAppleSapling());
-		appleLeaves = new BlockDefinition(new BlockAppleLeaves());
-		appleBlock = new BlockTypeDefinition<BlockApple>(new BlockApple());
+		appleSapling = newDefinition(new BlockAppleSapling());
+		appleLeaves = newDefinition(new BlockAppleLeaves());
+		appleBlock = newTypedDefinition(new BlockApple());
 	}
 
 	@Override

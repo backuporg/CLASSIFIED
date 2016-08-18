@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "grccellar:fruit_press",
+    "textures": {
+      "bottom": "grccellar:blocks/fruit_press/bottom",
+      "side": "grccellar:blocks/fruit_press/side",
+      "top": "grccellar:blocks/fruit_press/top"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}]
+  }
+}

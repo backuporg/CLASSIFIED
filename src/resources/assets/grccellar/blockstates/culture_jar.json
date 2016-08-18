@@ -1,15 +1,15 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "grccellar:blocks/culture_jar",
+    "model": "grccellar:culture_jar",
     "textures": {
       "bottom": "grccellar:blocks/culture_jar/bottom",
       "side": "grccellar:blocks/culture_jar/side",
       "top": "grccellar:blocks/culture_jar/top"
-    }
+    },
+    "transform": "forge:default-block"
   },
   "variants": {
-    "normal": [{
-    }]
+    "normal": [{}]
   }
 }

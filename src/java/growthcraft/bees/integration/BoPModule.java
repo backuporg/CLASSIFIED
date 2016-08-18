@@ -45,13 +45,13 @@ public class BoPModule extends ModIntegrationBase
 	@Override
 	public void doPreInit()
 	{
-		GrowthCraftBees.beeBoxBiomesOPlenty = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxBiomesOPlenty());
+		GrowthCraftBees.blocks.beeBoxBiomesOPlenty = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxBiomesOPlenty());
 	}
 
 	@Override
 	public void doRegister()
 	{
-		GrowthCraftBees.beeBoxBiomesOPlenty.register("grc.bee_box.biomes_o_plenty", ItemBlockBeeBox.class);
+		GrowthCraftBees.blocks.beeBoxBiomesOPlenty.register("grc.bee_box.biomes_o_plenty", ItemBlockBeeBox.class);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class BoPModule extends ModIntegrationBase
 			final ItemStack planks = type.asPlanksItemStack();
 			if (planks != null)
 			{
-				GameRegistry.addShapedRecipe(GrowthCraftBees.beeBoxBiomesOPlenty.asStack(1, type.meta), " A ", "A A", "AAA", 'A', planks);
+				GameRegistry.addShapedRecipe(GrowthCraftBees.blocks.beeBoxBiomesOPlenty.asStack(1, type.meta), " A ", "A A", "AAA", 'A', planks);
 			}
 		}
 	}

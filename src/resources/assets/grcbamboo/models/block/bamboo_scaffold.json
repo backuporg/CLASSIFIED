@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "grcbamboo:blocks/block",
+    "down": "grcbamboo:blocks/scaffold",
+    "north": "grcbamboo:blocks/scaffold",
+    "south": "grcbamboo:blocks/scaffold",
+    "east": "grcbamboo:blocks/scaffold",
+    "west": "grcbamboo:blocks/scaffold"
+  }
+}

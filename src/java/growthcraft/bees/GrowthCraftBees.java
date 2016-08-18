@@ -23,6 +23,7 @@
  */
 package growthcraft.bees;
 
+//import growthcraft.bees.common.village.VillageHandlerBees;
 import growthcraft.api.bees.BeesRegistry;
 import growthcraft.api.bees.user.UserBeesConfig;
 import growthcraft.api.bees.user.UserFlowerEntry;
@@ -32,21 +33,17 @@ import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.core.util.DomainResourceLocationFactory;
 import growthcraft.bees.client.gui.GuiHandlerBees;
-import growthcraft.bees.common.block.BlockBeeBox;
-import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.CommonProxy;
-import growthcraft.bees.common.item.ItemBlockBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.common.village.ComponentVillageApiarist;
-//import growthcraft.bees.common.village.VillageHandlerBees;
 import growthcraft.bees.common.village.VillageHandlerBeesApiarist;
 import growthcraft.bees.common.world.WorldGeneratorBees;
 import growthcraft.bees.creativetab.CreativeTabsGrowthcraftBees;
+import growthcraft.bees.init.GrcBeesBlocks;
 import growthcraft.bees.init.GrcBeesFluids;
 import growthcraft.bees.init.GrcBeesItems;
 import growthcraft.bees.init.GrcBeesRecipes;
 import growthcraft.core.common.definition.BlockDefinition;
-import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.integration.bop.BopPlatform;
 import growthcraft.core.util.MapGenHelper;
@@ -85,14 +82,9 @@ public class GrowthCraftBees
 	public static GrowthCraftBees instance;
 	public static final DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grcbees");
 	public static CreativeTabs tab;
-	public static BlockTypeDefinition<BlockBeeBox> beeBox;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBamboo;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxBiomesOPlenty;
-	public static BlockTypeDefinition<BlockBeeBox> beeBoxThaumcraft;
-	public static BlockDefinition beeHive;
+	public static final GrcBeesBlocks blocks = new GrcBeesBlocks();
 	public static final GrcBeesItems items = new GrcBeesItems();
 	public static final GrcBeesFluids fluids = new GrcBeesFluids();
-
 	public static VillagerProfession apiaristProfession;
 
 	private ILogger logger = new GrcLogger(MOD_ID);
@@ -126,6 +118,7 @@ public class GrowthCraftBees
 	{
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/bees.conf");
+		modules.add(blocks);
 		modules.add(items);
 		modules.add(fluids);
 		modules.add(recipes);
@@ -147,29 +140,15 @@ public class GrowthCraftBees
 		modules.add(CommonProxy.instance);
 		modules.freeze();
 		tab = new CreativeTabsGrowthcraftBees("creative_tab_grcbees");
-
 		apiaristProfession = new VillagerProfession(resources.join("apiarist"), resources.join("textures/entity/apiarist.png"));
-		initBlocksAndItems();
-	}
-
-	private void initBlocksAndItems()
-	{
-		beeBox  = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox());
-		beeBox.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
-		beeHive = new BlockDefinition(new BlockBeeHive());
-
 		modules.preInit();
 		register();
 	}
 
 	private void register()
 	{
-		// Bee Boxes
-		GameRegistry.registerBlock(beeBox.getBlock(), ItemBlockBeeBox.class, "grc.beeBox");
-		// Bee Hive(s)
-		GameRegistry.registerBlock(beeHive.getBlock(), "grc.beeHive");
 		// TileEntities
-		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.beeBox");
+		GameRegistry.registerTileEntity(TileEntityBeeBox.class, "grc.tileentity.bee_box");
 		GameRegistry.registerWorldGenerator(new WorldGeneratorBees(), 0);
 		MapGenHelper.registerStructureComponent(ComponentVillageApiarist.class, "grc.apiarist");
 		modules.register();
@@ -199,7 +178,7 @@ public class GrowthCraftBees
 		final BlockDefinition planks = new BlockDefinition(Blocks.planks);
 		for (int i = 0; i < 6; ++i)
 		{
-			GameRegistry.addRecipe(beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
+			GameRegistry.addRecipe(blocks.beeBox.asStack(1, i), new Object[] { " A ", "A A", "AAA", 'A', planks.asStack(1, i) });
 		}
 
 		final ItemStack honeyStack = items.honeyCombFilled.asStack();
@@ -209,7 +188,7 @@ public class GrowthCraftBees
 
 	private void postRegisterRecipes()
 	{
-		GameRegistry.addRecipe(new ShapedOreRecipe(beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(blocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 
 		//GameRegistry.addRecipe(new ShapelessMultiRecipe(
 		//		items.honeyJar.asStack(),
@@ -236,7 +215,6 @@ public class GrowthCraftBees
 		userBeesConfig.loadUserConfig();
 		userFlowersConfig.loadUserConfig();
 		postRegisterRecipes();
-
 		modules.postInit();
 	}
 }

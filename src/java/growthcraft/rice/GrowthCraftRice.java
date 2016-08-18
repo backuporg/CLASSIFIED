@@ -122,15 +122,15 @@ public class GrowthCraftRice
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(riceBlock.getBlock(), "grc.riceBlock");
-		GameRegistry.registerBlock(paddyField.getBlock(), "grc.paddyField");
+		GameRegistry.registerBlock(riceBlock.getBlock(), "rice_block");
+		GameRegistry.registerBlock(paddyField.getBlock(), "paddy_field");
 
-		GameRegistry.registerItem(rice.getItem(), "grc.rice");
-		GameRegistry.registerItem(riceBall.getItem(), "grc.riceBall");
+		GameRegistry.registerItem(rice.getItem(), "rice");
+		GameRegistry.registerItem(riceBall.getItem(), "rice_ball");
 
 		MinecraftForge.addGrassSeed(rice.asStack(), config.riceSeedDropRarity);
 
-		MapGenHelper.registerStructureComponent(ComponentVillageRiceField.class, "grc.ricefield");
+		MapGenHelper.registerStructureComponent(ComponentVillageRiceField.class, "grc.rice_field");
 
 		//====================
 		// ORE DICTIONARY
