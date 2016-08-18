@@ -294,6 +294,7 @@ public abstract class GrcBlockContainer extends GrcBlockBase implements IDroppab
 				{
 					final ItemStack stack = inventory.getStackInSlot(index);
 					spawnAsEntity(world, pos, stack);
+					inventory.setInventorySlotContents(index, null);
 				}
 				world.updateComparatorOutputLevel(pos, this);
 			}

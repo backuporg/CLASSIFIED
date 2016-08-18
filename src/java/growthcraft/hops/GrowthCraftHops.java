@@ -28,16 +28,15 @@ import growthcraft.api.core.log.GrcLogger;
 import growthcraft.api.core.log.ILogger;
 import growthcraft.api.core.module.ModuleContainer;
 import growthcraft.api.core.util.DomainResourceLocationFactory;
-import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.GrowthCraftCore;
 import growthcraft.core.util.MapGenHelper;
-import growthcraft.hops.common.block.BlockHops;
 import growthcraft.hops.common.CommonProxy;
 import growthcraft.hops.common.item.ItemHops;
 import growthcraft.hops.common.item.ItemHopSeeds;
 import growthcraft.hops.common.village.ComponentVillageHopVineyard;
 import growthcraft.hops.common.village.VillageHandlerHops;
+import growthcraft.hops.init.GrcHopsBlocks;
 import growthcraft.hops.init.GrcHopsFluids;
 
 import net.minecraft.util.WeightedRandomChestContent;
@@ -68,10 +67,9 @@ public class GrowthCraftHops
 	@Instance(MOD_ID)
 	public static GrowthCraftHops instance;
 	public static DomainResourceLocationFactory resources = new DomainResourceLocationFactory("grchops");
-	public static BlockTypeDefinition<BlockHops> hopVine;
-
 	public static ItemDefinition hops;
 	public static ItemDefinition hopSeeds;
+	public static GrcHopsBlocks blocks = new GrcHopsBlocks();
 	public static GrcHopsFluids fluids = new GrcHopsFluids();
 
 	private ILogger logger = new GrcLogger(MOD_ID);
@@ -94,15 +92,12 @@ public class GrowthCraftHops
 		config.setLogger(logger);
 		config.load(event.getModConfigurationDirectory(), "growthcraft/hops.conf");
 
+		modules.add(blocks);
 		modules.add(fluids);
 		if (config.enableThaumcraftIntegration) modules.add(new growthcraft.hops.integration.ThaumcraftModule());
 		modules.add(CommonProxy.instance);
 		if (config.debugEnabled) modules.setLogger(logger);
 		modules.freeze();
-		//====================
-		// INIT
-		//====================
-		hopVine  = new BlockTypeDefinition<BlockHops>(new BlockHops());
 
 		hops     = new ItemDefinition(new ItemHops());
 		hopSeeds = new ItemDefinition(new ItemHopSeeds());
@@ -116,17 +111,15 @@ public class GrowthCraftHops
 		//====================
 		// REGISTRIES
 		//====================
-		GameRegistry.registerBlock(hopVine.getBlock(), "grc.hop_vine");
-
-		GameRegistry.registerItem(hops.getItem(), "grc.hops");
-		GameRegistry.registerItem(hopSeeds.getItem(), "grc.hopSeeds");
+		GameRegistry.registerItem(hops.getItem(), "hops");
+		GameRegistry.registerItem(hopSeeds.getItem(), "hop_seeds");
 
 		CoreRegistry.instance().vineDrops().addDropEntry(hops.asStack(2), config.hopsVineDropRarity);
 
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CORRIDOR).addItem(new WeightedRandomChestContent(hops.asStack(), 1, 2, 10));
 		ChestGenHooks.getInfo(ChestGenHooks.STRONGHOLD_CROSSING).addItem(new WeightedRandomChestContent(hops.asStack(), 1, 2, 10));
 
-		MapGenHelper.registerStructureComponent(ComponentVillageHopVineyard.class, "grc.hopvineyard");
+		MapGenHelper.registerStructureComponent(ComponentVillageHopVineyard.class, "grc.hop_vineyard");
 
 		//====================
 		// ORE DICTIONARY

@@ -1,15 +1,15 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "grccellar:blocks/ferment_barrel",
+    "model": "grccellar:ferment_barrel",
     "textures": {
       "bottom": "grccellar:blocks/ferment_barrel/bottom",
       "side": "grccellar:blocks/ferment_barrel/side",
       "top": "grccellar:blocks/ferment_barrel/top"
-    }
+    },
+    "transform": "forge:default-block"
   },
   "variants": {
-    "normal": [{
-    }]
+    "normal": [{}]
   }
 }

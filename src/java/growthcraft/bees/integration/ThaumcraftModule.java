@@ -53,23 +53,23 @@ public class ThaumcraftModule extends ThaumcraftModuleBase
 	@Override
 	protected void doPreInit()
 	{
-		GrowthCraftBees.beeBoxThaumcraft = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxThaumcraft());
-		GrowthCraftBees.beeBoxThaumcraft.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
+		GrowthCraftBees.blocks.beeBoxThaumcraft = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBoxThaumcraft());
+		GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock().setFlammability(20).setFireSpreadSpeed(5).setHarvestLevel("axe", 0);
 	}
 
 	@Override
 	protected void doRegister()
 	{
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		if (GrowthCraftBees.blocks.beeBoxThaumcraft != null)
 		{
-			GameRegistry.registerBlock(GrowthCraftBees.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.bee_box.thaumcraft");
+			GameRegistry.registerBlock(GrowthCraftBees.blocks.beeBoxThaumcraft.getBlock(), ItemBlockBeeBox.class, "grc.bee_box.thaumcraft");
 		}
 	}
 
 	@Override
 	protected void doLateRegister()
 	{
-		if (GrowthCraftBees.beeBoxThaumcraft != null)
+		if (GrowthCraftBees.blocks.beeBoxThaumcraft != null)
 		{
 			final Block blockWoodenDevice = GameRegistry.findBlock(modID, "blockWoodenDevice");
 			if (blockWoodenDevice != null)

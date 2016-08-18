@@ -8,7 +8,7 @@ public class ItemRiceBall extends GrcItemFoodBase
 	public ItemRiceBall()
 	{
 		super(5, 0.6F, false);
-		this.setUnlocalizedName("grc.rice_ball");
+		this.setUnlocalizedName("rice_ball");
 		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 }

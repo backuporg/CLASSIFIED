@@ -19,7 +19,7 @@ public class ItemRice extends GrcItemBase
 	public ItemRice()
 	{
 		super();
-		this.setUnlocalizedName("grc.rice");
+		this.setUnlocalizedName("rice");
 		this.setCreativeTab(GrowthCraftCore.creativeTab);
 	}
 

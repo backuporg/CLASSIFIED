@@ -27,7 +27,7 @@ public class BlockPaddy extends BlockPaddyBase
 		super(Material.ground);
 		this.setHardness(0.5F);
 		this.setStepSound(soundTypeGravel);
-		this.setUnlocalizedName("grc.paddy_block");
+		this.setUnlocalizedName("paddy_field");
 		this.setCreativeTab(null);
 	}
 
